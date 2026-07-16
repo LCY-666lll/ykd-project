@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Local secrets and runtime logs: never commit these files.
+src/main/resources/application-local.properties
+logs/
