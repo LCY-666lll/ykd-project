@@ -1,0 +1,64 @@
+flowchart TD
+    A([项目启动]) --> B[读取 iLink 配置]
+    B --> C[生成 ILinkConfig]
+    C --> D[开启定时任务和回复线程池]
+
+    D --> E[访问 /api/ilink/login/qrcode]
+    E --> F{iLink 模块已启用？}
+    F -- 否 --> F1[返回：iLink 模块未启用]
+    F1 --> Z([结束])
+
+    F -- 是 --> G[关闭旧 ILinkClient]
+    G --> H[创建并保存新的 ILinkClient]
+    H --> I[调用 executeLogin 获取二维码内容]
+    I --> J{二维码获取成功？}
+    J -- 否 --> J1[关闭当前 Client]
+    J1 --> J2[返回：二维码登录启动失败]
+    J2 --> Z
+
+    J -- 是 --> K[二维码内容转换为 PNG]
+    K --> L[浏览器返回二维码]
+    L --> M[用户微信扫码]
+    M --> N{登录成功？}
+    N -- 否 --> N1[记录 login failed 日志]
+    N1 --> Z
+
+    N -- 是 --> O[记录 login succeeded 日志]
+    O --> P[每隔 500ms 执行 pollMessages]
+    P --> Q{Client 存在且已登录？}
+    Q -- 否 --> P
+
+    Q -- 是 --> R[调用 getUpdates 拉取微信消息]
+    R --> S{拉取消息异常？}
+    S -- 是 --> S1[记录 RECEIVE_FAILED 日志]
+    S1 --> P
+
+    S -- 否 --> T[遍历每一条微信消息]
+    T --> U[提取发送者 ID 和第一段文本]
+    U --> V{ID 和文本有效？}
+    V -- 否 --> T
+
+    V -- 是 --> W{是否机器人自己发的消息？}
+    W -- 是 --> W1[记录 BOT_MESSAGE 日志并跳过]
+    W1 --> T
+
+    W -- 否 --> X[记录 USER_MESSAGE 日志]
+    X --> Y[调用 IlinkMessageReplyService.submit]
+    Y --> AA{回复线程池队列已满？}
+    AA -- 是 --> AA1[记录 REPLY_REJECTED 日志]
+    AA1 --> T
+
+    AA -- 否 --> AB[加入全局 CompletableFuture 回复链]
+    AB --> AC[等待上一条回复任务结束]
+    AC --> AD[ilink-reply 线程池执行 reply]
+    AD --> AE[startTyping 显示正在输入]
+    AE --> AF[AiChatService 校验问题和 DeepSeek Key]
+    AF --> AG[DeepSeekClient 请求 DeepSeek]
+    AG --> AH{生成回答并发送成功？}
+    AH -- 是 --> AI[sendText 发送 AI 回答]
+    AI --> AJ[记录 REPLIED 日志]
+    AJ --> AL[stopTyping 停止输入状态]
+    AL --> T
+
+    AH -- 否 --> AK[发送处理失败提示]
+    AK --> AL

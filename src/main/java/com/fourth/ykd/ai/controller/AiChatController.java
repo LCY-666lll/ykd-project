@@ -3,7 +3,7 @@ package com.fourth.ykd.ai.controller;
 import com.fourth.ykd.ai.dto.AiChatRequest;
 import com.fourth.ykd.ai.dto.AiChatResponse;
 import com.fourth.ykd.ai.service.AiChatService;
-import com.fourth.ykd.common.ApiResponse;
+import com.fourth.ykd.result.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

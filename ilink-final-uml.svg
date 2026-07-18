@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="3100" viewBox="0 0 1400 3100">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#52616b"/></marker>
+    <style>
+      .title{font:700 30px 'Microsoft YaHei',Arial;fill:#18212b}.section{font:700 23px 'Microsoft YaHei',Arial;fill:#155e75}.txt{font:18px 'Microsoft YaHei',Arial;fill:#1f2937;text-anchor:middle}.small{font:15px 'Microsoft YaHei',Arial;fill:#374151;text-anchor:middle}.note{font:16px 'Microsoft YaHei',Arial;fill:#713f12}.action{fill:#e8f3ff;stroke:#3784c6;stroke-width:2}.decision{fill:#fff3c4;stroke:#c58a08;stroke-width:2}.end{fill:#fde2e2;stroke:#c53b3b;stroke-width:2}.start{fill:#d8f2df;stroke:#248454;stroke-width:2}.line{fill:none;stroke:#52616b;stroke-width:2.2;marker-end:url(#arrow)}.loop{fill:none;stroke:#7b8790;stroke-width:1.8;stroke-dasharray:7 5;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <rect x="35" y="25" width="1330" height="3040" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="700" y="75" class="title">iLink 微信登录与消息自动回复 UML 活动图</text>
+  <text x="700" y="108" class="small">依据当前项目 iLink 模块实现绘制</text>
+
+  <rect x="70" y="140" width="1260" height="870" rx="14" fill="#f0f9ff" stroke="#7dd3fc" stroke-width="2"/>
+  <text x="105" y="185" class="section" text-anchor="start">一、二维码登录流程</text>
+
+  <rect x="540" y="215" width="320" height="48" rx="24" class="start"/>
+  <text x="700" y="247" class="txt">访问 /api/ilink/login/qrcode</text>
+  <path d="M700 263 V300" class="line"/>
+  <polygon points="700,300 815,350 700,400 585,350" class="decision"/>
+  <text x="700" y="357" class="txt">iLink 模块已启用？</text>
+
+  <path d="M585 350 H290 V430" class="line"/>
+  <text x="480" y="338" class="small">否</text>
+  <rect x="115" y="430" width="350" height="62" rx="12" class="end"/>
+  <text x="290" y="468" class="txt">返回：iLink 模块未启用</text>
+
+  <path d="M700 400 V440" class="line"/>
+  <text x="722" y="426" class="small">是</text>
+  <rect x="510" y="440" width="380" height="62" rx="12" class="action"/>
+  <text x="700" y="478" class="txt">关闭旧 Client，创建新的 ILinkClient</text>
+  <path d="M700 502 V535" class="line"/>
+  <rect x="510" y="535" width="380" height="62" rx="12" class="action"/>
+  <text x="700" y="573" class="txt">executeLogin() 获取二维码内容</text>
+  <path d="M700 597 V635" class="line"/>
+  <polygon points="700,635 815,685 700,735 585,685" class="decision"/>
+  <text x="700" y="692" class="txt">二维码获取成功？</text>
+
+  <path d="M815 685 H1090 V760" class="line"/>
+  <text x="925" y="674" class="small">否</text>
+  <rect x="915" y="760" width="350" height="62" rx="12" class="end"/>
+  <text x="1090" y="787" class="txt">关闭 Client</text>
+  <text x="1090" y="811" class="txt">返回二维码登录启动失败</text>
+
+  <path d="M700 735 V770" class="line"/>
+  <text x="722" y="760" class="small">是</text>
+  <rect x="510" y="770" width="380" height="62" rx="12" class="action"/>
+  <text x="700" y="808" class="txt">二维码内容转换为 PNG 并返回浏览器</text>
+  <path d="M700 832 V860" class="line"/>
+  <rect x="510" y="860" width="380" height="62" rx="12" class="action"/>
+  <text x="700" y="887" class="txt">用户微信扫码，LoginFuture 异步等待</text>
+  <text x="700" y="911" class="txt">登录成功后进入消息轮询</text>
+
+  <rect x="930" y="220" width="350" height="150" rx="12" fill="#fff8d6" stroke="#d6a000" stroke-width="2"/>
+  <text x="1105" y="252" class="note" text-anchor="middle">附加接口</text>
+  <text x="1105" y="285" class="note" text-anchor="middle">GET /status：返回状态和登录标志</text>
+  <text x="1105" y="318" class="note" text-anchor="middle">POST /cancel：取消登录并关闭 Client</text>
+
+  <rect x="70" y="1050" width="1260" height="1940" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="105" y="1095" class="section" text-anchor="start">二、微信消息自动回复流程</text>
+
+  <rect x="510" y="1130" width="380" height="62" rx="12" class="action"/>
+  <text x="700" y="1158" class="txt">定时任务：每隔 500ms 执行 pollMessages()</text>
+  <text x="700" y="1182" class="txt">从 IlinkClientManager 获取 Client</text>
+  <path d="M700 1192 V1230" class="line"/>
+  <polygon points="700,1230 825,1285 700,1340 575,1285" class="decision"/>
+  <text x="700" y="1292" class="txt">Client 存在且已登录？</text>
+  <path d="M575 1285 H260 V1160 H500" class="loop"/>
+  <text x="410" y="1273" class="small">否，等待下一轮</text>
+
+  <path d="M700 1340 V1380" class="line"/>
+  <text x="722" y="1362" class="small">是</text>
+  <rect x="510" y="1380" width="380" height="62" rx="12" class="action"/>
+  <text x="700" y="1418" class="txt">client.getUpdates() 拉取微信消息</text>
+  <path d="M700 1442 V1480" class="line"/>
+  <polygon points="700,1480 815,1530 700,1580 585,1530" class="decision"/>
+  <text x="700" y="1537" class="txt">拉取消息异常？</text>
+  <path d="M585 1530 H280 V1615" class="line"/>
+  <text x="478" y="1518" class="small">是</text>
+  <rect x="105" y="1615" width="350" height="62" rx="12" class="end"/>
+  <text x="280" y="1653" class="txt">记录 RECEIVE_FAILED 日志</text>
+  <path d="M280 1677 V1720 H470" class="loop"/>
+
+  <path d="M700 1580 V1620" class="line"/>
+  <text x="722" y="1605" class="small">否</text>
+  <rect x="510" y="1620" width="380" height="62" rx="12" class="action"/>
+  <text x="700" y="1648" class="txt">遍历消息，提取发送者 ID 与第一段文本</text>
+  <text x="700" y="1672" class="txt">过滤空消息、非文本消息</text>
+  <path d="M700 1682 V1720" class="line"/>
+  <polygon points="700,1720 815,1770 700,1820 585,1770" class="decision"/>
+  <text x="700" y="1777" class="txt">是否机器人自己发的消息？</text>
+  <path d="M815 1770 H1090 V1845" class="line"/>
+  <text x="925" y="1758" class="small">是</text>
+  <rect x="915" y="1845" width="350" height="62" rx="12" class="action"/>
+  <text x="1090" y="1883" class="txt">记录 BOT_MESSAGE，跳过</text>
+  <path d="M1090 1907 V1940 H910" class="loop"/>
+
+  <path d="M700 1820 V1860" class="line"/>
+  <text x="722" y="1845" class="small">否</text>
+  <rect x="510" y="1860" width="380" height="62" rx="12" class="action"/>
+  <text x="700" y="1898" class="txt">记录 USER_MESSAGE，调用 submit()</text>
+  <path d="M700 1922 V1960" class="line"/>
+  <polygon points="700,1960 815,2010 700,2060 585,2010" class="decision"/>
+  <text x="700" y="2017" class="txt">回复线程池队列已满？</text>
+  <path d="M585 2010 H280 V2090" class="line"/>
+  <text x="480" y="1998" class="small">是</text>
+  <rect x="105" y="2090" width="350" height="62" rx="12" class="end"/>
+  <text x="280" y="2128" class="txt">记录 REPLY_REJECTED，跳过</text>
+  <path d="M280 2152 V2190 H470" class="loop"/>
+
+  <path d="M700 2060 V2100" class="line"/>
+  <text x="722" y="2085" class="small">否</text>
+  <rect x="510" y="2100" width="380" height="62" rx="12" class="action"/>
+  <text x="700" y="2128" class="txt">加入全局 CompletableFuture 回复链</text>
+  <text x="700" y="2152" class="txt">等待上一条回复任务结束</text>
+  <path d="M700 2162 V2200" class="line"/>
+  <rect x="510" y="2200" width="380" height="62" rx="12" class="action"/>
+  <text x="700" y="2238" class="txt">ilink-reply 线程池执行 reply()</text>
+  <path d="M700 2262 V2300" class="line"/>
+  <rect x="510" y="2300" width="380" height="62" rx="12" class="action"/>
+  <text x="700" y="2328" class="txt">startTyping 显示“正在输入”</text>
+  <text x="700" y="2352" class="txt">调用 DeepSeek 生成回答</text>
+  <path d="M700 2362 V2400" class="line"/>
+  <polygon points="700,2400 815,2450 700,2500 585,2450" class="decision"/>
+  <text x="700" y="2457" class="txt">生成回答并发送成功？</text>
+  <path d="M585 2450 H280 V2530" class="line"/>
+  <text x="480" y="2438" class="small">否</text>
+  <rect x="105" y="2530" width="350" height="62" rx="12" class="end"/>
+  <text x="280" y="2557" class="txt">记录 REPLY_FAILED</text>
+  <text x="280" y="2581" class="txt">发送“处理失败”提示</text>
+  <path d="M455 2561 H500 V2660" class="line"/>
+
+  <path d="M700 2500 V2530" class="line"/>
+  <text x="722" y="2520" class="small">是</text>
+  <rect x="510" y="2530" width="380" height="62" rx="12" class="action"/>
+  <text x="700" y="2568" class="txt">sendText 发送 AI 回答，记录 REPLIED 日志</text>
+  <path d="M700 2592 V2660" class="line"/>
+  <rect x="510" y="2660" width="380" height="62" rx="12" class="action"/>
+  <text x="700" y="2698" class="txt">stopTyping，当前回复任务结束</text>
+  <path d="M700 2722 V2770" class="line"/>
+  <rect x="510" y="2770" width="380" height="60" rx="30" class="start"/>
+  <text x="700" y="2808" class="txt">处理下一条消息 / 下一轮轮询</text>
+  <path d="M890 2800 H1210 V1160 H900" class="loop"/>
+
+  <rect x="930" y="2150" width="330" height="120" rx="12" fill="#fff8d6" stroke="#d6a000" stroke-width="2"/>
+  <text x="1095" y="2184" class="note" text-anchor="middle">注意：代码使用固定 key</text>
+  <text x="1095" y="2216" class="note" text-anchor="middle">__global__，所以所有用户</text>
+  <text x="1095" y="2248" class="note" text-anchor="middle">消息按顺序串行回复。</text>
+</svg>

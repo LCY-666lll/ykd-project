@@ -3,6 +3,7 @@ target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+.ilink/
 
 ### STS ###
 .apt_generated
@@ -35,4 +36,3 @@ build/
 # Local secrets and runtime logs: never commit these files.
 src/main/resources/application-local.properties
 logs/
-.ilink/
