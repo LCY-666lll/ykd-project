@@ -1,6 +1,6 @@
 package com.fourth.ykd.weather.controller;
 
-import com.fourth.ykd.common.ApiResponse;
+import com.fourth.ykd.result.ApiResponse;
 import com.fourth.ykd.weather.dto.WeatherInfoResponse;
 import com.fourth.ykd.weather.service.WeatherService;
 import lombok.RequiredArgsConstructor;

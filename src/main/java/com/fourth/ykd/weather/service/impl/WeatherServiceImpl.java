@@ -1,9 +1,9 @@
 package com.fourth.ykd.weather.service.impl;
 
-import com.fourth.ykd.client.QWeatherClient;
-import com.fourth.ykd.client.dto.QWeatherCityLookupResponse;
-import com.fourth.ykd.client.dto.QWeatherNowResponse;
-import com.fourth.ykd.config.WeatherProperties;
+import com.fourth.ykd.weather.infrastructure.qweather.QWeatherClient;
+import com.fourth.ykd.weather.infrastructure.qweather.dto.QWeatherCityLookupResponse;
+import com.fourth.ykd.weather.infrastructure.qweather.dto.QWeatherNowResponse;
+import com.fourth.ykd.weather.infrastructure.qweather.WeatherProperties;
 import com.fourth.ykd.exception.BusinessException;
 import com.fourth.ykd.weather.dto.WeatherInfoResponse;
 import com.fourth.ykd.weather.service.WeatherService;

@@ -2,8 +2,8 @@ package com.fourth.ykd.ai.service.impl;
 
 import com.fourth.ykd.ai.dto.AiChatResponse;
 import com.fourth.ykd.ai.service.AiChatService;
-import com.fourth.ykd.client.DeepSeekClient;
-import com.fourth.ykd.config.DeepSeekProperties;
+import com.fourth.ykd.ai.infrastructure.deepseek.DeepSeekClient;
+import com.fourth.ykd.ai.infrastructure.deepseek.DeepSeekProperties;
 import com.fourth.ykd.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
