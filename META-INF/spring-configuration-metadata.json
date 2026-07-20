@@ -1,0 +1,205 @@
+{
+  "groups": [
+    {
+      "name": "spring.ai.deepseek",
+      "type": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekConnectionProperties",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekConnectionProperties"
+    },
+    {
+      "name": "spring.ai.deepseek.chat",
+      "type": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties"
+    },
+    {
+      "name": "spring.ai.deepseek.chat.options",
+      "type": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties$Options",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties",
+      "sourceMethod": "getOptions()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.ai.deepseek.api-key",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekConnectionProperties"
+    },
+    {
+      "name": "spring.ai.deepseek.base-url",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekConnectionProperties"
+    },
+    {
+      "name": "spring.ai.deepseek.chat.api-key",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties"
+    },
+    {
+      "name": "spring.ai.deepseek.chat.base-url",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties"
+    },
+    {
+      "name": "spring.ai.deepseek.chat.beta-prefix-path",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties",
+      "defaultValue": "\/beta"
+    },
+    {
+      "name": "spring.ai.deepseek.chat.completions-path",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties",
+      "defaultValue": "\/chat\/completions"
+    },
+    {
+      "name": "spring.ai.deepseek.chat.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable DeepSeek chat client.",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "spring.ai.deepseek.chat.frequency-penalty",
+      "type": "java.lang.Double",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties"
+    },
+    {
+      "name": "spring.ai.deepseek.chat.logprobs",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties"
+    },
+    {
+      "name": "spring.ai.deepseek.chat.max-tokens",
+      "type": "java.lang.Integer",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties"
+    },
+    {
+      "name": "spring.ai.deepseek.chat.model",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties"
+    },
+    {
+      "name": "spring.ai.deepseek.chat.presence-penalty",
+      "type": "java.lang.Double",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties"
+    },
+    {
+      "name": "spring.ai.deepseek.chat.response-format",
+      "type": "org.springframework.ai.deepseek.api.ResponseFormat",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties"
+    },
+    {
+      "name": "spring.ai.deepseek.chat.stop",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties"
+    },
+    {
+      "name": "spring.ai.deepseek.chat.temperature",
+      "type": "java.lang.Double",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties"
+    },
+    {
+      "name": "spring.ai.deepseek.chat.top-logprobs",
+      "type": "java.lang.Integer",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties"
+    },
+    {
+      "name": "spring.ai.deepseek.chat.top-p",
+      "type": "java.lang.Double",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties"
+    },
+    {
+      "name": "spring.ai.deepseek.chat.options.frequency-penalty",
+      "type": "java.lang.Double",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties$Options",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "spring.ai.deepseek.chat.frequency-penalty"
+      }
+    },
+    {
+      "name": "spring.ai.deepseek.chat.options.logprobs",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties$Options",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "spring.ai.deepseek.chat.logprobs"
+      }
+    },
+    {
+      "name": "spring.ai.deepseek.chat.options.max-tokens",
+      "type": "java.lang.Integer",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties$Options",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "spring.ai.deepseek.chat.max-tokens"
+      }
+    },
+    {
+      "name": "spring.ai.deepseek.chat.options.model",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties$Options",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "spring.ai.deepseek.chat.model"
+      }
+    },
+    {
+      "name": "spring.ai.deepseek.chat.options.presence-penalty",
+      "type": "java.lang.Double",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties$Options",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "spring.ai.deepseek.chat.presence-penalty"
+      }
+    },
+    {
+      "name": "spring.ai.deepseek.chat.options.response-format",
+      "type": "org.springframework.ai.deepseek.api.ResponseFormat",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties$Options",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "spring.ai.deepseek.chat.response-format"
+      }
+    },
+    {
+      "name": "spring.ai.deepseek.chat.options.stop",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties$Options",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "spring.ai.deepseek.chat.stop"
+      }
+    },
+    {
+      "name": "spring.ai.deepseek.chat.options.temperature",
+      "type": "java.lang.Double",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties$Options",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "spring.ai.deepseek.chat.temperature"
+      }
+    },
+    {
+      "name": "spring.ai.deepseek.chat.options.top-logprobs",
+      "type": "java.lang.Integer",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties$Options",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "spring.ai.deepseek.chat.top-logprobs"
+      }
+    },
+    {
+      "name": "spring.ai.deepseek.chat.options.top-p",
+      "type": "java.lang.Double",
+      "sourceType": "org.springframework.ai.model.deepseek.autoconfigure.DeepSeekChatProperties$Options",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "spring.ai.deepseek.chat.top-p"
+      }
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

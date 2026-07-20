@@ -1,16 +1,12 @@
 package com.fourth.ykd;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@Slf4j
 public class YkdProjectApplication {
-
-    // 创建日志对象
-    private static final Logger log =
-            LoggerFactory.getLogger(YkdProjectApplication.class);
 
     public static void main(String[] args) {
 

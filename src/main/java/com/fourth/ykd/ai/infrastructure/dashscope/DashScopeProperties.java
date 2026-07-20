@@ -16,4 +16,12 @@ public class DashScopeProperties {
     private String imageGenerationModel;
 
     private String visionModel;
+
+    private String ttsModel;
+
+    private String ttsVoice;
+
+    private String ttsFormat;
+
+    private Integer ttsSampleRate;
 }
