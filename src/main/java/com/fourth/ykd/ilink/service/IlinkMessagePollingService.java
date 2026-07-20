@@ -49,9 +49,20 @@ public class IlinkMessagePollingService {
         }
 
         String text = extractText(message);
+        String voiceText = extractVoiceText(message);
         MessageItem imageItem = extractImageItem(message);
         if (imageItem != null) {
             saveImageContext(client, fromUserId, imageItem);
+        }
+        if (StringUtils.hasText(voiceText)) {
+            log.info("[iLink][VOICE_RECOGNIZED] fromUserId={}, text={}", fromUserId, voiceText);
+            ilinkMessageReplyService.submitVoice(client, fromUserId, voiceText);
+            return;
+        }
+        if (hasVoiceItem(message)) {
+            log.warn("[iLink][VOICE_RECOGNIZE_EMPTY] fromUserId={}", fromUserId);
+            ilinkMessageReplyService.submitVoiceRecognitionFailed(client, fromUserId);
+            return;
         }
         if (!StringUtils.hasText(text)) {
             return;
@@ -87,6 +98,30 @@ public class IlinkMessagePollingService {
             }
         }
         return null;
+    }
+
+    private String extractVoiceText(WeixinMessage message) {
+        if (message.getItem_list() == null) {
+            return null;
+        }
+        for (MessageItem item : message.getItem_list()) {
+            if (item.getVoice_item() != null && StringUtils.hasText(item.getVoice_item().getText())) {
+                return item.getVoice_item().getText().trim();
+            }
+        }
+        return null;
+    }
+
+    private boolean hasVoiceItem(WeixinMessage message) {
+        if (message.getItem_list() == null) {
+            return false;
+        }
+        for (MessageItem item : message.getItem_list()) {
+            if (item.getVoice_item() != null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private MessageItem extractImageItem(WeixinMessage message) {

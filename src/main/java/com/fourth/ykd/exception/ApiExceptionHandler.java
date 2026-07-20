@@ -6,7 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
+/*HTTP接口的全局处理器：统一捕获 Controller 调用链中没有处理的异常
+* Controller
+  -> ServiceImpl
+  -> throw BusinessException
+  -> ApiExceptionHandler.handleBusinessException
+  -> HTTP 400 + ApiResponse.failure(...)*/
 @Slf4j
 @RestControllerAdvice
 public class ApiExceptionHandler {

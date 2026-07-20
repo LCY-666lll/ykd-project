@@ -1,0 +1,3080 @@
+<<<FILE:.gitattributes>>>
+```text
+/mvnw text eol=lf
+*.cmd text eol=crlf
+
+```
+<<<END:.gitattributes>>>
+<<<FILE:.gitignore>>>
+```text
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+.ilink/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+# Local secrets and runtime logs: never commit these files.
+src/main/resources/application-local.properties
+logs/
+
+```
+<<<END:.gitignore>>>
+<<<FILE:mvnw>>>
+```text
+#!/bin/sh
+# ----------------------------------------------------------------------------
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+# Apache Maven Wrapper startup batch script, version 3.3.4
+#
+# Optional ENV vars
+# -----------------
+#   JAVA_HOME - location of a JDK home dir, required when download maven via java source
+#   MVNW_REPOURL - repo url base for downloading maven distribution
+#   MVNW_USERNAME/MVNW_PASSWORD - user and password for downloading maven
+#   MVNW_VERBOSE - true: enable verbose log; debug: trace the mvnw script; others: silence the output
+# ----------------------------------------------------------------------------
+
+set -euf
+[ "${MVNW_VERBOSE-}" != debug ] || set -x
+
+# OS specific support.
+native_path() { printf %s\\n "$1"; }
+case "$(uname)" in
+CYGWIN* | MINGW*)
+  [ -z "${JAVA_HOME-}" ] || JAVA_HOME="$(cygpath --unix "$JAVA_HOME")"
+  native_path() { cygpath --path --windows "$1"; }
+  ;;
+esac
+
+# set JAVACMD and JAVACCMD
+set_java_home() {
+  # For Cygwin and MinGW, ensure paths are in Unix format before anything is touched
+  if [ -n "${JAVA_HOME-}" ]; then
+    if [ -x "$JAVA_HOME/jre/sh/java" ]; then
+      # IBM's JDK on AIX uses strange locations for the executables
+      JAVACMD="$JAVA_HOME/jre/sh/java"
+      JAVACCMD="$JAVA_HOME/jre/sh/javac"
+    else
+      JAVACMD="$JAVA_HOME/bin/java"
+      JAVACCMD="$JAVA_HOME/bin/javac"
+
+      if [ ! -x "$JAVACMD" ] || [ ! -x "$JAVACCMD" ]; then
+        echo "The JAVA_HOME environment variable is not defined correctly, so mvnw cannot run." >&2
+        echo "JAVA_HOME is set to \"$JAVA_HOME\", but \"\$JAVA_HOME/bin/java\" or \"\$JAVA_HOME/bin/javac\" does not exist." >&2
+        return 1
+      fi
+    fi
+  else
+    JAVACMD="$(
+      'set' +e
+      'unset' -f command 2>/dev/null
+      'command' -v java
+    )" || :
+    JAVACCMD="$(
+      'set' +e
+      'unset' -f command 2>/dev/null
+      'command' -v javac
+    )" || :
+
+    if [ ! -x "${JAVACMD-}" ] || [ ! -x "${JAVACCMD-}" ]; then
+      echo "The java/javac command does not exist in PATH nor is JAVA_HOME set, so mvnw cannot run." >&2
+      return 1
+    fi
+  fi
+}
+
+# hash string like Java String::hashCode
+hash_string() {
+  str="${1:-}" h=0
+  while [ -n "$str" ]; do
+    char="${str%"${str#?}"}"
+    h=$(((h * 31 + $(LC_CTYPE=C printf %d "'$char")) % 4294967296))
+    str="${str#?}"
+  done
+  printf %x\\n $h
+}
+
+verbose() { :; }
+[ "${MVNW_VERBOSE-}" != true ] || verbose() { printf %s\\n "${1-}"; }
+
+die() {
+  printf %s\\n "$1" >&2
+  exit 1
+}
+
+trim() {
+  # MWRAPPER-139:
+  #   Trims trailing and leading whitespace, carriage returns, tabs, and linefeeds.
+  #   Needed for removing poorly interpreted newline sequences when running in more
+  #   exotic environments such as mingw bash on Windows.
+  printf "%s" "${1}" | tr -d '[:space:]'
+}
+
+scriptDir="$(dirname "$0")"
+scriptName="$(basename "$0")"
+
+# parse distributionUrl and optional distributionSha256Sum, requires .mvn/wrapper/maven-wrapper.properties
+while IFS="=" read -r key value; do
+  case "${key-}" in
+  distributionUrl) distributionUrl=$(trim "${value-}") ;;
+  distributionSha256Sum) distributionSha256Sum=$(trim "${value-}") ;;
+  esac
+done <"$scriptDir/.mvn/wrapper/maven-wrapper.properties"
+[ -n "${distributionUrl-}" ] || die "cannot read distributionUrl property in $scriptDir/.mvn/wrapper/maven-wrapper.properties"
+
+case "${distributionUrl##*/}" in
+maven-mvnd-*bin.*)
+  MVN_CMD=mvnd.sh _MVNW_REPO_PATTERN=/maven/mvnd/
+  case "${PROCESSOR_ARCHITECTURE-}${PROCESSOR_ARCHITEW6432-}:$(uname -a)" in
+  *AMD64:CYGWIN* | *AMD64:MINGW*) distributionPlatform=windows-amd64 ;;
+  :Darwin*x86_64) distributionPlatform=darwin-amd64 ;;
+  :Darwin*arm64) distributionPlatform=darwin-aarch64 ;;
+  :Linux*x86_64*) distributionPlatform=linux-amd64 ;;
+  *)
+    echo "Cannot detect native platform for mvnd on $(uname)-$(uname -m), use pure java version" >&2
+    distributionPlatform=linux-amd64
+    ;;
+  esac
+  distributionUrl="${distributionUrl%-bin.*}-$distributionPlatform.zip"
+  ;;
+maven-mvnd-*) MVN_CMD=mvnd.sh _MVNW_REPO_PATTERN=/maven/mvnd/ ;;
+*) MVN_CMD="mvn${scriptName#mvnw}" _MVNW_REPO_PATTERN=/org/apache/maven/ ;;
+esac
+
+# apply MVNW_REPOURL and calculate MAVEN_HOME
+# maven home pattern: ~/.m2/wrapper/dists/{apache-maven-<version>,maven-mvnd-<version>-<platform>}/<hash>
+[ -z "${MVNW_REPOURL-}" ] || distributionUrl="$MVNW_REPOURL$_MVNW_REPO_PATTERN${distributionUrl#*"$_MVNW_REPO_PATTERN"}"
+distributionUrlName="${distributionUrl##*/}"
+distributionUrlNameMain="${distributionUrlName%.*}"
+distributionUrlNameMain="${distributionUrlNameMain%-bin}"
+MAVEN_USER_HOME="${MAVEN_USER_HOME:-${HOME}/.m2}"
+MAVEN_HOME="${MAVEN_USER_HOME}/wrapper/dists/${distributionUrlNameMain-}/$(hash_string "$distributionUrl")"
+
+exec_maven() {
+  unset MVNW_VERBOSE MVNW_USERNAME MVNW_PASSWORD MVNW_REPOURL || :
+  exec "$MAVEN_HOME/bin/$MVN_CMD" "$@" || die "cannot exec $MAVEN_HOME/bin/$MVN_CMD"
+}
+
+if [ -d "$MAVEN_HOME" ]; then
+  verbose "found existing MAVEN_HOME at $MAVEN_HOME"
+  exec_maven "$@"
+fi
+
+case "${distributionUrl-}" in
+*?-bin.zip | *?maven-mvnd-?*-?*.zip) ;;
+*) die "distributionUrl is not valid, must match *-bin.zip or maven-mvnd-*.zip, but found '${distributionUrl-}'" ;;
+esac
+
+# prepare tmp dir
+if TMP_DOWNLOAD_DIR="$(mktemp -d)" && [ -d "$TMP_DOWNLOAD_DIR" ]; then
+  clean() { rm -rf -- "$TMP_DOWNLOAD_DIR"; }
+  trap clean HUP INT TERM EXIT
+else
+  die "cannot create temp dir"
+fi
+
+mkdir -p -- "${MAVEN_HOME%/*}"
+
+# Download and Install Apache Maven
+verbose "Couldn't find MAVEN_HOME, downloading and installing it ..."
+verbose "Downloading from: $distributionUrl"
+verbose "Downloading to: $TMP_DOWNLOAD_DIR/$distributionUrlName"
+
+# select .zip or .tar.gz
+if ! command -v unzip >/dev/null; then
+  distributionUrl="${distributionUrl%.zip}.tar.gz"
+  distributionUrlName="${distributionUrl##*/}"
+fi
+
+# verbose opt
+__MVNW_QUIET_WGET=--quiet __MVNW_QUIET_CURL=--silent __MVNW_QUIET_UNZIP=-q __MVNW_QUIET_TAR=''
+[ "${MVNW_VERBOSE-}" != true ] || __MVNW_QUIET_WGET='' __MVNW_QUIET_CURL='' __MVNW_QUIET_UNZIP='' __MVNW_QUIET_TAR=v
+
+# normalize http auth
+case "${MVNW_PASSWORD:+has-password}" in
+'') MVNW_USERNAME='' MVNW_PASSWORD='' ;;
+has-password) [ -n "${MVNW_USERNAME-}" ] || MVNW_USERNAME='' MVNW_PASSWORD='' ;;
+esac
+
+if [ -z "${MVNW_USERNAME-}" ] && command -v wget >/dev/null; then
+  verbose "Found wget ... using wget"
+  wget ${__MVNW_QUIET_WGET:+"$__MVNW_QUIET_WGET"} "$distributionUrl" -O "$TMP_DOWNLOAD_DIR/$distributionUrlName" || die "wget: Failed to fetch $distributionUrl"
+elif [ -z "${MVNW_USERNAME-}" ] && command -v curl >/dev/null; then
+  verbose "Found curl ... using curl"
+  curl ${__MVNW_QUIET_CURL:+"$__MVNW_QUIET_CURL"} -f -L -o "$TMP_DOWNLOAD_DIR/$distributionUrlName" "$distributionUrl" || die "curl: Failed to fetch $distributionUrl"
+elif set_java_home; then
+  verbose "Falling back to use Java to download"
+  javaSource="$TMP_DOWNLOAD_DIR/Downloader.java"
+  targetZip="$TMP_DOWNLOAD_DIR/$distributionUrlName"
+  cat >"$javaSource" <<-END
+	public class Downloader extends java.net.Authenticator
+	{
+	  protected java.net.PasswordAuthentication getPasswordAuthentication()
+	  {
+	    return new java.net.PasswordAuthentication( System.getenv( "MVNW_USERNAME" ), System.getenv( "MVNW_PASSWORD" ).toCharArray() );
+	  }
+	  public static void main( String[] args ) throws Exception
+	  {
+	    setDefault( new Downloader() );
+	    java.nio.file.Files.copy( java.net.URI.create( args[0] ).toURL().openStream(), java.nio.file.Paths.get( args[1] ).toAbsolutePath().normalize() );
+	  }
+	}
+	END
+  # For Cygwin/MinGW, switch paths to Windows format before running javac and java
+  verbose " - Compiling Downloader.java ..."
+  "$(native_path "$JAVACCMD")" "$(native_path "$javaSource")" || die "Failed to compile Downloader.java"
+  verbose " - Running Downloader.java ..."
+  "$(native_path "$JAVACMD")" -cp "$(native_path "$TMP_DOWNLOAD_DIR")" Downloader "$distributionUrl" "$(native_path "$targetZip")"
+fi
+
+# If specified, validate the SHA-256 sum of the Maven distribution zip file
+if [ -n "${distributionSha256Sum-}" ]; then
+  distributionSha256Result=false
+  if [ "$MVN_CMD" = mvnd.sh ]; then
+    echo "Checksum validation is not supported for maven-mvnd." >&2
+    echo "Please disable validation by removing 'distributionSha256Sum' from your maven-wrapper.properties." >&2
+    exit 1
+  elif command -v sha256sum >/dev/null; then
+    if echo "$distributionSha256Sum  $TMP_DOWNLOAD_DIR/$distributionUrlName" | sha256sum -c - >/dev/null 2>&1; then
+      distributionSha256Result=true
+    fi
+  elif command -v shasum >/dev/null; then
+    if echo "$distributionSha256Sum  $TMP_DOWNLOAD_DIR/$distributionUrlName" | shasum -a 256 -c >/dev/null 2>&1; then
+      distributionSha256Result=true
+    fi
+  else
+    echo "Checksum validation was requested but neither 'sha256sum' or 'shasum' are available." >&2
+    echo "Please install either command, or disable validation by removing 'distributionSha256Sum' from your maven-wrapper.properties." >&2
+    exit 1
+  fi
+  if [ $distributionSha256Result = false ]; then
+    echo "Error: Failed to validate Maven distribution SHA-256, your Maven distribution might be compromised." >&2
+    echo "If you updated your Maven version, you need to update the specified distributionSha256Sum property." >&2
+    exit 1
+  fi
+fi
+
+# unzip and move
+if command -v unzip >/dev/null; then
+  unzip ${__MVNW_QUIET_UNZIP:+"$__MVNW_QUIET_UNZIP"} "$TMP_DOWNLOAD_DIR/$distributionUrlName" -d "$TMP_DOWNLOAD_DIR" || die "failed to unzip"
+else
+  tar xzf${__MVNW_QUIET_TAR:+"$__MVNW_QUIET_TAR"} "$TMP_DOWNLOAD_DIR/$distributionUrlName" -C "$TMP_DOWNLOAD_DIR" || die "failed to untar"
+fi
+
+# Find the actual extracted directory name (handles snapshots where filename != directory name)
+actualDistributionDir=""
+
+# First try the expected directory name (for regular distributions)
+if [ -d "$TMP_DOWNLOAD_DIR/$distributionUrlNameMain" ]; then
+  if [ -f "$TMP_DOWNLOAD_DIR/$distributionUrlNameMain/bin/$MVN_CMD" ]; then
+    actualDistributionDir="$distributionUrlNameMain"
+  fi
+fi
+
+# If not found, search for any directory with the Maven executable (for snapshots)
+if [ -z "$actualDistributionDir" ]; then
+  # enable globbing to iterate over items
+  set +f
+  for dir in "$TMP_DOWNLOAD_DIR"/*; do
+    if [ -d "$dir" ]; then
+      if [ -f "$dir/bin/$MVN_CMD" ]; then
+        actualDistributionDir="$(basename "$dir")"
+        break
+      fi
+    fi
+  done
+  set -f
+fi
+
+if [ -z "$actualDistributionDir" ]; then
+  verbose "Contents of $TMP_DOWNLOAD_DIR:"
+  verbose "$(ls -la "$TMP_DOWNLOAD_DIR")"
+  die "Could not find Maven distribution directory in extracted archive"
+fi
+
+verbose "Found extracted Maven distribution directory: $actualDistributionDir"
+printf %s\\n "$distributionUrl" >"$TMP_DOWNLOAD_DIR/$actualDistributionDir/mvnw.url"
+mv -- "$TMP_DOWNLOAD_DIR/$actualDistributionDir" "$MAVEN_HOME" || [ -d "$MAVEN_HOME" ] || die "fail to move MAVEN_HOME"
+
+clean || :
+exec_maven "$@"
+
+```
+<<<END:mvnw>>>
+<<<FILE:mvnw.cmd>>>
+```text
+<# : batch portion
+@REM ----------------------------------------------------------------------------
+@REM Licensed to the Apache Software Foundation (ASF) under one
+@REM or more contributor license agreements.  See the NOTICE file
+@REM distributed with this work for additional information
+@REM regarding copyright ownership.  The ASF licenses this file
+@REM to you under the Apache License, Version 2.0 (the
+@REM "License"); you may not use this file except in compliance
+@REM with the License.  You may obtain a copy of the License at
+@REM
+@REM    http://www.apache.org/licenses/LICENSE-2.0
+@REM
+@REM Unless required by applicable law or agreed to in writing,
+@REM software distributed under the License is distributed on an
+@REM "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+@REM KIND, either express or implied.  See the License for the
+@REM specific language governing permissions and limitations
+@REM under the License.
+@REM ----------------------------------------------------------------------------
+
+@REM ----------------------------------------------------------------------------
+@REM Apache Maven Wrapper startup batch script, version 3.3.4
+@REM
+@REM Optional ENV vars
+@REM   MVNW_REPOURL - repo url base for downloading maven distribution
+@REM   MVNW_USERNAME/MVNW_PASSWORD - user and password for downloading maven
+@REM   MVNW_VERBOSE - true: enable verbose log; others: silence the output
+@REM ----------------------------------------------------------------------------
+
+@IF "%__MVNW_ARG0_NAME__%"=="" (SET __MVNW_ARG0_NAME__=%~nx0)
+@SET __MVNW_CMD__=
+@SET __MVNW_ERROR__=
+@SET __MVNW_PSMODULEP_SAVE=%PSModulePath%
+@SET PSModulePath=
+@FOR /F "usebackq tokens=1* delims==" %%A IN (`powershell -noprofile "& {$scriptDir='%~dp0'; $script='%__MVNW_ARG0_NAME__%'; icm -ScriptBlock ([Scriptblock]::Create((Get-Content -Raw '%~f0'))) -NoNewScope}"`) DO @(
+  IF "%%A"=="MVN_CMD" (set __MVNW_CMD__=%%B) ELSE IF "%%B"=="" (echo %%A) ELSE (echo %%A=%%B)
+)
+@SET PSModulePath=%__MVNW_PSMODULEP_SAVE%
+@SET __MVNW_PSMODULEP_SAVE=
+@SET __MVNW_ARG0_NAME__=
+@SET MVNW_USERNAME=
+@SET MVNW_PASSWORD=
+@IF NOT "%__MVNW_CMD__%"=="" ("%__MVNW_CMD__%" %*)
+@echo Cannot start maven from wrapper >&2 && exit /b 1
+@GOTO :EOF
+: end batch / begin powershell #>
+
+$ErrorActionPreference = "Stop"
+if ($env:MVNW_VERBOSE -eq "true") {
+  $VerbosePreference = "Continue"
+}
+
+# calculate distributionUrl, requires .mvn/wrapper/maven-wrapper.properties
+$distributionUrl = (Get-Content -Raw "$scriptDir/.mvn/wrapper/maven-wrapper.properties" | ConvertFrom-StringData).distributionUrl
+if (!$distributionUrl) {
+  Write-Error "cannot read distributionUrl property in $scriptDir/.mvn/wrapper/maven-wrapper.properties"
+}
+
+switch -wildcard -casesensitive ( $($distributionUrl -replace '^.*/','') ) {
+  "maven-mvnd-*" {
+    $USE_MVND = $true
+    $distributionUrl = $distributionUrl -replace '-bin\.[^.]*$',"-windows-amd64.zip"
+    $MVN_CMD = "mvnd.cmd"
+    break
+  }
+  default {
+    $USE_MVND = $false
+    $MVN_CMD = $script -replace '^mvnw','mvn'
+    break
+  }
+}
+
+# apply MVNW_REPOURL and calculate MAVEN_HOME
+# maven home pattern: ~/.m2/wrapper/dists/{apache-maven-<version>,maven-mvnd-<version>-<platform>}/<hash>
+if ($env:MVNW_REPOURL) {
+  $MVNW_REPO_PATTERN = if ($USE_MVND -eq $False) { "/org/apache/maven/" } else { "/maven/mvnd/" }
+  $distributionUrl = "$env:MVNW_REPOURL$MVNW_REPO_PATTERN$($distributionUrl -replace "^.*$MVNW_REPO_PATTERN",'')"
+}
+$distributionUrlName = $distributionUrl -replace '^.*/',''
+$distributionUrlNameMain = $distributionUrlName -replace '\.[^.]*$','' -replace '-bin$',''
+
+$MAVEN_M2_PATH = "$HOME/.m2"
+if ($env:MAVEN_USER_HOME) {
+  $MAVEN_M2_PATH = "$env:MAVEN_USER_HOME"
+}
+
+if (-not (Test-Path -Path $MAVEN_M2_PATH)) {
+    New-Item -Path $MAVEN_M2_PATH -ItemType Directory | Out-Null
+}
+
+$MAVEN_WRAPPER_DISTS = $null
+if ((Get-Item $MAVEN_M2_PATH).Target[0] -eq $null) {
+  $MAVEN_WRAPPER_DISTS = "$MAVEN_M2_PATH/wrapper/dists"
+} else {
+  $MAVEN_WRAPPER_DISTS = (Get-Item $MAVEN_M2_PATH).Target[0] + "/wrapper/dists"
+}
+
+$MAVEN_HOME_PARENT = "$MAVEN_WRAPPER_DISTS/$distributionUrlNameMain"
+$MAVEN_HOME_NAME = ([System.Security.Cryptography.SHA256]::Create().ComputeHash([byte[]][char[]]$distributionUrl) | ForEach-Object {$_.ToString("x2")}) -join ''
+$MAVEN_HOME = "$MAVEN_HOME_PARENT/$MAVEN_HOME_NAME"
+
+if (Test-Path -Path "$MAVEN_HOME" -PathType Container) {
+  Write-Verbose "found existing MAVEN_HOME at $MAVEN_HOME"
+  Write-Output "MVN_CMD=$MAVEN_HOME/bin/$MVN_CMD"
+  exit $?
+}
+
+if (! $distributionUrlNameMain -or ($distributionUrlName -eq $distributionUrlNameMain)) {
+  Write-Error "distributionUrl is not valid, must end with *-bin.zip, but found $distributionUrl"
+}
+
+# prepare tmp dir
+$TMP_DOWNLOAD_DIR_HOLDER = New-TemporaryFile
+$TMP_DOWNLOAD_DIR = New-Item -Itemtype Directory -Path "$TMP_DOWNLOAD_DIR_HOLDER.dir"
+$TMP_DOWNLOAD_DIR_HOLDER.Delete() | Out-Null
+trap {
+  if ($TMP_DOWNLOAD_DIR.Exists) {
+    try { Remove-Item $TMP_DOWNLOAD_DIR -Recurse -Force | Out-Null }
+    catch { Write-Warning "Cannot remove $TMP_DOWNLOAD_DIR" }
+  }
+}
+
+New-Item -Itemtype Directory -Path "$MAVEN_HOME_PARENT" -Force | Out-Null
+
+# Download and Install Apache Maven
+Write-Verbose "Couldn't find MAVEN_HOME, downloading and installing it ..."
+Write-Verbose "Downloading from: $distributionUrl"
+Write-Verbose "Downloading to: $TMP_DOWNLOAD_DIR/$distributionUrlName"
+
+$webclient = New-Object System.Net.WebClient
+if ($env:MVNW_USERNAME -and $env:MVNW_PASSWORD) {
+  $webclient.Credentials = New-Object System.Net.NetworkCredential($env:MVNW_USERNAME, $env:MVNW_PASSWORD)
+}
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$webclient.DownloadFile($distributionUrl, "$TMP_DOWNLOAD_DIR/$distributionUrlName") | Out-Null
+
+# If specified, validate the SHA-256 sum of the Maven distribution zip file
+$distributionSha256Sum = (Get-Content -Raw "$scriptDir/.mvn/wrapper/maven-wrapper.properties" | ConvertFrom-StringData).distributionSha256Sum
+if ($distributionSha256Sum) {
+  if ($USE_MVND) {
+    Write-Error "Checksum validation is not supported for maven-mvnd. `nPlease disable validation by removing 'distributionSha256Sum' from your maven-wrapper.properties."
+  }
+  Import-Module $PSHOME\Modules\Microsoft.PowerShell.Utility -Function Get-FileHash
+  if ((Get-FileHash "$TMP_DOWNLOAD_DIR/$distributionUrlName" -Algorithm SHA256).Hash.ToLower() -ne $distributionSha256Sum) {
+    Write-Error "Error: Failed to validate Maven distribution SHA-256, your Maven distribution might be compromised. If you updated your Maven version, you need to update the specified distributionSha256Sum property."
+  }
+}
+
+# unzip and move
+Expand-Archive "$TMP_DOWNLOAD_DIR/$distributionUrlName" -DestinationPath "$TMP_DOWNLOAD_DIR" | Out-Null
+
+# Find the actual extracted directory name (handles snapshots where filename != directory name)
+$actualDistributionDir = ""
+
+# First try the expected directory name (for regular distributions)
+$expectedPath = Join-Path "$TMP_DOWNLOAD_DIR" "$distributionUrlNameMain"
+$expectedMvnPath = Join-Path "$expectedPath" "bin/$MVN_CMD"
+if ((Test-Path -Path $expectedPath -PathType Container) -and (Test-Path -Path $expectedMvnPath -PathType Leaf)) {
+  $actualDistributionDir = $distributionUrlNameMain
+}
+
+# If not found, search for any directory with the Maven executable (for snapshots)
+if (!$actualDistributionDir) {
+  Get-ChildItem -Path "$TMP_DOWNLOAD_DIR" -Directory | ForEach-Object {
+    $testPath = Join-Path $_.FullName "bin/$MVN_CMD"
+    if (Test-Path -Path $testPath -PathType Leaf) {
+      $actualDistributionDir = $_.Name
+    }
+  }
+}
+
+if (!$actualDistributionDir) {
+  Write-Error "Could not find Maven distribution directory in extracted archive"
+}
+
+Write-Verbose "Found extracted Maven distribution directory: $actualDistributionDir"
+Rename-Item -Path "$TMP_DOWNLOAD_DIR/$actualDistributionDir" -NewName $MAVEN_HOME_NAME | Out-Null
+try {
+  Move-Item -Path "$TMP_DOWNLOAD_DIR/$MAVEN_HOME_NAME" -Destination $MAVEN_HOME_PARENT | Out-Null
+} catch {
+  if (! (Test-Path -Path "$MAVEN_HOME" -PathType Container)) {
+    Write-Error "fail to move MAVEN_HOME"
+  }
+} finally {
+  try { Remove-Item $TMP_DOWNLOAD_DIR -Recurse -Force | Out-Null }
+  catch { Write-Warning "Cannot remove $TMP_DOWNLOAD_DIR" }
+}
+
+Write-Output "MVN_CMD=$MAVEN_HOME/bin/$MVN_CMD"
+
+```
+<<<END:mvnw.cmd>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\controller\AiChatController.java>>>
+```text
+package com.fourth.ykd.ai.controller;
+
+import com.fourth.ykd.ai.dto.AiChatRequest;
+import com.fourth.ykd.ai.dto.AiChatResponse;
+import com.fourth.ykd.ai.service.AiChatService;
+import com.fourth.ykd.result.ApiResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/ai")
+@RequiredArgsConstructor
+public class AiChatController {
+
+    private final AiChatService aiChatService;
+
+    @PostMapping("/chat")
+    public ApiResponse<AiChatResponse> chat(@RequestBody AiChatRequest request) {
+        return ApiResponse.success(aiChatService.chat(request.message()));
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\controller\AiChatController.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\dto\AiChatRequest.java>>>
+```text
+package com.fourth.ykd.ai.dto;
+
+public record AiChatRequest(String message) {
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\dto\AiChatRequest.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\dto\AiChatResponse.java>>>
+```text
+package com.fourth.ykd.ai.dto;
+
+public record AiChatResponse(String reply) {
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\dto\AiChatResponse.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\dto\GeneratedImage.java>>>
+```text
+package com.fourth.ykd.ai.dto;
+
+public record GeneratedImage(byte[] bytes, String fileName, String contentType) {
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\dto\GeneratedImage.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\dto\PendingUserImage.java>>>
+```text
+package com.fourth.ykd.ai.dto;
+
+import java.time.Instant;
+
+public record   PendingUserImage(byte[] bytes, String contentType, Instant receivedAt) {
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\dto\PendingUserImage.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\infrastructure\dashscope\DashScopeConfig.java>>>
+```text
+package com.fourth.ykd.ai.infrastructure.dashscope;
+
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestClient;
+
+@Configuration
+@EnableConfigurationProperties(DashScopeProperties.class)
+public class DashScopeConfig {
+
+    @Bean
+    public RestClient dashScopeRestClient(DashScopeProperties properties) {
+        RestClient.Builder builder = RestClient.builder().baseUrl(properties.getApiBaseUrl());
+        if (StringUtils.hasText(properties.getApiKey())) {
+            builder.defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + properties.getApiKey());
+        }
+        return builder.build();
+    }
+
+    @Bean
+    public RestClient imageDownloadRestClient() {
+        // 下载临时图片时不能把百炼密钥发送给 OSS。
+        return RestClient.create();
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\infrastructure\dashscope\DashScopeConfig.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\infrastructure\dashscope\DashScopeProperties.java>>>
+```text
+package com.fourth.ykd.ai.infrastructure.dashscope;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+@Getter
+@Setter
+@ConfigurationProperties(prefix = "dashscope")
+public class DashScopeProperties {
+
+    private String apiBaseUrl;
+
+    private String apiKey;
+
+    private String imageGenerationModel;
+
+    private String visionModel;
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\infrastructure\dashscope\DashScopeProperties.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\infrastructure\dashscope\QwenImageClient.java>>>
+```text
+package com.fourth.ykd.ai.infrastructure.dashscope;
+
+import com.fourth.ykd.ai.dto.PendingUserImage;
+import java.util.Base64;
+import java.util.List;
+import java.util.Map;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestClient;
+import tools.jackson.databind.JsonNode;
+
+/**
+ * 通义千问图片生成客户端。
+ * 主要作用：图片描述 → 调用 DashScope → 得到临时图片 URL
+ * 1. 接收用户输入的图片描述；
+ * 2. 调用 DashScope 的 Qwen-Image 图片生成接口；
+ * 3. 从响应结果中提取生成图片的临时 URL；
+ * 4. 将图片 URL 返回给上层业务。
+ */
+@Component
+@RequiredArgsConstructor
+public class QwenImageClient {
+
+    /**
+     * DashScope 图片生成接口路径。
+     */
+    private static final String GENERATION_PATH =
+            "/api/v1/services/aigc/multimodal-generation/generation";
+
+    /**
+     * 用于向 DashScope 发送 HTTP 请求。
+     * 该对象通常已经提前配置好：
+     * 1. DashScope 基础地址；
+     * 2. API Key；
+     * 3. Authorization 请求头；
+     * 4. 请求超时时间。
+     */
+    private final RestClient dashScopeRestClient;
+
+    /**
+     * DashScope 配置对象:
+     * 用于读取配置文件中的图片生成模型名称等配置。
+     */
+    private final DashScopeProperties properties;
+
+    /**
+     * 调用同步版 Qwen-Image 图片生成接口，
+     * 返回生成图片的临时访问 URL。
+     * @param prompt 用户输入的图片描述词
+     * @return 图片生成接口返回的临时图片 URL
+     */
+    public String generateImageUrl(PendingUserImage referenceImage, String prompt) {
+        if (referenceImage == null || referenceImage.bytes() == null || referenceImage.bytes().length == 0) {
+            throw new IllegalArgumentException("参考图片不能为空");
+        }
+        if (!StringUtils.hasText(prompt)) {
+            throw new IllegalArgumentException("图片编辑指令不能为空");
+        }
+
+        String imageDataUrl = "data:" + referenceImage.contentType() + ";base64,"
+                + Base64.getEncoder().encodeToString(referenceImage.bytes());
+        Map<String, Object> requestBody = Map.of(
+                "model", properties.getImageGenerationModel(),
+                "input", Map.of(
+                        "messages", List.of(Map.of(
+                                "role", "user",
+                                "content", List.of(
+                                        Map.of("image", imageDataUrl),
+                                        Map.of("text", prompt.trim())
+                                )
+                        ))
+                ),
+                "parameters", Map.of(
+                        "size", "1024*1024",
+                        "prompt_extend", true,
+                        "watermark", false
+                )
+        );
+
+        return requestImageUrl(requestBody);
+    }
+    public String generateImageUrl(String prompt) {
+
+        // 判断图片描述是否为 null、空字符串或全部为空格
+        if (!StringUtils.hasText(prompt)) {
+            throw new IllegalArgumentException("图片生成提示词不能为空");
+        }
+
+        // 构造发送给 DashScope 的 JSON 请求体
+        Map<String, Object> requestBody = Map.of(
+
+                // 指定使用的图片生成模型
+                "model", properties.getImageGenerationModel(),
+
+                // 模型输入内容
+                "input", Map.of(
+                        // 对话消息列表
+                        "messages", List.of(Map.of(
+
+                                // 当前消息的角色是用户
+                                "role", "user",
+
+                                // 用户输入的具体内容
+                                "content", List.of(Map.of(
+
+                                        // 去掉提示词前后的多余空格
+                                        "text", prompt.trim()
+                                ))
+                        ))
+                ),
+
+                // 图片生成参数
+                "parameters", Map.of(
+
+                        // 设置图片尺寸为 1024 × 1024
+                        "size", "1024*1024",
+
+                        // 是否允许模型自动扩展和优化提示词
+                        "prompt_extend", true,
+
+                        // 是否在生成图片中添加水印
+                        "watermark", false
+                )
+        );
+
+        // 发送 POST 请求调用图片生成接口
+        return requestImageUrl(requestBody);
+    }
+    private String requestImageUrl(Map<String, Object> requestBody) {
+        JsonNode response = dashScopeRestClient.post()
+                .uri(GENERATION_PATH)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(requestBody)
+                .retrieve()
+                .body(JsonNode.class);
+
+        if (response == null) {
+            throw new IllegalStateException("Qwen-Image 返回了空响应");
+        }
+
+        String imageUrl = response.path("output")
+                .path("choices")
+                .path(0)
+                .path("message")
+                .path("content")
+                .path(0)
+                .path("image")
+                .asText();
+        if (!StringUtils.hasText(imageUrl)) {
+            throw new IllegalStateException("Qwen-Image 没有返回图片 URL");
+        }
+        return imageUrl;
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\infrastructure\dashscope\QwenImageClient.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\infrastructure\dashscope\QwenVisionClient.java>>>
+```text
+package com.fourth.ykd.ai.infrastructure.dashscope;
+
+import com.fourth.ykd.ai.dto.PendingUserImage;
+import java.util.Base64;
+import java.util.List;
+import java.util.Map;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestClient;
+import tools.jackson.databind.JsonNode;
+
+@Component
+@RequiredArgsConstructor
+public class QwenVisionClient {
+
+    private static final String CHAT_COMPLETIONS_PATH = "/compatible-mode/v1/chat/completions";
+
+    private final RestClient dashScopeRestClient;
+    private final DashScopeProperties properties;
+
+    public String understand(PendingUserImage image, String question) {
+        if (image == null || image.bytes() == null || image.bytes().length == 0) {
+            throw new IllegalArgumentException("待识别图片不能为空");
+        }
+        if (!StringUtils.hasText(question)) {
+            throw new IllegalArgumentException("识图问题不能为空");
+        }
+
+        String imageDataUrl = "data:" + image.contentType() + ";base64,"
+                + Base64.getEncoder().encodeToString(image.bytes());
+        Map<String, Object> requestBody = Map.of(
+                "model", properties.getVisionModel(),
+                "messages", List.of(Map.of(
+                        "role", "user",
+                        "content", List.of(
+                                Map.of("type", "image_url", "image_url", Map.of("url", imageDataUrl)),
+                                Map.of("type", "text", "text", question.trim())
+                        )
+                ))
+        );
+
+        JsonNode response = dashScopeRestClient.post()
+                .uri(CHAT_COMPLETIONS_PATH)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(requestBody)
+                .retrieve()
+                .body(JsonNode.class);
+
+        String answer = response == null
+                ? null
+                : response.path("choices").path(0).path("message").path("content").asText();
+        if (!StringUtils.hasText(answer)) {
+            throw new IllegalStateException("Qwen-VL 没有返回识图结果");
+        }
+        return answer.trim();
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\infrastructure\dashscope\QwenVisionClient.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\infrastructure\deepseek\DeepSeekClient.java>>>
+```text
+package com.fourth.ykd.ai.infrastructure.deepseek;
+
+import tools.jackson.databind.JsonNode;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClient;
+
+import java.util.List;
+import java.util.Map;
+
+@Component
+@RequiredArgsConstructor
+public class DeepSeekClient {
+
+    private final RestClient deepSeekRestClient;
+    private final DeepSeekProperties deepSeekProperties;
+
+    public String chat(String message) {
+        Map<String, Object> requestBody = Map.of(
+                "model", deepSeekProperties.getModel(),
+                "messages", List.of(Map.of("role", "user", "content", message))
+        );
+
+        JsonNode response = deepSeekRestClient.post()
+                .uri("/chat/completions")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(requestBody)
+                .retrieve()
+                .body(JsonNode.class);
+
+        if (response == null) {
+            throw new IllegalStateException("DeepSeek returned an empty response");
+        }
+
+        String reply = response.path("choices").path(0).path("message").path("content").asText();
+        if (reply.isBlank()) {
+            throw new IllegalStateException("DeepSeek did not return a chat reply");
+        }
+        return reply;
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\infrastructure\deepseek\DeepSeekClient.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\infrastructure\deepseek\DeepSeekConfig.java>>>
+```text
+package com.fourth.ykd.ai.infrastructure.deepseek;
+
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestClient;
+
+/*创建专用 RestClient Bean*/
+@Configuration
+@EnableConfigurationProperties(DeepSeekProperties.class)
+public class DeepSeekConfig {
+
+    @Bean
+    public RestClient deepSeekRestClient(DeepSeekProperties properties) {
+        RestClient.Builder builder = RestClient.builder().baseUrl(properties.getApiBaseUrl());
+        if (StringUtils.hasText(properties.getApiKey())) {
+            builder.defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + properties.getApiKey());
+        }
+        return builder.build();
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\infrastructure\deepseek\DeepSeekConfig.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\infrastructure\deepseek\DeepSeekProperties.java>>>
+```text
+package com.fourth.ykd.ai.infrastructure.deepseek;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+@Getter
+@Setter
+@ConfigurationProperties(prefix = "deepseek")
+public class DeepSeekProperties {
+
+    private String apiBaseUrl;
+
+    private String apiKey;
+
+    private String model;
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\infrastructure\deepseek\DeepSeekProperties.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\routing\DeepSeekIntentRouter.java>>>
+```text
+package com.fourth.ykd.ai.routing;
+
+import com.fourth.ykd.ai.infrastructure.deepseek.DeepSeekClient;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+/*AI消息分流：deepseek判断用户消息意图类型，把判断结果转化为枚举状态*/
+@Slf4j
+@Component
+@RequiredArgsConstructor
+public class DeepSeekIntentRouter {
+
+    //从 DeepSeek 返回的 {"intent":"IMAGE_EDIT"} 里，把 IMAGE_EDIT 提取出来
+    private static final Pattern INTENT_PATTERN =
+            Pattern.compile("\"intent\"\\s*:\\s*\"([A-Z_]+)\"");
+
+    private final DeepSeekClient deepSeekClient;
+
+    public UserIntent route(String userText) {
+        return route(userText, false);
+    }
+
+    public UserIntent route(String userText, boolean hasPendingImage) {
+        Matcher matcher = INTENT_PATTERN.matcher(deepSeekClient.chat(buildPrompt(userText, hasPendingImage)));
+        if (!matcher.find()) {
+            return UserIntent.TEXT;
+        }
+        try {
+            /*matcher.group(0) 拿到的是整个匹配内容："intent":"IMAGE_EDIT"
+            而：matcher.group(1) 拿到的是第一个圆括号捕获到的内容：IMAGE_EDIT*/
+            return UserIntent.valueOf(matcher.group(1));
+          //这里可能出现异常，但这个异常不用继续处理，直接走默认逻辑。
+        } catch (IllegalArgumentException e) {
+            log.warn("DeepSeek 返回了未知意图: {}", matcher.group(1));
+            return UserIntent.TEXT;
+        }
+    }
+
+    private String buildPrompt(String userText, boolean hasPendingImage) {
+        String availableIntents = hasPendingImage
+                ? "TEXT, IMAGE_GENERATE, IMAGE_EDIT, IMAGE_UNDERSTAND"
+                : "TEXT, IMAGE_GENERATE";
+        return """
+                你是消息路由器。根据用户当前这句话的真实目标，选择一个最合适的意图。
+                可选意图：""" + availableIntents + """
+                IMAGE_UNDERSTAND 表示用户希望理解、判断或获取当前图片的信息。
+                IMAGE_EDIT 表示用户希望把当前图片作为输入进行修改、延展、变换或作为参考素材。
+                IMAGE_GENERATE 表示用户希望生成一张独立的新图片，且不需要使用当前图片。
+                TEXT 表示普通对话或与图片无关的文字任务。
+                只返回 JSON 对象，格式为 {"intent":"其中一个可选意图"}，不要补充解释。
+                用户内容：""" + userText;
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\routing\DeepSeekIntentRouter.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\routing\UserIntent.java>>>
+```text
+package com.fourth.ykd.ai.routing;
+
+public enum UserIntent {
+    TEXT,
+    IMAGE_GENERATE,
+    IMAGE_EDIT,
+    IMAGE_UNDERSTAND
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\routing\UserIntent.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\service\AiChatService.java>>>
+```text
+package com.fourth.ykd.ai.service;
+
+import com.fourth.ykd.ai.dto.AiChatResponse;
+
+public interface AiChatService {
+
+    AiChatResponse chat(String message);
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\service\AiChatService.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\service\ImageContextService.java>>>
+```text
+package com.fourth.ykd.ai.service;
+
+import com.fourth.ykd.ai.dto.PendingUserImage;
+import java.util.Optional;
+
+public interface ImageContextService {
+
+    void save(String userId, byte[] imageBytes);
+
+    Optional<PendingUserImage> findActive(String userId);
+
+    void remove(String userId, PendingUserImage image);
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\service\ImageContextService.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\service\ImageGenerationService.java>>>
+```text
+package com.fourth.ykd.ai.service;
+
+import com.fourth.ykd.ai.dto.GeneratedImage;
+
+public interface ImageGenerationService {
+
+    GeneratedImage generate(String prompt);
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\service\ImageGenerationService.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\service\ImageReferenceGenerationService.java>>>
+```text
+package com.fourth.ykd.ai.service;
+
+import com.fourth.ykd.ai.dto.GeneratedImage;
+import com.fourth.ykd.ai.dto.PendingUserImage;
+
+public interface ImageReferenceGenerationService {
+
+    GeneratedImage generate(PendingUserImage referenceImage, String prompt);
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\service\ImageReferenceGenerationService.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\service\ImageUnderstandingService.java>>>
+```text
+package com.fourth.ykd.ai.service;
+
+import com.fourth.ykd.ai.dto.PendingUserImage;
+
+public interface ImageUnderstandingService {
+
+    String understand(PendingUserImage image, String question);
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\service\ImageUnderstandingService.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\service\impl\AiChatServiceImpl.java>>>
+```text
+package com.fourth.ykd.ai.service.impl;
+
+import com.fourth.ykd.ai.dto.AiChatResponse;
+import com.fourth.ykd.ai.service.AiChatService;
+import com.fourth.ykd.ai.infrastructure.deepseek.DeepSeekClient;
+import com.fourth.ykd.ai.infrastructure.deepseek.DeepSeekProperties;
+import com.fourth.ykd.exception.BusinessException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+@Service
+@RequiredArgsConstructor
+public class AiChatServiceImpl implements AiChatService {
+
+    private final DeepSeekClient deepSeekClient;
+    private final DeepSeekProperties deepSeekProperties;
+
+    @Override
+    public AiChatResponse chat(String message) {
+        if (!StringUtils.hasText(message)) {
+            throw new BusinessException(40001, "message must not be blank");
+        }
+        if (!StringUtils.hasText(deepSeekProperties.getApiKey())) {
+            throw new BusinessException(50001, "DEEPSEEK_API_KEY is not configured");
+        }
+        return new AiChatResponse(deepSeekClient.chat(message.trim()));
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\service\impl\AiChatServiceImpl.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\service\impl\ImageGenerationServiceImpl.java>>>
+```text
+package com.fourth.ykd.ai.service.impl;
+
+import com.fourth.ykd.ai.dto.GeneratedImage;
+import com.fourth.ykd.ai.infrastructure.dashscope.DashScopeProperties;
+import com.fourth.ykd.ai.infrastructure.dashscope.QwenImageClient;
+import com.fourth.ykd.ai.service.ImageGenerationService;
+import com.fourth.ykd.exception.BusinessException;
+import java.net.URI;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestClient;
+
+@Service
+public class ImageGenerationServiceImpl implements ImageGenerationService {
+    private final QwenImageClient qwenImageClient;
+    private final DashScopeProperties properties;
+    private final RestClient imageDownloadRestClient;
+
+    public ImageGenerationServiceImpl(QwenImageClient qwenImageClient, DashScopeProperties properties,
+            @Qualifier("imageDownloadRestClient") RestClient imageDownloadRestClient) {
+        this.qwenImageClient = qwenImageClient;
+        this.properties = properties;
+        this.imageDownloadRestClient = imageDownloadRestClient;
+    }
+
+    @Override
+    public GeneratedImage generate(String prompt) {
+        if (!StringUtils.hasText(prompt)) {
+            throw new BusinessException(40001, "图片描述不能为空");
+        }
+        if (!StringUtils.hasText(properties.getApiKey())) {
+            throw new BusinessException(50003, "DASHSCOPE_API_KEY 未配置");
+        }
+        String imageUrl = qwenImageClient.generateImageUrl(prompt);
+        // 原样保留 OSS 签名参数，不能被 HTTP 客户端二次编码。
+        ResponseEntity<byte[]> response = imageDownloadRestClient.get()
+                .uri(URI.create(imageUrl))
+                .retrieve()
+                .toEntity(byte[].class);
+        byte[] bytes = response.getBody();
+        if (bytes == null || bytes.length == 0) {
+            throw new BusinessException(50004, "生成图片下载失败");
+        }
+        MediaType type = response.getHeaders().getContentType();
+        return new GeneratedImage(bytes, "qwen-image.png", type == null ? MediaType.IMAGE_PNG_VALUE : type.toString());
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\service\impl\ImageGenerationServiceImpl.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\service\impl\ImageReferenceGenerationServiceImpl.java>>>
+```text
+package com.fourth.ykd.ai.service.impl;
+
+import com.fourth.ykd.ai.dto.GeneratedImage;
+import com.fourth.ykd.ai.dto.PendingUserImage;
+import com.fourth.ykd.ai.infrastructure.dashscope.DashScopeProperties;
+import com.fourth.ykd.ai.infrastructure.dashscope.QwenImageClient;
+import com.fourth.ykd.ai.service.ImageReferenceGenerationService;
+import com.fourth.ykd.exception.BusinessException;
+import java.net.URI;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestClient;
+
+@Service
+public class ImageReferenceGenerationServiceImpl implements ImageReferenceGenerationService {
+
+    private final QwenImageClient qwenImageClient;
+    private final DashScopeProperties properties;
+    private final RestClient imageDownloadRestClient;
+
+    public ImageReferenceGenerationServiceImpl(
+            QwenImageClient qwenImageClient,
+            DashScopeProperties properties,
+            @Qualifier("imageDownloadRestClient") RestClient imageDownloadRestClient
+    ) {
+        this.qwenImageClient = qwenImageClient;
+        this.properties = properties;
+        this.imageDownloadRestClient = imageDownloadRestClient;
+    }
+
+    @Override
+    public GeneratedImage generate(PendingUserImage referenceImage, String prompt) {
+        if (referenceImage == null || referenceImage.bytes() == null || referenceImage.bytes().length == 0) {
+            throw new BusinessException(40001, "参考图片不能为空");
+        }
+        if (!StringUtils.hasText(prompt)) {
+            throw new BusinessException(40001, "图片编辑指令不能为空");
+        }
+        if (!StringUtils.hasText(properties.getApiKey())) {
+            throw new BusinessException(50003, "DASHSCOPE_API_KEY 未配置");
+        }
+
+        String imageUrl = qwenImageClient.generateImageUrl(referenceImage, prompt);
+        ResponseEntity<byte[]> response = imageDownloadRestClient.get()
+                .uri(URI.create(imageUrl))
+                .retrieve()
+                .toEntity(byte[].class);
+        byte[] bytes = response.getBody();
+        if (bytes == null || bytes.length == 0) {
+            throw new BusinessException(50004, "参考图生成结果下载失败");
+        }
+
+        MediaType type = response.getHeaders().getContentType();
+        return new GeneratedImage(bytes, "qwen-image-reference.png",
+                type == null ? MediaType.IMAGE_PNG_VALUE : type.toString());
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\service\impl\ImageReferenceGenerationServiceImpl.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\service\impl\ImageUnderstandingServiceImpl.java>>>
+```text
+package com.fourth.ykd.ai.service.impl;
+
+import com.fourth.ykd.ai.dto.PendingUserImage;
+import com.fourth.ykd.ai.infrastructure.dashscope.DashScopeProperties;
+import com.fourth.ykd.ai.infrastructure.dashscope.QwenVisionClient;
+import com.fourth.ykd.ai.service.ImageUnderstandingService;
+import com.fourth.ykd.exception.BusinessException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+@Service
+@RequiredArgsConstructor
+public class ImageUnderstandingServiceImpl implements ImageUnderstandingService {
+
+    private final QwenVisionClient qwenVisionClient;
+    private final DashScopeProperties properties;
+
+    @Override
+    public String understand(PendingUserImage image, String question) {
+        if (!StringUtils.hasText(properties.getApiKey())) {
+            throw new BusinessException(50001, "DASHSCOPE_API_KEY is not configured");
+        }
+        return qwenVisionClient.understand(image, question);
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\service\impl\ImageUnderstandingServiceImpl.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ai\service\impl\InMemoryImageContextService.java>>>
+```text
+package com.fourth.ykd.ai.service.impl;
+
+import com.fourth.ykd.ai.dto.PendingUserImage;
+import com.fourth.ykd.ai.service.ImageContextService;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+@Service
+public class InMemoryImageContextService implements ImageContextService {
+
+    private static final Duration IMAGE_CONTEXT_TTL = Duration.ofMinutes(10);
+
+    private final ConcurrentMap<String, PendingUserImage> images = new ConcurrentHashMap<>();
+
+    @Override
+    public void save(String userId, byte[] imageBytes) {
+        if (!StringUtils.hasText(userId) || imageBytes == null || imageBytes.length == 0) {
+            throw new IllegalArgumentException("图片上下文不能为空");
+        }
+        images.put(userId, new PendingUserImage(
+                imageBytes,
+                detectContentType(imageBytes),
+                Instant.now()
+        ));
+    }
+
+    @Override
+    public Optional<PendingUserImage> findActive(String userId) {
+        PendingUserImage image = images.get(userId);
+        if (image == null) {
+            return Optional.empty();
+        }
+        if (isExpired(image)) {
+            images.remove(userId, image);
+            return Optional.empty();
+        }
+        return Optional.of(image);
+    }
+
+    @Override
+    public void remove(String userId, PendingUserImage image) {
+        images.remove(userId, image);
+    }
+
+    @Scheduled(fixedDelay = 60_000)
+    void removeExpiredImages() {
+        images.entrySet().removeIf(entry -> isExpired(entry.getValue()));
+    }
+
+    private boolean isExpired(PendingUserImage image) {
+        return image.receivedAt().plus(IMAGE_CONTEXT_TTL).isBefore(Instant.now());
+    }
+
+    private String detectContentType(byte[] bytes) {
+        if (bytes.length >= 8
+                && bytes[0] == (byte) 0x89
+                && bytes[1] == 0x50
+                && bytes[2] == 0x4E
+                && bytes[3] == 0x47) {
+            return "image/png";
+        }
+        if (bytes.length >= 3
+                && bytes[0] == (byte) 0xFF
+                && bytes[1] == (byte) 0xD8
+                && bytes[2] == (byte) 0xFF) {
+            return "image/jpeg";
+        }
+        if (bytes.length >= 6
+                && bytes[0] == 0x47
+                && bytes[1] == 0x49
+                && bytes[2] == 0x46) {
+            return "image/gif";
+        }
+        return "image/jpeg";
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ai\service\impl\InMemoryImageContextService.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\exception\ApiExceptionHandler.java>>>
+```text
+package com.fourth.ykd.exception;
+
+import com.fourth.ykd.result.ApiResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+@Slf4j
+@RestControllerAdvice
+public class ApiExceptionHandler {
+
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<ApiResponse<Void>> handleBusinessException(
+            BusinessException exception) {
+
+        log.warn("Business exception: code={}, message={}",
+                exception.getCode(), exception.getMessage());
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ApiResponse.failure(
+                        exception.getCode(),
+                        exception.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ApiResponse<Void>> handleIllegalArgumentException(
+            IllegalArgumentException exception) {
+
+        log.warn("Invalid request parameter: {}", exception.getMessage());
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ApiResponse.failure(
+                        40000,
+                        exception.getMessage()));
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponse<Void>> handleUnexpectedException(
+            Exception exception) {
+
+        log.error("Unexpected system exception", exception);
+
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ApiResponse.failure(
+                        50000,
+                        "系统繁忙，请稍后重试"));
+    }
+}
+
+```
+<<<END:src\main\java\com\fourth\ykd\exception\ApiExceptionHandler.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\exception\BusinessException.java>>>
+```text
+package com.fourth.ykd.exception;
+
+/* 封装统一异常类：
+天气业务发现城市为空
+        ↓
+抛出 BusinessException(40001, "城市名称不能为空")
+        ↓
+全局异常处理器捕获
+        ↓
+ApiResponse.failure(40001, "城市名称不能为空")
+        ↓
+返回 JSON 给接口调用者*/
+public class BusinessException extends RuntimeException{
+
+    private final int code;
+
+    public BusinessException(int code,String message){
+        //错误说明交给异常父类保存，后面可以直接exception.getMessage()。
+        super(message);
+        this.code = code;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+}
+
+```
+<<<END:src\main\java\com\fourth\ykd\exception\BusinessException.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ilink\client\IlinkClientManager.java>>>
+```text
+package com.fourth.ykd.ilink.client;
+
+import com.github.wechat.ilink.sdk.ILinkClient;
+import com.github.wechat.ilink.sdk.core.config.ILinkConfig;
+import jakarta.annotation.PreDestroy;
+import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+/*用一个 Spring 单例组件，统一管理项目中唯一的 ILinkClient：创建、获取、关闭。*/
+@Slf4j
+//这个类交给Spring管理，在项目启动时创建一个IlinkClientManager对象放进Spring容器内
+// 用了 @Component 后，各个服务注入的是同一个管理器。
+@Component
+public class IlinkClientManager {
+
+    private final ILinkConfig iLinkSdkConfig;
+
+    public IlinkClientManager(ILinkConfig iLinkSdkConfig) {
+        this.iLinkSdkConfig = iLinkSdkConfig;
+    }
+
+    /**
+     * 当前唯一的 iLink 客户端:
+     * volatile 的作用：
+     * 后续“消息接收线程”和“登录接口线程”在不同线程运行时，
+     * 一个线程替换客户端后，另一个线程能立刻看到最新引用。
+     */
+    private volatile ILinkClient client;
+
+    /**
+     * 创建一个新的 iLink 客户端。
+     * 使用场景：
+     * 用户主动重新发起扫码登录时。
+     * 创建前必须先关闭旧客户端，
+     * 否则旧客户端的线程池、登录状态和消息游标会残留。
+     */
+    public synchronized ILinkClient createNewClient() {
+        closeCurrentClient();
+
+        ILinkClient newClient = ILinkClient.builder()
+                .config(iLinkSdkConfig)
+                .build();
+
+       /*保存为当前客户端：左边：this.client
+        表示当前 IlinkClientManager 对象保存的成员变量。
+        右边：newClient
+        表示刚刚创建出来的局部变量。*/
+        this.client = newClient;
+        log.info("[iLink] new client created");
+
+        return newClient;
+    }
+    /**
+     * 查询当前客户端是否存在：
+     * “客户端存在”不等于“已经登录”。
+     * 是否登录要在下一步通过 current.isLoggedIn() 判断。
+     * Optional<>:返回的不是直接的 ILinkClient，而是一个可能有值、也可能没值的包装对象
+     */
+    public Optional<ILinkClient> findClient() {
+        /*如果 client 不为 null,返回一个有值的 Optional
+        如果 client 为 null,返回一个空 Optional*/
+        return Optional.ofNullable(client);
+    }
+
+    /**
+     * 关闭并清空当前客户端。加锁：创建和关闭都需要串行执行
+     * 使用场景：
+     * 取消扫码、重新扫码、应用关闭。
+     */
+    public synchronized void closeCurrentClient() {
+        /*保存旧的客户端:左边：current
+        是当前方法里的局部变量。
+        右边：this.client
+        是管理器对象里的成员变量*/
+        ILinkClient current = this.client;
+        //清空成员变量：当前管理器不再对外提供这个客户端
+        this.client = null;
+        if (current != null) {
+            try {
+                current.close();
+                log.info("[iLink] client closed");
+            } catch (Exception exception) {
+                log.warn("[iLink] client close failed: {}", exception.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Spring Boot 停止时自动调用。
+     * 防止 SDK 线程池遗留，导致项目无法正常结束。
+     */
+    @PreDestroy
+    public void shutdown() {
+        closeCurrentClient();
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ilink\client\IlinkClientManager.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ilink\config\IlinkProperties.java>>>
+```text
+package com.fourth.ykd.ilink.config;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+/*Spring 启动
+  ↓
+读取 application.properties
+  ↓
+创建 IlinkProperties
+  ↓
+调用 iLinkSdkConfig(...)
+  ↓
+创建并保存一个 SDK ILinkConfig
+  ↓
+后续 IlinkClientManager 使用它创建 ILinkClient*/
+@Getter
+@Setter
+@ConfigurationProperties(prefix = "ilink")
+public class IlinkProperties {
+
+    /**
+     * 是否启用 iLink 模块。
+     * 以后临时排查其他功能时，可以设为 false，避免启动 iLink。
+     */
+    private boolean enabled = true;
+
+    /**
+     * 手机扫码登录成功后，本地保存会话凭证的文件。
+     * 重启项目时可尝试恢复登录，不必每次重新扫码。
+     */
+    private String sessionFile = ".ilink/session.token";
+
+    /**
+     * 与 iLink 服务建立 TCP/HTTP 连接的最长等待时间。
+     */
+    private long connectTimeoutMs = 5_000;
+
+    /**
+     * 接收 iLink 服务响应的最长等待时间。
+     * 后续收消息采用长轮询，所以不能设置得过短。
+     */
+    private long readTimeoutMs = 35_000;
+
+    /**
+     * 向 iLink 服务发送请求数据的最长等待时间。
+     */
+    private long writeTimeoutMs = 5_000;
+
+    /**
+     * 单个 iLink HTTP 请求失败后的最大重试次数。
+     */
+    private int httpMaxRetries = 2;
+
+    /**
+     * 第一次重试前的基础等待时间。
+     */
+    private long retryBaseDelayMs = 300;
+
+    /**
+     * 重试等待时间的最大值，防止重试越等越久。
+     */
+    private long retryMaxDelayMs = 2_000;
+
+    /**
+     * 是否开启 SDK 内置心跳。
+     * 先关闭；第 4 步我们会自己实现更及时的消息接收循环。
+     */
+    private boolean heartbeatEnabled = false;
+
+    /**
+     * SDK 内部处理网络 IO 的核心线程数。
+     */
+    private int ioCoreThreads = 2;
+
+    /**
+     * SDK 内部处理网络 IO 的最大线程数。
+     */
+    private int ioMaxThreads = 4;
+
+    /**
+     * SDK 内部定时任务线程数。
+     */
+    private int schedulerThreads = 1;
+
+    /**
+     * SDK 内部任务队列容量，防止任务无限积压。
+     */
+    private int queueCapacity = 100;
+
+    /**
+     * SDK 自动重连开关。
+     */
+    private boolean autoReconnectEnabled = true;
+
+    /**
+     * 两次消息拉取之间的最小等待时间。
+     * 无消息时：getUpdates() 长时间等待 → 不会疯狂请求
+     * 有消息、接口立即返回时：等待 500ms 再请求
+     * → 控制台通常在 0.5 秒级别看到新消息→ 不会无间隔占满 CPU
+     */
+    private long pollDelayMs = 500;
+
+    // Application reply worker settings; separate from the SDK IO pool.
+    private int replyCoreThreads = 1;
+
+    private int replyMaxThreads = 1;
+
+    private int replyQueueCapacity = 100;
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ilink\config\IlinkProperties.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ilink\config\IlinkReplyExecutorConfiguration.java>>>
+```text
+package com.fourth.ykd.ilink.config;
+
+import java.util.concurrent.ThreadPoolExecutor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
+@Configuration
+public class IlinkReplyExecutorConfiguration {
+
+    @Bean(name = "iLinkReplyExecutor")
+    public ThreadPoolTaskExecutor iLinkReplyExecutor(
+            IlinkProperties properties
+    ) {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+
+        executor.setThreadNamePrefix("ilink-reply-");
+        executor.setCorePoolSize(properties.getReplyCoreThreads());
+        executor.setMaxPoolSize(properties.getReplyMaxThreads());
+        executor.setQueueCapacity(properties.getReplyQueueCapacity());
+
+        executor.setRejectedExecutionHandler(
+                new ThreadPoolExecutor.AbortPolicy()
+        );
+
+        /*应用准备关闭
+           ↓
+        等待线程池已有任务完成
+           ↓
+        最多等 15 秒
+           ↓
+        超过时间后继续关闭*/
+        executor.setWaitForTasksToCompleteOnShutdown(true);
+        executor.setAwaitTerminationSeconds(15);
+
+        return executor;
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ilink\config\IlinkReplyExecutorConfiguration.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ilink\config\IlinkSchedulingConfiguration.java>>>
+```text
+package com.fourth.ykd.ilink.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+/*开启spring定时任务能力：
+@Scheduled(...)只有在 Spring 开启 @EnableScheduling 后才会真正定时执行。
+没有这个类，即使消息接收器里写了 @Scheduled，方法也永远不会运行*/
+@Configuration
+@EnableScheduling
+public class IlinkSchedulingConfiguration {
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ilink\config\IlinkSchedulingConfiguration.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ilink\config\IlinkSdkConfiguration.java>>>
+```text
+package com.fourth.ykd.ilink.config;
+
+import com.github.wechat.ilink.sdk.core.config.ILinkConfig;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+
+/* 转换器：我们的配置 IlinkProperties
+        ↓
+IlinkSdkConfiguration 转换
+        ↓
+SDK 配置 ILinkConfig*/
+@Configuration
+@EnableConfigurationProperties(IlinkProperties.class)
+public class IlinkSdkConfiguration {
+
+    @Bean
+    public ILinkConfig iLinkSdkConfig(IlinkProperties properties) {
+        return ILinkConfig.builder()
+                .connectTimeoutMs(properties.getConnectTimeoutMs())
+                .readTimeoutMs(properties.getReadTimeoutMs())
+                .writeTimeoutMs(properties.getWriteTimeoutMs())
+                .httpMaxRetries(properties.getHttpMaxRetries())
+                .retryBaseDelayMs(properties.getRetryBaseDelayMs())
+                .retryMaxDelayMs(properties.getRetryMaxDelayMs())
+                .retryJitterEnabled(true)
+                .heartbeatEnabled(properties.isHeartbeatEnabled())
+                .ioCoreThreads(properties.getIoCoreThreads())
+                .ioMaxThreads(properties.getIoMaxThreads())
+                .schedulerThreads(properties.getSchedulerThreads())
+                .queueCapacity(properties.getQueueCapacity())
+                .autoReconnectEnabled(properties.isAutoReconnectEnabled())
+                .build();
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ilink\config\IlinkSdkConfiguration.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ilink\controller\IlinkLoginController.java>>>
+```text
+package com.fourth.ykd.ilink.controller;
+
+import com.fourth.ykd.result.ApiResponse;
+import com.fourth.ykd.ilink.dto.IlinkLoginQrResponse;
+import com.fourth.ykd.ilink.dto.IlinkLoginStatusResponse;
+import com.fourth.ykd.ilink.service.IlinkLoginService;
+import com.fourth.ykd.ilink.service.IlinkQrCodeService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.CacheControl;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/ilink/login")
+@RequiredArgsConstructor
+public class IlinkLoginController {
+
+    private final IlinkLoginService ilinkLoginService;
+    private final IlinkQrCodeService ilinkQrCodeService;
+
+    /**
+     * 本地联调入口：
+     * 打开此地址会发起新的 iLink 登录，并直接返回 PNG 二维码。
+     */
+    @GetMapping(value = "/qrcode", produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<byte[]> startLoginAndRenderQrCode() {
+        IlinkLoginQrResponse loginResponse = ilinkLoginService.startLogin();
+
+        byte[] imageBytes = ilinkQrCodeService.createPng(
+                loginResponse.qrCodeContent()
+        );
+
+        return ResponseEntity.ok()
+                .cacheControl(CacheControl.noStore())
+                .contentType(MediaType.IMAGE_PNG)
+                .body(imageBytes);
+    }
+
+    /**
+     * 查询当前二维码的扫码/登录状态。
+     *
+     * 这个接口只读状态，绝不会创建新二维码。
+     */
+    @GetMapping("/status")
+    public ApiResponse<IlinkLoginStatusResponse> getLoginStatus() {
+        return ApiResponse.success(ilinkLoginService.getLoginStatus());
+    }
+
+    /**
+     * 手动取消当前扫码流程。
+     */
+    @PostMapping("/cancel")
+    public ApiResponse<Void> cancelLogin() {
+        ilinkLoginService.cancelLogin();
+        return ApiResponse.success(null);
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ilink\controller\IlinkLoginController.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ilink\dto\IlinkLoginQrResponse.java>>>
+```text
+package com.fourth.ykd.ilink.dto;
+
+/**
+ * 发起 iLink 登录后返回给 Controller 的数据。
+ * qrCodeContent 是 SDK 返回的原始二维码内容，下一步会被转换成二维码图片。
+ */
+public record IlinkLoginQrResponse(
+        String qrCodeContent,
+        String status
+) {
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ilink\dto\IlinkLoginQrResponse.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ilink\dto\IlinkLoginStatusResponse.java>>>
+```text
+package com.fourth.ykd.ilink.dto;
+
+/**
+ * 当前 iLink 登录状态。
+ * status：SDK 的状态名，例如 WAITING、SCANNED、LOGGED_IN、EXPIRED。
+ * loggedIn：项目业务层更容易判断的 true / false。
+ */
+public record IlinkLoginStatusResponse(
+        String status,
+        boolean loggedIn
+) {
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ilink\dto\IlinkLoginStatusResponse.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ilink\package-info.java>>>
+```text
+/*7.17 Spring 定时任务
+    ↓
+每隔 500ms 调用 pollMessages()
+    ↓
+从 IlinkClientManager 获取已经登录的微信客户端
+    ↓
+client.getUpdates() 拉取微信消息
+    ↓
+提取消息里的文本
+    ↓
+排除空消息、图片消息、机器人自己发送的消息
+    ↓
+调用 ilinkMessageReplyService.submit()
+    ↓
+消息进入全局 CompletableFuture 链
+    ↓
+等待前一条消息处理完成
+    ↓
+在线程池中执行 reply()
+    ↓
+client.startTyping() 显示“正在输入”
+        ↓
+aiChatService.chat() 校验参数
+    ↓
+deepSeekClient.chat() 请求 DeepSeek
+    ↓
+解析 DeepSeek 返回的回答
+    ↓
+client.sendText() 把回答发回微信
+    ↓
+client.stopTyping() 停止“正在输入”
+        ↓
+当前任务完成，下一条任务开始*/
+package com.fourth.ykd.ilink;
+```
+<<<END:src\main\java\com\fourth\ykd\ilink\package-info.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ilink\service\IlinkLoginService.java>>>
+```text
+package com.fourth.ykd.ilink.service;
+
+import com.fourth.ykd.ilink.dto.IlinkLoginQrResponse;
+import com.fourth.ykd.ilink.dto.IlinkLoginStatusResponse;
+
+public interface IlinkLoginService {
+
+    /**
+     * 创建新客户端并向 iLink 服务请求二维码内容。
+     */
+    IlinkLoginQrResponse startLogin();
+
+    /**
+     * 查询当前客户端的登录状态。
+     */
+    IlinkLoginStatusResponse getLoginStatus();
+
+    /**
+     * 取消当前扫码登录，并释放客户端资源。
+     */
+    void cancelLogin();
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ilink\service\IlinkLoginService.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ilink\service\IlinkMessagePollingService.java>>>
+```text
+package com.fourth.ykd.ilink.service;
+
+import com.fourth.ykd.ai.service.ImageContextService;
+import com.fourth.ykd.ilink.client.IlinkClientManager;
+import com.github.wechat.ilink.sdk.ILinkClient;
+import com.github.wechat.ilink.sdk.core.model.MessageItem;
+import com.github.wechat.ilink.sdk.core.model.WeixinMessage;
+import java.io.IOException;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class IlinkMessagePollingService {
+
+    private final IlinkClientManager clientManager;
+    private final IlinkMessageReplyService ilinkMessageReplyService;
+    private final ImageContextService imageContextService;
+
+    @Scheduled(fixedDelayString = "${ilink.poll-delay-ms:500}")
+    public void pollMessages() {
+        clientManager.findClient()
+                .filter(ILinkClient::isLoggedIn)
+                .ifPresent(this::pullMessages);
+    }
+
+    private void pullMessages(ILinkClient client) {
+        try {
+            List<WeixinMessage> messages = client.getUpdates();
+            for (WeixinMessage message : messages) {
+                handleMessage(client, message);
+            }
+        } catch (IOException exception) {
+            log.warn("[iLink][RECEIVE_FAILED] {}", exception.getMessage());
+        } catch (RuntimeException exception) {
+            log.warn("[iLink][RECEIVE_INTERRUPTED] {}", exception.getMessage());
+        }
+    }
+
+    private void handleMessage(ILinkClient client, WeixinMessage message) {
+        String fromUserId = message.getFrom_user_id();
+        if (!StringUtils.hasText(fromUserId) || isFromBot(client, fromUserId)) {
+            return;
+        }
+
+        String text = extractText(message);
+        MessageItem imageItem = extractImageItem(message);
+        if (imageItem != null) {
+            saveImageContext(client, fromUserId, imageItem);
+        }
+        if (!StringUtils.hasText(text)) {
+            return;
+        }
+
+        log.info("[iLink][USER_MESSAGE] fromUserId={}, text={}", fromUserId, text);
+        ilinkMessageReplyService.submit(client, fromUserId, text);
+    }
+
+    private boolean isFromBot(ILinkClient client, String fromUserId) {
+        return client.getLoginContext() != null
+                && fromUserId.equals(client.getLoginContext().getBotId());
+    }
+
+    private void saveImageContext(ILinkClient client, String userId, MessageItem imageItem) {
+        try {
+            byte[] imageBytes = client.downloadImageFromMessageItem(imageItem);
+            imageContextService.save(userId, imageBytes);
+            ilinkMessageReplyService.submitImageReceived(client, userId);
+            log.info("[iLink][IMAGE_CONTEXT_SAVED] userId={}, imageBytes={}", userId, imageBytes.length);
+        } catch (IOException | RuntimeException exception) {
+            log.warn("[iLink][IMAGE_CONTEXT_SAVE_FAILED] userId={}, reason={}", userId, exception.getMessage());
+        }
+    }
+
+    private String extractText(WeixinMessage message) {
+        if (message.getItem_list() == null) {
+            return null;
+        }
+        for (MessageItem item : message.getItem_list()) {
+            if (item.getText_item() != null && StringUtils.hasText(item.getText_item().getText())) {
+                return item.getText_item().getText().trim();
+            }
+        }
+        return null;
+    }
+
+    private MessageItem extractImageItem(WeixinMessage message) {
+        if (message.getItem_list() == null) {
+            return null;
+        }
+        for (MessageItem item : message.getItem_list()) {
+            if (item.getImage_item() != null) {
+                return item;
+            }
+        }
+        return null;
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ilink\service\IlinkMessagePollingService.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ilink\service\IlinkMessageReplyService.java>>>
+```text
+package com.fourth.ykd.ilink.service;
+
+import com.github.wechat.ilink.sdk.ILinkClient;
+
+public interface IlinkMessageReplyService {
+
+    void submit(ILinkClient client, String userId, String userText);
+
+    void submitImageReceived(ILinkClient client, String userId);
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ilink\service\IlinkMessageReplyService.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ilink\service\IlinkQrCodeService.java>>>
+```text
+package com.fourth.ykd.ilink.service;
+
+import com.fourth.ykd.exception.BusinessException;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Map;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+@Service
+public class IlinkQrCodeService {
+
+    /**
+     * 360 × 360 像素。
+     */
+    private static final int IMAGE_SIZE = 360;
+
+    /**
+     * 将 iLink SDK 返回的二维码内容转换为 PNG 图片字节。
+     * @param qrCodeContent iLink SDK 的 executeLogin() 返回值
+     * @return PNG 格式的图片字节
+     */
+    public byte[] createPng(String qrCodeContent) {
+        if (!StringUtils.hasText(qrCodeContent)) {
+            throw new BusinessException(40010, "iLink 二维码内容不能为空");
+        }
+
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+            //字符串 -> BitMatrix（二维码的黑白格子矩阵）
+            BitMatrix matrix = new QRCodeWriter().encode(
+                    qrCodeContent,
+                    BarcodeFormat.QR_CODE,
+                    IMAGE_SIZE,
+                    IMAGE_SIZE,
+                    Map.of(
+                            EncodeHintType.CHARACTER_SET, "UTF-8",
+                            EncodeHintType.MARGIN, 1
+                    )
+            );
+
+            //BitMatrix -> ByteArrayOutputStream -> byte[] PNG
+            MatrixToImageWriter.writeToStream(matrix, "PNG", outputStream);
+            return outputStream.toByteArray();
+        } catch (WriterException | IOException exception) {
+            throw new BusinessException(50012, "iLink 二维码图片生成失败");
+        }
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ilink\service\IlinkQrCodeService.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ilink\service\impl\IlinkLoginServiceImpl.java>>>
+```text
+package com.fourth.ykd.ilink.service.impl;
+
+import com.fourth.ykd.exception.BusinessException;
+import com.fourth.ykd.ilink.client.IlinkClientManager;
+import com.fourth.ykd.ilink.config.IlinkProperties;
+import com.fourth.ykd.ilink.dto.IlinkLoginQrResponse;
+import com.fourth.ykd.ilink.dto.IlinkLoginStatusResponse;
+import com.fourth.ykd.ilink.service.IlinkLoginService;
+import com.github.wechat.ilink.sdk.ILinkClient;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class IlinkLoginServiceImpl implements IlinkLoginService {
+
+    private final IlinkProperties properties;
+    private final IlinkClientManager clientManager;
+
+    @Override
+    public IlinkLoginQrResponse startLogin() {
+        if (!properties.isEnabled()){
+            throw new BusinessException(50010,"iLink模块未启用");
+        }
+        ILinkClient client = clientManager.createNewClient();
+
+        try {
+            String qrCodeContent = client.executeLogin();
+
+            /*
+             * executeLogin() 返回后，扫码登录仍在异步进行。
+             * getLoginFuture() 会在手机扫码且登录完成后结束。
+             * 这里先记录结果，下一步再加入会话持久化逻辑。
+             */
+            client.getLoginFuture().whenComplete((loginContext, throwable) -> {
+                if (throwable == null) {
+                    log.info("[iLink] login succeeded");
+                } else {
+                    log.warn("[iLink] login failed: {}", throwable.getMessage());
+                }
+            });
+
+            return new IlinkLoginQrResponse(
+                    qrCodeContent,
+                    client.getLoginStatus().getStatus().name()
+            );
+        } catch (Exception exception) {
+            /*
+             * 二维码申请失败时，这个新客户端没有继续保留的意义。
+             * 立即关闭，防止线程池或网络资源残留。
+             */
+            clientManager.closeCurrentClient();
+            throw new BusinessException(50011, "iLink 二维码登录启动失败");
+        }
+    }
+
+    @Override
+    public IlinkLoginStatusResponse getLoginStatus() {
+        return clientManager.findClient()
+                .map(client -> new IlinkLoginStatusResponse(
+                        client.getLoginStatus().getStatus().name(),
+                        client.isLoggedIn()
+                ))
+                .orElseGet(() -> new IlinkLoginStatusResponse(
+                        "NOT_STARTED",
+                        false
+                ));
+    }
+
+    @Override
+    public void cancelLogin() {
+        clientManager.findClient().ifPresent(ILinkClient::cancelLogin);
+        clientManager.closeCurrentClient();
+    }
+}
+
+```
+<<<END:src\main\java\com\fourth\ykd\ilink\service\impl\IlinkLoginServiceImpl.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\ilink\service\impl\IlinkMessageReplyServiceImpl.java>>>
+```text
+package com.fourth.ykd.ilink.service.impl;
+
+import com.fourth.ykd.ai.dto.GeneratedImage;
+import com.fourth.ykd.ai.dto.PendingUserImage;
+import com.fourth.ykd.ai.routing.DeepSeekIntentRouter;
+import com.fourth.ykd.ai.routing.UserIntent;
+import com.fourth.ykd.ai.service.AiChatService;
+import com.fourth.ykd.ai.service.ImageContextService;
+import com.fourth.ykd.ai.service.ImageGenerationService;
+import com.fourth.ykd.ai.service.ImageReferenceGenerationService;
+import com.fourth.ykd.ai.service.ImageUnderstandingService;
+import com.fourth.ykd.ilink.service.IlinkMessageReplyService;
+import com.github.wechat.ilink.sdk.ILinkClient;
+import java.io.IOException;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.Executor;
+import java.util.concurrent.RejectedExecutionException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+@Slf4j
+@Service
+public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
+
+    private final AiChatService aiChatService;
+    private final DeepSeekIntentRouter intentRouter;
+    private final ImageGenerationService imageGenerationService;
+    private final ImageReferenceGenerationService imageReferenceGenerationService;
+    private final ImageUnderstandingService imageUnderstandingService;
+    private final ImageContextService imageContextService;
+    private final Executor replyExecutor;
+    private final ConcurrentMap<String, CompletableFuture<Void>> replyChains = new ConcurrentHashMap<>();
+
+    public IlinkMessageReplyServiceImpl(
+            AiChatService aiChatService,
+            DeepSeekIntentRouter intentRouter,
+            ImageGenerationService imageGenerationService,
+            ImageReferenceGenerationService imageReferenceGenerationService,
+            ImageUnderstandingService imageUnderstandingService,
+            ImageContextService imageContextService,
+            @Qualifier("iLinkReplyExecutor") Executor replyExecutor
+    ) {
+        this.aiChatService = aiChatService;
+        this.intentRouter = intentRouter;
+        this.imageGenerationService = imageGenerationService;
+        this.imageReferenceGenerationService = imageReferenceGenerationService;
+        this.imageUnderstandingService = imageUnderstandingService;
+        this.imageContextService = imageContextService;
+        this.replyExecutor = replyExecutor;
+    }
+
+    @Override
+    public void submit(ILinkClient client, String userId, String userText) {
+        if (!StringUtils.hasText(userId) || !StringUtils.hasText(userText)) {
+            return;
+        }
+        String text = userText.trim();
+        log.info("[iLink][QUEUED] userId={}, text={}", userId, text);
+        try {
+            CompletableFuture<Void> current = replyChains.compute(userId, (key, previous) ->
+                    (previous == null ? CompletableFuture.completedFuture(null) : previous.handle((value, error) -> null))
+                            .thenRunAsync(() -> reply(client, userId, text), replyExecutor));
+            current.whenComplete((value, error) -> replyChains.remove(userId, current));
+        } catch (RejectedExecutionException exception) {
+            log.warn("[iLink][REPLY_REJECTED] userId={}", userId);
+        }
+    }
+
+    @Override
+    public void submitImageReceived(ILinkClient client, String userId) {
+        if (!StringUtils.hasText(userId)) {
+            return;
+        }
+        log.info("[iLink][IMAGE_CONTEXT_QUEUED] userId={}", userId);
+        try {
+            CompletableFuture<Void> current = replyChains.compute(userId, (key, previous) ->
+                    (previous == null ? CompletableFuture.completedFuture(null) : previous.handle((value, error) -> null))
+                            .thenRunAsync(() -> replyImageReceived(client, userId), replyExecutor));
+            current.whenComplete((value, error) -> replyChains.remove(userId, current));
+        } catch (RejectedExecutionException exception) {
+            log.warn("[iLink][REPLY_REJECTED] userId={}", userId);
+        }
+    }
+
+    private void replyImageReceived(ILinkClient client, String userId) {
+        try {
+            client.sendTextWithTyping(userId, "已经看到您的图片啦，您想了解什么呢？", 800);
+            log.info("[iLink][IMAGE_CONTEXT_REPLIED] toUserId={}, answer={}",
+                    userId, "已经看到您的图片啦，您想了解什么呢？");
+        } catch (IOException exception) {
+            log.warn("[iLink][IMAGE_CONTEXT_REPLY_FAILED] userId={}, reason={}",
+                    userId, exception.getMessage());
+        }
+    }
+    private void reply(ILinkClient client, String userId, String userText) {
+        long startedAt = System.currentTimeMillis();
+        startTypingQuietly(client, userId);
+        try {
+            Optional<PendingUserImage> pendingImage = imageContextService.findActive(userId);
+            UserIntent intent = intentRouter.route(userText, pendingImage.isPresent());
+            log.info("[iLink][ROUTED] userId={}, intent={}, hasPendingImage={}",
+                    userId, intent, pendingImage.isPresent());
+
+            if (pendingImage.isPresent() && intent == UserIntent.IMAGE_UNDERSTAND) {
+                replyWithImageUnderstanding(client, userId, userText, pendingImage.get(), startedAt);
+                return;
+            }
+            if (pendingImage.isPresent() && intent == UserIntent.IMAGE_EDIT) {
+                replyWithImageReferenceGeneration(client, userId, userText, pendingImage.get(), startedAt);
+                return;
+            }
+            if (intent == UserIntent.IMAGE_GENERATE) {
+                GeneratedImage image = imageGenerationService.generate(userText);
+                client.sendImage(userId, image.bytes(), image.fileName(), null);
+                log.info("[iLink][IMAGE_REPLIED] toUserId={}, imageBytes={}, elapsedMs={}",
+                        userId, image.bytes().length, System.currentTimeMillis() - startedAt);
+                return;
+            }
+
+            String answer = aiChatService.chat(userText).reply();
+            client.sendText(userId, answer);
+            pendingImage.ifPresent(image -> {
+                imageContextService.remove(userId, image);
+                log.info("[iLink][IMAGE_CONTEXT_CLEARED] userId={}, reason=TEXT", userId);
+            });
+            log.info("[iLink][REPLIED] toUserId={}, answer={}, elapsedMs={}",
+                    userId, formatAnswerForLog(answer), System.currentTimeMillis() - startedAt);
+        } catch (Exception exception) {
+            log.error("[iLink][REPLY_FAILED] userId={}, elapsedMs={}",
+                    userId, System.currentTimeMillis() - startedAt, exception);
+            sendFailureMessage(client, userId);
+        } finally {
+            stopTypingQuietly(client, userId);
+        }
+    }
+
+    private void replyWithImageReferenceGeneration(
+            ILinkClient client,
+            String userId,
+            String instruction,
+            PendingUserImage image,
+            long startedAt
+    ) throws IOException {
+        log.info("[iLink][IMAGE_EDITING] userId={}, instruction={}", userId, instruction);
+        GeneratedImage generatedImage = imageReferenceGenerationService.generate(image, instruction);
+        client.sendImage(userId, generatedImage.bytes(), generatedImage.fileName(), null);
+        imageContextService.remove(userId, image);
+        log.info("[iLink][IMAGE_EDITED] toUserId={}, imageBytes={}, elapsedMs={}",
+                userId, generatedImage.bytes().length, System.currentTimeMillis() - startedAt);
+    }
+    private void replyWithImageUnderstanding(
+            ILinkClient client,
+            String userId,
+            String question,
+            PendingUserImage image,
+            long startedAt
+    ) throws IOException {
+        log.info("[iLink][IMAGE_UNDERSTANDING] userId={}, question={}", userId, question);
+        String answer = imageUnderstandingService.understand(image, question);
+        client.sendText(userId, answer);
+        // 仅在模型和发送都成功后清理图片，失败时仍可再次追问。
+        imageContextService.remove(userId, image);
+        log.info("[iLink][IMAGE_UNDERSTOOD] toUserId={}, answer={}, elapsedMs={}",
+                userId, formatAnswerForLog(answer), System.currentTimeMillis() - startedAt);
+    }
+
+    private String formatAnswerForLog(String answer) {
+        if (answer == null) {
+            return "";
+        }
+        String singleLine = answer.replaceAll("[\\r\\n]+", " ").trim();
+        return singleLine.length() <= 1_000 ? singleLine : singleLine.substring(0, 1_000) + "...";
+    }
+    private void startTypingQuietly(ILinkClient client, String userId) {
+        try {
+            client.startTyping(userId);
+            log.info("[iLink][TYPING_STARTED] userId={}", userId);
+        } catch (IOException exception) {
+            log.warn("[iLink][TYPING_START_FAILED] userId={}, reason={}", userId, exception.getMessage());
+        }
+    }
+
+    private void stopTypingQuietly(ILinkClient client, String userId) {
+        try {
+            client.stopTyping(userId);
+            log.info("[iLink][TYPING_STOPPED] userId={}", userId);
+        } catch (IOException exception) {
+            log.warn("[iLink][TYPING_STOP_FAILED] userId={}, reason={}", userId, exception.getMessage());
+        }
+    }
+
+    private void sendFailureMessage(ILinkClient client, String userId) {
+        try {
+            client.sendText(userId, "抱歉，刚才处理失败了，请稍后再试。");
+        } catch (IOException exception) {
+            log.warn("[iLink][FAILURE_MESSAGE_SEND_FAILED] userId={}, reason={}", userId, exception.getMessage());
+        }
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\ilink\service\impl\IlinkMessageReplyServiceImpl.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\result\ApiResponse.java>>>
+```text
+package com.fourth.ykd.result;
+
+public record ApiResponse<T>(int code, String message, T data) {
+
+    //约定0成功非0失败
+    public static <T> ApiResponse<T> success(T data) {
+        return new ApiResponse<>(0, "success", data);
+    }
+
+    public static <T> ApiResponse<T> failure(int code, String message) {
+        return new ApiResponse<>(code, message, null);
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\result\ApiResponse.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\weather\controller\WeatherController.java>>>
+```text
+package com.fourth.ykd.weather.controller;
+
+import com.fourth.ykd.result.ApiResponse;
+import com.fourth.ykd.weather.dto.WeatherInfoResponse;
+import com.fourth.ykd.weather.service.WeatherService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@Slf4j
+@RestController
+@RequestMapping("/api/weather")
+@RequiredArgsConstructor
+public class WeatherController {
+
+    private final WeatherService weatherService;
+
+    /**
+     * 按城市名称查询实时天气。
+     * 示例：
+     * GET /api/weather?city=北京
+     */
+    @GetMapping
+    public ApiResponse<WeatherInfoResponse> getCurrentWeather(
+            /*required = false，原因是：
+                    如果参数缺失，Controller 不立即抛 Spring 默认异常；
+                    city 会是 null；
+                    交给 WeatherService；
+                    WeatherService 抛出我们定义的 BusinessException(40001, "城市名称不能为空")；
+                    最终得到统一 JSON 错误格式。*/
+            @RequestParam(required = false) String city
+    ) {
+        log.info("Received weather query request: city={}", city);
+
+        WeatherInfoResponse weatherInfo =
+                weatherService.queryCurrentWeather(city);
+
+        return ApiResponse.success(weatherInfo);
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\weather\controller\WeatherController.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\weather\dto\WeatherInfoResponse.java>>>
+```text
+package com.fourth.ykd.weather.dto;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+/**
+ * 定义我们接口返回给调用者的数据
+ * 不直接依赖和风天气的原始返回格式，
+ * 只保留当前业务需要展示的字段。
+ * 和风城市查询响应
+ *       +
+ * 和风实时天气响应
+ *       ↓ WeatherService 组合
+ * WeatherInfoResponse
+ *       ↓ Controller
+ * ApiResponse<WeatherInfoResponse>
+ *       ↓
+ * 调用者收到 JSON
+ */
+@Getter
+@Setter
+@NoArgsConstructor
+public class WeatherInfoResponse {
+
+    /**
+     * 用户实际查询到的城市名称。
+     */
+    private String city;
+
+    /**
+     * 和风天气接口数据更新时间。
+     */
+    private String updateTime;
+
+    /**
+     * 实况观测时间。
+     */
+    private String obsTime;
+
+    /**
+     * 当前温度，单位：摄氏度。
+     */
+    private String temp;
+
+    /**
+     * 体感温度，单位：摄氏度。
+     */
+    private String feelsLike;
+
+    /**
+     * 天气描述，例如：晴、多云、小雨。
+     */
+    private String text;
+
+    /**
+     * 风向。
+     */
+    private String windDir;
+
+    /**
+     * 风速，单位：公里/小时。
+     */
+    private String windSpeed;
+
+    /**
+     * 相对湿度，单位：百分比。
+     */
+    private String humidity;
+}
+```
+<<<END:src\main\java\com\fourth\ykd\weather\dto\WeatherInfoResponse.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\weather\infrastructure\qweather\dto\QWeatherCityLookupResponse.java>>>
+```text
+package com.fourth.ykd.weather.infrastructure.qweather.dto;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
+
+/**接收第三方原始 JSON
+ * 描述和风天气城市查询接口的原始响应:
+ *只负责接收第三方接口数据：Jackson把JSON自动转换成QWeatherCityLookupResponse对象
+ * 最终转换出来相当于：
+ * QWeatherCityLookupResponse response = ...;
+ * response.getCode();                      // "200"
+ * response.getLocation().get(0).getName(); // "郑州"
+ * response.getLocation().get(0).getId();   // "101180101"
+ */
+@Getter
+@Setter
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class QWeatherCityLookupResponse {
+
+    /**
+     * 和风天气接口响应码。
+     * 例如：
+     * 200：请求成功
+     * 404：查询不到城市
+     */
+    private String code;
+
+    /**
+     * 查询到的城市列表。
+     */
+    private List<Location> location;
+
+    /**
+     * 城市信息。
+     */
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Location {
+
+        /**
+         * 城市名称。
+         */
+        private String name;
+
+        /**
+         * 和风天气中的城市 ID。
+         */
+        private String id;
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\weather\infrastructure\qweather\dto\QWeatherCityLookupResponse.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\weather\infrastructure\qweather\dto\QWeatherNowResponse.java>>>
+```text
+package com.fourth.ykd.weather.infrastructure.qweather.dto;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+/**接收第三方原始 JSON
+ * 描述和风天气实时天气接口的原始响应。
+ * 只负责接收第三方接口数据：
+ * 不写业务逻辑；
+ * 不包装项目统一返回结果；
+ * 不进行成功失败判断。
+ */
+@Getter
+@Setter
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class QWeatherNowResponse {
+
+    /**
+     * 和风天气接口响应码。
+     * 例如：
+     * 200：请求成功
+     */
+    private String code;
+
+    /**
+     * 和风天气接口数据更新时间。
+     */
+    private String updateTime;
+
+    /**
+     * 当前实时天气数据。
+     */
+    private Now now;
+
+    /**
+     * 实时天气详情。
+     */
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Now {
+
+        /**
+         * 实况观测时间。
+         */
+        private String obsTime;
+
+        /**
+         * 当前温度，单位：摄氏度。
+         */
+        private String temp;
+
+        /**
+         * 体感温度，单位：摄氏度。
+         */
+        private String feelsLike;
+
+        /**
+         * 天气文字描述，例如：晴、多云、小雨。
+         */
+        private String text;
+
+        /**
+         * 风向，例如：东北风。
+         */
+        private String windDir;
+
+        /**
+         * 风速，单位：公里/小时。
+         */
+        private String windSpeed;
+
+        /**
+         * 相对湿度，单位：百分比。
+         */
+        private String humidity;
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\weather\infrastructure\qweather\dto\QWeatherNowResponse.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\weather\infrastructure\qweather\QWeatherClient.java>>>
+```text
+package com.fourth.ykd.weather.infrastructure.qweather;
+
+import com.fourth.ykd.weather.infrastructure.qweather.dto.QWeatherCityLookupResponse;
+import com.fourth.ykd.weather.infrastructure.qweather.dto.QWeatherNowResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClient;
+
+/*向和风天气发 HTTP 请求
+        ↓
+把 JSON 自动转为 QWeatherCityLookupResponse
+        ↓
+交给后面的 WeatherService
+*/
+@Slf4j
+@Component
+public class QWeatherClient {
+
+    private final RestClient qWeatherRestClient;
+
+    public QWeatherClient(RestClient qWeatherRestClient) {
+        this.qWeatherRestClient = qWeatherRestClient;
+    }
+    /**
+     * 根据城市名称查询和风天气Api的城市信息。
+     * @param city 用户输入的城市名称，例如：北京
+     * @return 和风天气原始城市查询响应
+     * EG:北京
+     *   ↓
+     * 城市查询 API
+     *   ↓
+     * LocationID：101010100
+     */
+    public QWeatherCityLookupResponse lookupCity(String city) {
+
+        log.info("Calling QWeather city lookup API: city={}", city);
+
+        // qWeatherRestClient.get():创建一个 HTTP GET 请求
+        return qWeatherRestClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        //添加接口路径
+                        .path("/geo/v2/city/lookup")
+                        .queryParam("location", city)
+                        .queryParam("range", "cn")
+                        .queryParam("lang", "zh")
+                        //前面的路径和参数都设置好了，现在正式生成 URI 地址
+                        .build()
+                )
+                //点击发送并获取响应
+                .retrieve()
+                //把和风天气返回的 JSON，转换成 QWeatherCityLookupResponse 对象
+                .body(QWeatherCityLookupResponse.class);
+    }
+
+    /**
+     * 根据和风天气的城市 ID 查询实时天气。
+     * @param locationId 和风天气城市 ID，例如：101010100
+     * @return 和风天气原始实时天气响应
+     * EG:LocationID：101010100
+     *   ↓
+     * 实时天气 API
+     *   ↓
+     * 温度、湿度、风向、天气描述
+     */
+    public QWeatherNowResponse getCurrentWeather(String locationId) {
+
+        log.info("Calling QWeather current weather API: locationId={}",
+                locationId);
+
+        return qWeatherRestClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/v7/weather/now")
+                        .queryParam("location", locationId)
+                        .queryParam("lang", "zh")
+                        .build()
+                )
+                .retrieve()
+                .body(QWeatherNowResponse.class);
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\weather\infrastructure\qweather\QWeatherClient.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\weather\infrastructure\qweather\WeatherConfig.java>>>
+```text
+package com.fourth.ykd.weather.infrastructure.qweather;
+
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.util.Timeout;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestClient;
+
+@Configuration
+@EnableConfigurationProperties(WeatherProperties.class)
+public class WeatherConfig {
+
+    @Bean
+    public RestClient qWeatherRestClient(WeatherProperties properties) {
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectTimeout(
+                        Timeout.ofMilliseconds(properties.getConnectTimeoutMs())
+                )
+                .setResponseTimeout(
+                        Timeout.ofMilliseconds(properties.getReadTimeoutMs())
+                )
+                .build();
+
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .setDefaultRequestConfig(requestConfig)
+                .build();
+
+        HttpComponentsClientHttpRequestFactory requestFactory =
+                new HttpComponentsClientHttpRequestFactory(httpClient);
+
+        RestClient.Builder builder = RestClient.builder()
+                .baseUrl("https://" + properties.getApiHost())
+                .requestFactory(requestFactory);
+
+        if (StringUtils.hasText(properties.getApiKey())) {
+            builder.defaultHeader("X-QW-Api-Key", properties.getApiKey());
+        }
+
+        return builder.build();
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\weather\infrastructure\qweather\WeatherConfig.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\weather\infrastructure\qweather\WeatherProperties.java>>>
+```text
+package com.fourth.ykd.weather.infrastructure.qweather;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+/* 天气Api配置类，负责从配置文件统一读配置
+application.properties
+        ↓ Spring 自动绑定
+WeatherProperties
+        ↓
+后面的 HTTP 客户端、天气服务共同使用*/
+@Getter
+@Setter
+@ConfigurationProperties(prefix = "weather.qweather")
+public class WeatherProperties {
+
+    private String apiHost;
+
+    private String apiKey;
+
+    private int connectTimeoutMs;
+
+    private int readTimeoutMs;
+
+}
+```
+<<<END:src\main\java\com\fourth\ykd\weather\infrastructure\qweather\WeatherProperties.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\weather\service\impl\WeatherServiceImpl.java>>>
+```text
+package com.fourth.ykd.weather.service.impl;
+
+import com.fourth.ykd.weather.infrastructure.qweather.QWeatherClient;
+import com.fourth.ykd.weather.infrastructure.qweather.dto.QWeatherCityLookupResponse;
+import com.fourth.ykd.weather.infrastructure.qweather.dto.QWeatherNowResponse;
+import com.fourth.ykd.weather.infrastructure.qweather.WeatherProperties;
+import com.fourth.ykd.exception.BusinessException;
+import com.fourth.ykd.weather.dto.WeatherInfoResponse;
+import com.fourth.ykd.weather.service.WeatherService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class WeatherServiceImpl implements WeatherService {
+
+    private final QWeatherClient qWeatherClient;
+
+    private final WeatherProperties weatherProperties;
+
+    @Override
+    public WeatherInfoResponse queryCurrentWeather(String city) {
+        if (!StringUtils.hasText(city)) {
+            throw new BusinessException(40001, "城市名称不能为空");
+        }
+
+        if (!StringUtils.hasText(weatherProperties.getApiKey())) {
+            throw new BusinessException(50001, "天气服务 API Key 未配置");
+        }
+
+        String cityName = city.trim();
+        long startTime = System.currentTimeMillis();
+
+        QWeatherCityLookupResponse cityResponse =
+                qWeatherClient.lookupCity(cityName);
+
+        if (cityResponse == null
+                || !"200".equals(cityResponse.getCode())
+                || cityResponse.getLocation() == null
+                || cityResponse.getLocation().isEmpty()) {
+            log.warn("City lookup failed: city={}, qWeatherCode={}",
+                    cityName,
+                    cityResponse == null ? null : cityResponse.getCode());
+            throw new BusinessException(40002, "未查询到城市：" + cityName);
+        }
+
+        QWeatherCityLookupResponse.Location location =
+                cityResponse.getLocation().stream()
+                        .filter(item -> cityName.equals(item.getName()))
+                        .findFirst()
+                        .orElseThrow(() -> new BusinessException(
+                                40002,
+                                "未查询到城市：" + cityName
+                        ));
+
+        QWeatherNowResponse weatherResponse =
+                qWeatherClient.getCurrentWeather(location.getId());
+
+        if (weatherResponse == null
+                || !"200".equals(weatherResponse.getCode())
+                || weatherResponse.getNow() == null) {
+            log.warn("Current weather lookup failed: city={}, locationId={}, qWeatherCode={}",
+                    cityName,
+                    location.getId(),
+                    weatherResponse == null ? null : weatherResponse.getCode());
+            throw new BusinessException(50002, "天气服务查询失败，请稍后重试");
+        }
+
+        WeatherInfoResponse response = convertToWeatherInfo(
+                location,
+                weatherResponse
+        );
+
+        log.info("Weather query succeeded: city={}, locationId={}, temp={}, text={}, elapsedMs={}",
+                response.getCity(),
+                location.getId(),
+                response.getTemp(),
+                response.getText(),
+                System.currentTimeMillis() - startTime);
+
+        return response;
+    }
+
+    private WeatherInfoResponse convertToWeatherInfo(
+            QWeatherCityLookupResponse.Location location,
+            QWeatherNowResponse weatherResponse
+    ) {
+        QWeatherNowResponse.Now now = weatherResponse.getNow();
+
+        WeatherInfoResponse response = new WeatherInfoResponse();
+        response.setCity(location.getName());
+        response.setUpdateTime(weatherResponse.getUpdateTime());
+        response.setObsTime(now.getObsTime());
+        response.setTemp(now.getTemp());
+        response.setFeelsLike(now.getFeelsLike());
+        response.setText(now.getText());
+        response.setWindDir(now.getWindDir());
+        response.setWindSpeed(now.getWindSpeed());
+        response.setHumidity(now.getHumidity());
+        return response;
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\weather\service\impl\WeatherServiceImpl.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\weather\service\WeatherService.java>>>
+```text
+package com.fourth.ykd.weather.service;
+
+import com.fourth.ykd.weather.dto.WeatherInfoResponse;
+
+public interface WeatherService {
+
+    WeatherInfoResponse queryCurrentWeather(String city);
+}
+```
+<<<END:src\main\java\com\fourth\ykd\weather\service\WeatherService.java>>>
+<<<FILE:src\main\java\com\fourth\ykd\YkdProjectApplication.java>>>
+```text
+package com.fourth.ykd;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class YkdProjectApplication {
+
+    // 创建日志对象
+    private static final Logger log =
+            LoggerFactory.getLogger(YkdProjectApplication.class);
+
+    public static void main(String[] args) {
+
+        SpringApplication.run(YkdProjectApplication.class, args);
+
+        log.info("==========");
+        log.info("Spring Boot 启动成功！");
+        log.info("==========");
+    }
+}
+```
+<<<END:src\main\java\com\fourth\ykd\YkdProjectApplication.java>>>
+<<<FILE:src\main\resources\application.properties>>>
+```text
+spring.application.name=ykd-project
+
+spring.config.import=optional:classpath:application-local.properties
+weather.qweather.api-host=p33tejmexe.re.qweatherapi.com
+weather.qweather.api-key=${QWEATHER_API_KEY:}
+weather.qweather.connect-timeout-ms=5000
+weather.qweather.read-timeout-ms=5000
+
+
+deepseek.api-base-url=https://api.deepseek.com
+deepseek.model=deepseek-chat
+deepseek.api-key=${DEEPSEEK_API_KEY:}
+
+# ==================== DashScope / Alibaba Cloud Model Studio ====================
+dashscope.api-key=${DASHSCOPE_API_KEY:}
+dashscope.api-base-url=${DASHSCOPE_API_BASE_URL:https://dashscope.aliyuncs.com}
+dashscope.image-generation-model=qwen-image-2.0
+dashscope.vision-model=qwen-vl-plus
+
+# ==================== iLink ====================
+ilink.enabled=${ILINK_ENABLED:true}
+
+ilink.session-file=${ILINK_SESSION_FILE:.ilink/session.token}
+
+ilink.connect-timeout-ms=5000
+
+ilink.read-timeout-ms=35000
+
+ilink.write-timeout-ms=5000
+
+ilink.http-max-retries=2
+
+ilink.retry-base-delay-ms=300
+ilink.retry-max-delay-ms=2000
+
+ilink.heartbeat-enabled=false
+
+ilink.io-core-threads=2
+ilink.io-max-threads=4
+
+ilink.scheduler-threads=1
+
+ilink.queue-capacity=100
+
+ilink.auto-reconnect-enabled=true
+
+ilink.poll-delay-ms=500
+
+# DeepSeek reply worker pool
+ilink.reply-core-threads=1
+ilink.reply-max-threads=1
+ilink.reply-queue-capacity=100
+
+
+logging.charset.console=UTF-8
+logging.charset.file=UTF-8
+logging.file.name=logs/ykd-project.log
+# 图片上下文仅保存在进程内存中，10 分钟未追问会自动清除
+ilink.image-context-ttl-minutes=10
+
+```
+<<<END:src\main\resources\application.properties>>>
+

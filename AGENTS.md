@@ -120,13 +120,30 @@ image
 - 验证：mvn -q test 通过。建议按分支测试清单进行人工联调，并以 ROUTED、IMAGE_CONTEXT_CLEARED、IMAGE_UNDERSTOOD、IMAGE_EDITED 日志核对真实路由。
 ## 2026-07-18 Windows 控制台乱码修复
 
-- 本地 IDEA 控制台按 Windows GBK 解码，而应用此前以 UTF-8 输出，导致日志中的中文消息显示为“鐢熸垚...”。
+- 本地 IDEA 控制台按 Windows GBK 解码，而应用此前以 UTF-8 输出，导致日志中的中文消息显示为乱码。
 - 控制台日志编码调整为 GBK；文件日志继续使用 UTF-8。
 - IDEA 项目编码明确覆盖 main Java、resources、test Java 为 UTF-8；Maven 增加 project.build.sourceEncoding=UTF-8，避免源码与资源在编译阶段发生编码歧义。
 - 验证：mvn -q test 通过。重启应用后验证 IDEA 控制台中文日志。
-- 更正控制台编码判断：GBK 输出在当前 IDEA 控制台显示为替换字符“����”，已恢复 logging.charset.console=UTF-8；文件日志保持 UTF-8。重启后以 UTF-8 验证中文日志。
+- 更正控制台编码判断：GBK 输出在当前 IDEA 控制台显示为替换字符，已恢复 logging.charset.console=UTF-8；文件日志保持 UTF-8。重启后以 UTF-8 验证中文日志。
 ## 2026-07-18 回复内容日志恢复
 
 - REPLIED 日志恢复输出 Bot 普通文字 answer；IMAGE_UNDERSTOOD 日志恢复输出识图 answer；IMAGE_CONTEXT_REPLIED 输出固定收图确认文本。
 - 长回复统一压缩为单行，并限制前 1000 字符，避免控制台被大段内容淹没。
 - 验证：mvn -q test 通过。
+## 2026-07-20 协作原则与乱码核查
+
+- 后续所有功能接入坚持小步改动：只改当前需求相关代码，不做大范围重构，不破坏已跑通的文字、图片、语音链路。
+- 每次代码变更后必须同步更新本文件，记录改动内容、验证结果与遗留风险。
+- 已核查 `src/main/java` 与 `src/main/resources` 下的中文提示、注释和配置说明，未发现残留中文乱码；仅清理本文件历史记录中的乱码示例表达。
+- 已查阅 Spring AI 2.0.0 官方 ChatMemory/ChatClient 文档、Spring AI Alibaba chat-memory 示例与 Spring AI 默认 conversationId 安全公告；后续记忆实现必须用微信 userId 作为显式 conversationId，避免多用户上下文串线。
+## 2026-07-20 Spring AI 记忆第一步接入
+
+- 已按官方当前文档选择 Spring AI 2.0.0；该版本已发布 GA，支持 Spring Boot 4.0.x/4.1.x，本项目当前 Spring Boot 4.1.0 可直接接入。
+- `pom.xml` 新增 `spring-ai-bom` 2.0.0 与 `spring-ai-starter-model-deepseek`，不替换现有自写 DeepSeek 路由和图片/语音模型客户端。
+- `application.properties` 新增 `spring.ai.deepseek.*` 与 `spring.ai.model.chat` 配置，继续复用 `DEEPSEEK_API_KEY`，不写入任何真实密钥。
+- 新增 `SpringAiChatConfig`，在 Spring AI `ChatModel` 存在时创建带 `MessageChatMemoryAdvisor` 的 `ChatClient`，由框架默认 `MessageWindowChatMemory` 提供短期上下文。
+- `AiChatService` 新增 `chat(conversationId, message)`，旧 `chat(message)` 保留给控制器兼容；实现层优先使用 Spring AI ChatClient 并显式传入 `ChatMemory.CONVERSATION_ID`，不可用时回退原 `DeepSeekClient`。
+- iLink 普通文本/语音文本回复链路调用 `aiChatService.chat(userId, userText)`，以微信用户 id 作为 conversationId，避免多用户记忆串线。
+- 本阶段只让普通聊天回复具备 Spring AI 记忆基础；图片、识图、生图、语音文件回复、TTS、iLink SDK 语音识别链路未做行为改造。
+- 验证：`mvn -q -DskipTests compile` 通过；`mvn -q test` 通过。
+- 下一步：补充统一多模态事件写入服务，把图片接收、识图结果、生成图结果、语音识别文本与语音回复文本写入同一个 Spring AI conversationId。
