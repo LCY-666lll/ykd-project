@@ -39,7 +39,7 @@ public class AudioSynthesisServiceImpl implements AudioSynthesisService {
                 .uri(URI.create(audioUrl))
                 .retrieve()
                 .toEntity(byte[].class);
-        byte[] bytes = response.getBody();
+         byte[] bytes = response.getBody();
         if (bytes == null || bytes.length == 0) {
             throw new BusinessException(50006, "TTS audio download failed");
         }

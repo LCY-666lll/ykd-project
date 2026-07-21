@@ -1,4 +1,4 @@
 package com.fourth.ykd.ai.dto;
 
-public record AiChatRequest(String message) {
+public record  AiChatRequest(String message) {
 }

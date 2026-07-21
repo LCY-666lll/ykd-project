@@ -7,6 +7,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestClient;
 
+/*创建两个 RestClient：一个带 DashScope Key 调模型，一个不带 Key 下载临时媒体 URL
+*dashScopeRestClient：调用百炼 API，带 Authorization
+ imageDownloadRestClient：下载 OSS 图片/音频，不带 Authorization */
 @Configuration
 @EnableConfigurationProperties(DashScopeProperties.class)
 public class DashScopeConfig {

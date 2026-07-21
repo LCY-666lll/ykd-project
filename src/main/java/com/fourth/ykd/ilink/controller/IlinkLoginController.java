@@ -42,7 +42,6 @@ public class IlinkLoginController {
 
     /**
      * 查询当前二维码的扫码/登录状态。
-     *
      * 这个接口只读状态，绝不会创建新二维码。
      */
     @GetMapping("/status")

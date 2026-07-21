@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestClient;
 
+/*调 Qwen 生图，拿临时 URL，再下载成图片字节*/
 @Service
 public class ImageGenerationServiceImpl implements ImageGenerationService {
     private final QwenImageClient qwenImageClient;

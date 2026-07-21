@@ -10,6 +10,7 @@ import org.springframework.web.client.RestClient;
 import java.util.List;
 import java.util.Map;
 
+/*DeepSeek HTTP 客户端。路由器用它，Spring AI 不可用时聊天兜底也用它。*/
 @Component
 @RequiredArgsConstructor
 public class DeepSeekClient {

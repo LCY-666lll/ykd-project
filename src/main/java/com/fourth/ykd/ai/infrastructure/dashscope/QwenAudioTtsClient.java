@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestClient;
 import tools.jackson.databind.JsonNode;
-
+/*DashScope TTS HTTP 客户端。*/
 @Component
 @RequiredArgsConstructor
 public class QwenAudioTtsClient {

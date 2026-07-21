@@ -13,6 +13,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+/*把 iLink SDK 返回的二维码字符串转成 PNG 图片字节*/
 @Service
 public class IlinkQrCodeService {
 

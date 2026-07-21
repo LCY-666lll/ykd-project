@@ -10,7 +10,7 @@ import com.github.wechat.ilink.sdk.ILinkClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
+/*创建 iLink client，调用 client.executeLogin() 获取二维码内容，监听登录结果，取消登录状态*/
 @Service
 @Slf4j
 @RequiredArgsConstructor

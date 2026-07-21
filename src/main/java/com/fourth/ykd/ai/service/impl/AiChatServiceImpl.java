@@ -12,6 +12,7 @@ import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+/*普通文本聊天实现。优先使用 Spring AI 记忆 ChatClient，失败才回退自写 DeepSeekClient*/
 @Slf4j
 @Service
 @RequiredArgsConstructor

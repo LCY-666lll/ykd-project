@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+/*定时轮询 iLink 消息。负责 client.getUpdates()、过滤机器人自己的消息、提取文本/语音/图片。*/
 @Slf4j
 @Service
 @RequiredArgsConstructor

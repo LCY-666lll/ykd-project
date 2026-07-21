@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+/*校验 DashScope Key，然后调用 Qwen 视觉客户端。*/
 @Service
 @RequiredArgsConstructor
 public class ImageUnderstandingServiceImpl implements ImageUnderstandingService {

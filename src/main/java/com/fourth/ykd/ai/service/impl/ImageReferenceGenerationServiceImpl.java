@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestClient;
 
+/*把暂存图片和用户指令一起交给 QwenImageClient，生成结果后下载图片字节*/
 @Service
 public class ImageReferenceGenerationServiceImpl implements ImageReferenceGenerationService {
 

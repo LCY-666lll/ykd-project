@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-/*AI消息分流：deepseek判断用户消息意图类型，把判断结果转化为枚举状态*/
+/*AI消息分流：用 DeepSeek 判断用户这句话要走哪条链路。只做分类，不负责最终回答，把判断结果转化为枚举状态*/
 @Slf4j
 @Component
 @RequiredArgsConstructor

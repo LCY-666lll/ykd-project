@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-
+/*创建 iLinkReplyExecutor 回复线程池。模型调用、发消息都放到这里，不阻塞轮询线程。*/
 @Configuration
 public class IlinkReplyExecutorConfiguration {
 

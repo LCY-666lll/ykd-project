@@ -11,6 +11,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestClient;
 import tools.jackson.databind.JsonNode;
 
+/*DashScope 视觉模型 HTTP 客户端。把图片转 Base64 Data URL，
+请求 /compatible-mode/v1/chat/completions*/
 @Component
 @RequiredArgsConstructor
 public class QwenVisionClient {

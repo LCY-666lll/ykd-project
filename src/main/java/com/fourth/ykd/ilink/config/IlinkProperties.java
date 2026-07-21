@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-/*Spring 启动
+/*读取 ilink.* 配置：是否启用、超时、轮询间隔、线程池大小、队列容量等：
+Spring 启动
   ↓
 读取 application.properties
   ↓

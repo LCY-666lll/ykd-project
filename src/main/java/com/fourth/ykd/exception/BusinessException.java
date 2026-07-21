@@ -1,7 +1,7 @@
 package com.fourth.ykd.exception;
 
-/* 封装统一异常类：
-天气业务发现城市为空
+/* 封装统一  运行时异常(RuntimeException)  类：
+EG：天气业务发现城市为空
         ↓
 抛出 BusinessException(40001, "城市名称不能为空")
         ↓

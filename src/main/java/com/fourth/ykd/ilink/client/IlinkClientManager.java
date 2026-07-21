@@ -7,10 +7,12 @@ import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-/*用一个 Spring 单例组件，统一管理项目中唯一的 ILinkClient：创建、获取、关闭。*/
+/*
+ 管理全项目唯一 ILinkClient：创建、获取、关闭。它是项目和 iLink SDK 的连接持有者。
+*/
 @Slf4j
-//这个类交给Spring管理，在项目启动时创建一个IlinkClientManager对象放进Spring容器内
-// 用了 @Component 后，各个服务注入的是同一个管理器。
+/*这个类交给Spring管理，在项目启动时创建一个IlinkClientManager对象放进Spring容器内
+用了 @Component 后，各个服务注入的是同一个管理器。*/
 @Component
 public class IlinkClientManager {
 

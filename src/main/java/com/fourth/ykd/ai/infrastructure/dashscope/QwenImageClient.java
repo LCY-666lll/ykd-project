@@ -12,7 +12,7 @@ import org.springframework.web.client.RestClient;
 import tools.jackson.databind.JsonNode;
 
 /**
- * 通义千问图片生成客户端。
+ * DashScope 图片生成客户端。支持纯文本生图，也支持传入参考图 Base64 Data URL
  * 主要作用：图片描述 → 调用 DashScope → 得到临时图片 URL
  * 1. 接收用户输入的图片描述；
  * 2. 调用 DashScope 的 Qwen-Image 图片生成接口；
