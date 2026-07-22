@@ -81,6 +81,11 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.alibaba.cloud.ai</groupId>
+            <artifactId>spring-ai-alibaba-starter-tool-calling-baidusearch</artifactId>
+            <version>1.1.2.3</version>
+        </dependency>
+        <dependency>
             <groupId>io.github.lith0924</groupId>
             <artifactId>wechat-ilink-sdk</artifactId>
             <version>2.3.3</version>

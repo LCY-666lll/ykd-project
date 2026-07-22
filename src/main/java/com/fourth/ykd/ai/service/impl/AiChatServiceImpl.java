@@ -2,6 +2,7 @@ package com.fourth.ykd.ai.service.impl;
 
 import com.fourth.ykd.ai.dto.AiChatResponse;
 import com.fourth.ykd.ai.service.AiChatService;
+import com.fourth.ykd.ai.utils.BaiduSearchTool;
 import com.fourth.ykd.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,7 @@ public class AiChatServiceImpl implements AiChatService {
     private static final String DEFAULT_CONVERSATION_ID = "api-chat";
 
     private final ChatClient springAiChatClient;
+    private final BaiduSearchTool baiduSearchTool;
 
     @Override
     public AiChatResponse chat(String message) {
@@ -40,6 +42,7 @@ public class AiChatServiceImpl implements AiChatService {
         String answer = springAiChatClient.prompt()
                 .user(normalizedMessage)
                 .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
+                .tools(baiduSearchTool)
                 .call()
                 .content();
         return new AiChatResponse(answer);
