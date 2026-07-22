@@ -1,14 +1,24 @@
 package com.fourth.ykd.ai.service.impl;
 
+import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatOptions;
 import com.fourth.ykd.ai.dto.AiChatResponse;
 import com.fourth.ykd.ai.service.AiChatService;
+
+
+import com.fourth.ykd.ai.utils.MathCalculatorTools;
 import com.fourth.ykd.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 /* 普通文本聊天：DeepSeek 仍然是文本对话模型，只是通过 Spring AI ChatClient 调用。 */
 @Slf4j
@@ -19,6 +29,8 @@ public class AiChatServiceImpl implements AiChatService {
     private static final String DEFAULT_CONVERSATION_ID = "api-chat";
 
     private final ChatClient springAiChatClient;
+
+    private final MathCalculatorTools mathCalculatorTools;
 
     @Override
     public AiChatResponse chat(String message) {
@@ -40,8 +52,12 @@ public class AiChatServiceImpl implements AiChatService {
         String answer = springAiChatClient.prompt()
                 .user(normalizedMessage)
                 .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
+                .tools(mathCalculatorTools)
                 .call()
                 .content();
         return new AiChatResponse(answer);
     }
+
+
+
 }
