@@ -2,13 +2,10 @@ package com.fourth.ykd.ai.service.impl;
 
 import com.fourth.ykd.ai.dto.AiChatResponse;
 import com.fourth.ykd.ai.service.AiChatService;
-<<<<<<< Updated upstream
 
 
 import com.fourth.ykd.ai.utils.MathCalculatorTool;
-=======
 import com.fourth.ykd.ai.utils.WeatherTool;
->>>>>>> Stashed changes
 import com.fourth.ykd.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,11 +24,9 @@ public class AiChatServiceImpl implements AiChatService {
 
     private final ChatClient springAiChatClient;
 
-<<<<<<< Updated upstream
-    private final MathCalculatorTool mathCalculatorTools;
-=======
+    private final MathCalculatorTool mathCalculatorTool;
+
     private final WeatherTool weatherTool;
->>>>>>> Stashed changes
 
     @Override
     public AiChatResponse chat(String message) {
@@ -54,11 +49,7 @@ public class AiChatServiceImpl implements AiChatService {
         String answer = springAiChatClient.prompt()
                 .user(normalizedMessage)
                 .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
-<<<<<<< Updated upstream
-                .tools(mathCalculatorTools)
-=======
-                .tools(weatherTool)
->>>>>>> Stashed changes
+                .tools(mathCalculatorTool, weatherTool)
                 .call()
                 .content();
 
