@@ -15,7 +15,7 @@ public class MathCalculatorTool {
             @ToolParam(description = "第二个参与运算的数字", required = true) Double num2,
             @ToolParam(description = "运算符，仅允许 + 、 - 、 * 、 / 四种取值", required = true) String operator
     ) {
-        log.info("[AI][TOOL][CALCULATE][START][计算器工具开始执行] num1={}, num2={}, operator={}", num1, num2, operator);
+        log.info("[AI][TOOL][MathCalculatorToolCALCULATE][START][计算器工具开始执行] num1={}, num2={}, operator={}", num1, num2, operator);
 
         try {
             double res;
@@ -33,10 +33,10 @@ public class MathCalculatorTool {
                     return "运算失败：仅支持 + - * / 运算符";
                 }
             }
-            log.info("[AI][TOOL][CALCULATE][OVER][调用完毕]");
+            log.info("[AI][TOOL][MathCalculatorToolCALCULATE][OVER][调用完毕]");
             return String.valueOf(res);
         }catch (RuntimeException exception){
-            log.warn("[AI][TOOL][CALCULATE][FAILED],计算工具调用失败, reason={}", exception.getMessage());
+            log.warn("[AI][TOOL][MathCalculatorToolCALCULATE][FAILED],计算工具调用失败, reason={}", exception.getMessage());
             throw exception;
         }
 
