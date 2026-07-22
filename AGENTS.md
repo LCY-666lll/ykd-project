@@ -33,3 +33,4 @@
 - Added concise Chinese comments to the new Qwen configuration, service implementations, and integration test.
 - Added concise Chinese class-level comments to the Qwen configuration, service implementations, and integration test.
 - Removed unused legacy DeepSeek client/config/properties and DashScope download config; image services now use RestClient.Builder.
+- Weather API host now falls back to the configured default when a local or environment override is blank.
