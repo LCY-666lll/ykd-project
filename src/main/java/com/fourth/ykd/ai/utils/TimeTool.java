@@ -56,10 +56,9 @@ public class TimeTool {
      * @return 格式化文本结果，供AI二次加工展示
      */
     @Tool(description = """
-            获取系统真实时间。
-            当用户询问当前时间、今天日期、星期几，或者需要计算日期间隔时调用此工具。
-            operateType=now：获取当前上海时区日期时间；
-            operateType=diff：需要传入targetDate，计算今天与目标日期相隔天数。
+            获取系统真实时间，或计算当前日期与目标日期的间隔。
+            operateType=now：获取上海时区当前日期时间；
+            operateType=diff：传入 targetDate，计算当前日期与目标日期相隔天数。
             """)
     public String getTimeInfo(
             @ToolParam(description = "操作类型，可选值：now / diff") String operateType,
@@ -68,33 +67,41 @@ public class TimeTool {
         if (operateType == null || operateType.trim().isEmpty()) {
             return "operateType不能为空，可选值 now、diff";
         }
-        operateType = operateType.trim();
-        log.info("[TIME_TOOL] operateType={}, targetDate={}", operateType, targetDate);
+        String normalizedOperateType = operateType.trim();
+        log.info("[AI][TOOL][TIME][START] operateType={}, targetDate={}", normalizedOperateType, targetDate);
 
         try {
             LocalDateTime now = LocalDateTime.now(ZONE_SHANGHAI);
-            if ("now".equals(operateType)) {
+            if ("now".equals(normalizedOperateType)) {
                 String nowStr = now.format(DATE_TIME_FORMATTER);
-                return "当前上海时区时间：" + nowStr + "，星期" + now.getDayOfWeek().getValue();
+                String result = "当前上海时区时间：" + nowStr + "，星期" + now.getDayOfWeek().getValue();
+                log.info("[AI][TOOL][TIME][SUCCESS] operateType={}, result={}", normalizedOperateType, result);
+                return result;
             }
-            if ("diff".equals(operateType)) {
+            if ("diff".equals(normalizedOperateType)) {
                 if (targetDate == null || targetDate.trim().isEmpty()) {
                     return "计算日期差值时targetDate不能为空，格式示例：2026-10-01";
                 }
                 LocalDate today = now.toLocalDate();
                 LocalDate date = LocalDate.parse(targetDate.trim(), DATE_FORMATTER);
                 long days = Duration.between(today.atStartOfDay(), date.atStartOfDay()).toDays();
+                String result;
                 if (days > 0) {
-                    return "距离 " + targetDate + " 还有 " + days + " 天";
+                    result = "距离 " + targetDate + " 还有 " + days + " 天";
                 } else if (days < 0) {
-                    return targetDate + " 已经过去 " + Math.abs(days) + " 天";
+                    result = targetDate + " 已经过" + Math.abs(days) + " 天";
                 } else {
-                    return "今天就是 " + targetDate;
+                    result = "今天就是 " + targetDate;
                 }
+                log.info("[AI][TOOL][TIME][SUCCESS] operateType={}, targetDate={}, result={}",
+                        normalizedOperateType, targetDate, result);
+                return result;
             }
-            return "不支持的operateType：" + operateType;
+            log.warn("[AI][TOOL][TIME][FAILED] operateType={}, reason=不支持的操作类型", normalizedOperateType);
+            return "不支持的operateType：" + normalizedOperateType;
         } catch (Exception e) {
-            log.warn("[TIME_TOOL] 执行异常：{}", e.getMessage(), e);
+            log.warn("[AI][TOOL][TIME][FAILED] operateType={}, targetDate={}, reason={}",
+                    normalizedOperateType, targetDate, e.getMessage());
             return "时间工具暂时不可用，" + e.getMessage();
         }
     }

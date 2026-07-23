@@ -20,7 +20,7 @@ public class WeatherTool{
 
     @Tool(
             name = "query_current_weather",
-            description = "查询用户要求城市的实时天气，当用户询问某个城市当前天气、气温、体感温度、湿度、风向或风速时调用。"
+            description = "仅当用户明确询问某城市或地区的当前天气、温度、体感温度、湿度、降雨、风力或天气预报时调用。新闻、时事、政策、经济和科技动态问题不得调用此工具。"
     )
     public WeatherInfoResponse queryCurrentWeather(
             @ToolParam(description = "要查询的城市名称，例如北京、上海、杭州", required = true) String city

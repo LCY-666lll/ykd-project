@@ -8,28 +8,6 @@ import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.stereotype.Component;
 
 
-
-/**
- * 本地表达式计算器工具 — 使用 @Tool 声明式注解，提供给 Spring AI Alibaba Function Calling。
- * <p>实现思路：</p>
- * <ul>
- *     <li>@Tool 注解标注方法，向 AI 声明工具描述和参数</li>
- *     <li>本地使用Aviator执行数学表达式，无外部API调用、无需API Key</li>
- * </ul>
- *
- * <p>Bean 名称解析：</p>
- * <pre>
- MathCalculatorTool + @Component 默认bean名称 mathCalculatorTool
- * 无需额外配置，自动被Spring扫描
- * </pre>
- *
- * <p>使用方式：</p>
- * <pre>
- ChatClient.prompt("计算 (12.5+23)*8/2")
- .tools(mathCalculatorTool)
- .content();
- * </pre>
- */
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -58,13 +36,13 @@ public class MathCalculatorTool {
             return "表达式不能为空";
         }
         expression = expression.trim();
-        log.info("[MATH_TOOL] expression={}", expression);
+        log.info("[AI][TOOL][MATH][START] expression={}", expression);
         try {
             Object result = AviatorEvaluator.execute(expression);
-            log.info("[MATH_TOOL] 计算成功，结果={}", result);
+            log.info("[AI][TOOL][MATH][SUCCESS] expression={}, result={}", expression, result);
             return "表达式【" + expression + "】计算结果 = " + result;
         } catch (Exception e) {
-            log.warn("[MATH_TOOL] 计算异常：{}", e.getMessage(), e);
+            log.warn("[AI][TOOL][MATH][FAILED] expression={}, reason={}", expression, e.getMessage());
             return "表达式计算失败：" + e.getMessage();
         }
     }
