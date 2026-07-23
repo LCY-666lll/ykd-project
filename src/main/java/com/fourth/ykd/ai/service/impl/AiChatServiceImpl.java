@@ -4,9 +4,7 @@ import com.fourth.ykd.ai.dto.AiChatResponse;
 import com.fourth.ykd.ai.service.AiChatService;
 
 
-import com.fourth.ykd.ai.utils.BaiduSearchTool;
-import com.fourth.ykd.ai.utils.MathCalculatorTool;
-import com.fourth.ykd.ai.utils.TimeTool;
+import com.fourth.ykd.ai.utils.*;
 import com.fourth.ykd.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,10 +21,28 @@ public class AiChatServiceImpl implements AiChatService {
 
     private static final String DEFAULT_CONVERSATION_ID = "api-chat";
 
+    private static final String TOOL_USAGE_INSTRUCTIONS = """
+            你是中文智能助手，所有回答使用中文。
+            工具选择规则：
+            1. 用户明确询问天气、温度、降雨、风力或天气预报时才调用天气工具；新闻、时事、政策、经济、科技动态问题不得调用天气工具。
+            2. 用户询问新闻、时事、最新动态或发生了什么时，应调用百度搜索工具，不得使用训练数据编造实时信息。
+            3. 用户未明确地区时，搜索并优先总结中国国家层面的新闻；首次回答返回5到10条新闻。每条新闻使用“标题 + 发生了什么 + 关键影响或进展”写成2到3句，只能依据本次搜索结果扩展事实；信息不足时如实简短说明，不得编造。不展示链接，末尾固定追加“您希望了解上述新闻的更多消息吗？”。
+            4. 用户明确城市、省份、自治区或国家地区时，直接搜索并回答该地区新闻，不先返回全国新闻。
+            5. 用户追问某条新闻的详情、来源、原文或链接时，调用百度搜索工具补充对应信息，并在回答中展示相关链接。
+            6. 百度搜索工具返回“实时搜索失败”时，不得再次更换关键词重试，不得调用其他工具，也不得使用训练数据补充新闻；只回复“暂未取得实时新闻，请稍后重试。”
+            """;
+
     private final ChatClient springAiChatClient;
 
     private final MathCalculatorTool mathCalculatorTools;
+
     private final TimeTool timeTool;
+
+    private final TranslationTool translationTool;
+
+    private final WeatherTool weatherTool;
+
+    private final BaiduSearchTool baiduSearchTool;
 
     @Override
     public AiChatResponse chat(String message) {
@@ -47,9 +63,10 @@ public class AiChatServiceImpl implements AiChatService {
         log.info("[AI][MEMORY_CHAT] conversationId={}", normalizedConversationId);
 
         String answer = springAiChatClient.prompt()
+                .system(TOOL_USAGE_INSTRUCTIONS)
                 .user(normalizedMessage)
                 .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
-                .tools(mathCalculatorTools,timeTool)
+                .tools(mathCalculatorTools,timeTool,baiduSearchTool,weatherTool,translationTool)
                 .call()
                 .content();
 

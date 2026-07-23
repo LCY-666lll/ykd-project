@@ -42,7 +42,7 @@ public class TranslationTool {
                             )
                     );
 
-            log.info("[AI][TOOL][TRANSLATION][OVER][翻译工具调用完毕]");
+            log.info("[AI][TOOL][TRANSLATION][SUCCESS] 翻译工具调用成功");
 
             return response.translatedTexts();
         } catch (RuntimeException exception) {
