@@ -33,7 +33,7 @@ public class QWeatherClient {
      */
     public QWeatherCityLookupResponse lookupCity(String city) {
 
-        log.info("Calling QWeather city lookup API: city={}", city);
+        log.debug("Calling QWeather city lookup API: city={}", city);
 
         // qWeatherRestClient.get():创建一个 HTTP GET 请求
         return qWeatherRestClient.get()
@@ -64,7 +64,7 @@ public class QWeatherClient {
      */
     public QWeatherNowResponse getCurrentWeather(String locationId) {
 
-        log.info("Calling QWeather current weather API: locationId={}",
+        log.debug("Calling QWeather current weather API: locationId={}",
                 locationId);
 
         return qWeatherRestClient.get()
