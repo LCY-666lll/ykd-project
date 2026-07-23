@@ -85,7 +85,7 @@ public class BaiduSearchTool {
             return "搜索关键词不能为空";
         }
 
-        int resultCount = (num != null && num > 0) ? Math.min(num, 50) : 10;
+        int resultCount = (num != null && num > 0) ? Math.min(num, 10) : 5;
         log.info("[BAIDU_SEARCH] query={}, num={}", query, resultCount);
 
         try {
