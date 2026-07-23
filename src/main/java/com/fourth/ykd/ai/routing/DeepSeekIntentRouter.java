@@ -25,7 +25,13 @@ public class DeepSeekIntentRouter {
     }
 
     public UserIntent route(String userText, boolean hasPendingImage) {
-        String routeResult = routeChatClient.prompt()
+        /*SpringAI链式写法：
+        1.prompt()：routeChatClient.prompt()：开始构造一次大模型请求。
+        2.user()：user(buildPrompt(userText, hasPendingImage)) ：设置用户消息。
+        这里不是直接把原始的 userText 发给模型，而是先调用buildPrompt(userText, hasPendingImage)构造完整提示词。
+        3.call():真正向 DeepSeek 发起请求。这是一个同步调用。当前线程会等待模型返回结果之后，才继续向下执行.
+        4.content():取出模型返回的文字内容。*/
+                String routeResult = routeChatClient.prompt()
                 .user(buildPrompt(userText, hasPendingImage))
                 .call()
                 .content();
@@ -34,6 +40,7 @@ public class DeepSeekIntentRouter {
             return UserIntent.TEXT;
         }
         try {
+            //字符串转换为枚举
             return UserIntent.valueOf(matcher.group(1));
         } catch (IllegalArgumentException e) {
             log.warn("DeepSeek 返回了未知意图: {}", matcher.group(1));
