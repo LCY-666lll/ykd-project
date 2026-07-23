@@ -168,7 +168,9 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
     }
 
     private ReplyResult buildReplyResult(String userId, String userText, boolean voiceMode) {
+
         Optional<PendingUserImage> pendingImage = imageContextService.findActive(userId);
+
         UserIntent intent = intentRouter.route(userText, pendingImage.isPresent());
         log.info("[iLink][{}] userId={}, intent={}, hasPendingImage={}",
                 voiceMode ? "VOICE_ROUTED" : "ROUTED", userId, intent, pendingImage.isPresent());
