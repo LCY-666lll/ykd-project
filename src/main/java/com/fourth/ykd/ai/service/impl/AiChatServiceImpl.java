@@ -4,6 +4,7 @@ import com.fourth.ykd.ai.dto.AiChatResponse;
 import com.fourth.ykd.ai.service.AiChatService;
 
 
+import com.fourth.ykd.ai.utils.BaiduSearchTool;
 import com.fourth.ykd.ai.utils.MathCalculatorTool;
 import com.fourth.ykd.ai.utils.TimeTool;
 import com.fourth.ykd.exception.BusinessException;
@@ -44,12 +45,14 @@ public class AiChatServiceImpl implements AiChatService {
                 : DEFAULT_CONVERSATION_ID;
 
         log.info("[AI][MEMORY_CHAT] conversationId={}", normalizedConversationId);
+
         String answer = springAiChatClient.prompt()
                 .user(normalizedMessage)
                 .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
                 .tools(mathCalculatorTools,timeTool)
                 .call()
                 .content();
+
         return new AiChatResponse(answer);
     }
 
