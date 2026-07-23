@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 // 千问图片识别模型配置，单独创建兼容端点模型以保留 DeepSeek 默认文本模型。
-public class DashScopeVisionConfig {
+public class       DashScopeVisionConfig {
 
     @Bean("dashScopeVisionModel")
     public DashScopeVisionModelProvider dashScopeVisionModel(
