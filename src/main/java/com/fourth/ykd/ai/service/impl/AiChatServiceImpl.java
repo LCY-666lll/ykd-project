@@ -6,8 +6,7 @@ import com.fourth.ykd.ai.service.AiChatService;
 
 import com.fourth.ykd.ai.utils.BaiduSearchTool;
 import com.fourth.ykd.ai.utils.MathCalculatorTool;
-import com.fourth.ykd.ai.utils.TranslationTool;
-import com.fourth.ykd.ai.utils.WeatherTool;
+import com.fourth.ykd.ai.utils.TimeTool;
 import com.fourth.ykd.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,13 +25,8 @@ public class AiChatServiceImpl implements AiChatService {
 
     private final ChatClient springAiChatClient;
 
-    private final MathCalculatorTool mathCalculatorTool;
-
-    private final WeatherTool weatherTool;
-
-    private final TranslationTool translationTool;
-
-    private final BaiduSearchTool baiduSearchTool;
+    private final MathCalculatorTool mathCalculatorTools;
+    private final TimeTool timeTool;
 
     @Override
     public AiChatResponse chat(String message) {
@@ -55,7 +49,7 @@ public class AiChatServiceImpl implements AiChatService {
         String answer = springAiChatClient.prompt()
                 .user(normalizedMessage)
                 .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
-                .tools(mathCalculatorTool, weatherTool,translationTool,baiduSearchTool)
+                .tools(mathCalculatorTools,timeTool)
                 .call()
                 .content();
 

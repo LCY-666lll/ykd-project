@@ -1,45 +1,71 @@
 package com.fourth.ykd.ai.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.googlecode.aviator.AviatorEvaluator;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.stereotype.Component;
 
+
+
+/**
+ * 本地表达式计算器工具 — 使用 @Tool 声明式注解，提供给 Spring AI Alibaba Function Calling。
+ * <p>实现思路：</p>
+ * <ul>
+ *     <li>@Tool 注解标注方法，向 AI 声明工具描述和参数</li>
+ *     <li>本地使用Aviator执行数学表达式，无外部API调用、无需API Key</li>
+ * </ul>
+ *
+ * <p>Bean 名称解析：</p>
+ * <pre>
+ MathCalculatorTool + @Component 默认bean名称 mathCalculatorTool
+ * 无需额外配置，自动被Spring扫描
+ * </pre>
+ *
+ * <p>使用方式：</p>
+ * <pre>
+ ChatClient.prompt("计算 (12.5+23)*8/2")
+ .tools(mathCalculatorTool)
+ .content();
+ * </pre>
+ */
+@Slf4j
 @Component
+@RequiredArgsConstructor
 public class MathCalculatorTool {
-    private static final Logger log = LoggerFactory.getLogger(MathCalculatorTool.class);
-    @Tool(description = "执行数学四则运算：加法、减法、乘法、除法；接收两个数字、一个运算符，返回计算结果；除数为0时返回错误信息")
+
+    /**
+     * 数学表达式运算，当AI需要精确数学计算时自动调用。
+     * <p>适用场景：</p>
+     * <ul>
+     *     <li>四则运算、小数计算、复杂算式求解</li>
+     *     <li>防止大模型口算出错，交由本地代码精确运算</li>
+     * </ul>
+     *
+     * @param expression 数学表达式，例如 (100+25)*3/2
+     * @return 计算结果文本，供AI二次加工展示
+     */
+    @Tool(description = """
+            执行数学表达式精确计算。
+            用户提出算式、数值计算问题时调用。
+            不要让AI自行估算，优先调用本工具得到准确结果。
+            """)
     public String calculate(
-            @ToolParam(description = "第一个参与运算的数字", required = true) Double num1,
-            @ToolParam(description = "第二个参与运算的数字", required = true) Double num2,
-            @ToolParam(description = "运算符，仅允许 + 、 - 、 * 、 / 四种取值", required = true) String operator
+            @ToolParam(description = "待计算的数学表达式，例如 (128.5 + 231.5) * 12 / 4") String expression
     ) {
-        log.info("[AI][TOOL][MathCalculatorToolCALCULATE][START][计算器工具开始执行] num1={}, num2={}, operator={}", num1, num2, operator);
-
-        try {
-            double res;
-            switch (operator) {
-                case "+" -> res = num1 + num2;
-                case "-" -> res = num1 - num2;
-                case "*" -> res = num1 * num2;
-                case "/" -> {
-                    if (num2 == 0) {
-                        return "运算失败：除数不能为0";
-                    }
-                    res = num1 / num2;
-                }
-                default -> {
-                    return "运算失败：仅支持 + - * / 运算符";
-                }
-            }
-            log.info("[AI][TOOL][MathCalculatorToolCALCULATE][OVER][调用完毕]");
-            return String.valueOf(res);
-        }catch (RuntimeException exception){
-            log.warn("[AI][TOOL][MathCalculatorToolCALCULATE][FAILED],计算工具调用失败, reason={}", exception.getMessage());
-            throw exception;
+        if (expression == null || expression.trim().isEmpty()) {
+            return "表达式不能为空";
         }
-
+        expression = expression.trim();
+        log.info("[MATH_TOOL] expression={}", expression);
+        try {
+            Object result = AviatorEvaluator.execute(expression);
+            log.info("[MATH_TOOL] 计算成功，结果={}", result);
+            return "表达式【" + expression + "】计算结果 = " + result;
+        } catch (Exception e) {
+            log.warn("[MATH_TOOL] 计算异常：{}", e.getMessage(), e);
+            return "表达式计算失败：" + e.getMessage();
+        }
     }
-
 }
