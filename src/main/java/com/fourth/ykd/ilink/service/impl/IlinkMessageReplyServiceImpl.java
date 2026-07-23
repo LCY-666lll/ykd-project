@@ -14,6 +14,8 @@ import com.fourth.ykd.ai.service.ImageUnderstandingService;
 import com.fourth.ykd.ilink.service.IlinkMessageReplyService;
 import com.github.wechat.ilink.sdk.ILinkClient;
 import java.io.IOException;
+import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,6 +23,8 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -29,6 +33,13 @@ import org.springframework.util.StringUtils;
 @Service
 public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
 
+    private static final String IMAGE_MEMORY_PROMPT = """
+            请识别这张图片，并生成供后续多轮聊天使用的中文图片记忆。
+            只描述图片中确实可见的内容；优先说明主体、人物或物体、场景、明显颜色、
+            相对位置、可辨识文字和关键细节。
+            不确定的内容明确说明无法确认；不要寒暄、不要提问、不要编造。
+            """;
+
     private final AiChatService aiChatService;
     private final AudioSynthesisService audioSynthesisService;
     private final DeepSeekIntentRouter intentRouter;
@@ -36,6 +47,7 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
     private final ImageReferenceGenerationService imageReferenceGenerationService;
     private final ImageUnderstandingService imageUnderstandingService;
     private final ImageContextService imageContextService;
+    private final ChatMemory chatMemory;
     private final Executor replyExecutor;
     private final ConcurrentMap<String, CompletableFuture<Void>> replyChains = new ConcurrentHashMap<>();
 
@@ -47,6 +59,7 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
             ImageReferenceGenerationService imageReferenceGenerationService,
             ImageUnderstandingService imageUnderstandingService,
             ImageContextService imageContextService,
+            ChatMemory chatMemory,
             @Qualifier("iLinkReplyExecutor") Executor replyExecutor
     ) {
         this.aiChatService = aiChatService;
@@ -56,6 +69,7 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
         this.imageReferenceGenerationService = imageReferenceGenerationService;
         this.imageUnderstandingService = imageUnderstandingService;
         this.imageContextService = imageContextService;
+        this.chatMemory = chatMemory;
         this.replyExecutor = replyExecutor;
     }
 
@@ -128,15 +142,60 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
 
     private void replyImageReceived(ILinkClient client, String userId) {
         try {
+            saveReceivedImageMemory(userId);
+        } catch (RuntimeException exception) {
+            // 图片记忆写入失败不影响用户收到固定确认语。
+            log.error("[iLink][IMAGE_MEMORY_SAVE_FAILED] userId={}", userId, exception);
+        }
+
+        try {
             client.sendTextWithTyping(userId, "已经看到您的图片啦，您想了解什么呢？", 800);
-            log.info("[iLink][IMAGE_CONTEXT_REPLIED] toUserId={}, answer={}",
-                    userId, "已经看到您的图片啦，您想了解什么呢？");
+            log.info("[iLink][IMAGE_CONTEXT_REPLIED] toUserId={}", userId);
         } catch (IOException exception) {
             log.warn("[iLink][IMAGE_CONTEXT_REPLY_FAILED] userId={}, reason={}",
                     userId, exception.getMessage());
         }
     }
 
+    /**
+     * 后台识图后仅写入聊天记忆，不直接把识图结果发送给用户。
+     */
+    private void saveReceivedImageMemory(String userId) {
+        PendingUserImage image = imageContextService.findActive(userId)
+                .orElseThrow(() -> new IllegalStateException("当前图片上下文不存在"));
+        saveImageMemory(userId, image, "用户此前发送了一张图片");
+    }
+
+    /**
+     * 机器人生成图片后，识别实际生成结果并写入聊天记忆。
+     */
+    private void saveGeneratedImageMemoryQuietly(String userId, GeneratedImage generatedImage, String imageSource) {
+        try {
+            PendingUserImage image = new PendingUserImage(
+                    generatedImage.bytes(),
+                    generatedImage.contentType(),
+                    Instant.now()
+            );
+            saveImageMemory(userId, image, imageSource);
+        } catch (RuntimeException exception) {
+            // 图片记忆写入失败不影响生成图片发送给用户。
+            log.error("[iLink][GENERATED_IMAGE_MEMORY_SAVE_FAILED] userId={}", userId, exception);
+        }
+    }
+
+    private void saveImageMemory(String userId, PendingUserImage image, String imageSource) {
+        String imageSummary = imageUnderstandingService.understand(image, IMAGE_MEMORY_PROMPT);
+        String memoryContent = """
+                【图片识别记忆】
+                %s，后台识别结果如下：
+                %s
+                """.formatted(imageSource, imageSummary);
+
+        // userId 与 AiChatService.chat(userId, userText) 使用同一个会话标识。
+        chatMemory.add(userId, List.of(new AssistantMessage(memoryContent)));
+        log.info("[iLink][IMAGE_MEMORY_SAVED] userId={}, source={}, summary={}",
+                userId, imageSource, formatAnswerForLog(imageSummary));
+    }
     private void reply(ILinkClient client, String userId, String userText) {
         long startedAt = System.currentTimeMillis();
         startTypingQuietly(client, userId);
@@ -183,10 +242,12 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
         if (pendingImage.isPresent() && intent == UserIntent.IMAGE_EDIT) {
             log.info("[iLink][IMAGE_EDITING] userId={}, instruction={}", userId, userText);
             GeneratedImage image = imageReferenceGenerationService.generate(pendingImage.get(), userText);
+            saveGeneratedImageMemoryQuietly(userId, image, "机器人此前根据用户要求编辑并生成了一张图片");
             return ReplyResult.image(intent, image, pendingImage.get(), "IMAGE_EDIT");
         }
         if (intent == UserIntent.IMAGE_GENERATE) {
             GeneratedImage image = imageGenerationService.generate(userText);
+            saveGeneratedImageMemoryQuietly(userId, image, "机器人此前根据用户请求生成了一张图片");
             return ReplyResult.image(intent, image, null, null);
         }
 
