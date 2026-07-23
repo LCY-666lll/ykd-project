@@ -15,6 +15,8 @@ import org.springframework.web.client.RestClient;
 @EnableConfigurationProperties(WeatherProperties.class)
 public class WeatherConfig {
 
+    private static final String DEFAULT_API_HOST = "p33tejmexe.re.qweatherapi.com";
+
     @Bean
     public RestClient qWeatherRestClient(WeatherProperties properties) {
         RequestConfig requestConfig = RequestConfig.custom()
@@ -33,8 +35,12 @@ public class WeatherConfig {
         HttpComponentsClientHttpRequestFactory requestFactory =
                 new HttpComponentsClientHttpRequestFactory(httpClient);
 
+        String apiHost = StringUtils.hasText(properties.getApiHost())
+                ? properties.getApiHost().trim()
+                : DEFAULT_API_HOST;
+
         RestClient.Builder builder = RestClient.builder()
-                .baseUrl("https://" + properties.getApiHost())
+                .baseUrl("https://" + apiHost)
                 .requestFactory(requestFactory);
 
         if (StringUtils.hasText(properties.getApiKey())) {
