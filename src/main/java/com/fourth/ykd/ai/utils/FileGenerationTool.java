@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -24,28 +25,37 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 // 复用聊天记忆生成一次内容，再转换为用户要求的一种或多种文件。
+@Slf4j
 @Component
 public class FileGenerationTool {
 
     private final ChatClient springAiChatClient;
     private final String pdfChineseFontPath;
+    private final BaiduSearchTool baiduSearchTool;
 
     public FileGenerationTool(
             ChatClient springAiChatClient,
+            BaiduSearchTool baiduSearchTool,
             @Value("${file.pdf-chinese-font-path:C:/Windows/Fonts/STSONG.TTF}") String pdfChineseFontPath
     ) {
         this.springAiChatClient = springAiChatClient;
+        this.baiduSearchTool = baiduSearchTool;
         this.pdfChineseFontPath = pdfChineseFontPath;
     }
 
     public List<GeneratedDocument> generate(String userId, String userText) {
+        log.info("[AI][FILE_GENERATE][START] userId={}, userText={}", userId, userText);
         FileDraft draft = springAiChatClient.prompt().system("""
                 你负责根据当前聊天历史、图片识别记忆和用户请求生成可下载文件。
                 支持 DOCX、XLSX、PDF；可以同时生成多个格式。必须只返回 JSON：
                 {"types":["DOCX","XLSX","PDF"],"title":"文件标题","content":"完整内容"}
+                用户要求搜索、查询新闻、实时、最近、今天、昨天、上个月或指定日期范围的内容时，必须先调用百度搜索工具；搜索失败时必须在 content 中如实说明“实时搜索失败”，不得使用训练数据补写。
                 未明确格式时 types 返回 ["DOCX"]；XLSX 内容使用换行分隔记录、使用 | 分隔单元格；只输出 JSON，不要解释。
                 """).user(userText.trim())
-                .advisors(spec -> spec.param(ChatMemory.CONVERSATION_ID, userId)).call().entity(FileDraft.class);
+                .advisors(spec -> spec.param(ChatMemory.CONVERSATION_ID, userId))
+                .tools(baiduSearchTool)
+                .call()
+                .entity(FileDraft.class);
         if (draft == null || !StringUtils.hasText(draft.content())) {
             throw new BusinessException(50006, "文件内容生成失败");
         }
