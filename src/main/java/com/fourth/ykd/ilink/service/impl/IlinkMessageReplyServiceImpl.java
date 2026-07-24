@@ -2,6 +2,7 @@ package com.fourth.ykd.ilink.service.impl;
 
 import com.fourth.ykd.ai.dto.GeneratedAudio;
 import com.fourth.ykd.ai.dto.GeneratedImage;
+import com.fourth.ykd.ai.dto.GeneratedDocument;
 import com.fourth.ykd.ai.dto.PendingUserImage;
 import com.fourth.ykd.ai.routing.DeepSeekIntentRouter;
 import com.fourth.ykd.ai.routing.UserIntent;
@@ -11,6 +12,7 @@ import com.fourth.ykd.ai.service.ImageContextService;
 import com.fourth.ykd.ai.service.ImageGenerationService;
 import com.fourth.ykd.ai.service.ImageReferenceGenerationService;
 import com.fourth.ykd.ai.service.ImageUnderstandingService;
+import com.fourth.ykd.ai.utils.FileGenerationTool;
 import com.fourth.ykd.ilink.service.IlinkMessageReplyService;
 import com.github.wechat.ilink.sdk.ILinkClient;
 import java.io.IOException;
@@ -47,6 +49,7 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
     private final ImageReferenceGenerationService imageReferenceGenerationService;
     private final ImageUnderstandingService imageUnderstandingService;
     private final ImageContextService imageContextService;
+    private final FileGenerationTool fileGenerationTool;
     private final ChatMemory chatMemory;
     private final Executor replyExecutor;
     private final ConcurrentMap<String, CompletableFuture<Void>> replyChains = new ConcurrentHashMap<>();
@@ -59,6 +62,7 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
             ImageReferenceGenerationService imageReferenceGenerationService,
             ImageUnderstandingService imageUnderstandingService,
             ImageContextService imageContextService,
+            FileGenerationTool fileGenerationTool,
             ChatMemory chatMemory,
             @Qualifier("iLinkReplyExecutor") Executor replyExecutor
     ) {
@@ -69,6 +73,7 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
         this.imageReferenceGenerationService = imageReferenceGenerationService;
         this.imageUnderstandingService = imageUnderstandingService;
         this.imageContextService = imageContextService;
+        this.fileGenerationTool = fileGenerationTool;
         this.chatMemory = chatMemory;
         this.replyExecutor = replyExecutor;
     }
@@ -251,6 +256,11 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
             return ReplyResult.image(intent, image, null, null);
         }
 
+        if (intent == UserIntent.FILE_GENERATE) {
+            List<GeneratedDocument> documents = fileGenerationTool.generate(userId, userText);
+            return ReplyResult.documents(intent, documents, pendingImage.orElse(null), "FILE_GENERATE");
+        }
+
         String answer = aiChatService.chat(userId, userText).reply();
         return ReplyResult.text(intent, answer, pendingImage.orElse(null), voiceMode ? "VOICE_TEXT" : "TEXT");
     }
@@ -259,6 +269,10 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
             throws IOException {
         if (result.type() == ReplyResultType.IMAGE) {
             sendImageReply(client, userId, result, startedAt);
+            return;
+        }
+        if (result.type() == ReplyResultType.DOCUMENT) {
+            sendDocumentReply(client, userId, result, startedAt);
             return;
         }
 
@@ -294,6 +308,16 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
             log.info("[iLink][VOICE_REPLIED_WITH_TEXT_FALLBACK] toUserId={}, answer={}, elapsedMs={}",
                     userId, formatAnswerForLog(result.answer()), System.currentTimeMillis() - startedAt);
         }
+    }
+
+    private void sendDocumentReply(ILinkClient client, String userId, ReplyResult result, long startedAt)
+            throws IOException {
+        for (GeneratedDocument document : result.documents()) {
+            client.sendFile(userId, document.bytes(), document.fileName(), null);
+            log.info("[iLink][DOCUMENT_REPLIED] toUserId={}, fileName={}, fileBytes={}, elapsedMs={}",
+                    userId, document.fileName(), document.bytes().length, System.currentTimeMillis() - startedAt);
+        }
+        clearImageContextIfNeeded(userId, result);
     }
 
     private void sendImageReply(ILinkClient client, String userId, ReplyResult result, long startedAt)
@@ -391,7 +415,8 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
 
     private enum ReplyResultType {
         TEXT,
-        IMAGE
+        IMAGE,
+        DOCUMENT
     }
 
     private enum AudioReplyResult {
@@ -404,17 +429,23 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
             UserIntent intent,
             String answer,
             GeneratedImage image,
+            List<GeneratedDocument> documents,
             PendingUserImage imageToClear,
             String clearReason
     ) {
         private static ReplyResult text(UserIntent intent, String answer, PendingUserImage imageToClear,
                 String clearReason) {
-            return new ReplyResult(ReplyResultType.TEXT, intent, answer, null, imageToClear, clearReason);
+            return new ReplyResult(ReplyResultType.TEXT, intent, answer, null, null, imageToClear, clearReason);
         }
 
         private static ReplyResult image(UserIntent intent, GeneratedImage image, PendingUserImage imageToClear,
                 String clearReason) {
-            return new ReplyResult(ReplyResultType.IMAGE, intent, null, image, imageToClear, clearReason);
+            return new ReplyResult(ReplyResultType.IMAGE, intent, null, image, null, imageToClear, clearReason);
+        }
+
+        private static ReplyResult documents(UserIntent intent, List<GeneratedDocument> documents,
+                PendingUserImage imageToClear, String clearReason) {
+            return new ReplyResult(ReplyResultType.DOCUMENT, intent, null, null, documents, imageToClear, clearReason);
         }
     }
 }

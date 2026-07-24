@@ -50,17 +50,28 @@ public class DeepSeekIntentRouter {
 
     private String buildPrompt(String userText, boolean hasPendingImage) {
         String availableIntents = hasPendingImage
-                ? "TEXT, IMAGE_GENERATE, IMAGE_EDIT, IMAGE_UNDERSTAND"
-                : "TEXT, IMAGE_GENERATE";
+                ? "TEXT, IMAGE_GENERATE, IMAGE_EDIT, IMAGE_UNDERSTAND, FILE_GENERATE"
+                : "TEXT, IMAGE_GENERATE, FILE_GENERATE";
         return """
-                你是消息路由器。请根据用户当前这句话的真实目标，选择一个最合适的意图。
-                可选意图：%s
-                IMAGE_UNDERSTAND 表示用户希望理解、判断或获取当前图片的信息。
-                IMAGE_EDIT 表示用户希望把当前图片作为输入进行修改、延展、变换或作为参考素材。
-                IMAGE_GENERATE 表示用户希望生成一张独立的新图片，且不需要使用当前图片。
-                TEXT 表示普通对话或与图片无关的文字任务。
-                只返回 JSON 对象，格式必须类似 {"intent":"TEXT"}，不要补充解释。
-                用户内容：%s
+                你是消息意图路由器，只负责选择意图，不负责回答、搜索、整理内容或生成文件。
+                必须从以下可选意图中选择一个：%s。
+
+                FILE_GENERATE：用户要求把内容生成、导出、下载或整理成文件时使用；文件格式包括 PDF、DOCX、Word、XLSX、Excel。
+                只要请求同时包含“搜索、查询、整理、总结”等内容和“导出为文件”的要求，仍必须选择 FILE_GENERATE。
+                示例：
+                - “帮我生成学习计划并导出成 PDF” -> {"intent":"FILE_GENERATE"}
+                - “搜索软件工程资料后整理成 Word 和 Excel” -> {"intent":"FILE_GENERATE"}
+                - “把刚才内容导出为 PDF” -> {"intent":"FILE_GENERATE"}
+
+                IMAGE_UNDERSTAND：用户希望理解、判断或获取当前图片的信息。
+                IMAGE_EDIT：用户希望把当前图片作为输入进行修改、延展、变换或作为参考素材。
+                IMAGE_GENERATE：用户希望生成一张独立的新图片，且不需要使用当前图片。
+                TEXT：普通对话、知识问答、搜索请求或文字任务，且没有要求生成、导出或下载文件。
+
+                只能返回 JSON 对象，格式必须严格为 {"intent":"TEXT"}，不要输出解释、Markdown、文件内容或其他文字。
+                用户内容开始：
+                %s
+                用户内容结束。
                 """.formatted(availableIntents, userText);
     }
 }
