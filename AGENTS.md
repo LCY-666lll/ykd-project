@@ -57,3 +57,5 @@
 - 新增文件生成与识别能力：`FileGenerationTool` 支持 DOCX、XLSX、PDF；PDF 使用可配置中文字体路径生成，避免中文乱码。iLink 命中文件意图后直接发送生成文件；收到 PDF 时下载并提取可复制文字，写入同一 Spring AI ChatMemory，支持后续追问、总结和导出。扫描版与加密 PDF 明确提示暂不支持，单文件限制为 20MB。修复 FILE_GENERATE 未列入路由可选意图的问题；验证：mvn -q -DskipTests compile 通过。
 - 按需求收紧文件能力：移除超出范围的微信 PDF 上传读取、文本解析与聊天记忆写入，仅保留 DOCX、XLSX、PDF 的生成及 iLink 文件发送；验证：mvn -q -DskipTests compile 通过。
 - 优化文件生成意图路由：补充 FILE_GENERATE 的中文定义、正反例与“搜索后导出文件”优先规则，禁止路由模型输出文件 JSON 内容；验证：mvn -q -DskipTests compile 通过。
+- 修复文件生成实时搜索链路：FileGenerationTool 显式注册 BaiduSearchTool，并在中文提示词中要求涉及搜索、新闻、实时或日期范围的文件内容先搜索，失败时不得用训练数据补写；新增文件生成 START/SUCCESS 日志；验证：mvn -q -DskipTests compile 通过。
+- 优化 iLink 回复链路：拆分为回复队列生命周期、回复业务处理、回复发送三个职责块；语音请求生成文件时直接发送文件；意图路由规则改为系统提示词与用户内容分离；图片上下文有效期改为读取现有 ilink.image-context-ttl-minutes 配置；新增注释、提示词与异常文案均为中文，并保持线程池拒绝时原有的语音提示分支。验证：mvn -q -DskipTests compile 通过；mvn -q -Dtest=InMemoryImageContextServiceTest test 通过。
