@@ -5,5 +5,6 @@ public enum UserIntent {
     TEXT,
     IMAGE_GENERATE,
     IMAGE_EDIT,
-    IMAGE_UNDERSTAND
+    IMAGE_UNDERSTAND,
+    FILE_GENERATE
 }

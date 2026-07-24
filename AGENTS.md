@@ -53,3 +53,7 @@
 
 - 图片消息收到后在原有单用户回复队列中自动调用千问识图，将识图结果作为“图片识别记忆”写入同一 Spring AI ChatMemory；用户仍只收到固定图片确认语，原图缓存、显式识图和图片编辑链路保持不变；验证：mvn -q -DskipTests compile 通过。
 - 文生图与参考图编辑成功后复用图片识别记忆逻辑，对实际生成结果执行后台识图并写入同一 Spring AI ChatMemory；识别失败不阻断图片发送；验证：mvn -q -DskipTests compile 通过。
+
+- 新增文件生成与识别能力：`FileGenerationTool` 支持 DOCX、XLSX、PDF；PDF 使用可配置中文字体路径生成，避免中文乱码。iLink 命中文件意图后直接发送生成文件；收到 PDF 时下载并提取可复制文字，写入同一 Spring AI ChatMemory，支持后续追问、总结和导出。扫描版与加密 PDF 明确提示暂不支持，单文件限制为 20MB。修复 FILE_GENERATE 未列入路由可选意图的问题；验证：mvn -q -DskipTests compile 通过。
+- 按需求收紧文件能力：移除超出范围的微信 PDF 上传读取、文本解析与聊天记忆写入，仅保留 DOCX、XLSX、PDF 的生成及 iLink 文件发送；验证：mvn -q -DskipTests compile 通过。
+- 优化文件生成意图路由：补充 FILE_GENERATE 的中文定义、正反例与“搜索后导出文件”优先规则，禁止路由模型输出文件 JSON 内容；验证：mvn -q -DskipTests compile 通过。
