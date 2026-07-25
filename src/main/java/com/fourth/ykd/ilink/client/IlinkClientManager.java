@@ -30,7 +30,7 @@ public class IlinkClientManager {
      */
     private volatile ILinkClient client;
 
-    /**
+    /**v yj
      * 创建一个新的 iLink 客户端。
      * 使用场景：
      * 用户主动重新发起扫码登录时。

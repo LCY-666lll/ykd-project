@@ -1,5 +1,6 @@
 package com.fourth.ykd.ilink.service.impl;
 import com.fourth.ykd.ai.dto.*;
+import com.fourth.ykd.ai.routing.UserIntent;
 import com.fourth.ykd.ai.service.*;
 import com.github.wechat.ilink.sdk.ILinkClient;
 import java.io.IOException;
@@ -23,7 +24,17 @@ public class IlinkReplySender {
             long startedAt) throws IOException {
         if (result.type() == IlinkReplyProcessor.ReplyResultType.IMAGE) sendImageReply(client, userId, result, startedAt);
         else if (result.type() == IlinkReplyProcessor.ReplyResultType.DOCUMENT) sendDocumentReply(client, userId, result, startedAt);
-        else { client.sendText(userId, result.answer()); clearImageContextIfNeeded(userId, result); }
+        else {
+            client.sendText(userId, result.answer());
+            clearImageContextIfNeeded(userId, result);
+            if (result.intent() == UserIntent.IMAGE_UNDERSTAND) {
+                log.info("[iLink][IMAGE_UNDERSTOOD] toUserId={}, answer={}, elapsedMs={}",
+                        userId, formatAnswerForLog(result.answer()), System.currentTimeMillis() - startedAt);
+            } else {
+                log.info("[iLink][REPLIED] toUserId={}, answer={}, elapsedMs={}",
+                        userId, formatAnswerForLog(result.answer()), System.currentTimeMillis() - startedAt);
+            }
+        }
     }
 
     /** 按语音消息方式发送结果，文件仍直接发送。 */
@@ -57,23 +68,37 @@ public class IlinkReplySender {
     /** 逐个发送生成文件。 */
     private void sendDocumentReply(ILinkClient client, String userId, IlinkReplyProcessor.ReplyResult result,
             long startedAt) throws IOException {
-        for (GeneratedDocument document : result.documents()) client.sendFile(userId, document.bytes(), document.fileName(), null);
+        for (GeneratedDocument document : result.documents()) {
+            client.sendFile(userId, document.bytes(), document.fileName(), null);
+            log.info("[iLink][REPLY_SENT] userId={}, type=FILE, fileName={}, fileBytes={}, elapsedMs={}",
+                    userId, document.fileName(), document.bytes().length, System.currentTimeMillis() - startedAt);
+        }
         clearImageContextIfNeeded(userId, result);
     }
     /** 发送图片结果。 */
     private void sendImageReply(ILinkClient client, String userId, IlinkReplyProcessor.ReplyResult result,
             long startedAt) throws IOException {
-        GeneratedImage image = result.image(); client.sendImage(userId, image.bytes(), image.fileName(), null);
+        GeneratedImage image = result.image(); client.sendImage(userId, image.bytes(), image.fileName(), null); log.info("[iLink][REPLY_SENT] userId={}, type=IMAGE, imageBytes={}", userId, image.bytes().length);
         clearImageContextIfNeeded(userId, result);
     }
     /** 合成语音，失败时退回文字。 */
     private void sendAudioAnswer(ILinkClient client, String userId, String answer, long startedAt) throws IOException {
-        try { GeneratedAudio audio = audioSynthesisService.synthesize(answer); client.sendFile(userId, audio.bytes(), audio.fileName(), null); }
+        try {
+            GeneratedAudio audio = audioSynthesisService.synthesize(answer);
+            client.sendFile(userId, audio.bytes(), audio.fileName(), null);
+            log.info("[iLink][REPLY_SENT] userId={}, type=AUDIO, fileName={}, fileBytes={}, elapsedMs={}",
+                    userId, audio.fileName(), audio.bytes().length, System.currentTimeMillis() - startedAt);
+        }
         catch (Exception exception) { log.warn("[iLink][VOICE_AUDIO_REPLY_FAILED] userId={}", userId, exception); client.sendText(userId, "语音回复生成失败了，我先用文字回复您：" + answer); }
     }
     /** 在本次图片操作完成后清理图片上下文。 */
     private void clearImageContextIfNeeded(String userId, IlinkReplyProcessor.ReplyResult result) {
         if (result.imageToClear() != null) imageContextService.remove(userId, result.imageToClear());
+    }
+    private String formatAnswerForLog(String answer) {
+        if (answer == null) return "";
+        String singleLine = answer.replaceAll("[\r\n]+", " ").trim();
+        return singleLine.length() <= 1_000 ? singleLine : singleLine.substring(0, 1_000) + "...";
     }
     /** 安全发送固定文字。 */
     private void sendTextQuietly(ILinkClient client, String userId, String message) {

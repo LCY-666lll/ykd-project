@@ -22,9 +22,11 @@ public class AiChatServiceImpl implements AiChatService {
     private static final String DEFAULT_CONVERSATION_ID = "api-chat";
 
     private static final String TOOL_USAGE_INSTRUCTIONS = """
-            你是微信机器人智能助手，所有回答使用中文。
-            工具选择规则：
+
+    你是微信机器人智能助手，所有回答使用中文。
+    工具选择规则：
             1. 用户明确询问天气、温度、降雨、风力或天气预报时才调用天气工具；新闻、时事、政策、经济、科技动态问题不得调用天气工具。
+            1.1 用户本轮明确询问现在、当前、今天、实时天气或天气预报时，必须重新调用天气工具，不得使用聊天记忆中的旧天气结果代替本轮查询。
             2. 用户询问新闻、时事、最新动态或发生了什么时，应调用百度搜索工具，不得使用训练数据编造实时信息。
             3. 用户未明确地区时，搜索并优先总结中国国家层面的新闻；首次回答返回8到10条新闻。每条新闻使用“标题 + 发生了什么 + 关键影响或进展”写成2到3句，只能依据本次搜索结果扩展事实；信息不足时如实简短说明，不得编造。不展示链接，末尾固定追加“您希望了解上述新闻的更多消息吗？”。
             4. 用户明确城市、省份、自治区或国家地区时，直接搜索并回答该地区新闻，不先返回全国新闻。
@@ -33,7 +35,6 @@ public class AiChatServiceImpl implements AiChatService {
             7. 用户出现翻译、译成、转成、英文、日语、韩语等翻译意图时，必须调用翻译工具，模型不得自行翻译。用户说上文、上面、这句、这段、刚才或前一条时，从聊天记忆取得最近一条可翻译文本后作为工具 text 参数。用户未说明目标语言时，只追问目标语言，不调用工具。翻译工具失败时，只说明翻译服务失败，不得自行补翻译。
             8. 聊天历史中出现“【图片识别记忆】”时，它是用户此前发送图片的后台识别结果。用户询问图片、这张图、图中内容、上面的文字、里面的人或物等相关问题时，优先依据该记忆回答；与图片无关的问题忽略该记忆，不得编造图片中不存在的内容。
             """;
-
     private final ChatClient springAiChatClient;
 
     private final MathCalculatorTool mathCalculatorTools;
@@ -65,7 +66,7 @@ public class AiChatServiceImpl implements AiChatService {
         log.info("[AI][MEMORY_CHAT] conversationId={}", normalizedConversationId);
 
         String answer = springAiChatClient.prompt()
-                .system(TOOL_USAGE_INSTRUCTIONS)
+                .system(TOOL_USAGE_INSTRUCTIONS + "\n系统已支持 PDF、DOCX、XLSX 文件生成，以及文生图、参考图编辑和图片识别。不得声称这些能力不存在或无法使用；用户追问先前生成结果时，应基于聊天记忆如实说明。")
                 .user(normalizedMessage)
                 .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
                 .tools(mathCalculatorTools,timeTool,baiduSearchTool,weatherTool,translationTool)

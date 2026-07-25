@@ -1,5 +1,6 @@
 package com.fourth.ykd.weather.infrastructure.qweather;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.hc.client5.http.config.RequestConfig;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
@@ -11,11 +12,14 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestClient;
 
+//在程序启动时创建一次专用客户端，后续重复使用,
 @Configuration
-@EnableConfigurationProperties(WeatherProperties.class)
+@RequiredArgsConstructor
 public class WeatherConfig {
 
     private static final String DEFAULT_API_HOST = "p33tejmexe.re.qweatherapi.com";
+
+    private final WeatherProperties properties;
 
     @Bean
     public RestClient qWeatherRestClient(WeatherProperties properties) {

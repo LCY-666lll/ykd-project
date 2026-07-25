@@ -3,6 +3,7 @@ package com.fourth.ykd.weather.infrastructure.qweather;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /* 天气Api配置类，负责从配置文件统一读配置
 application.properties
@@ -13,6 +14,7 @@ WeatherProperties
 @Getter
 @Setter
 @ConfigurationProperties(prefix = "weather.qweather")
+@Component
 public class WeatherProperties {
 
     private String apiHost;
