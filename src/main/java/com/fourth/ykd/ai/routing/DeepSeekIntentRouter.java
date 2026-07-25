@@ -1,7 +1,10 @@
 package com.fourth.ykd.ai.routing;
+import java.util.List;
 import java.util.regex.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.messages.Message;
 import org.springframework.stereotype.Component;
 
 /** 使用 DeepSeek 对消息进行意图分类。 */
@@ -10,18 +13,32 @@ import org.springframework.stereotype.Component;
 public class DeepSeekIntentRouter {
     private static final Pattern INTENT_PATTERN = Pattern.compile("\\\"intent\\\"\\s*:\\s*\\\"([A-Z_]+)\\\"");
     private final ChatClient routeChatClient;
+    private final ChatMemory chatMemory;
     /** 创建独立的意图路由客户端。 */
-    public DeepSeekIntentRouter(ChatClient.Builder chatClientBuilder) { this.routeChatClient = chatClientBuilder.build(); }
+    public DeepSeekIntentRouter(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory) {
+        this.routeChatClient = chatClientBuilder.build();
+        this.chatMemory = chatMemory;
+    }
     /** 按默认条件路由用户消息。 */
     public UserIntent route(String userText) { return route(userText, false); }
     /** 按图片上下文可用性路由用户消息。 */
     public UserIntent route(String userText, boolean hasPendingImage) {
-        String result = routeChatClient.prompt().system(buildRouteInstructions(hasPendingImage))
+        return route(ChatMemory.DEFAULT_CONVERSATION_ID, userText, hasPendingImage);
+    }
+    public UserIntent route(String conversationId, String userText, boolean hasPendingImage) {
+        String result = routeChatClient.prompt().system(buildRouteInstructions(hasPendingImage) + recentConversation(conversationId))
                 .user(userText == null ? "" : userText.trim()).call().content();
         Matcher matcher = INTENT_PATTERN.matcher(result == null ? "" : result);
         if (!matcher.find()) { log.warn("意图路由结果无法识别，按普通文本处理，结果={}", result); return UserIntent.TEXT; }
         try { return UserIntent.valueOf(matcher.group(1)); }
         catch (IllegalArgumentException exception) { log.warn("意图路由返回未知意图，按普通文本处理，意图={}", matcher.group(1)); return UserIntent.TEXT; }
+    }
+    private String recentConversation(String conversationId) {
+        List<Message> messages = chatMemory.get(conversationId);
+        int start = Math.max(0, messages.size() - 6);
+        StringBuilder result = new StringBuilder("\n以下是同一用户近期会话，仅用于理解省略指代：\n");
+        for (int index = start; index < messages.size(); index++) result.append(messages.get(index).getText()).append('\n');
+        return result.toString();
     }
     /** 构造仅包含路由规则的系统提示词。 */
     private String buildRouteInstructions(boolean hasPendingImage) {
@@ -31,6 +48,7 @@ public class DeepSeekIntentRouter {
                 必须从以下可选意图中选择一个：%s。
                 FILE_GENERATE：用户要求把内容生成、导出、下载或整理成文件时使用；格式包括 PDF、DOCX、Word、XLSX、Excel。
                 即使请求包含搜索、查询、整理或总结，只要要求导出文件，仍必须选择 FILE_GENERATE。
+                若近期会话中的上一项任务是生成或导出文件，用户说“再生成”“重新生成”“按上面生成”或“给我生成”时，必须选择 FILE_GENERATE。
                 IMAGE_UNDERSTAND：用户希望理解、判断或获取当前图片的信息。
                 IMAGE_EDIT：用户希望修改、延展或变换当前图片。
                 IMAGE_GENERATE：用户希望生成独立新图片且不使用当前图片。

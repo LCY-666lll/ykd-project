@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/*创建一个自带“聊天记忆功能”的 ChatClient，以后调用它时，会自动把历史消息带给大模型。
+/*创建一个自带“聊天记忆功能”的 ChatClient（创建和装配 AI 基础 Bean），以后调用它时，会自动把历史消息带给大模型。
 项目启动
   ↓
 Spring 找到 ChatModel
@@ -24,7 +24,11 @@ Spring 找到 ChatModel
 public class SpringAiChatConfig {
 
     @Bean
-    //ChatClient.Builder : Spring AI 根据当前配置好的 ChatModel，自动准备好这个 Builder
+    /*ChatClient.Builder : Spring AI 根据当前配置好的 ChatModel，自动准备好这个 Builder
+    DeepSeek 配置 → DeepSeek ChatModel → ChatClient.Builder
+    为什么注入 Builder 而不是现成 ChatClient ：还要向客户端添加默认 Advisor。
+    如果直接得到已经构造完成的 ChatClient，再添加默认记忆拦截逻辑就不方便。
+     Builder 允许：添加默认 Advisor 添加默认系统配置 最终 build*/
     public ChatClient aiMemoryChatClient(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory) {
 
         /*MessageChatMemoryAdvisor 是一个聊天记忆顾问，也可以理解成一个拦截器。

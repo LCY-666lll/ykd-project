@@ -5,5 +5,7 @@ import com.fourth.ykd.ai.dto.PendingUserImage;
 
 public interface ImageReferenceGenerationService {
 
-    GeneratedImage generate(PendingUserImage referenceImage, String prompt);
+    GeneratedImage generate(PendingUserImage referenceImage,
+                            String prompt
+    );
 }

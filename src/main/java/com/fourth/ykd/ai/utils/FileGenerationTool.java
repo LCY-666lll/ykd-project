@@ -126,9 +126,10 @@ public class FileGenerationTool {
              ByteArrayOutputStream output = new ByteArrayOutputStream()) {
             PDType0Font font = PDType0Font.load(document, fontStream, true);
             PdfPageWriter writer = new PdfPageWriter(document, font);
-            writer.writeLine(title, 16);
+            String pdfTitle = sanitizePdfText(font, title);
+            writer.writeLine(StringUtils.hasText(pdfTitle) ? pdfTitle : "文件内容", 16);
             for (String line : content.split("\\R", -1)) {
-                writer.writeWrappedLine(line, 11);
+                writer.writeWrappedLine(sanitizePdfText(font, line), 11);
             }
             writer.close();
             document.save(output);
@@ -138,6 +139,22 @@ public class FileGenerationTool {
         }
     }
 
+    // PDF 字体不支持表情等字符时移除，避免宽度计算和文本写入失败。
+    private String sanitizePdfText(PDType0Font font, String text) throws IOException {
+        StringBuilder result = new StringBuilder();
+        for (int offset = 0; offset < text.length(); ) {
+            int codePoint = text.codePointAt(offset);
+            String character = new String(Character.toChars(codePoint));
+            try {
+                font.encode(character);
+                result.append(character);
+            } catch (IllegalArgumentException ignored) {
+                // 忽略当前字体无法渲染的字符。
+            }
+            offset += Character.charCount(codePoint);
+        }
+        return result.toString();
+    }
     private String safeName(String title) {
         String result = title.replaceAll("[\\\\/:*?\"<>|\\r\\n]+", "_").trim();
         return StringUtils.hasText(result) ? result.substring(0, Math.min(result.length(), 40)) : "文件内容";
