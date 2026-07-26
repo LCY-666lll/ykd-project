@@ -53,15 +53,14 @@ public class IlinkReplyProcessor {
             log.info("[AI][IMAGE_UNDERSTAND][START] userId={}", userId);
             String answer = imageUnderstandingService.understand(pendingImage.get(), userText);
             log.info("[AI][IMAGE_UNDERSTAND][SUCCESS] userId={}, answerLength={}", userId, answer.length());
-            return ReplyResult.text(intent, answer,
-                    null, "IMAGE_UNDERSTAND");
+            return ReplyResult.text(intent, answer, null);
         }
         if (pendingImage.isPresent() && intent == UserIntent.IMAGE_EDIT) {
             log.info("[AI][IMAGE_EDIT][START] userId={}", userId);
             GeneratedImage image = imageReferenceGenerationService.generate(pendingImage.get(), userText);
             saveGeneratedImageMemoryQuietly(userId, image, "机器人此前根据用户要求编辑并生成了一张图片");
             log.info("[AI][IMAGE_EDIT][SUCCESS] userId={}, imageBytes={}", userId, image.bytes().length);
-            return ReplyResult.image(intent, image, pendingImage.get(), "IMAGE_EDIT");
+            return ReplyResult.image(intent, image, pendingImage.get());
         }
         if (intent == UserIntent.IMAGE_GENERATE) {
             log.info("[AI][IMAGE_GENERATE][START] userId={}", userId);
@@ -69,14 +68,18 @@ public class IlinkReplyProcessor {
             GeneratedImage image = imageGenerationService.generate(imagePrompt);
             saveGeneratedImageMemoryQuietly(userId, image, "机器人此前根据用户请求生成了一张图片");
             log.info("[AI][IMAGE_GENERATE][SUCCESS] userId={}, imageBytes={}", userId, image.bytes().length);
-            return ReplyResult.image(intent, image, null, null);
+            return ReplyResult.image(intent, image, null);
         }
         if (intent == UserIntent.FILE_GENERATE) {
             return ReplyResult.documents(intent, fileGenerationTool.generate(userId, userText),
-                    pendingImage.orElse(null), "FILE_GENERATE");
+                    pendingImage.orElse(null));
+        }
+        if (intent == UserIntent.VOICE_REPLY) {
+            return ReplyResult.audio(intent, aiChatService.chat(userId, userText).reply(),
+                    pendingImage.orElse(null));
         }
         return ReplyResult.text(intent, aiChatService.chat(userId, userText).reply(),
-                pendingImage.orElse(null), voiceMode ? "VOICE_TEXT" : "TEXT");
+                pendingImage.orElse(null));
     }
 
     private String resolveImagePrompt(String userId, String userText) {
@@ -117,23 +120,27 @@ public class IlinkReplyProcessor {
     }
 
     /** 回复结果类型。 */
-    public enum ReplyResultType { TEXT, IMAGE, DOCUMENT }
+    public enum ReplyResultType { TEXT, IMAGE, DOCUMENT, AUDIO }
 
     /** 承载不同业务链路产生的待发送内容。 */
     public record ReplyResult(ReplyResultType type, UserIntent intent, String answer, GeneratedImage image,
-            List<GeneratedDocument> documents, PendingUserImage imageToClear, String clearReason) {
+            List<GeneratedDocument> documents, PendingUserImage imageToClear) {
         /** 创建文字结果。 */
-        public static ReplyResult text(UserIntent intent, String answer, PendingUserImage imageToClear, String reason) {
-            return new ReplyResult(ReplyResultType.TEXT, intent, answer, null, null, imageToClear, reason);
+        public static ReplyResult text(UserIntent intent, String answer, PendingUserImage imageToClear) {
+            return new ReplyResult(ReplyResultType.TEXT, intent, answer, null, null, imageToClear);
         }
         /** 创建图片结果。 */
-        public static ReplyResult image(UserIntent intent, GeneratedImage image, PendingUserImage imageToClear, String reason) {
-            return new ReplyResult(ReplyResultType.IMAGE, intent, null, image, null, imageToClear, reason);
+        public static ReplyResult image(UserIntent intent, GeneratedImage image, PendingUserImage imageToClear) {
+            return new ReplyResult(ReplyResultType.IMAGE, intent, null, image, null, imageToClear);
         }
         /** 创建文件结果。 */
         public static ReplyResult documents(UserIntent intent, List<GeneratedDocument> documents,
-                PendingUserImage imageToClear, String reason) {
-            return new ReplyResult(ReplyResultType.DOCUMENT, intent, null, null, documents, imageToClear, reason);
+                PendingUserImage imageToClear) {
+            return new ReplyResult(ReplyResultType.DOCUMENT, intent, null, null, documents, imageToClear);
+        }
+        /** 创建需要语音合成的文字结果。 */
+        public static ReplyResult audio(UserIntent intent, String answer, PendingUserImage imageToClear) {
+            return new ReplyResult(ReplyResultType.AUDIO, intent, answer, null, null, imageToClear);
         }
     }
 }

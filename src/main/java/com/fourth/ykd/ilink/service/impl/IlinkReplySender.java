@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class IlinkReplySender {
+    private static final String VOICE_CAPABILITY_TIP = "如果您想与我语音交流，我也可以回复您语音哦。";
+
     private final AudioSynthesisService audioSynthesisService;
     private final ImageContextService imageContextService;
 
@@ -24,6 +26,10 @@ public class IlinkReplySender {
             long startedAt) throws IOException {
         if (result.type() == IlinkReplyProcessor.ReplyResultType.IMAGE) sendImageReply(client, userId, result, startedAt);
         else if (result.type() == IlinkReplyProcessor.ReplyResultType.DOCUMENT) sendDocumentReply(client, userId, result, startedAt);
+        else if (result.type() == IlinkReplyProcessor.ReplyResultType.AUDIO) {
+            sendAudioAnswer(client, userId, result.answer(), startedAt);
+            clearImageContextIfNeeded(userId, result);
+        }
         else {
             client.sendText(userId, result.answer());
             clearImageContextIfNeeded(userId, result);
@@ -36,15 +42,22 @@ public class IlinkReplySender {
             }
         }
     }
-
-    /** 按语音消息方式发送结果，文件仍直接发送。 */
+    /** 按语音消息方式发送结果，普通回答默认使用文字。 */
     public void sendVoiceModeReply(ILinkClient client, String userId, IlinkReplyProcessor.ReplyResult result,
             long startedAt) throws IOException {
         if (result.type() == IlinkReplyProcessor.ReplyResultType.IMAGE) sendImageReply(client, userId, result, startedAt);
         else if (result.type() == IlinkReplyProcessor.ReplyResultType.DOCUMENT) sendDocumentReply(client, userId, result, startedAt);
-        else { sendAudioAnswer(client, userId, result.answer(), startedAt); clearImageContextIfNeeded(userId, result); }
+        else if (result.type() == IlinkReplyProcessor.ReplyResultType.AUDIO) {
+            sendAudioAnswer(client, userId, result.answer(), startedAt);
+            clearImageContextIfNeeded(userId, result);
+        }
+        else {
+            sendTextModeReply(client, userId, result, startedAt);
+            if (result.intent() == UserIntent.TEXT) {
+                sendTextQuietly(client, userId, VOICE_CAPABILITY_TIP);
+            }
+        }
     }
-
     /** 发送图片确认语。 */
     public void sendImageReceivedConfirmation(ILinkClient client, String userId) {
         try { client.sendTextWithTyping(userId, "已经看到您的图片啦，您想了解什么呢？", 800); }
@@ -78,7 +91,9 @@ public class IlinkReplySender {
     /** 发送图片结果。 */
     private void sendImageReply(ILinkClient client, String userId, IlinkReplyProcessor.ReplyResult result,
             long startedAt) throws IOException {
-        GeneratedImage image = result.image(); client.sendImage(userId, image.bytes(), image.fileName(), null); log.info("[iLink][REPLY_SENT] userId={}, type=IMAGE, imageBytes={}", userId, image.bytes().length);
+        GeneratedImage image = result.image(); client.sendImage(userId, image.bytes(), image.fileName(), null);
+        log.info("[iLink][REPLY_SENT] userId={}, type=IMAGE, imageBytes={}, elapsedMs={}",
+                userId, image.bytes().length, System.currentTimeMillis() - startedAt);
         clearImageContextIfNeeded(userId, result);
     }
     /** 合成语音，失败时退回文字。 */

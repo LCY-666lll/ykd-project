@@ -18,10 +18,11 @@ public class TranslationTool {
     }
 
 
-    @Tool(description = """
+    @Tool(name = "translate_text", description = """
             调用阿里翻译服务翻译文本。
             用户出现翻译、译成、转成、英文、日语、韩语等明确翻译意图时必须调用本工具，模型不得自行翻译。
             用户说上文、上面、这句、这段、刚才或前一条时，应从当前会话记忆中取得最近一条可翻译文本，作为 text 参数传入。
+            用户未指定目标语言时不要调用本工具，应先追问目标语言。
             sourceLanguage 和 targetLanguage 只能传 zh、en、ja、ko。
             """)
     public String translation(

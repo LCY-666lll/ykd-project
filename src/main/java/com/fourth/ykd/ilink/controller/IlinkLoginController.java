@@ -27,7 +27,9 @@ public class IlinkLoginController {
      * 打开此地址会发起新的 iLink 登录，并直接返回 PNG 二维码。
      */
     @GetMapping(value = "/qrcode", produces = MediaType.IMAGE_PNG_VALUE)
+    //返回ResponseEntity<byte[]> : 让响应体就是纯图片字节
     public ResponseEntity<byte[]> startLoginAndRenderQrCode() {
+        //获得：SDK 二维码原始内容,SDK 当前状态
         IlinkLoginQrResponse loginResponse = ilinkLoginService.startLogin();
 
         byte[] imageBytes = ilinkQrCodeService.createPng(
@@ -35,7 +37,9 @@ public class IlinkLoginController {
         );
 
         return ResponseEntity.ok()
+                //生成禁止保存二维码的缓存策略
                 .cacheControl(CacheControl.noStore())
+                //明确响应体是 PNG 图片
                 .contentType(MediaType.IMAGE_PNG)
                 .body(imageBytes);
     }

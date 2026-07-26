@@ -11,28 +11,37 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 /*创建 iLink client，调用 client.executeLogin() 获取二维码内容，监听登录结果，取消登录状态*/
-@Service
+
 @Slf4j
+@Service
 @RequiredArgsConstructor
 public class IlinkLoginServiceImpl implements IlinkLoginService {
 
     private final IlinkProperties properties;
+
     private final IlinkClientManager clientManager;
 
     @Override
     public IlinkLoginQrResponse startLogin() {
+
         if (!properties.isEnabled()){
             throw new BusinessException(50010,"iLink模块未启用");
         }
+
         ILinkClient client = clientManager.createNewClient();
 
         try {
+
+            /*executeLogin() 完成的是：
+            客户端向 iLink 服务发起登录请求
+            → iLink 返回二维码原始内容
+            → 方法返回字符串*/
             String qrCodeContent = client.executeLogin();
 
             /*
-             * executeLogin() 返回后，扫码登录仍在异步进行。
-             * getLoginFuture() 会在手机扫码且登录完成后结束。
-             * 这里先记录结果，下一步再加入会话持久化逻辑。
+             client.getLoginFuture()：它代表一个未来才会完成的登录结果。
+             现在还没有登录结果
+             → 先拿到一个 Future → 用户扫码完成后 Future 成功 → 登录失败或取消后 Future 异常完成
              */
             client.getLoginFuture().whenComplete((loginContext, throwable) -> {
                 if (throwable == null) {
@@ -59,6 +68,7 @@ public class IlinkLoginServiceImpl implements IlinkLoginService {
     @Override
     public IlinkLoginStatusResponse getLoginStatus() {
         return clientManager.findClient()
+                //Optional 中有客户端 → 把 ILinkClient 转换成 IlinkLoginStatusResponse
                 .map(client -> new IlinkLoginStatusResponse(
                         client.getLoginStatus().getStatus().name(),
                         client.isLoggedIn()
@@ -71,7 +81,12 @@ public class IlinkLoginServiceImpl implements IlinkLoginService {
 
     @Override
     public void cancelLogin() {
-        clientManager.findClient().ifPresent(ILinkClient::cancelLogin);
-        clientManager.closeCurrentClient();
+
+        try{
+            //通知 SDK：终止当前正在进行的扫码登录流程
+            clientManager.findClient().ifPresent(ILinkClient::cancelLogin);
+        }finally {
+            clientManager.closeCurrentClient();
+        }
     }
 }
