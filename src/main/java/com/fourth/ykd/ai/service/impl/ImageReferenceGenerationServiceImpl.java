@@ -1,16 +1,20 @@
 package com.fourth.ykd.ai.service.impl;
 
-import com.alibaba.cloud.ai.dashscope.sdk.image.DashScopeSdkImageOptions;
+import com.alibaba.dashscope.aigc.multimodalconversation.MultiModalConversation;
+import com.alibaba.dashscope.aigc.multimodalconversation.MultiModalConversationParam;
+import com.alibaba.dashscope.aigc.multimodalconversation.MultiModalConversationResult;
+import com.alibaba.dashscope.common.MultiModalMessage;
+import com.alibaba.dashscope.common.Role;
+import com.alibaba.dashscope.protocol.Protocol;
 import com.fourth.ykd.ai.dto.GeneratedImage;
 import com.fourth.ykd.ai.dto.PendingUserImage;
 import com.fourth.ykd.ai.service.ImageReferenceGenerationService;
 import com.fourth.ykd.exception.BusinessException;
 import java.net.URI;
 import java.util.Base64;
-
-import org.springframework.ai.image.ImageModel;
-import org.springframework.ai.image.ImagePrompt;
-import org.springframework.ai.image.ImageResponse;
+import java.util.List;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,66 +22,107 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestClient;
 
 @Service
-// 图生图业务实现，将用户图片作为千问官方图片模型的参考图。
+// 图片编辑业务实现，仅此链路使用千问官方同步多模态编辑接口。
 public class ImageReferenceGenerationServiceImpl implements ImageReferenceGenerationService {
 
-    private final ImageModel imageModel;
+    private final MultiModalConversation imageEditClient;
     private final RestClient imageDownloadRestClient;
+    private final String apiKey;
+    private final String imageEditModel;
 
-
-    public ImageReferenceGenerationServiceImpl(ImageModel imageModel,
-                                               RestClient.Builder restClientBuilder) {
-
-
-        this.imageModel = imageModel;
+    public ImageReferenceGenerationServiceImpl(
+            RestClient.Builder restClientBuilder,
+            @Value("${spring.ai.dashscope.api-key:}") String apiKey,
+            @Value("${spring.ai.dashscope.base-url:https://dashscope.aliyuncs.com}") String baseUrl,
+            @Value("${spring.ai.dashscope.image.edit-model:qwen-image-edit}") String imageEditModel) {
+        this.imageEditClient = new MultiModalConversation(Protocol.HTTP.getValue(), normalizeSdkBaseUrl(baseUrl));
         this.imageDownloadRestClient = restClientBuilder.build();
+        this.apiKey = apiKey;
+        this.imageEditModel = imageEditModel;
+    }
 
+    private static String normalizeSdkBaseUrl(String baseUrl) {
+        String normalized = StringUtils.hasText(baseUrl)
+                ? baseUrl.trim().replaceAll("/+$", "")
+                : "https://dashscope.aliyuncs.com";
+        return normalized.endsWith("/api/v1") ? normalized : normalized + "/api/v1";
     }
 
     @Override
     public GeneratedImage generate(PendingUserImage referenceImage, String prompt) {
         if (referenceImage == null || referenceImage.bytes() == null || referenceImage.bytes().length == 0) {
-            throw new BusinessException(40001, "\u53c2\u8003\u56fe\u7247\u4e0d\u80fd\u4e3a\u7a7a");
+            throw new BusinessException(40001, "参考图片不能为空");
         }
         if (!StringUtils.hasText(prompt)) {
-            throw new BusinessException(40001, "\u56fe\u7247\u7f16\u8f91\u6307\u4ee4\u4e0d\u80fd\u4e3a\u7a7a");
+            throw new BusinessException(40001, "图片编辑指令不能为空");
         }
-        String contentType = StringUtils.hasText(referenceImage.contentType()) ? referenceImage.contentType() : MediaType.IMAGE_PNG_VALUE;
-        // 将微信缓存的图片字节转为 SDK refImage 所需的数据地址。
-        String referenceImageDataUrl = "data:" + contentType + ";base64," + Base64.getEncoder().encodeToString(referenceImage.bytes());
+        if (!StringUtils.hasText(apiKey)) {
+            throw new BusinessException(50004, "图片编辑服务未配置 DashScope API Key");
+        }
+
+        String contentType = StringUtils.hasText(referenceImage.contentType())
+                ? referenceImage.contentType()
+                : MediaType.IMAGE_PNG_VALUE;
+        String referenceImageDataUrl = "data:" + contentType + ";base64,"
+                + Base64.getEncoder().encodeToString(referenceImage.bytes());
         String referencePrompt = """
-                严格以用户提供的参考图为基础进行编辑。保留用户未要求改变的主体身份、外观、姿态、构图和画面内容，
-                只修改用户明确指定的部分，不得把原图整体替换成无关人物、物体或场景。
+                严格以用户提供的原图为编辑基础。保留用户未要求改变的主体、人物身份、外观、姿态、构图和其他画面内容，
+                只修改用户明确指定的部分，不得重新创作或替换为无关人物、物体或场景。
                 用户编辑指令：%s
                 """.formatted(prompt.trim());
-        ImageResponse response = imageModel.call(new ImagePrompt(referencePrompt,
-                DashScopeSdkImageOptions.builder()
 
-                        .refImage(referenceImageDataUrl)
-                        .async(false)
-                        .build()));
-        if (response == null || response.getResult() == null || response.getResult().getOutput() == null) {
-            throw new BusinessException(50004, "\u56fe\u751f\u56fe\u6ca1\u6709\u8fd4\u56de\u56fe\u7247\u5185\u5bb9");
+        MultiModalMessage message = MultiModalMessage.builder()
+                .role(Role.USER.getValue())
+                .content(List.of(
+                        Map.of("image", referenceImageDataUrl),
+                        Map.of("text", referencePrompt)))
+                .build();
+        MultiModalConversationParam request = MultiModalConversationParam.builder()
+                .apiKey(apiKey)
+                .model(imageEditModel)
+                .message(message)
+                .parameter("n", 1)
+                .build();
+
+        try {
+            MultiModalConversationResult response = imageEditClient.call(request);
+            return downloadImage(extractImageUrl(response));
+        } catch (BusinessException exception) {
+            throw exception;
+        } catch (Exception exception) {
+            throw new BusinessException(50004, "图片编辑模型调用失败：" + exception.getMessage());
         }
-        String imageUrl = response.getResult().getOutput().getUrl();
-        if (StringUtils.hasText(imageUrl)) {
-            // URL 结果统一下载为图片字节，保持 iLink 发送流程不变。
-            return downloadImage(imageUrl);
+    }
+
+    private String extractImageUrl(MultiModalConversationResult response) {
+        if (response == null || response.getOutput() == null || response.getOutput().getChoices() == null) {
+            throw new BusinessException(50004, "图片编辑模型没有返回图片内容");
         }
-        String b64Json = response.getResult().getOutput().getB64Json();
-        if (!StringUtils.hasText(b64Json)) {
-            throw new BusinessException(50004, "\u56fe\u751f\u56fe\u6ca1\u6709\u8fd4\u56de\u56fe\u7247\u5185\u5bb9");
+        for (var choice : response.getOutput().getChoices()) {
+            if (choice.getMessage() == null || choice.getMessage().getContent() == null) {
+                continue;
+            }
+            for (Map<String, Object> content : choice.getMessage().getContent()) {
+                Object image = content.get("image");
+                if (image instanceof String imageUrl && StringUtils.hasText(imageUrl)) {
+                    return imageUrl;
+                }
+            }
         }
-        return new GeneratedImage(Base64.getDecoder().decode(b64Json), "qwen-image-reference.png", MediaType.IMAGE_PNG_VALUE);
+        throw new BusinessException(50004, "图片编辑模型没有返回图片地址");
     }
 
     private GeneratedImage downloadImage(String imageUrl) {
-        ResponseEntity<byte[]> response = imageDownloadRestClient.get().uri(URI.create(imageUrl)).retrieve().toEntity(byte[].class);
+        ResponseEntity<byte[]> response = imageDownloadRestClient.get()
+                .uri(URI.create(imageUrl))
+                .retrieve()
+                .toEntity(byte[].class);
         byte[] bytes = response.getBody();
         if (bytes == null || bytes.length == 0) {
-            throw new BusinessException(50004, "\u56fe\u751f\u56fe\u7ed3\u679c\u4e0b\u8f7d\u5931\u8d25");
+            throw new BusinessException(50004, "图片编辑结果下载失败");
         }
         MediaType contentType = response.getHeaders().getContentType();
-        return new GeneratedImage(bytes, "qwen-image-reference.png", contentType == null ? MediaType.IMAGE_PNG_VALUE : contentType.toString());
+        return new GeneratedImage(bytes, "qwen-image-edit.png",
+                contentType == null ? MediaType.IMAGE_PNG_VALUE : contentType.toString());
     }
 }
