@@ -55,14 +55,16 @@ public class TimeTool {
      * @param targetDate  目标日期，operateType=diff时必填，格式 yyyy-MM-dd
      * @return 格式化文本结果，供AI二次加工展示
      */
-    @Tool(description = """
+    @Tool(name = "get_time_info", description = """
             获取系统真实时间，或计算当前日期与目标日期的间隔。
             operateType=now：获取上海时区当前日期时间；
             operateType=diff：传入 targetDate，计算当前日期与目标日期相隔天数。
             """)
     public String getTimeInfo(
-            @ToolParam(description = "操作类型，可选值：now / diff") String operateType,
-            @ToolParam(description = "目标日期，格式 yyyy-MM-dd；operateType为diff时填写") String targetDate
+            @ToolParam(description = "操作类型，可选值：now / diff", required = true) String operateType,
+            @ToolParam(description = "目标日期，格式 yyyy-MM-dd；仅 operateType=diff 时填写，now 时不要填写",
+                    required = false)
+            String targetDate
     ) {
         if (operateType == null || operateType.trim().isEmpty()) {
             return "operateType不能为空，可选值 now、diff";

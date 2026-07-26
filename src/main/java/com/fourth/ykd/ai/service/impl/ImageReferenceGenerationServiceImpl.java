@@ -7,6 +7,7 @@ import com.fourth.ykd.ai.service.ImageReferenceGenerationService;
 import com.fourth.ykd.exception.BusinessException;
 import java.net.URI;
 import java.util.Base64;
+
 import org.springframework.ai.image.ImageModel;
 import org.springframework.ai.image.ImagePrompt;
 import org.springframework.ai.image.ImageResponse;
@@ -23,10 +24,14 @@ public class ImageReferenceGenerationServiceImpl implements ImageReferenceGenera
     private final ImageModel imageModel;
     private final RestClient imageDownloadRestClient;
 
+
     public ImageReferenceGenerationServiceImpl(ImageModel imageModel,
                                                RestClient.Builder restClientBuilder) {
+
+
         this.imageModel = imageModel;
         this.imageDownloadRestClient = restClientBuilder.build();
+
     }
 
     @Override
@@ -40,9 +45,17 @@ public class ImageReferenceGenerationServiceImpl implements ImageReferenceGenera
         String contentType = StringUtils.hasText(referenceImage.contentType()) ? referenceImage.contentType() : MediaType.IMAGE_PNG_VALUE;
         // 将微信缓存的图片字节转为 SDK refImage 所需的数据地址。
         String referenceImageDataUrl = "data:" + contentType + ";base64," + Base64.getEncoder().encodeToString(referenceImage.bytes());
-        String referencePrompt = "\u5fc5\u987b\u4ee5\u53c2\u8003\u56fe\u4e2d\u7684\u4e3b\u4f53\u3001\u83dc\u54c1\u79cd\u7c7b\u3001\u6784\u56fe\u548c\u5173\u952e\u98df\u6750\u4e3a\u57fa\u7840\uff0c\u4ec5\u6309\u4ee5\u4e0b\u6307\u4ee4\u7f16\u8f91\uff1b\u4e0d\u5f97\u5c06\u539f\u56fe\u66ff\u6362\u4e3a\u65e0\u5173\u83dc\u54c1\u6216\u573a\u666f\uff1a" + prompt.trim();
+        String referencePrompt = """
+                严格以用户提供的参考图为基础进行编辑。保留用户未要求改变的主体身份、外观、姿态、构图和画面内容，
+                只修改用户明确指定的部分，不得把原图整体替换成无关人物、物体或场景。
+                用户编辑指令：%s
+                """.formatted(prompt.trim());
         ImageResponse response = imageModel.call(new ImagePrompt(referencePrompt,
-                DashScopeSdkImageOptions.builder().refImage(referenceImageDataUrl).async(false).build()));
+                DashScopeSdkImageOptions.builder()
+
+                        .refImage(referenceImageDataUrl)
+                        .async(false)
+                        .build()));
         if (response == null || response.getResult() == null || response.getResult().getOutput() == null) {
             throw new BusinessException(50004, "\u56fe\u751f\u56fe\u6ca1\u6709\u8fd4\u56de\u56fe\u7247\u5185\u5bb9");
         }
