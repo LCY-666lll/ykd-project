@@ -7,11 +7,13 @@ import org.springframework.context.annotation.Configuration;
 
 
 /*把项目自己的 IlinkProperties 转成 SDK 接口能接收的 ILinkConfig。：
-转换器：我们的配置 IlinkProperties
+项目配置 IlinkProperties
         ↓
-IlinkSdkConfiguration 转换
+IlinkSdkConfiguration 逐项转换
         ↓
-SDK 配置 ILinkConfig*/
+SDK 配置 ILinkConfig
+        ↓
+ILinkClient.builder().config(...)*/
 @Configuration
 @EnableConfigurationProperties(IlinkProperties.class)
 public class IlinkSdkConfiguration {

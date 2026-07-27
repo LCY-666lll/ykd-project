@@ -1,6 +1,7 @@
 package com.fourth.ykd.ilink.dto;
 
-/**二维码登录返回 DTO：二维码内容、状态。
+/**负责在层与层之间传递登录二维码结果，不负责执行登录：
+ * 二维码登录返回 DTO：二维码内容、状态。
  * 发起 iLink 登录后返回给 Controller 的数据。
  * qrCodeContent 是 SDK 返回的原始二维码内容，下一步会被转换成二维码图片。
  */

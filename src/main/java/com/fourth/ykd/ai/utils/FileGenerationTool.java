@@ -32,14 +32,26 @@ public class FileGenerationTool {
     private final ChatClient springAiChatClient;
     private final String pdfChineseFontPath;
     private final BaiduSearchTool baiduSearchTool;
+    private final MathCalculatorTool mathCalculatorTool;
+    private final TimeTool timeTool;
+    private final TranslationTool translationTool;
+    private final WeatherTool weatherTool;
 
     public FileGenerationTool(
             ChatClient springAiChatClient,
             BaiduSearchTool baiduSearchTool,
+            MathCalculatorTool mathCalculatorTool,
+            TimeTool timeTool,
+            TranslationTool translationTool,
+            WeatherTool weatherTool,
             @Value("${file.pdf-chinese-font-path:C:/Windows/Fonts/STSONG.TTF}") String pdfChineseFontPath
     ) {
         this.springAiChatClient = springAiChatClient;
         this.baiduSearchTool = baiduSearchTool;
+        this.mathCalculatorTool = mathCalculatorTool;
+        this.timeTool = timeTool;
+        this.translationTool = translationTool;
+        this.weatherTool = weatherTool;
         this.pdfChineseFontPath = pdfChineseFontPath;
     }
 
@@ -49,11 +61,18 @@ public class FileGenerationTool {
                 你负责根据当前聊天历史、图片识别记忆和用户请求生成可下载文件。
                 支持 DOCX、XLSX、PDF；可以同时生成多个格式。必须只返回 JSON：
                 {"types":["DOCX","XLSX","PDF"],"title":"文件标题","content":"完整内容"}
-                用户要求搜索、查询新闻、实时、最近、今天、昨天、上个月或指定日期范围的内容时，必须先调用百度搜索工具；搜索失败时必须在 content 中如实说明“实时搜索失败”，不得使用训练数据补写。
+                用户查询现在、当前、实时天气或今天此刻天气时，必须调用 query_current_weather。
+                用户查询今天至后天的最高最低温、每日预报或未来3天天气时，必须调用 query_weather_forecast。
+                用户要求查询新闻、时事、最近、今天、昨天、上个月或指定日期范围的信息时，必须调用 search_realtime_information。
+                用户提出算式或精确数值计算时，必须调用 calculate_math_expression。
+                用户查询真实当前日期、时间或日期间隔时，必须调用 get_time_info。
+                用户明确要求翻译时，必须调用 translate_text。
+                工具调用失败时不得使用训练数据编造实时结果。
+                用户明确指定 PDF、DOCX/Word、XLSX/Excel/表格时，types 必须严格返回用户指定的全部格式。
                 未明确格式时 types 返回 ["DOCX"]；XLSX 内容使用换行分隔记录、使用 | 分隔单元格；只输出 JSON，不要解释。
                 """).user(userText.trim())
                 .advisors(spec -> spec.param(ChatMemory.CONVERSATION_ID, userId))
-                .tools(baiduSearchTool)
+                .tools(mathCalculatorTool, timeTool, baiduSearchTool, weatherTool, translationTool)
                 .call()
                 .entity(FileDraft.class);
         if (draft == null || !StringUtils.hasText(draft.content())) {
@@ -61,7 +80,7 @@ public class FileGenerationTool {
         }
         String title = StringUtils.hasText(draft.title()) ? draft.title().trim() : "文件内容";
         List<GeneratedDocument> result = new ArrayList<>();
-        for (String type : normalizeTypes(draft.types())) {
+        for (String type : resolveTypes(userText, draft.types())) {
             result.add(switch (type) {
                 case "XLSX" -> createXlsx(title, draft.content());
                 case "PDF" -> createPdf(title, draft.content());
@@ -69,6 +88,26 @@ public class FileGenerationTool {
             });
         }
         return result;
+    }
+
+    /**
+     * 用户明确指定的格式优先于模型返回值，避免模型字段异常时静默生成错误文件类型。
+     */
+    List<String> resolveTypes(String userText, List<String> modelTypes) {
+        String normalizedText = userText == null ? "" : userText.toUpperCase();
+        LinkedHashSet<String> explicitTypes = new LinkedHashSet<>();
+        if (normalizedText.contains("DOCX") || normalizedText.contains("WORD")) {
+            explicitTypes.add("DOCX");
+        }
+        if (normalizedText.contains("XLSX") || normalizedText.contains("EXCEL")
+                || normalizedText.matches("(?s).*(生成|导出|制作|创建).{0,6}表格.*")
+                || normalizedText.matches("(?s).*表格.{0,6}(文件|格式).*")) {
+            explicitTypes.add("XLSX");
+        }
+        if (normalizedText.contains("PDF")) {
+            explicitTypes.add("PDF");
+        }
+        return explicitTypes.isEmpty() ? normalizeTypes(modelTypes) : List.copyOf(explicitTypes);
     }
 
     private List<String> normalizeTypes(List<String> types) {
@@ -126,9 +165,10 @@ public class FileGenerationTool {
              ByteArrayOutputStream output = new ByteArrayOutputStream()) {
             PDType0Font font = PDType0Font.load(document, fontStream, true);
             PdfPageWriter writer = new PdfPageWriter(document, font);
-            writer.writeLine(title, 16);
+            String pdfTitle = sanitizePdfText(font, title);
+            writer.writeLine(StringUtils.hasText(pdfTitle) ? pdfTitle : "文件内容", 16);
             for (String line : content.split("\\R", -1)) {
-                writer.writeWrappedLine(line, 11);
+                writer.writeWrappedLine(sanitizePdfText(font, line), 11);
             }
             writer.close();
             document.save(output);
@@ -138,6 +178,22 @@ public class FileGenerationTool {
         }
     }
 
+    // PDF 字体不支持表情等字符时移除，避免宽度计算和文本写入失败。
+    private String sanitizePdfText(PDType0Font font, String text) throws IOException {
+        StringBuilder result = new StringBuilder();
+        for (int offset = 0; offset < text.length(); ) {
+            int codePoint = text.codePointAt(offset);
+            String character = new String(Character.toChars(codePoint));
+            try {
+                font.encode(character);
+                result.append(character);
+            } catch (IllegalArgumentException ignored) {
+                // 忽略当前字体无法渲染的字符。
+            }
+            offset += Character.charCount(codePoint);
+        }
+        return result.toString();
+    }
     private String safeName(String title) {
         String result = title.replaceAll("[\\\\/:*?\"<>|\\r\\n]+", "_").trim();
         return StringUtils.hasText(result) ? result.substring(0, Math.min(result.length(), 40)) : "文件内容";

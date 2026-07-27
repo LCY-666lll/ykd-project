@@ -1,6 +1,7 @@
 package com.fourth.ykd.weather.infrastructure.qweather;
 
 import com.fourth.ykd.weather.infrastructure.qweather.dto.QWeatherCityLookupResponse;
+import com.fourth.ykd.weather.infrastructure.qweather.dto.QWeatherForecastResponse;
 import com.fourth.ykd.weather.infrastructure.qweather.dto.QWeatherNowResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -76,5 +77,25 @@ public class QWeatherClient {
                 )
                 .retrieve()
                 .body(QWeatherNowResponse.class);
+    }
+
+    /**
+     * 根据和风天气城市 ID 查询未来3天天气预报。
+     *
+     * @param locationId 和风天气城市 ID
+     * @return 和风天气原始3日预报响应
+     */
+    public QWeatherForecastResponse getThreeDayForecast(String locationId) {
+        log.debug("Calling QWeather 3-day forecast API: locationId={}", locationId);
+
+        return qWeatherRestClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/v7/weather/3d")
+                        .queryParam("location", locationId)
+                        .queryParam("lang", "zh")
+                        .build()
+                )
+                .retrieve()
+                .body(QWeatherForecastResponse.class);
     }
 }

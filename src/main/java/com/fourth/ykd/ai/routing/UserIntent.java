@@ -6,5 +6,6 @@ public enum UserIntent {
     IMAGE_GENERATE,
     IMAGE_EDIT,
     IMAGE_UNDERSTAND,
-    FILE_GENERATE
+    FILE_GENERATE,
+    VOICE_REPLY
 }

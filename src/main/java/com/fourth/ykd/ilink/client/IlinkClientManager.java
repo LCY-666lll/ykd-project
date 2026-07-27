@@ -9,6 +9,11 @@ import org.springframework.stereotype.Component;
 
 /*
  管理全项目唯一 ILinkClient：创建、获取、关闭。它是项目和 iLink SDK 的连接持有者。
+创建 ILinkClient
+保存当前唯一的 ILinkClient
+给其他业务类查询客户端
+重新登录时关闭旧客户端
+项目关闭时释放客户端资源
 */
 @Slf4j
 /*这个类交给Spring管理，在项目启动时创建一个IlinkClientManager对象放进Spring容器内
@@ -36,6 +41,13 @@ public class IlinkClientManager {
      * 用户主动重新发起扫码登录时。
      * 创建前必须先关闭旧客户端，
      * 否则旧客户端的线程池、登录状态和消息游标会残留。
+     * volatile 只保证单次读取、写入的可见性，不能保证多个操作组合起来是线程安全的,
+     * 所以创建和关闭方法还需要加 synchronized。
+
+     * createNewClient(),加了 synchronized，而：
+     * closeCurrentClient(),也加了 synchronized。
+     * 但是不会产生死锁： Java 的 synchronized 是 可重入锁。
+     * 当前线程已经拿到了 this 对象的锁，还可以再次进入同一个对象上的其他 synchronized 方法。
      */
     public synchronized ILinkClient createNewClient() {
         closeCurrentClient();
@@ -49,13 +61,13 @@ public class IlinkClientManager {
         右边：newClient
         表示刚刚创建出来的局部变量。*/
         this.client = newClient;
+
         log.info("[iLink] new client created");
 
         return newClient;
     }
     /**
-     * 查询当前客户端是否存在：
-     * “客户端存在”不等于“已经登录”。
+     * 查询当前客户端是否存在：：“客户端存在”不等于“已经登录”。
      * 是否登录要在下一步通过 current.isLoggedIn() 判断。
      * Optional<>:返回的不是直接的 ILinkClient，而是一个可能有值、也可能没值的包装对象
      */
@@ -67,8 +79,7 @@ public class IlinkClientManager {
 
     /**
      * 关闭并清空当前客户端。加锁：创建和关闭都需要串行执行
-     * 使用场景：
-     * 取消扫码、重新扫码、应用关闭。
+     * 使用场景：取消扫码、重新扫码、应用关闭。
      */
     public synchronized void closeCurrentClient() {
         /*保存旧的客户端:左边：current
@@ -89,8 +100,8 @@ public class IlinkClientManager {
     }
 
     /**
-     * Spring Boot 停止时自动调用。
-     * 防止 SDK 线程池遗留，导致项目无法正常结束。
+     * @PreDestroy 表示：Spring 容器准备销毁这个 Bean 前，自动调用这个方法。
+     * Spring Boot 停止时自动调用。防止 SDK 线程池遗留，导致项目无法正常结束。
      */
     @PreDestroy
     public void shutdown() {
