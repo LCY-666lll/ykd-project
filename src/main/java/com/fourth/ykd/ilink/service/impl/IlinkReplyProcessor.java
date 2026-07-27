@@ -1,5 +1,6 @@
 package com.fourth.ykd.ilink.service.impl;
 import com.fourth.ykd.ai.dto.*;
+import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
 import com.fourth.ykd.ai.routing.*;
 import com.fourth.ykd.ai.service.*;
 import com.fourth.ykd.ai.utils.FileGenerationTool;
@@ -26,17 +27,20 @@ public class IlinkReplyProcessor {
     private final ImageContextService imageContextService;
     private final FileGenerationTool fileGenerationTool;
     private final ChatMemory chatMemory;
+    private final SqliteChatMessageRepository sqliteChatMessageRepository;
 
     /** 注入现有的回复处理依赖。 */
     public IlinkReplyProcessor(AiChatService aiChatService, DeepSeekIntentRouter intentRouter,
             ImageGenerationService imageGenerationService, ImageReferenceGenerationService imageReferenceGenerationService,
             ImageUnderstandingService imageUnderstandingService, ImageContextService imageContextService,
-            FileGenerationTool fileGenerationTool, ChatMemory chatMemory) {
+            FileGenerationTool fileGenerationTool, ChatMemory chatMemory,
+            SqliteChatMessageRepository sqliteChatMessageRepository) {
         this.aiChatService = aiChatService; this.intentRouter = intentRouter;
         this.imageGenerationService = imageGenerationService;
         this.imageReferenceGenerationService = imageReferenceGenerationService;
         this.imageUnderstandingService = imageUnderstandingService; this.imageContextService = imageContextService;
         this.fileGenerationTool = fileGenerationTool; this.chatMemory = chatMemory;
+        this.sqliteChatMessageRepository = sqliteChatMessageRepository;
     }
 
     /** 按现有意图执行业务，并产出待发送结果。 */
@@ -111,11 +115,14 @@ public class IlinkReplyProcessor {
     private void saveImageMemory(String userId, PendingUserImage image, String imageSource) {
         log.info("[AI][IMAGE_MEMORY_UNDERSTAND][START] userId={}", userId);
         String summary = imageUnderstandingService.understand(image, IMAGE_MEMORY_PROMPT);
-        chatMemory.add(userId, List.of(new AssistantMessage("""
+        String imageMemoryText = """
                 【图片识别记忆】
                 %s，后台识别结果如下：
                 %s
-                """.formatted(imageSource, summary))));
+                """.formatted(imageSource, summary);
+        chatMemory.add(userId, List.of(new AssistantMessage(imageMemoryText)));
+        sqliteChatMessageRepository.save(userId, PersistedChatMessage.Role.ASSISTANT, imageMemoryText);
+        sqliteChatMessageRepository.softDeleteOldMessages(userId, 100);
         log.info("[AI][IMAGE_MEMORY_UNDERSTAND][SUCCESS] userId={}, summaryLength={}", userId, summary.length());
     }
 
