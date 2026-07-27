@@ -1,5 +1,6 @@
 package com.fourth.ykd.ilink.service.impl;
 import com.fourth.ykd.ai.dto.*;
+import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
 import com.fourth.ykd.ai.routing.*;
 import com.fourth.ykd.ai.service.*;
 import com.fourth.ykd.ai.utils.FileGenerationTool;
@@ -26,14 +27,17 @@ public class IlinkReplyProcessor {
     private final ImageContextService imageContextService;
     private final FileGenerationTool fileGenerationTool;
     private final ChatMemory chatMemory;
+    private final SqliteChatMessageRepository chatMessageRepository;
 
     /** 注入现有的回复处理依赖。 */
     public IlinkReplyProcessor(AiChatService aiChatService, DeepSeekIntentRouter intentRouter,
+                               SqliteChatMessageRepository chatMessageRepository,
             ImageGenerationService imageGenerationService, ImageReferenceGenerationService imageReferenceGenerationService,
             ImageUnderstandingService imageUnderstandingService, ImageContextService imageContextService,
             FileGenerationTool fileGenerationTool, ChatMemory chatMemory) {
         this.aiChatService = aiChatService; this.intentRouter = intentRouter;
         this.imageGenerationService = imageGenerationService;
+        this.chatMessageRepository = chatMessageRepository;
         this.imageReferenceGenerationService = imageReferenceGenerationService;
         this.imageUnderstandingService = imageUnderstandingService; this.imageContextService = imageContextService;
         this.fileGenerationTool = fileGenerationTool; this.chatMemory = chatMemory;
@@ -41,6 +45,20 @@ public class IlinkReplyProcessor {
 
     /** 按现有意图执行业务，并产出待发送结果。 */
     public ReplyResult process(String userId, String userText, boolean voiceMode) {
+
+        // 检测"清除记忆/清除上下文"意图（使用 contains 宽松匹配）
+        String trimmed = userText != null ? userText.trim() : "";
+        if (trimmed.contains("清除上下文") || trimmed.contains("清除记忆")
+                || trimmed.contains("清空上下文") || trimmed.contains("清空记忆")
+                || trimmed.contains("重置对话") || trimmed.contains("忘记之前")
+                || trimmed.contains("清除历史") || trimmed.contains("清空历史")
+                || trimmed.contains("清除聊天") || trimmed.contains("清空聊天")
+                || trimmed.contains("忘掉之前") || trimmed.contains("清除对话")
+                || trimmed.contains("删除记忆") || trimmed.contains("删除历史")) {
+            clearUserMemory(userId);
+            return ReplyResult.text(UserIntent.TEXT, "已清除您的聊天记忆，之前的对话内容已被遗忘。", null);
+        }
+
         Optional<PendingUserImage> pendingImage = imageContextService.findActive(userId);
         UserIntent intent = intentRouter.route(userId, userText, pendingImage.isPresent());
         if (pendingImage.isEmpty() && (intent == UserIntent.IMAGE_EDIT || intent == UserIntent.IMAGE_UNDERSTAND)) {
@@ -143,4 +161,19 @@ public class IlinkReplyProcessor {
             return new ReplyResult(ReplyResultType.AUDIO, intent, answer, null, null, imageToClear);
         }
     }
+
+    /**
+     * 清除用户的聊天记忆。
+     * 同时清除内存 ChatMemory 和 SQLite 持久化消息。
+     */
+    private void clearUserMemory(String userId) {
+        // 1. 清除内存中的 ChatMemory（Spring AI）
+        chatMemory.clear(userId);
+        log.info("[AI][MEMORY_CLEARED_IN_MEMORY] userId={}", userId);
+
+        // 2. 软删除 SQLite 中的持久化消息
+        chatMessageRepository.softDeleteByConversationId(userId);
+        log.info("[AI][MEMORY_CLEARED_SQLITE] userId={}", userId);
+    }
+
 }

@@ -12,6 +12,7 @@ import com.fourth.ykd.ai.service.ImageContextService;
 import com.fourth.ykd.ai.service.ImageGenerationService;
 import com.fourth.ykd.ai.service.ImageReferenceGenerationService;
 import com.fourth.ykd.ai.service.ImageUnderstandingService;
+import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
 import com.fourth.ykd.ai.utils.FileGenerationTool;
 import java.time.Instant;
 import java.util.Optional;
@@ -31,7 +32,9 @@ class IlinkReplyProcessorTest {
         ImageContextService imageContextService = mock(ImageContextService.class);
         FileGenerationTool fileGenerationTool = mock(FileGenerationTool.class);
         ChatMemory chatMemory = mock(ChatMemory.class);
+        SqliteChatMessageRepository chatMessageRepository = mock(SqliteChatMessageRepository.class);
         IlinkReplyProcessor processor = new IlinkReplyProcessor(aiChatService, intentRouter,
+                chatMessageRepository,
                 imageGenerationService, referenceGenerationService, understandingService,
                 imageContextService, fileGenerationTool, chatMemory);
         PendingUserImage image = new PendingUserImage(new byte[]{1}, "image/png", Instant.now());

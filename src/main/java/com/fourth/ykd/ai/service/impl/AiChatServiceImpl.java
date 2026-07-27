@@ -1,6 +1,10 @@
 package com.fourth.ykd.ai.service.impl;
 
 import com.fourth.ykd.ai.dto.AiChatResponse;
+import com.fourth.ykd.ai.dto.PersistedChatMessage;
+import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
+import org.springframework.ai.chat.memory.ChatMemory;
+import java.util.List;
 import com.fourth.ykd.ai.service.AiChatService;
 
 
@@ -51,6 +55,10 @@ public class AiChatServiceImpl implements AiChatService {
 
     private final BaiduSearchTool baiduSearchTool;
 
+    private final SqliteChatMessageRepository chatMessageRepository;
+
+    private final ChatMemory chatMemory;
+
     @Override
     public AiChatResponse chat(String message) {
         return chat(DEFAULT_CONVERSATION_ID, message);
@@ -69,6 +77,28 @@ public class AiChatServiceImpl implements AiChatService {
 
         log.info("[AI][MEMORY_CHAT] conversationId={}", normalizedConversationId);
 
+        // 从 SQLite 恢复历史消息到 ChatMemory（解决重启丢失上下文问题）
+        List<PersistedChatMessage> persistedMessages =
+                chatMessageRepository.findAllActiveByConversationId(normalizedConversationId);
+
+        // 只有当 ChatMemory 为空且 SQLite 中有持久化消息时才恢复
+        // chatMemory.get() 返回 List<Message>
+        List<org.springframework.ai.chat.messages.Message> existingMemory =
+                chatMemory.get(normalizedConversationId);
+        if (existingMemory.isEmpty() && !persistedMessages.isEmpty()) {
+            log.info("[AI][MEMORY_RESTORE_FROM_SQLITE] conversationId={}, messageCount={}",
+                    normalizedConversationId, persistedMessages.size());
+            for (PersistedChatMessage msg : persistedMessages) {
+                if (msg.getRole() == PersistedChatMessage.Role.USER) {
+                    chatMemory.add(normalizedConversationId,
+                            List.of(new org.springframework.ai.chat.messages.UserMessage(msg.getContent())));
+                } else if (msg.getRole() == PersistedChatMessage.Role.ASSISTANT) {
+                    chatMemory.add(normalizedConversationId,
+                            List.of(new org.springframework.ai.chat.messages.AssistantMessage(msg.getContent())));
+                }
+            }
+        }
+
         String answer = springAiChatClient.prompt()
                 .system(TOOL_USAGE_INSTRUCTIONS + """
 
@@ -82,6 +112,24 @@ public class AiChatServiceImpl implements AiChatService {
                 .tools(mathCalculatorTools,timeTool,baiduSearchTool,weatherTool,translationTool)
                 .call()
                 .content();
+
+        //保存用户消息和 AI 回复到 SQLite
+        try {
+            // 保存用户消息
+            chatMessageRepository.save(normalizedConversationId,
+                    PersistedChatMessage.Role.USER, normalizedMessage);
+
+            // 保存 AI 回复
+            chatMessageRepository.save(normalizedConversationId,
+                    PersistedChatMessage.Role.ASSISTANT, answer);
+
+            // 清理超出窗口大小的历史消息（保留最近 20 条）
+            chatMessageRepository.cleanupExcessMessages(normalizedConversationId, 20);
+        } catch (Exception e) {
+            // 保存失败不影响聊天功能，只记录日志
+            log.error("[SQLite][CHAT_MESSAGE_SAVE_FAILED] conversationId={}",
+                    normalizedConversationId, e);
+        }
 
         return new AiChatResponse(answer);
     }
