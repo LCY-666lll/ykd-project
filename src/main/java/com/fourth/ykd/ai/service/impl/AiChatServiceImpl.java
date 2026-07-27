@@ -1,17 +1,22 @@
 package com.fourth.ykd.ai.service.impl;
 
 import com.fourth.ykd.ai.dto.AiChatResponse;
+import com.fourth.ykd.ai.dto.PersistedChatMessage;
+import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
 import com.fourth.ykd.ai.service.AiChatService;
-
-
+import org.springframework.ai.chat.messages.AssistantMessage;
+import org.springframework.ai.chat.messages.Message;
 import com.fourth.ykd.ai.utils.*;
 import com.fourth.ykd.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 /* 普通文本聊天：DeepSeek 仍然是文本对话模型，只是通过 Spring AI ChatClient 调用。 */
 @Slf4j
@@ -38,7 +43,16 @@ public class AiChatServiceImpl implements AiChatService {
             8. 用户提出算式或要求精确数值计算时，必须调用 calculate_math_expression，不得由模型自行估算。
             9. 用户查询真实当前日期、时间或计算当前日期与目标日期的间隔时，调用 get_time_info。
             10. 聊天历史中出现“【图片识别记忆】”时，它是用户此前发送图片的后台识别结果。用户询问图片、这张图、图中内容、上面的文字、里面的人或物等相关问题时，优先依据该记忆回答；与图片无关的问题忽略该记忆，不得编造图片中不存在的内容。
+            11. 聊天历史和长期记忆仅用于理解用户的指代、延续同一任务、已确认的用户偏好或此前生成内容。
+                    用户本轮提出独立的新问题时，不得把历史消息中的旧回答、旧事实或旧工具结果当作本轮答案的依据。
+                    天气、新闻、时间、价格、政策等可能变化的信息，必须以本轮工具查询结果为准。
+                    用户明确说“新话题”“不要参考历史”或“忽略之前内容”时，本轮不得使用聊天历史。
             """;
+
+    private static final int PERSISTED_MEMORY_LIMIT = 20;
+
+    private static final int MAX_PERSISTED_MEMORY_MESSAGES = 100;
+
     private final ChatClient springAiChatClient;
 
     private final MathCalculatorTool mathCalculatorTools;
@@ -50,6 +64,10 @@ public class AiChatServiceImpl implements AiChatService {
     private final WeatherTool weatherTool;
 
     private final BaiduSearchTool baiduSearchTool;
+
+    private final ChatMemory chatMemory;
+
+    private final SqliteChatMessageRepository sqliteChatMessageRepository;
 
     @Override
     public AiChatResponse chat(String message) {
@@ -67,11 +85,20 @@ public class AiChatServiceImpl implements AiChatService {
                 ? conversationId.trim()
                 : DEFAULT_CONVERSATION_ID;
 
+        // 如果项目刚重启，内存没有历史消息，就从 SQLite 恢复最近 20 条
+        restorePersistedMemory(normalizedConversationId);
+
+        // 本次用户问题先写入 SQLite。
+        sqliteChatMessageRepository.save(
+                normalizedConversationId,
+                PersistedChatMessage.Role.USER,
+                normalizedMessage
+        );
+
         log.info("[AI][MEMORY_CHAT] conversationId={}", normalizedConversationId);
 
         String answer = springAiChatClient.prompt()
                 .system(TOOL_USAGE_INSTRUCTIONS + """
-
                         系统已支持 PDF、DOCX、XLSX 文件生成，以及文生图、参考图编辑、图片识别和语音合成。
                         不得声称这些能力不存在或无法使用；用户追问先前生成结果时，应基于聊天记忆如实说明。
                         当用户明确要求语音回复时，外层系统会把回答正文合成为语音；你只需正常回答用户的问题，
@@ -83,9 +110,48 @@ public class AiChatServiceImpl implements AiChatService {
                 .call()
                 .content();
 
+        // 模型回答成功后，把 bot 回复写入 SQLite。
+        sqliteChatMessageRepository.save(
+                normalizedConversationId,
+                PersistedChatMessage.Role.ASSISTANT,
+                answer
+        );
+
+        sqliteChatMessageRepository.softDeleteOldMessages(
+                normalizedConversationId,
+                MAX_PERSISTED_MEMORY_MESSAGES
+        );
+
         return new AiChatResponse(answer);
     }
 
+    /*如果当前内存需要恢复，就从数据库恢复持久化聊天记录*/
+    private void restorePersistedMemory(String conversationId){
+        //如果 ChatMemory 已经有消息,直接结束方法 ,不从 SQLite 重复恢复
+        if (!chatMemory.get(conversationId).isEmpty()){
+            return;
+        }
+        List<Message> messages = sqliteChatMessageRepository
+                .findRecentActive(conversationId, PERSISTED_MEMORY_LIMIT)
+                .stream()
+                .map(this::toChatMemoryMessage)
+                .toList();
 
+        // SQLite 有历史消息时，才放入 Spring AI 的内存记忆。
+        if (!messages.isEmpty()) {
+            chatMemory.add(conversationId, messages);
+        }
+
+    }
+
+    /*把自己封装的PersistedChatMessage类型转化为ChatMemory认识的SpringAI的Message类型
+    SQLite: USER       → Spring AI: UserMessage
+    SQLite: ASSISTANT  → Spring AI: AssistantMessage*/
+    private Message toChatMemoryMessage(PersistedChatMessage message) {
+        return switch (message.role()) {
+            case USER -> new UserMessage(message.content());
+            case ASSISTANT -> new AssistantMessage(message.content());
+        };
+    }
 
 }
