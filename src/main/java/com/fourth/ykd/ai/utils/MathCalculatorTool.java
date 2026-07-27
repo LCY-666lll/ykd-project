@@ -15,7 +15,7 @@ public class MathCalculatorTool {
 
     /**
      * 数学表达式运算，当AI需要精确数学计算时自动调用。
-     * <p>适用场景：</p>
+     * 适用场景：
      * <ul>
      *     <li>四则运算、小数计算、复杂算式求解</li>
      *     <li>防止大模型口算出错，交由本地代码精确运算</li>
@@ -24,13 +24,14 @@ public class MathCalculatorTool {
      * @param expression 数学表达式，例如 (100+25)*3/2
      * @return 计算结果文本，供AI二次加工展示
      */
-    @Tool(description = """
+    @Tool(name = "calculate_math_expression", description = """
             执行数学表达式精确计算。
             用户提出算式、数值计算问题时调用。
             不要让AI自行估算，优先调用本工具得到准确结果。
             """)
     public String calculate(
-            @ToolParam(description = "待计算的数学表达式，例如 (128.5 + 231.5) * 12 / 4") String expression
+            @ToolParam(description = "待计算的数学表达式，例如 (128.5 + 231.5) * 12 / 4", required = true)
+            String expression
     ) {
         if (expression == null || expression.trim().isEmpty()) {
             return "表达式不能为空";
