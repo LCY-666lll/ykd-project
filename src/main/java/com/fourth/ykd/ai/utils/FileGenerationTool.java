@@ -1,6 +1,8 @@
 package com.fourth.ykd.ai.utils;
 
 import com.fourth.ykd.ai.dto.GeneratedDocument;
+import com.fourth.ykd.ai.dto.PersistedChatMessage;
+import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
 import com.fourth.ykd.exception.BusinessException;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -36,6 +38,7 @@ public class FileGenerationTool {
     private final TimeTool timeTool;
     private final TranslationTool translationTool;
     private final WeatherTool weatherTool;
+    private final SqliteChatMessageRepository sqliteChatMessageRepository;
 
     public FileGenerationTool(
             ChatClient springAiChatClient,
@@ -44,6 +47,7 @@ public class FileGenerationTool {
             TimeTool timeTool,
             TranslationTool translationTool,
             WeatherTool weatherTool,
+            SqliteChatMessageRepository sqliteChatMessageRepository,
             @Value("${file.pdf-chinese-font-path:C:/Windows/Fonts/STSONG.TTF}") String pdfChineseFontPath
     ) {
         this.springAiChatClient = springAiChatClient;
@@ -52,6 +56,7 @@ public class FileGenerationTool {
         this.timeTool = timeTool;
         this.translationTool = translationTool;
         this.weatherTool = weatherTool;
+        this.sqliteChatMessageRepository = sqliteChatMessageRepository;
         this.pdfChineseFontPath = pdfChineseFontPath;
     }
 
@@ -87,6 +92,19 @@ public class FileGenerationTool {
                 default -> createDocx(title, draft.content());
             });
         }
+        String fileMemoryText = """
+                【文件生成记忆】
+                用户请求：%s
+                已生成文件：%s
+                文件正文：
+                %s
+                """.formatted(
+                userText.trim(),
+                String.join(", ", result.stream().map(GeneratedDocument::fileName).toList()),
+                draft.content()
+        );
+        sqliteChatMessageRepository.save(userId, PersistedChatMessage.Role.ASSISTANT, fileMemoryText);
+        sqliteChatMessageRepository.softDeleteOldMessages(userId, 100);
         return result;
     }
 
