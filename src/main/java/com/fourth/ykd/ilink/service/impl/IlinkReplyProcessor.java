@@ -4,8 +4,10 @@ import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
 import com.fourth.ykd.ai.routing.*;
 import com.fourth.ykd.ai.service.*;
 import com.fourth.ykd.ai.utils.FileGenerationTool;
+import com.fourth.ykd.ai.utils.PeriodicDutyTool;
 import java.time.Instant;
 import java.util.*;
+import java.util.regex.Pattern;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.messages.AssistantMessage;
@@ -26,6 +28,9 @@ public class IlinkReplyProcessor {
     private final ImageUnderstandingService imageUnderstandingService;
     private final ImageContextService imageContextService;
     private final FileGenerationTool fileGenerationTool;
+    private final PeriodicDutyTool periodicDutyTool;
+    private final FileContextService fileContextService;
+    private final FileUnderstandingService fileUnderstandingService;
     private final ChatMemory chatMemory;
     private final SqliteChatMessageRepository sqliteChatMessageRepository;
 
@@ -33,13 +38,17 @@ public class IlinkReplyProcessor {
     public IlinkReplyProcessor(AiChatService aiChatService, DeepSeekIntentRouter intentRouter,
             ImageGenerationService imageGenerationService, ImageReferenceGenerationService imageReferenceGenerationService,
             ImageUnderstandingService imageUnderstandingService, ImageContextService imageContextService,
-            FileGenerationTool fileGenerationTool, ChatMemory chatMemory,
+            FileGenerationTool fileGenerationTool, PeriodicDutyTool periodicDutyTool,
+            FileContextService fileContextService, FileUnderstandingService fileUnderstandingService,
+            ChatMemory chatMemory,
             SqliteChatMessageRepository sqliteChatMessageRepository) {
         this.aiChatService = aiChatService; this.intentRouter = intentRouter;
         this.imageGenerationService = imageGenerationService;
         this.imageReferenceGenerationService = imageReferenceGenerationService;
         this.imageUnderstandingService = imageUnderstandingService; this.imageContextService = imageContextService;
-        this.fileGenerationTool = fileGenerationTool; this.chatMemory = chatMemory;
+        this.fileGenerationTool = fileGenerationTool;this.periodicDutyTool = periodicDutyTool;
+        this.fileContextService = fileContextService; this.fileUnderstandingService = fileUnderstandingService;
+        this.chatMemory = chatMemory;
         this.sqliteChatMessageRepository = sqliteChatMessageRepository;
     }
 
@@ -79,6 +88,27 @@ public class IlinkReplyProcessor {
             return ReplyResult.documents(intent, fileGenerationTool.generate(userId, userText),
                     pendingImage.orElse(null));
         }
+
+        // 周期任务请求按操作类型分流到对应方法
+        if (intent == UserIntent.TEXT && matchesPeriodicTask(userText)) {
+            String reply;
+            if (isCancelRequest(userText)) {
+                log.info("[iLink][PERIODIC_TASK] action=DELETE");
+                reply = periodicDutyTool.delete(extractTaskIdentifier(userText));
+            } else if (isListRequest(userText)) {
+                log.info("[iLink][PERIODIC_TASK] action=LIST");
+                reply = periodicDutyTool.list();
+            } else if (isExecuteNowRequest(userText)) {
+                log.info("[iLink][PERIODIC_TASK] action=EXECUTE_NOW");
+                reply = periodicDutyTool.executeNow(extractTaskIdentifier(userText));
+            } else {
+                log.info("[iLink][PERIODIC_TASK] action=CREATE");
+                reply = periodicDutyTool.create(userText);
+            }
+            return ReplyResult.text(intent, reply, pendingImage.orElse(null));
+        }
+
+
         if (intent == UserIntent.VOICE_REPLY) {
             return ReplyResult.audio(intent, aiChatService.chat(userId, userText).reply(),
                     pendingImage.orElse(null));
@@ -94,11 +124,68 @@ public class IlinkReplyProcessor {
         }
         sqliteChatMessageRepository.save(userId, PersistedChatMessage.Role.USER, userText.trim());
     }
+
+    private static final Pattern PERIODIC_PATTERN = Pattern.compile(
+            "周期任务|定时任务|定时发送|定时推送|每\\d+分钟|每\\d+小时|每隔\\d",
+            Pattern.CASE_INSENSITIVE);
+
+    private boolean matchesPeriodicTask(String text) {
+        return text != null && PERIODIC_PATTERN.matcher(text).find();
+    }
+
+    private static final Pattern CANCEL_PATTERN = Pattern.compile(
+            "取消|删除|停止|不要|移除|删掉|去掉", Pattern.CASE_INSENSITIVE);
+
+    private static final Pattern LIST_PATTERN = Pattern.compile(
+            "查看|列表|有哪些|显示|列出|当前.*任务|任务.*列表", Pattern.CASE_INSENSITIVE);
+
+    private static final Pattern EXECUTE_NOW_PATTERN = Pattern.compile(
+            "立即执行|马上执行|现在执行|执行.*任务|帮忙执行|提前执行|手动执行",
+            Pattern.CASE_INSENSITIVE);
+
+    private boolean isCancelRequest(String text) {
+        return text != null && CANCEL_PATTERN.matcher(text).find();
+    }
+
+    private boolean isListRequest(String text) {
+        return text != null && LIST_PATTERN.matcher(text).find();
+    }
+
+    private boolean isExecuteNowRequest(String text) {
+        return text != null && EXECUTE_NOW_PATTERN.matcher(text).find();
+    }
+
+    private String extractTaskIdentifier(String text) {
+        java.util.regex.Matcher m = Pattern.compile("(\\d+)").matcher(text);
+        if (m.find()) return m.group(1);
+        return text;
+    }
+
+
     /** 将当前待处理图片写入聊天记忆。 */
     public void saveReceivedImageMemory(String userId) {
         PendingUserImage image = imageContextService.findActive(userId)
                 .orElseThrow(() -> new IllegalStateException("当前图片上下文不存在"));
         saveImageMemory(userId, image, "用户此前发送了一张图片");
+    }
+
+    /** 将当前待处理文件写入聊天记忆。 */
+    public void saveReceivedFileMemory(String userId) {
+        PendingUserFile file = fileContextService.findActive(userId)
+                .orElseThrow(() -> new IllegalStateException("当前文件上下文不存在"));
+        log.info("[AI][FILE_MEMORY_UNDERSTAND][START] userId={}, fileName={}", userId, file.fileName());
+        String summary = fileUnderstandingService.understand(file);
+        String fileMemoryText = """
+                【文件识别记忆】
+                用户此前发送了一个文件（%s），后台识别结果如下：
+                %s
+                """.formatted(file.fileName(), summary);
+        fileContextService.remove(userId);
+        chatMemory.add(userId, List.of(new AssistantMessage(fileMemoryText)));
+        sqliteChatMessageRepository.save(userId, PersistedChatMessage.Role.ASSISTANT, fileMemoryText);
+        sqliteChatMessageRepository.softDeleteOldMessages(userId, 100);
+        log.info("[AI][FILE_MEMORY_UNDERSTAND][SUCCESS] userId={}, summaryLength={}",
+                userId, summary.length());
     }
 
     /** 识别生成图片；失败不影响图片发送。 */

@@ -63,6 +63,11 @@ public class IlinkReplySender {
         try { client.sendTextWithTyping(userId, "已经看到您的图片啦，您想了解什么呢？", 800); }
         catch (IOException exception) { log.warn("[iLink][IMAGE_CONTEXT_REPLY_FAILED] userId={}", userId, exception); }
     }
+    /** 发送文件接收确认语。 */
+    public void sendFileReceivedConfirmation(ILinkClient client, String userId) {
+        try { client.sendTextWithTyping(userId, "已收到您的文件，内容已记录到聊天记忆中，您可以就此文件向我提问。", 800); }
+        catch (IOException exception) { log.warn("[iLink][FILE_CONTEXT_REPLY_FAILED] userId={}", userId, exception); }
+    }
     /** 启动输入状态。 */
     public void startTypingQuietly(ILinkClient client, String userId) {
         try { client.startTyping(userId); } catch (IOException exception) { log.warn("[iLink][TYPING_START_FAILED] userId={}", userId, exception); }

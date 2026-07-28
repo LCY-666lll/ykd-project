@@ -11,4 +11,6 @@ public interface IlinkMessageReplyService {
     void submitVoice(ILinkClient client, String userId, String voiceText);
 
     void submitVoiceRecognitionFailed(ILinkClient client, String userId);
+
+    void submitFileReceived(ILinkClient client, String userId);
 }
