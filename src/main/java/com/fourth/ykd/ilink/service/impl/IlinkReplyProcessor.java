@@ -53,6 +53,7 @@ public class IlinkReplyProcessor {
         }
         log.info("[iLink][{}] userId={}, intent={}, hasPendingImage={}",
                 voiceMode ? "VOICE_ROUTED" : "ROUTED", userId, intent, pendingImage.isPresent());
+        saveSpecialFlowUserMessage(userId, userText, intent);
         if (pendingImage.isPresent() && intent == UserIntent.IMAGE_UNDERSTAND) {
             log.info("[AI][IMAGE_UNDERSTAND][START] userId={}", userId);
             String answer = imageUnderstandingService.understand(pendingImage.get(), userText);
@@ -68,7 +69,7 @@ public class IlinkReplyProcessor {
         }
         if (intent == UserIntent.IMAGE_GENERATE) {
             log.info("[AI][IMAGE_GENERATE][START] userId={}", userId);
-            String imagePrompt = resolveImagePrompt(userId, userText);
+            String imagePrompt = aiChatService.prepareImagePrompt(userId, userText);
             GeneratedImage image = imageGenerationService.generate(imagePrompt);
             saveGeneratedImageMemoryQuietly(userId, image, "机器人此前根据用户请求生成了一张图片");
             log.info("[AI][IMAGE_GENERATE][SUCCESS] userId={}, imageBytes={}", userId, image.bytes().length);
@@ -86,13 +87,12 @@ public class IlinkReplyProcessor {
                 pendingImage.orElse(null));
     }
 
-    private String resolveImagePrompt(String userId, String userText) {
-        if (!(userText.contains("上面") || userText.contains("上述") || userText.contains("刚才")
-                || userText.contains("前面") || userText.contains("这份计划") || userText.contains("这个计划"))) {
-            return userText;
+    private void saveSpecialFlowUserMessage(String userId, String userText, UserIntent intent) {
+        if (intent != UserIntent.IMAGE_GENERATE && intent != UserIntent.IMAGE_EDIT
+                && intent != UserIntent.IMAGE_UNDERSTAND && intent != UserIntent.FILE_GENERATE) {
+            return;
         }
-        String prompt = aiChatService.chat(userId, "根据当前会话中用户刚刚确认的内容，将本次图片请求改写为完整、具体的中文图片生成提示词。必须保留活动主题、餐厅名称、核心规则、视觉主体和用户强调的重点；只输出图片提示词，不要解释，不要 Markdown。").reply();
-        return prompt == null || prompt.isBlank() ? userText : prompt.trim();
+        sqliteChatMessageRepository.save(userId, PersistedChatMessage.Role.USER, userText.trim());
     }
     /** 将当前待处理图片写入聊天记忆。 */
     public void saveReceivedImageMemory(String userId) {

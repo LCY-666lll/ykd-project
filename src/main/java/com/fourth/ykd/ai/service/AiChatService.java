@@ -7,4 +7,6 @@ public interface AiChatService {
     AiChatResponse chat(String message);
 
     AiChatResponse chat(String conversationId, String message);
+
+    String prepareImagePrompt(String conversationId, String userText);
 }

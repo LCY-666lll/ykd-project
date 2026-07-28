@@ -53,6 +53,10 @@ public class AiChatServiceImpl implements AiChatService {
 
     private static final int MAX_PERSISTED_MEMORY_MESSAGES = 100;
 
+    private static final int MEMORY_ENTRY_MAX_LENGTH = 2_000;
+
+    private static final int GENERATED_CONTENT_MEMORY_MAX_LENGTH = 1_200;
+
     private final ChatClient springAiChatClient;
 
     private final MathCalculatorTool mathCalculatorTools;
@@ -125,6 +129,29 @@ public class AiChatServiceImpl implements AiChatService {
         return new AiChatResponse(answer);
     }
 
+    @Override
+    public String prepareImagePrompt(String conversationId, String userText) {
+        if (!StringUtils.hasText(userText)) {
+            throw new BusinessException(40001, "图片请求不能为空");
+        }
+        String normalizedConversationId = StringUtils.hasText(conversationId)
+                ? conversationId.trim()
+                : DEFAULT_CONVERSATION_ID;
+        restorePersistedMemory(normalizedConversationId);
+        String imagePrompt = springAiChatClient.prompt()
+                .system(TOOL_USAGE_INSTRUCTIONS + """
+                        你负责为文生图模型准备最终中文提示词，不直接回答用户。
+                        用户请求涉及新闻、时事、最新、今天、当前、实时天气、日期、计算或翻译时，必须先调用对应工具；
+                        只能根据本轮工具结果写入相关事实，工具失败时不得使用训练数据补充事实。
+                        最终只输出一段可直接交给文生图模型的中文画面描述，不要解释、不要 Markdown、不要标题。
+                        """)
+                .user(userText.trim())
+                .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
+                .tools(mathCalculatorTools, timeTool, baiduSearchTool, weatherTool, translationTool)
+                .call()
+                .content();
+        return StringUtils.hasText(imagePrompt) ? imagePrompt.trim() : userText.trim();
+    }
     /*如果当前内存需要恢复，就从数据库恢复持久化聊天记录*/
     private void restorePersistedMemory(String conversationId){
         //如果 ChatMemory 已经有消息,直接结束方法 ,不从 SQLite 重复恢复
@@ -148,10 +175,21 @@ public class AiChatServiceImpl implements AiChatService {
     SQLite: USER       → Spring AI: UserMessage
     SQLite: ASSISTANT  → Spring AI: AssistantMessage*/
     private Message toChatMemoryMessage(PersistedChatMessage message) {
+        String content = compactRestoredMemory(message.content());
         return switch (message.role()) {
-            case USER -> new UserMessage(message.content());
-            case ASSISTANT -> new AssistantMessage(message.content());
+            case USER -> new UserMessage(content);
+            case ASSISTANT -> new AssistantMessage(content);
         };
+    }
+
+    private String compactRestoredMemory(String content) {
+        if (!StringUtils.hasText(content)) {
+            return "";
+        }
+        int maxLength = (content.startsWith("【文件生成记忆】") || content.startsWith("【图片识别记忆】"))
+                ? GENERATED_CONTENT_MEMORY_MAX_LENGTH
+                : MEMORY_ENTRY_MAX_LENGTH;
+        return content.length() <= maxLength ? content : content.substring(0, maxLength) + "…";
     }
 
 }
