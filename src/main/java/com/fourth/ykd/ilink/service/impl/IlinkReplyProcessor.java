@@ -26,21 +26,23 @@ public class IlinkReplyProcessor {
     private final ImageContextService imageContextService;
     private final FileGenerationTool fileGenerationTool;
     private final ChatMemory chatMemory;
+    private final ReminderService reminderService;
 
     /** 注入现有的回复处理依赖。 */
     public IlinkReplyProcessor(AiChatService aiChatService, DeepSeekIntentRouter intentRouter,
             ImageGenerationService imageGenerationService, ImageReferenceGenerationService imageReferenceGenerationService,
             ImageUnderstandingService imageUnderstandingService, ImageContextService imageContextService,
-            FileGenerationTool fileGenerationTool, ChatMemory chatMemory) {
+            FileGenerationTool fileGenerationTool, ChatMemory chatMemory, ReminderService reminderService) {
         this.aiChatService = aiChatService; this.intentRouter = intentRouter;
         this.imageGenerationService = imageGenerationService;
         this.imageReferenceGenerationService = imageReferenceGenerationService;
         this.imageUnderstandingService = imageUnderstandingService; this.imageContextService = imageContextService;
         this.fileGenerationTool = fileGenerationTool; this.chatMemory = chatMemory;
+        this.reminderService = reminderService;
     }
 
-    /** 按现有意图执行业务，并产出待发送结果。 */
-    public ReplyResult process(String userId, String userText, boolean voiceMode) {
+    /** 按现有意图执行业务，并产出待发送结果。contextToken 从用户消息提取，用于提醒推送。 */
+    public ReplyResult process(String userId, String userText, String contextToken, boolean voiceMode) {
         Optional<PendingUserImage> pendingImage = imageContextService.findActive(userId);
         UserIntent intent = intentRouter.route(userId, userText, pendingImage.isPresent());
         if (pendingImage.isEmpty() && (intent == UserIntent.IMAGE_EDIT || intent == UserIntent.IMAGE_UNDERSTAND)) {
@@ -73,6 +75,16 @@ public class IlinkReplyProcessor {
         if (intent == UserIntent.FILE_GENERATE) {
             return ReplyResult.documents(intent, fileGenerationTool.generate(userId, userText),
                     pendingImage.orElse(null));
+        }
+        if (intent == UserIntent.CREATE_TASK) {
+            log.info("[REMINDER][CREATE_TASK] userId={}, hasContextToken={}", userId, contextToken != null);
+            String answer = reminderService.createReminder(userId, contextToken, userText);
+            return ReplyResult.text(intent, answer, pendingImage.orElse(null));
+        }
+        if (intent == UserIntent.DELETE_TASK) {
+            log.info("[REMINDER][DELETE_TASK] userId={}", userId);
+            String answer = reminderService.deleteReminder(userId);
+            return ReplyResult.text(intent, answer, pendingImage.orElse(null));
         }
         if (intent == UserIntent.VOICE_REPLY) {
             return ReplyResult.audio(intent, aiChatService.chat(userId, userText).reply(),

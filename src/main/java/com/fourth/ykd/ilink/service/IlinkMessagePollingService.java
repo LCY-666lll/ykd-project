@@ -49,6 +49,7 @@ public class IlinkMessagePollingService {
             return;
         }
 
+        String contextToken = message.getContext_token();
         String text = extractText(message);
         String voiceText = extractVoiceText(message);
         MessageItem imageItem = extractImageItem(message);
@@ -57,7 +58,7 @@ public class IlinkMessagePollingService {
         }
         if (StringUtils.hasText(voiceText)) {
             log.info("[iLink][VOICE_RECOGNIZED] fromUserId={}, text={}", fromUserId, voiceText);
-            ilinkMessageReplyService.submitVoice(client, fromUserId, voiceText);
+            ilinkMessageReplyService.submitVoice(client, fromUserId, contextToken, voiceText);
             return;
         }
         if (hasVoiceItem(message)) {
@@ -70,7 +71,7 @@ public class IlinkMessagePollingService {
         }
 
         log.info("[iLink][USER_MESSAGE] fromUserId={}, text={}", fromUserId, text);
-        ilinkMessageReplyService.submit(client, fromUserId, text);
+        ilinkMessageReplyService.submit(client, fromUserId, contextToken, text);
     }
 
     private boolean isFromBot(ILinkClient client, String fromUserId) {

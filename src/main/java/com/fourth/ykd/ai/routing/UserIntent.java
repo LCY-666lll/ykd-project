@@ -7,5 +7,9 @@ public enum UserIntent {
     IMAGE_EDIT,
     IMAGE_UNDERSTAND,
     FILE_GENERATE,
-    VOICE_REPLY
+    VOICE_REPLY,
+    //创建任务
+    CREATE_TASK,
+    //删除任务
+    DELETE_TASK
 }

@@ -15,5 +15,6 @@ public class YkdProjectApplication {
         log.info("==========");
         log.info("Spring Boot 启动成功！");
         log.info("==========");
+
     }
 }

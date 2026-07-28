@@ -37,3 +37,7 @@ build/
 src/main/resources/application-local.properties
 logs/
 AGENTS.md
+
+
+# Local SQLite runtime database
+data/

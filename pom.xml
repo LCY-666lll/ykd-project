@@ -12,6 +12,7 @@
     <artifactId>ykd-project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ykd-project</name>
+
     <description>ykd-project</description>
     <url/>
     <licenses>
@@ -143,6 +144,16 @@
             <groupId>com.alibaba.cloud.ai</groupId>
             <artifactId>spring-ai-alibaba-starter-tool-calling-baidusearch</artifactId>
             <version>1.1.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.53.2.0</version>
         </dependency>
     </dependencies>
 

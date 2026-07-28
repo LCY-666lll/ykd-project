@@ -38,6 +38,14 @@ public class DeepSeekIntentRouter {
     private static final Pattern VOICE_REPLY_PATTERN = pattern(
             "用语音.{0,8}(回复|回答|告诉|说)|语音回复|语音回答|说给我听|读给我听|读出来"
                     + "|发一段语音|用声音.{0,8}(回复|回答|告诉)");
+    private static final Pattern CREATE_TASK_PATTERN = pattern(
+            "(提醒|通知).{0,10}(我|一下|我一下)"
+                    + "|(设置|创建|新建|添加|加个|定个|设个).{0,10}(提醒|闹钟|定时|任务)"
+                    + "|^\\s*(提醒我|通知我|叫我)");
+    private static final Pattern DELETE_TASK_PATTERN = pattern(
+            "(取消|删除|移除|关闭|停用|清空|清掉).{0,8}(提醒|闹钟|定时|任务)"
+                    + "|(提醒|闹钟|定时|任务).{0,8}(取消|删除|不要了|关掉|清掉)");
+
 
     private final ChatClient routeChatClient;
     private final ChatMemory chatMemory;
@@ -110,6 +118,12 @@ public class DeepSeekIntentRouter {
         if (businessCandidates.size() > 1) {
             return Optional.empty();
         }
+        if (matches(CREATE_TASK_PATTERN, text)) {
+            return Optional.of(UserIntent.CREATE_TASK);
+        }
+        if (matches(DELETE_TASK_PATTERN, text)) {
+            return Optional.of(UserIntent.DELETE_TASK);
+        }
         return matches(VOICE_REPLY_PATTERN, text)
                 ? Optional.of(UserIntent.VOICE_REPLY)
                 : Optional.empty();
@@ -136,23 +150,25 @@ public class DeepSeekIntentRouter {
     /** 构造仅包含路由规则的系统提示词。 */
     private String buildRouteInstructions(boolean hasPendingImage) {
         String intents = hasPendingImage
-                ? "TEXT, IMAGE_GENERATE, IMAGE_EDIT, IMAGE_UNDERSTAND, FILE_GENERATE, VOICE_REPLY"
-                : "TEXT, IMAGE_GENERATE, FILE_GENERATE, VOICE_REPLY";
+                ? "TEXT, IMAGE_GENERATE, IMAGE_EDIT, IMAGE_UNDERSTAND, FILE_GENERATE, VOICE_REPLY, CREATE_TASK, DELETE_TASK"
+                : "TEXT, IMAGE_GENERATE, FILE_GENERATE, VOICE_REPLY, CREATE_TASK, DELETE_TASK";
         return """
                 你是消息意图路由器，只负责选择意图，不负责回答、搜索、整理内容或生成文件。
                 必须从以下可选意图中选择一个：%s。
+                CREATE_TASK：用户要求设置提醒、创建闹钟、定时通知时使用。常见表述包括"提醒我""设置一个提醒""通知我""定个闹钟"等。
+                DELETE_TASK：用户要求取消、删除或关闭已有提醒时使用。常见表述包括"取消提醒""删除闹钟""不要提醒了"等。
                 FILE_GENERATE：用户要求把内容生成、导出、下载或整理成文件时使用；格式包括 PDF、DOCX、Word、XLSX、Excel。
                 即使请求包含搜索、查询、整理或总结，只要要求导出文件，仍必须选择 FILE_GENERATE。
-                若近期会话中的上一项任务是生成或导出文件，用户说“再生成”“重新生成”“按上面生成”或“给我生成”时，必须选择 FILE_GENERATE。
+                若近期会话中的上一项任务是生成或导出文件，用户说"再生成""重新生成""按上面生成"或"给我生成"时，必须选择 FILE_GENERATE。
                 IMAGE_UNDERSTAND：用户希望理解、判断或获取当前图片的信息。
                 IMAGE_EDIT：用户希望修改、延展或变换当前图片。
                 IMAGE_GENERATE：用户希望生成独立新图片且不使用当前图片。
                 VOICE_REPLY：仅当用户明确要求机器人使用语音、声音回答，或把内容读出来时使用。用户发送的是语音消息，不代表要求语音回复。
-                图片理解、图片编辑、图片生成和文件生成请求优先选择各自意图，不因同时出现“语音”而改选 VOICE_REPLY。
+                创建任务、删除任务、图片理解、图片编辑、图片生成和文件生成请求优先选择各自意图，不因同时出现"语音"而改选 VOICE_REPLY。
                 TEXT：普通对话、知识问答、搜索请求或文字任务，且没有要求生成、导出或下载文件。
-                “帮我写一篇文章”选择 TEXT；只有明确要求导出、下载或生成文件时才选择 FILE_GENERATE。
-                “用表格列出”不等于 XLSX；只有明确要求 Excel、XLSX、电子表格或表格文件时才选择 FILE_GENERATE。
-                存在当前图片时，“换背景”选择 IMAGE_EDIT，“图片里有什么”选择 IMAGE_UNDERSTAND。
+                "帮我写一篇文章"选择 TEXT；只有明确要求导出、下载或生成文件时才选择 FILE_GENERATE。
+                "用表格列出"不等于 XLSX；只有明确要求 Excel、XLSX、电子表格或表格文件时才选择 FILE_GENERATE。
+                存在当前图片时，"换背景"选择 IMAGE_EDIT，"图片里有什么"选择 IMAGE_UNDERSTAND。
                 请求包含多个连续业务任务时，选择用户最终要求交付的主要结果类型。
                 只能返回 JSON 对象，格式必须严格为 {"intent":"TEXT"}，不要输出解释、Markdown、文件内容或其他文字。
                 """.formatted(intents);

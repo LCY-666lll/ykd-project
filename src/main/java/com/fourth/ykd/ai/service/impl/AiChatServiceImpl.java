@@ -1,6 +1,8 @@
 package com.fourth.ykd.ai.service.impl;
 
 import com.fourth.ykd.ai.dto.AiChatResponse;
+import com.fourth.ykd.ai.dto.PersistedChatMessage;
+import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
 import com.fourth.ykd.ai.service.AiChatService;
 
 
@@ -12,6 +14,9 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /* 普通文本聊天：DeepSeek 仍然是文本对话模型，只是通过 Spring AI ChatClient 调用。 */
 @Slf4j
@@ -51,6 +56,8 @@ public class AiChatServiceImpl implements AiChatService {
 
     private final BaiduSearchTool baiduSearchTool;
 
+    private final SqliteChatMessageRepository repository;
+
     @Override
     public AiChatResponse chat(String message) {
         return chat(DEFAULT_CONVERSATION_ID, message);
@@ -61,14 +68,22 @@ public class AiChatServiceImpl implements AiChatService {
         if (!StringUtils.hasText(message)) {
             throw new BusinessException(40001, "消息内容不能为空");
         }
-
         String normalizedMessage = message.trim();
         String normalizedConversationId = StringUtils.hasText(conversationId)
                 ? conversationId.trim()
                 : DEFAULT_CONVERSATION_ID;
+        List<PersistedChatMessage> history = repository.findByConversationId(normalizedConversationId);
+        StringBuilder context = new StringBuilder();
+        for(PersistedChatMessage msg:history){
+            context.append(msg.role())
+                    .append(":")
+                    .append(msg.content())
+                    .append("\n");
+        }
+        context.append("\nUSER:")
+                .append(normalizedMessage);
 
         log.info("[AI][MEMORY_CHAT] conversationId={}", normalizedConversationId);
-
         String answer = springAiChatClient.prompt()
                 .system(TOOL_USAGE_INSTRUCTIONS + """
 
@@ -77,12 +92,12 @@ public class AiChatServiceImpl implements AiChatService {
                         当用户明确要求语音回复时，外层系统会把回答正文合成为语音；你只需正常回答用户的问题，
                         输出适合朗读的正文，不得声称自己只能文本交互、不能语音回复，也不要解释语音合成过程。
                         """)
-                .user(normalizedMessage)
-                .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
+                .user(String.valueOf(context))
                 .tools(mathCalculatorTools,timeTool,baiduSearchTool,weatherTool,translationTool)
                 .call()
                 .content();
-
+        repository.save(normalizedConversationId,"USER",normalizedMessage);
+        repository.save(normalizedConversationId,"ASSISTANT",answer);
         return new AiChatResponse(answer);
     }
 
