@@ -69,6 +69,8 @@ public class AiChatServiceImpl implements AiChatService {
 
     private final BaiduSearchTool baiduSearchTool;
 
+    private final ScheduledTaskTool scheduledTaskTool;
+
     private final ChatMemory chatMemory;
 
     private final SqliteChatMessageRepository sqliteChatMessageRepository;
@@ -101,19 +103,29 @@ public class AiChatServiceImpl implements AiChatService {
 
         log.info("[AI][MEMORY_CHAT] conversationId={}", normalizedConversationId);
 
-        String answer = springAiChatClient.prompt()
-                .system(TOOL_USAGE_INSTRUCTIONS + """
-                        系统已支持 PDF、DOCX、XLSX 文件生成，以及文生图、参考图编辑、图片识别和语音合成。
-                        不得声称这些能力不存在或无法使用；用户追问先前生成结果时，应基于聊天记忆如实说明。
-                        当用户明确要求语音回复时，外层系统会把回答正文合成为语音；你只需正常回答用户的问题，
-                        输出适合朗读的正文，不得声称自己只能文本交互、不能语音回复，也不要解释语音合成过程。
-                        """)
-                .user(normalizedMessage)
-                .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
-                .tools(mathCalculatorTools,timeTool,baiduSearchTool,weatherTool,translationTool)
-                .call()
-                .content();
-
+        // 设置定时任务工具的当前用户ID
+        ScheduledTaskTool.setCurrentUserId(normalizedConversationId);
+        String answer;
+        try {
+            answer = springAiChatClient.prompt()
+                    .system(TOOL_USAGE_INSTRUCTIONS + """
+                            系统已支持 PDF、DOCX、XLSX 文件生成，以及文生图、参考图编辑、图片识别和语音合成。
+                            不得声称这些能力不存在或无法使用；用户追问先前生成结果时，应基于聊天记忆如实说明。
+                            当用户明确要求语音回复时，外层系统会把回答正文合成为语音；你只需正常回答用户的问题，
+                            输出适合朗读的正文，不得声称自己只能文本交互、不能语音回复，也不要解释语音合成过程。
+                            用户要求定时执行任务时（如定时提醒、定时查天气、定时搜索等），使用 schedule_task 工具。
+                            用户要取消定时任务时，使用 cancel_scheduled_task 工具。
+                            用户要查看定时任务列表时，使用 list_scheduled_tasks 工具。
+                            """)
+                    .user(normalizedMessage)
+                    .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
+                    .tools(mathCalculatorTools,timeTool,baiduSearchTool,weatherTool,translationTool,scheduledTaskTool)
+                    .call()
+                    .content();
+        } finally {
+            // 清理ThreadLocal，防止内存泄漏
+            ScheduledTaskTool.clearCurrentUserId();
+        }
         // 模型回答成功后，把 bot 回复写入 SQLite。
         sqliteChatMessageRepository.save(
                 normalizedConversationId,
