@@ -37,6 +37,10 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
     @Override public void submitVoiceRecognitionFailed(ILinkClient client, String userId) {
         if (StringUtils.hasText(userId)) enqueue(userId, () -> replySender.sendVoiceRecognitionFailureMessage(client, userId), () -> replySender.sendVoiceRecognitionFailureMessage(client, userId));
     }
+    /** 提交文件接收确认任务。 */
+    @Override public void submitFileReceived(ILinkClient client, String userId) {
+        if (StringUtils.hasText(userId)) enqueue(userId, () -> replyFileReceived(client, userId), () -> {});
+    }
     /** 将任务串接到同一用户已有任务之后。 */
     private void enqueue(String userId, Runnable task, Runnable rejectedTask) {
         try {
@@ -53,6 +57,12 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
         try { replyProcessor.saveReceivedImageMemory(userId); }
         catch (RuntimeException exception) { log.error("[iLink][IMAGE_MEMORY_SAVE_FAILED] userId={}", userId, exception); }
         replySender.sendImageReceivedConfirmation(client, userId);
+    }
+    /** 写入文件记忆后发送确认语。 */
+    private void replyFileReceived(ILinkClient client, String userId) {
+        try { replyProcessor.saveReceivedFileMemory(userId); }
+        catch (RuntimeException exception) { log.error("[iLink][FILE_MEMORY_SAVE_FAILED] userId={}", userId, exception); }
+        replySender.sendFileReceivedConfirmation(client, userId);
     }
     /** 处理并发送文字回复。 */
     private void reply(ILinkClient client, String userId, String userText) {
