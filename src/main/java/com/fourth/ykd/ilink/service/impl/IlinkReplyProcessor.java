@@ -4,10 +4,10 @@ import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
 import com.fourth.ykd.ai.routing.*;
 import com.fourth.ykd.ai.service.*;
 import com.fourth.ykd.ai.utils.FileGenerationTool;
-import com.fourth.ykd.ai.utils.PeriodicDutyTool;
+import com.fourth.ykd.ai.utils.PeriodicTaskTool;
+import com.fourth.ykd.ai.utils.ScheduledTaskTool;
 import java.time.Instant;
 import java.util.*;
-import java.util.regex.Pattern;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.messages.AssistantMessage;
@@ -28,9 +28,12 @@ public class IlinkReplyProcessor {
     private final ImageUnderstandingService imageUnderstandingService;
     private final ImageContextService imageContextService;
     private final FileGenerationTool fileGenerationTool;
-    private final PeriodicDutyTool periodicDutyTool;
+    private final PeriodicTaskTool periodicTaskTool;
+    private final ScheduledTaskTool scheduledTaskTool;
+    // 文件识别开始
     private final FileContextService fileContextService;
     private final FileUnderstandingService fileUnderstandingService;
+    // 文件识别结束
     private final ChatMemory chatMemory;
     private final SqliteChatMessageRepository sqliteChatMessageRepository;
 
@@ -38,16 +41,24 @@ public class IlinkReplyProcessor {
     public IlinkReplyProcessor(AiChatService aiChatService, DeepSeekIntentRouter intentRouter,
             ImageGenerationService imageGenerationService, ImageReferenceGenerationService imageReferenceGenerationService,
             ImageUnderstandingService imageUnderstandingService, ImageContextService imageContextService,
-            FileGenerationTool fileGenerationTool, PeriodicDutyTool periodicDutyTool,
-            FileContextService fileContextService, FileUnderstandingService fileUnderstandingService,
+            // 文件识别开始
+            FileGenerationTool fileGenerationTool, FileContextService fileContextService,
+            FileUnderstandingService fileUnderstandingService,
+            // 文件识别结束
+            PeriodicTaskTool periodicTaskTool,
+            ScheduledTaskTool scheduledTaskTool,
             ChatMemory chatMemory,
             SqliteChatMessageRepository sqliteChatMessageRepository) {
         this.aiChatService = aiChatService; this.intentRouter = intentRouter;
         this.imageGenerationService = imageGenerationService;
         this.imageReferenceGenerationService = imageReferenceGenerationService;
         this.imageUnderstandingService = imageUnderstandingService; this.imageContextService = imageContextService;
-        this.fileGenerationTool = fileGenerationTool;this.periodicDutyTool = periodicDutyTool;
-        this.fileContextService = fileContextService; this.fileUnderstandingService = fileUnderstandingService;
+        // 文件识别开始
+        this.fileGenerationTool = fileGenerationTool;this.fileContextService = fileContextService;
+        this.fileUnderstandingService = fileUnderstandingService;
+        // 文件识别结束
+        this.periodicTaskTool = periodicTaskTool;
+        this.scheduledTaskTool = scheduledTaskTool;
         this.chatMemory = chatMemory;
         this.sqliteChatMessageRepository = sqliteChatMessageRepository;
     }
@@ -83,28 +94,20 @@ public class IlinkReplyProcessor {
             log.info("[AI][IMAGE_GENERATE][SUCCESS] userId={}, imageBytes={}", userId, image.bytes().length);
             return ReplyResult.image(intent, image, null);
         }
+
+        // 定时任务 → 直接调用 ScheduledTaskTool（绕过 DeepSeek 工具调用，由内部 AI 解析）
+        if (intent == UserIntent.TASK_SCHEDULED) {
+            String reply = scheduledTaskTool.parseAndSchedule(userId, userText);
+            return ReplyResult.text(intent, reply, pendingImage.orElse(null));
+        }
+        // 周期任务 → 直接调用 PeriodicTaskTool（绕过 DeepSeek 工具调用，由内部 parseTask() 解析）
+        if (intent == UserIntent.TASK_PERIODIC) {
+            String reply = dispatchPeriodicTask(userText);
+            return ReplyResult.text(intent, reply, pendingImage.orElse(null));
+        }
         if (intent == UserIntent.FILE_GENERATE) {
             return ReplyResult.documents(intent, fileGenerationTool.generate(userId, userText),
                     pendingImage.orElse(null));
-        }
-
-        // 周期任务请求按操作类型分流到对应方法
-        if (intent == UserIntent.TEXT && matchesPeriodicTask(userText)) {
-            String reply;
-            if (isCancelRequest(userText)) {
-                log.info("[iLink][PERIODIC_TASK] action=DELETE");
-                reply = periodicDutyTool.delete(extractTaskIdentifier(userText));
-            } else if (isListRequest(userText)) {
-                log.info("[iLink][PERIODIC_TASK] action=LIST");
-                reply = periodicDutyTool.list();
-            } else if (isExecuteNowRequest(userText)) {
-                log.info("[iLink][PERIODIC_TASK] action=EXECUTE_NOW");
-                reply = periodicDutyTool.executeNow(extractTaskIdentifier(userText));
-            } else {
-                log.info("[iLink][PERIODIC_TASK] action=CREATE");
-                reply = periodicDutyTool.create(userText);
-            }
-            return ReplyResult.text(intent, reply, pendingImage.orElse(null));
         }
 
 
@@ -125,42 +128,35 @@ public class IlinkReplyProcessor {
         return prompt == null || prompt.isBlank() ? userText : prompt.trim();
     }
 
-    private static final Pattern PERIODIC_PATTERN = Pattern.compile(
-            "周期任务|定时任务|定时发送|定时推送|每\\d+分钟|每\\d+小时|每隔\\d",
-            Pattern.CASE_INSENSITIVE);
 
-    private boolean matchesPeriodicTask(String text) {
-        return text != null && PERIODIC_PATTERN.matcher(text).find();
+    private static final java.util.regex.Pattern PT_CREATE = java.util.regex.Pattern.compile("创建|设置|安排|帮我|给我|加一个|来一个");
+    private static final java.util.regex.Pattern PT_LIST = java.util.regex.Pattern.compile("查看|列表|有哪些|显示|列出|任务.*列表|当前.*任务");
+    private static final java.util.regex.Pattern PT_DELETE = java.util.regex.Pattern.compile("取消|删除|停止|不要|移除|删掉|去掉");
+    private static final java.util.regex.Pattern PT_EXECUTE = java.util.regex.Pattern.compile("立即执行|马上执行|现在执行|提前执行|手动执行");
+
+    /** 将周期任务请求分发到 PeriodicTaskTool 的具体方法。 */
+    private String dispatchPeriodicTask(String text) {
+        if (text == null) return "无法处理空的周期任务请求。";
+        if (PT_CREATE.matcher(text).find()) {
+            return periodicTaskTool.create(text);
+        }
+        if (PT_LIST.matcher(text).find()) {
+            return periodicTaskTool.list();
+        }
+        if (PT_DELETE.matcher(text).find()) {
+            return periodicTaskTool.delete(extractTaskId(text));
+        }
+        if (PT_EXECUTE.matcher(text).find()) {
+            return periodicTaskTool.executeNow(extractTaskId(text));
+        }
+        return periodicTaskTool.create(text);
     }
 
-    private static final Pattern CANCEL_PATTERN = Pattern.compile(
-            "取消|删除|停止|不要|移除|删掉|去掉", Pattern.CASE_INSENSITIVE);
-
-    private static final Pattern LIST_PATTERN = Pattern.compile(
-            "查看|列表|有哪些|显示|列出|当前.*任务|任务.*列表", Pattern.CASE_INSENSITIVE);
-
-    private static final Pattern EXECUTE_NOW_PATTERN = Pattern.compile(
-            "立即执行|马上执行|现在执行|执行.*任务|帮忙执行|提前执行|手动执行",
-            Pattern.CASE_INSENSITIVE);
-
-    private boolean isCancelRequest(String text) {
-        return text != null && CANCEL_PATTERN.matcher(text).find();
-    }
-
-    private boolean isListRequest(String text) {
-        return text != null && LIST_PATTERN.matcher(text).find();
-    }
-
-    private boolean isExecuteNowRequest(String text) {
-        return text != null && EXECUTE_NOW_PATTERN.matcher(text).find();
-    }
-
-    private String extractTaskIdentifier(String text) {
-        java.util.regex.Matcher m = Pattern.compile("(\\d+)").matcher(text);
+    private static String extractTaskId(String text) {
+        java.util.regex.Matcher m = java.util.regex.Pattern.compile("(\\d+)").matcher(text);
         if (m.find()) return m.group(1);
         return text;
     }
-
 
     /** 将当前待处理图片写入聊天记忆。 */
     public void saveReceivedImageMemory(String userId) {

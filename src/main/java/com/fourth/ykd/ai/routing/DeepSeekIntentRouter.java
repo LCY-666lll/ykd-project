@@ -38,6 +38,8 @@ public class DeepSeekIntentRouter {
     private static final Pattern VOICE_REPLY_PATTERN = pattern(
             "用语音.{0,8}(回复|回答|告诉|说)|语音回复|语音回答|说给我听|读给我听|读出来"
                     + "|发一段语音|用声音.{0,8}(回复|回答|告诉)");
+    private static final Pattern TASK_SCHEDULED_PATTERN = pattern("定时任务|定时提醒|延迟提醒|稍后提醒|到.*点.*提醒");
+    private static final Pattern TASK_PERIODIC_PATTERN = pattern("周期任务|周期性|每隔|每\\d+分钟|每\\d+小时|每\\d+秒|每天早上|每天晚上|每周");
 
     private final ChatClient routeChatClient;
     private final ChatMemory chatMemory;
@@ -85,6 +87,15 @@ public class DeepSeekIntentRouter {
         String text = userText == null ? "" : userText.trim();
         if (text.isEmpty()) {
             return Optional.empty();
+        }
+
+        // 定时任务 → TASK_SCHEDULED 意图
+        if (matches(TASK_SCHEDULED_PATTERN, text)) {
+            return Optional.of(UserIntent.TASK_SCHEDULED);
+        }
+        // 周期任务 → TASK_PERIODIC 意图
+        if (matches(TASK_PERIODIC_PATTERN, text)) {
+            return Optional.of(UserIntent.TASK_PERIODIC);
         }
 
         Set<UserIntent> businessCandidates = EnumSet.noneOf(UserIntent.class);
@@ -135,9 +146,10 @@ public class DeepSeekIntentRouter {
 
     /** 构造仅包含路由规则的系统提示词。 */
     private String buildRouteInstructions(boolean hasPendingImage) {
-        String intents = hasPendingImage
+        String base = hasPendingImage
                 ? "TEXT, IMAGE_GENERATE, IMAGE_EDIT, IMAGE_UNDERSTAND, FILE_GENERATE, VOICE_REPLY"
                 : "TEXT, IMAGE_GENERATE, FILE_GENERATE, VOICE_REPLY";
+        String intents = base + ", TASK_SCHEDULED, TASK_PERIODIC";
         return """
                 你是消息意图路由器，只负责选择意图，不负责回答、搜索、整理内容或生成文件。
                 必须从以下可选意图中选择一个：%s。
@@ -149,7 +161,9 @@ public class DeepSeekIntentRouter {
                 IMAGE_GENERATE：用户希望生成独立新图片且不使用当前图片。
                 VOICE_REPLY：仅当用户明确要求机器人使用语音、声音回答，或把内容读出来时使用。用户发送的是语音消息，不代表要求语音回复。
                 图片理解、图片编辑、图片生成和文件生成请求优先选择各自意图，不因同时出现“语音”而改选 VOICE_REPLY。
-                TEXT：普通对话、知识问答、搜索请求或文字任务，且没有要求生成、导出或下载文件。
+                TEXT：普通对话、知识问答、搜索请求、文字任务，且没有明确要求生成文件、导出文件、设置定时任务或设置周期任务。
+                TASK_SCHEDULED：用户要求设置一次性延迟任务，如"30分钟后提醒我""到11:00提醒开会""过5分钟叫我""1小时后发消息"等。
+                TASK_PERIODIC：用户要求设置重复执行的周期任务，如"每天早上8点发新闻""每1分钟发送天气""每30分钟提醒""每隔10秒刷新"等。
                 “帮我写一篇文章”选择 TEXT；只有明确要求导出、下载或生成文件时才选择 FILE_GENERATE。
                 “用表格列出”不等于 XLSX；只有明确要求 Excel、XLSX、电子表格或表格文件时才选择 FILE_GENERATE。
                 存在当前图片时，“换背景”选择 IMAGE_EDIT，“图片里有什么”选择 IMAGE_UNDERSTAND。

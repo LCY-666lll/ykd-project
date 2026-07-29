@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class FileGenerationToolTypeTest {
 
     private final FileGenerationTool tool = new FileGenerationTool(
-            null, null, null, null, null, null, "");
+            null, null, null, null, null, null, null, "");
 
     @Test
     void shouldPreferExplicitPdfOverModelDocx() {

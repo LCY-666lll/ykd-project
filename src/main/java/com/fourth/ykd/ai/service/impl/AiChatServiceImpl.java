@@ -47,6 +47,25 @@ public class AiChatServiceImpl implements AiChatService {
                     用户本轮提出独立的新问题时，不得把历史消息中的旧回答、旧事实或旧工具结果当作本轮答案的依据。
                     天气、新闻、时间、价格、政策等可能变化的信息，必须以本轮工具查询结果为准。
                     用户明确说“新话题”“不要参考历史”或“忽略之前内容”时，本轮不得使用聊天历史。
+            12. 当用户要求创建、查看、删除或立即执行周期任务时，必须调用对应工具获取真实结果，
+                严禁未调用工具就自行编造”任务已创建”或任务列表。
+                create_periodic_task 用于重复执行的周期任务，schedule_task 用于一次性延迟任务，两者不可混用。
+                - 创建：create_periodic_task（用户说”每天早上8点发新闻””每30分钟提醒””每隔10分钟发送天气”等重复性需求）
+                - 查看：list_periodic_tasks（用户说”查看周期任务””有哪些周期任务””我设置了哪些任务”等）
+                - 删除：delete_periodic_task（用户说”删除/取消某任务”时提供任务名或ID）
+                - 立即执行：execute_periodic_task_now（用户说”立即/马上执行某任务”）
+                用户仅陈述事实性习惯或客观规律（如”我每5分钟检查一次邮箱””高铁每30分钟一班”），
+                而非指示你创建任务时，不得调用 create_periodic_task。
+                当用户明确表达”设置””创建””帮我””给我安排”等操作意图且包含时间频率时，
+                必须调用 create_periodic_task。
+            13. 当用户要求设置一次性延迟提醒时，必须调用定时任务工具获取真实结果：
+                - 创建：schedule_task（用户说”30分钟后提醒我喝水””5分钟后查询天气””1小时后发消息”）
+                - 查看：list_scheduled_tasks（用户说”查看定时任务””有哪些待执行的任务”等）
+                - 取消：cancel_scheduled_task（用户说”取消定时任务”时使用返回的taskId）
+                用户仅说”提醒我””帮我记着”但未指定具体延迟时间时，应追问延迟多久。
+                用户要求重复执行应调用 create_periodic_task，而非 schedule_task。
+            14. 硬性约束：涉及周期任务或定时任务的任何操作，必须先调用对应工具，再基于工具返回值回复用户。
+                在未收到工具返回值之前，严禁声称任务已创建、已删除或返回任何任务列表。
             """;
 
     private static final int PERSISTED_MEMORY_LIMIT = 20;
@@ -64,6 +83,10 @@ public class AiChatServiceImpl implements AiChatService {
     private final WeatherTool weatherTool;
 
     private final BaiduSearchTool baiduSearchTool;
+
+    private final PeriodicTaskTool periodicTaskTool;
+
+    private final ScheduledTaskTool scheduledTaskTool;
 
     private final ChatMemory chatMemory;
 
@@ -97,18 +120,24 @@ public class AiChatServiceImpl implements AiChatService {
 
         log.info("[AI][MEMORY_CHAT] conversationId={}", normalizedConversationId);
 
-        String answer = springAiChatClient.prompt()
-                .system(TOOL_USAGE_INSTRUCTIONS + """
-                        系统已支持 PDF、DOCX、XLSX 文件生成，以及文生图、参考图编辑、图片识别和语音合成。
-                        不得声称这些能力不存在或无法使用；用户追问先前生成结果时，应基于聊天记忆如实说明。
-                        当用户明确要求语音回复时，外层系统会把回答正文合成为语音；你只需正常回答用户的问题，
-                        输出适合朗读的正文，不得声称自己只能文本交互、不能语音回复，也不要解释语音合成过程。
-                        """)
-                .user(normalizedMessage)
-                .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
-                .tools(mathCalculatorTools,timeTool,baiduSearchTool,weatherTool,translationTool)
-                .call()
-                .content();
+        ScheduledTaskTool.setCurrentUserId(normalizedConversationId);
+        String answer;
+        try {
+            answer = springAiChatClient.prompt()
+                    .system(TOOL_USAGE_INSTRUCTIONS + """
+                            系统已支持 PDF、DOCX、XLSX 文件生成，以及文生图、参考图编辑、图片识别和语音合成。
+                            不得声称这些能力不存在或无法使用；用户追问先前生成结果时，应基于聊天记忆如实说明。
+                            当用户明确要求语音回复时，外层系统会把回答正文合成为语音；你只需正常回答用户的问题，
+                            输出适合朗读的正文，不得声称自己只能文本交互、不能语音回复，也不要解释语音合成过程。
+                            """)
+                    .user(normalizedMessage)
+                    .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
+                    .tools(mathCalculatorTools, timeTool, baiduSearchTool, weatherTool, translationTool, periodicTaskTool, scheduledTaskTool)
+                    .call()
+                    .content();
+        } finally {
+            ScheduledTaskTool.clearCurrentUserId();
+        }
 
         // 模型回答成功后，把 bot 回复写入 SQLite。
         sqliteChatMessageRepository.save(

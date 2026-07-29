@@ -16,7 +16,8 @@ import com.fourth.ykd.ai.service.ImageReferenceGenerationService;
 import com.fourth.ykd.ai.service.ImageUnderstandingService;
 import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
 import com.fourth.ykd.ai.utils.FileGenerationTool;
-import com.fourth.ykd.ai.utils.PeriodicDutyTool;
+import com.fourth.ykd.ai.utils.PeriodicTaskTool;
+import com.fourth.ykd.ai.utils.ScheduledTaskTool;
 import java.time.Instant;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,8 @@ class IlinkReplyProcessorTest {
         ImageUnderstandingService understandingService = mock(ImageUnderstandingService.class);
         ImageContextService imageContextService = mock(ImageContextService.class);
         FileGenerationTool fileGenerationTool = mock(FileGenerationTool.class);
-        PeriodicDutyTool periodicDutyTool = mock(PeriodicDutyTool.class);
+        PeriodicTaskTool periodicTaskTool = mock(PeriodicTaskTool.class);
+        ScheduledTaskTool scheduledTaskTool = mock(ScheduledTaskTool.class);
         FileContextService fileContextService = mock(FileContextService.class);
         FileUnderstandingService fileUnderstandingService = mock(FileUnderstandingService.class);
         ChatMemory chatMemory = mock(ChatMemory.class);
@@ -42,7 +44,9 @@ class IlinkReplyProcessorTest {
         IlinkReplyProcessor processor = new IlinkReplyProcessor(aiChatService, intentRouter,
                 imageGenerationService, referenceGenerationService, understandingService,
                 imageContextService, fileGenerationTool,
-                periodicDutyTool, fileContextService, fileUnderstandingService,
+                fileContextService, fileUnderstandingService,
+                periodicTaskTool,
+                scheduledTaskTool,
                 chatMemory, chatMessageRepository);
         PendingUserImage image = new PendingUserImage(new byte[]{1}, "image/png", Instant.now());
         when(imageContextService.findActive("user-1")).thenReturn(Optional.of(image));
