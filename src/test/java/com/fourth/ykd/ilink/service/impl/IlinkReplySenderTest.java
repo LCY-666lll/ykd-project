@@ -1,5 +1,6 @@
 package com.fourth.ykd.ilink.service.impl;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -8,9 +9,11 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import com.fourth.ykd.ai.dto.GeneratedAudio;
+import com.fourth.ykd.ai.dto.GeneratedImage;
 import com.fourth.ykd.ai.routing.UserIntent;
 import com.fourth.ykd.ai.service.AudioSynthesisService;
 import com.fourth.ykd.ai.service.ImageContextService;
+import com.fourth.ykd.ai.service.impl.InMemoryImageContextService;
 import com.github.wechat.ilink.sdk.ILinkClient;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
@@ -64,5 +67,36 @@ class IlinkReplySenderTest {
         verify(audioSynthesisService).synthesize("语音回答内容");
         verify(client).sendFile(USER_ID, audioBytes, "reply.mp3", null);
         verify(client, never()).sendText(USER_ID, VOICE_CAPABILITY_TIP);
+    }
+
+    @Test
+    void shouldSaveImageContextAfterImageSentSuccessfully() throws Exception {
+        byte[] imageBytes = {1, 2, 3};
+        GeneratedImage image = new GeneratedImage(imageBytes, "result.png", "image/png");
+        IlinkReplyProcessor.ReplyResult result = IlinkReplyProcessor.ReplyResult.image(
+                UserIntent.IMAGE_GENERATE, image, null);
+
+        sender.sendTextModeReply(client, USER_ID, result, System.currentTimeMillis());
+
+        InOrder order = inOrder(client, imageContextService);
+        order.verify(client).sendImage(USER_ID, imageBytes, "result.png", null);
+        order.verify(imageContextService).save(USER_ID, imageBytes);
+    }
+
+    @Test
+    void shouldKeepEditedImageAfterOldImageCleanup() throws Exception {
+        InMemoryImageContextService contextService = new InMemoryImageContextService();
+        byte[] oldImageBytes = {1};
+        byte[] editedImageBytes = {2};
+        contextService.save(USER_ID, oldImageBytes);
+        var oldImage = contextService.findActive(USER_ID).orElseThrow();
+        IlinkReplySender localSender = new IlinkReplySender(audioSynthesisService, contextService);
+        IlinkReplyProcessor.ReplyResult result = IlinkReplyProcessor.ReplyResult.image(
+                UserIntent.IMAGE_EDIT, new GeneratedImage(editedImageBytes, "edited.png", "image/png"), oldImage);
+
+        localSender.sendTextModeReply(client, USER_ID, result, System.currentTimeMillis());
+
+        assertThat(contextService.findActive(USER_ID).orElseThrow().bytes())
+                .isSameAs(editedImageBytes);
     }
 }

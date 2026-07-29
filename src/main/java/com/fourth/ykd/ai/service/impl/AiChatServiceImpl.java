@@ -37,7 +37,8 @@ public class AiChatServiceImpl implements AiChatService {
             2. 用户询问新闻、时事、最新动态或发生了什么时，应调用 search_realtime_information，不得使用训练数据编造实时信息。
             3. 用户未明确地区时，搜索并优先总结中国国家层面的新闻；首次新闻查询调用 search_realtime_information 时 num 传8。工具实际返回多少条有效结果就总结多少条，不得仅因少于8条而声称未搜到消息。每条新闻使用“标题 + 发生了什么 + 关键影响或进展”写成2到3句，只能依据本次搜索结果扩展事实；信息不足时如实简短说明，不得编造。不展示链接，末尾固定追加“您希望了解上述新闻的更多消息吗？”。
             4. 用户明确城市、省份、自治区或国家地区时，直接搜索并回答该地区新闻，不先返回全国新闻。
-            5. 用户追问某条新闻的详情、来源、原文或链接时，调用 search_realtime_information 补充对应信息，并在回答中展示相关链接。
+            5. \u7528\u6237\u8ffd\u95ee\u67d0\u6761\u65b0\u95fb\u7684\u8be6\u60c5\u3001\u539f\u6587\u6216\u94fe\u63a5\uff0c\u6216\u660e\u786e\u8981\u6c42\u91cd\u65b0\u67e5\u6700\u65b0\u6d88\u606f\u65f6\uff0c\u8c03\u7528 search_realtime_information \u8865\u5145\u5bf9\u5e94\u4fe1\u606f\uff0c\u5e76\u5728\u56de\u7b54\u4e2d\u5c55\u793a\u76f8\u5173\u94fe\u63a5\u3002
+               \u7528\u6237\u8ffd\u95ee\u521a\u624d\u65b0\u95fb\u3001\u4e0a\u9762\u5185\u5bb9\u3001\u5df2\u751f\u6210\u6587\u6863\u6216\u56fe\u7247\u7684\u201c\u4f9d\u636e\u3001\u6839\u636e\u3001\u6765\u6e90\u662f\u4ec0\u4e48\u201d\u4f46\u6ca1\u6709\u8981\u6c42\u539f\u6587\u3001\u94fe\u63a5\u6216\u91cd\u65b0\u67e5\u8be2\u65f6\uff0c\u4f18\u5148\u4f9d\u636e\u804a\u5929\u8bb0\u5fc6\u4e2d\u7684\u3010\u5de5\u5177\u4f9d\u636e\u8bb0\u5fc6\u3011\u3001\u3010\u6587\u4ef6\u751f\u6210\u8bb0\u5fc6\u3011\u6216\u4e0a\u4e00\u8f6e\u56de\u7b54\u8bf4\u660e\uff0c\u4e0d\u8981\u91cd\u590d\u8c03\u7528\u641c\u7d22\u5de5\u5177\u3002
             6. search_realtime_information 返回“实时搜索失败”时，不得再次更换关键词重试，不得调用其他工具，也不得使用训练数据补充新闻；只回复“暂未取得实时新闻，请稍后重试。”
             7. 用户出现翻译、译成、转成、英文、日语、韩语等翻译意图时，必须调用 translate_text，模型不得自行翻译。用户说上文、上面、这句、这段、刚才或前一条时，从聊天记忆取得最近一条可翻译文本后作为工具 text 参数。用户未说明目标语言时，只追问目标语言，不调用工具。translate_text 调用失败时，只说明翻译服务失败，不得自行补翻译。
             8. 用户提出算式或要求精确数值计算时，必须调用 calculate_math_expression，不得由模型自行估算。
@@ -113,12 +114,12 @@ public class AiChatServiceImpl implements AiChatService {
                 .tools(mathCalculatorTools,timeTool,baiduSearchTool,weatherTool,translationTool)
                 .call()
                 .content();
-
+        String normalizedAnswer = StringUtils.hasText(answer) ? answer.trim() : "我在的，有什么需要我帮忙？";
         // 模型回答成功后，把 bot 回复写入 SQLite。
         sqliteChatMessageRepository.save(
                 normalizedConversationId,
                 PersistedChatMessage.Role.ASSISTANT,
-                answer
+                normalizedAnswer
         );
 
         sqliteChatMessageRepository.softDeleteOldMessages(
@@ -126,7 +127,7 @@ public class AiChatServiceImpl implements AiChatService {
                 MAX_PERSISTED_MEMORY_MESSAGES
         );
 
-        return new AiChatResponse(answer);
+        return new AiChatResponse(normalizedAnswer);
     }
 
     @Override

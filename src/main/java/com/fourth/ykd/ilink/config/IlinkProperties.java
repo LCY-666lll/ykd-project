@@ -103,7 +103,7 @@ public class IlinkProperties {
      */
     private long pollDelayMs = 500;
 
-    // Application reply worker settings; separate from the SDK IO pool.
+
     private int replyCoreThreads = 1;
 
     private int replyMaxThreads = 1;

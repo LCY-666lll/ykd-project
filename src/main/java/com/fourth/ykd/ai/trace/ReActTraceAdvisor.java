@@ -1,8 +1,11 @@
 package com.fourth.ykd.ai.trace;
 
+import com.fourth.ykd.ai.dto.PersistedChatMessage;
+import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
 import com.fourth.ykd.exception.BusinessException;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -30,13 +33,20 @@ public class ReActTraceAdvisor extends ToolCallAdvisor {
 
     private static final String TRACE_CONTEXT_KEY = ReActTraceAdvisor.class.getName() + ".trace";
     private static final int MAX_LOG_LENGTH = 1_500;
+    private static final int MAX_EVIDENCE_MEMORY_LENGTH = 4_000;
     private static final int MAX_TOOL_ROUNDS = 8;
     private static final Pattern SENSITIVE_VALUE_PATTERN = Pattern.compile(
             "(?i)(\\\"?(?:api[-_]?key|access[-_]?key|secret|token|password|authorization)\\\"?\\s*[:=]\\s*)(\\\"(?:\\\\.|[^\\\"])*\\\"|[^,}\\s]+)"
     );
 
-    public ReActTraceAdvisor(ToolCallingManager toolCallingManager, int advisorOrder) {
+    private final ChatMemory chatMemory;
+    private final SqliteChatMessageRepository sqliteChatMessageRepository;
+
+    public ReActTraceAdvisor(ToolCallingManager toolCallingManager, int advisorOrder,
+            ChatMemory chatMemory, SqliteChatMessageRepository sqliteChatMessageRepository) {
         super(toolCallingManager, advisorOrder);
+        this.chatMemory = chatMemory;
+        this.sqliteChatMessageRepository = sqliteChatMessageRepository;
     }
 
     @Override
@@ -104,6 +114,7 @@ public class ReActTraceAdvisor extends ToolCallAdvisor {
             log.info("[AI][REACT][FINAL] traceId={}, steps={}, toolRounds={}, reasoningPresent={}, promptTokens={}, completionTokens={}, totalTokens={}, elapsedMs={}",
                     trace.traceId, trace.step, trace.toolRounds, trace.reasoningPresent, trace.promptTokens, trace.completionTokens,
                     trace.promptTokens + trace.completionTokens, trace.elapsedMillis());
+            saveToolEvidenceMemory(trace);
         }
         return response;
     }
@@ -122,6 +133,37 @@ public class ReActTraceAdvisor extends ToolCallAdvisor {
         return conversationId == null ? "default" : String.valueOf(conversationId);
     }
 
+    private void saveToolEvidenceMemory(TraceState trace) {
+        if (trace.evidenceEntries.isEmpty()) {
+            return;
+        }
+        String content = """
+                \u3010\u5de5\u5177\u4f9d\u636e\u8bb0\u5fc6\u3011
+                \u672c\u8f6e\u81ea\u52a8\u8c03\u7528\u5de5\u5177\u53d6\u5f97\u4ee5\u4e0b\u7ed3\u679c\u3002\u540e\u7eed\u7528\u6237\u8ffd\u95ee\u521a\u624d\u7ed3\u679c\u3001\u4f9d\u636e\u3001\u6765\u6e90\u6216\u5df2\u751f\u6210\u5185\u5bb9\u65f6\u4f18\u5148\u53c2\u8003\uff1b\u7528\u6237\u660e\u786e\u8981\u6c42\u91cd\u65b0\u67e5\u8be2\u5b9e\u65f6\u4fe1\u606f\u65f6\u624d\u91cd\u65b0\u8c03\u7528\u5de5\u5177\u3002
+                %s
+                """.formatted(trimEvidence(String.join(System.lineSeparator() + System.lineSeparator(), trace.evidenceEntries)));
+        try {
+            chatMemory.add(trace.conversationId, List.of(new AssistantMessage(content)));
+            sqliteChatMessageRepository.save(trace.conversationId, PersistedChatMessage.Role.ASSISTANT, content);
+            sqliteChatMessageRepository.softDeleteOldMessages(trace.conversationId, 100);
+        } catch (RuntimeException exception) {
+            log.warn("[AI][REACT][EVIDENCE_MEMORY_SAVE_FAILED] traceId={}, conversationId={}",
+                    trace.traceId, trace.conversationId, exception);
+        }
+    }
+
+    private static String trimEvidence(String value) {
+        return value.length() <= MAX_EVIDENCE_MEMORY_LENGTH
+                ? value
+                : value.substring(0, MAX_EVIDENCE_MEMORY_LENGTH) + "...";
+    }
+
+    private static boolean isEvidenceTool(String toolName) {
+        return Set.of("search_realtime_information", "query_current_weather", "query_weather_forecast",
+                "get_time_info", "translate_text", "calculate_math_expression").contains(toolName);
+    }
+
+
     private static TraceState traceState(Map<String, Object> context) {
         Object trace = context.get(TRACE_CONTEXT_KEY);
         return trace instanceof TraceState traceState ? traceState : null;
@@ -132,6 +174,7 @@ public class ReActTraceAdvisor extends ToolCallAdvisor {
         private final String conversationId;
         private final long startedAtNanos = System.nanoTime();
         private final Set<String> loggedObservations = new HashSet<>();
+        private final List<String> evidenceEntries = new ArrayList<>();
         private int step;
         private int toolRounds;
         private int promptTokens;
@@ -149,8 +192,14 @@ public class ReActTraceAdvisor extends ToolCallAdvisor {
         private void logNewObservations(List<Message> messages) {
             toolResponses(messages)
                     .filter(response -> loggedObservations.add(key(response)))
-                    .forEach(response -> log.info("[AI][REACT][OBSERVATION] traceId={}, step={}, tool={}, result={}",
-                            traceId, step, response.name(), sanitize(response.responseData())));
+                    .forEach(response -> {
+                        String result = sanitize(response.responseData());
+                        if (isEvidenceTool(response.name())) {
+                            evidenceEntries.add("\u5de5\u5177\uff1a" + response.name() + System.lineSeparator() + "\u7ed3\u679c\uff1a" + result);
+                        }
+                        log.info("[AI][REACT][OBSERVATION] traceId={}, step={}, tool={}, result={}",
+                                traceId, step, response.name(), result);
+                    });
         }
 
         private java.util.stream.Stream<ToolResponseMessage.ToolResponse> toolResponses(List<Message> messages) {

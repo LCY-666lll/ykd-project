@@ -1,5 +1,7 @@
 package com.fourth.ykd.ai.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fourth.ykd.ai.dto.GeneratedDocument;
 import com.fourth.ykd.ai.dto.PersistedChatMessage;
 import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
@@ -31,6 +33,7 @@ import org.springframework.util.StringUtils;
 @Component
 public class FileGenerationTool {
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
     private final ChatClient springAiChatClient;
     private final String pdfChineseFontPath;
     private final BaiduSearchTool baiduSearchTool;
@@ -62,24 +65,33 @@ public class FileGenerationTool {
 
     public List<GeneratedDocument> generate(String userId, String userText) {
         log.info("[AI][FILE_GENERATE][START] userId={}, userText={}", userId, userText);
-        FileDraft draft = springAiChatClient.prompt().system("""
+        String rawDraft = springAiChatClient.prompt().system("""
                 你负责根据当前聊天历史、图片识别记忆和用户请求生成可下载文件。
-                支持 DOCX、XLSX、PDF；可以同时生成多个格式。必须只返回 JSON：
+                支持 DOCX、XLSX、PDF，可以同时生成多个格式。
+                必须只返回一个合法 JSON 对象，不要 Markdown，不要代码块，不要解释文字。
+                JSON 格式：
                 {"types":["DOCX","XLSX","PDF"],"title":"文件标题","content":"完整内容"}
-                用户查询现在、当前、实时天气或今天此刻天气时，必须调用 query_current_weather。
-                用户查询今天至后天的最高最低温、每日预报或未来3天天气时，必须调用 query_weather_forecast。
-                用户要求查询新闻、时事、最近、今天、昨天、上个月或指定日期范围的信息时，必须调用 search_realtime_information。
-                用户提出算式或精确数值计算时，必须调用 calculate_math_expression。
-                用户查询真实当前日期、时间或日期间隔时，必须调用 get_time_info。
-                用户明确要求翻译时，必须调用 translate_text。
-                工具调用失败时不得使用训练数据编造实时结果。
-                用户明确指定 PDF、DOCX/Word、XLSX/Excel/表格时，types 必须严格返回用户指定的全部格式。
-                未明确格式时 types 返回 ["DOCX"]；XLSX 内容使用换行分隔记录、使用 | 分隔单元格；只输出 JSON，不要解释。
+                字段要求：
+                - types 只能包含 DOCX、XLSX、PDF。用户未明确格式时返回 ["DOCX"]。
+                - title 使用简短中文标题，不要包含文件扩展名。
+                - content 必须是 JSON 字符串；换行必须写成 \\n，双引号必须转义。
+                - 用户明确指定 PDF、DOCX/Word、XLSX/Excel/表格时，types 必须严格返回用户指定的全部格式。
+                - XLSX 内容使用换行分隔记录，使用 | 分隔单元格。
+
+                工具调用规则：
+                - 用户查询现在、当前、实时天气或今天此刻天气时，必须调用 query_current_weather。
+                - 用户查询今天至后天的最高最低温、每日预报或未来 3 天天气时，必须调用 query_weather_forecast。
+                - 用户要求查询新闻、时事、最近、今天、昨天、上个月或指定日期范围的信息时，必须调用 search_realtime_information。
+                - 用户提出算式或精确数值计算时，必须调用 calculate_math_expression。
+                - 用户查询真实当前日期、时间或日期间隔时，必须调用 get_time_info。
+                - 用户明确要求翻译时，必须调用 translate_text。
+                - 工具调用失败时不得使用训练数据编造实时结果。
                 """).user(userText.trim())
                 .advisors(spec -> spec.param(ChatMemory.CONVERSATION_ID, userId))
                 .tools(mathCalculatorTool, timeTool, baiduSearchTool, weatherTool, translationTool)
                 .call()
-                .entity(FileDraft.class);
+                .content();
+        FileDraft draft = parseDraft(rawDraft, userText);
         if (draft == null || !StringUtils.hasText(draft.content())) {
             throw new BusinessException(50006, "文件内容生成失败");
         }
@@ -118,8 +130,8 @@ public class FileGenerationTool {
             explicitTypes.add("DOCX");
         }
         if (normalizedText.contains("XLSX") || normalizedText.contains("EXCEL")
-                || normalizedText.matches("(?s).*(生成|导出|制作|创建).{0,6}表格.*")
-                || normalizedText.matches("(?s).*表格.{0,6}(文件|格式).*")) {
+                || normalizedText.contains("电子表格")
+                || normalizedText.contains("表格文件")) {
             explicitTypes.add("XLSX");
         }
         if (normalizedText.contains("PDF")) {
@@ -137,6 +149,35 @@ public class FileGenerationTool {
             }
         }
         return result.isEmpty() ? List.of("DOCX") : List.copyOf(result);
+    }
+
+    private FileDraft parseDraft(String rawDraft, String userText) {
+        if (!StringUtils.hasText(rawDraft)) {
+            return new FileDraft(resolveTypes(userText, null), "文件内容", userText.trim());
+        }
+        String json = extractJsonObject(rawDraft.trim());
+        if (StringUtils.hasText(json)) {
+            try {
+                return objectMapper.readValue(json, FileDraft.class);
+            } catch (JsonProcessingException exception) {
+                log.warn("[AI][FILE_GENERATE][JSON_PARSE_FAILED] rawDraft={}", rawDraft, exception);
+            }
+        } else {
+            log.warn("[AI][FILE_GENERATE][JSON_MISSING] rawDraft={}", rawDraft);
+        }
+        return new FileDraft(resolveTypes(userText, null), "文件内容", stripMarkdownFence(rawDraft).trim());
+    }
+
+    private String extractJsonObject(String text) {
+        String stripped = stripMarkdownFence(text);
+        int start = stripped.indexOf('{');
+        int end = stripped.lastIndexOf('}');
+        return start >= 0 && end > start ? stripped.substring(start, end + 1) : null;
+    }
+
+    private String stripMarkdownFence(String text) {
+        return text.replaceFirst("(?s)^```(?:json)?\\s*", "")
+                .replaceFirst("(?s)\\s*```$", "");
     }
 
     private GeneratedDocument createDocx(String title, String content) {
@@ -212,6 +253,7 @@ public class FileGenerationTool {
         }
         return result.toString();
     }
+
     private String safeName(String title) {
         String result = title.replaceAll("[\\\\/:*?\"<>|\\r\\n]+", "_").trim();
         return StringUtils.hasText(result) ? result.substring(0, Math.min(result.length(), 40)) : "文件内容";

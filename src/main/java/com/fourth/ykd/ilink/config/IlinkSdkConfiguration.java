@@ -15,6 +15,10 @@ SDK 配置 ILinkConfig
         ↓
 ILinkClient.builder().config(...)*/
 @Configuration
+/*注册 IlinkProperties
+→ 读取 ilink.*
+→ 完成字段绑定
+→ 放入 Spring 容器*/
 @EnableConfigurationProperties(IlinkProperties.class)
 public class IlinkSdkConfiguration {
 
@@ -27,7 +31,10 @@ public class IlinkSdkConfiguration {
                 .httpMaxRetries(properties.getHttpMaxRetries())
                 .retryBaseDelayMs(properties.getRetryBaseDelayMs())
                 .retryMaxDelayMs(properties.getRetryMaxDelayMs())
+
+                //解决多个请求同时失败后又同时重试的问题：随机抖动会让它们的重试时间稍微错开。
                 .retryJitterEnabled(true)
+
                 .heartbeatEnabled(properties.isHeartbeatEnabled())
                 .ioCoreThreads(properties.getIoCoreThreads())
                 .ioMaxThreads(properties.getIoMaxThreads())

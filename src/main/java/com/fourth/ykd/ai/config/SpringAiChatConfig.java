@@ -1,13 +1,12 @@
 package com.fourth.ykd.ai.config;
 
+import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
 import com.fourth.ykd.ai.trace.ReActTraceAdvisor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.model.tool.ToolCallingManager;
 import org.springframework.core.Ordered;
-import org.springframework.ai.chat.model.ChatModel;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,7 +32,7 @@ public class SpringAiChatConfig {
     如果直接得到已经构造完成的 ChatClient，再添加默认记忆拦截逻辑就不方便。
      Builder 允许：添加默认 Advisor 添加默认系统配置 最终 build*/
     public ChatClient aiMemoryChatClient(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory,
-            ToolCallingManager toolCallingManager) {
+            ToolCallingManager toolCallingManager, SqliteChatMessageRepository sqliteChatMessageRepository) {
 
         /*MessageChatMemoryAdvisor 是一个聊天记忆顾问，也可以理解成一个拦截器。
         它会在调用大模型前后自动做两件事：
@@ -57,7 +56,8 @@ public class SpringAiChatConfig {
 
 // 注册到 Builder 内部
         chatClientBuilder.defaultAdvisors(memoryAdvisor,
-                new ReActTraceAdvisor(toolCallingManager, Ordered.HIGHEST_PRECEDENCE + 300));
+                new ReActTraceAdvisor(toolCallingManager, Ordered.HIGHEST_PRECEDENCE + 300,
+                        chatMemory, sqliteChatMessageRepository));
 
 // 构建 ChatClient
         return chatClientBuilder.build();

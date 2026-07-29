@@ -1,11 +1,13 @@
 package com.fourth.ykd.ilink.config;
 
 import java.util.concurrent.ThreadPoolExecutor;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 /*创建 iLinkReplyExecutor 回复线程池。模型调用、发消息都放到这里，不阻塞轮询线程。
-线程池解决的是：把耗时的 AI 回复任务从微信消息接收线程中拿出去，
+线程池解决的是：让耗时的 AI 回复离开微信消息轮询线程。
 保证机器人在生成 PDF、图片、语音或等待模型时，仍然可以继续接收后续微信消息。
 
 “接收消息”和“处理回复”解耦：
@@ -21,19 +23,22 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 */
 @Configuration
+@RequiredArgsConstructor
 public class IlinkReplyExecutorConfiguration {
 
-    @Bean(name = "iLinkReplyExecutor")
-    public ThreadPoolTaskExecutor iLinkReplyExecutor(
-            IlinkProperties properties
-    ) {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+    private final IlinkProperties properties;
 
+    @Bean(name = "iLinkReplyExecutor")
+    public ThreadPoolTaskExecutor iLinkReplyExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        //AI 回复线程
         executor.setThreadNamePrefix("ilink-reply-");
         executor.setCorePoolSize(properties.getReplyCoreThreads());
         executor.setMaxPoolSize(properties.getReplyMaxThreads());
         executor.setQueueCapacity(properties.getReplyQueueCapacity());
 
+        /*抛出拒绝 执行异常。
+        后面的回复服务会捕获：RejectedExecutionException 并执行失败提示或降级。*/
         executor.setRejectedExecutionHandler(
                 new ThreadPoolExecutor.AbortPolicy()
         );

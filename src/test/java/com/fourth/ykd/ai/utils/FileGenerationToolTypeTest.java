@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class FileGenerationToolTypeTest {
 
     private final FileGenerationTool tool = new FileGenerationTool(
-            null, null, null, null, null, null, "");
+            null, null, null, null, null, null, null, "");
 
     @Test
     void shouldPreferExplicitPdfOverModelDocx() {
@@ -24,11 +24,16 @@ class FileGenerationToolTypeTest {
     }
 
     @Test
-    void shouldTreatGeneratedTableAsXlsx() {
+    void shouldUseModelTypeForTableLayoutWithoutExplicitFileFormat() {
         assertThat(tool.resolveTypes("请生成表格，列出每日课程和负责人", List.of("DOCX")))
-                .containsExactly("XLSX");
+                .containsExactly("DOCX");
     }
 
+    @Test
+    void shouldTreatExplicitTableFileAsXlsx() {
+        assertThat(tool.resolveTypes("请生成表格文件，列出每日课程和负责人", List.of("DOCX")))
+                .containsExactly("XLSX");
+    }
     @Test
     void shouldNotTreatPdfTableLayoutAsExtraXlsxFile() {
         assertThat(tool.resolveTypes("请生成PDF，内容用表格展示", List.of("DOCX")))

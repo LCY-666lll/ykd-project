@@ -6,8 +6,12 @@ import com.fourth.ykd.ai.service.*;
 import com.fourth.ykd.ai.utils.FileGenerationTool;
 import java.time.Instant;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+import java.util.concurrent.RejectedExecutionException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.stereotype.Service;
 
@@ -28,19 +32,22 @@ public class IlinkReplyProcessor {
     private final FileGenerationTool fileGenerationTool;
     private final ChatMemory chatMemory;
     private final SqliteChatMessageRepository sqliteChatMessageRepository;
+    private final Executor imageMemoryExecutor;
 
     /** 注入现有的回复处理依赖。 */
     public IlinkReplyProcessor(AiChatService aiChatService, DeepSeekIntentRouter intentRouter,
             ImageGenerationService imageGenerationService, ImageReferenceGenerationService imageReferenceGenerationService,
             ImageUnderstandingService imageUnderstandingService, ImageContextService imageContextService,
             FileGenerationTool fileGenerationTool, ChatMemory chatMemory,
-            SqliteChatMessageRepository sqliteChatMessageRepository) {
+            SqliteChatMessageRepository sqliteChatMessageRepository,
+            @Qualifier("iLinkReplyExecutor") Executor imageMemoryExecutor) {
         this.aiChatService = aiChatService; this.intentRouter = intentRouter;
         this.imageGenerationService = imageGenerationService;
         this.imageReferenceGenerationService = imageReferenceGenerationService;
         this.imageUnderstandingService = imageUnderstandingService; this.imageContextService = imageContextService;
         this.fileGenerationTool = fileGenerationTool; this.chatMemory = chatMemory;
         this.sqliteChatMessageRepository = sqliteChatMessageRepository;
+        this.imageMemoryExecutor = imageMemoryExecutor;
     }
 
     /** 按现有意图执行业务，并产出待发送结果。 */
@@ -63,28 +70,27 @@ public class IlinkReplyProcessor {
         if (pendingImage.isPresent() && intent == UserIntent.IMAGE_EDIT) {
             log.info("[AI][IMAGE_EDIT][START] userId={}", userId);
             GeneratedImage image = imageReferenceGenerationService.generate(pendingImage.get(), userText);
-            saveGeneratedImageMemoryQuietly(userId, image, "机器人此前根据用户要求编辑并生成了一张图片");
+            saveGeneratedImageMemoryAsync(userId, image, "机器人此前根据用户要求编辑并生成了一张图片");
             log.info("[AI][IMAGE_EDIT][SUCCESS] userId={}, imageBytes={}", userId, image.bytes().length);
             return ReplyResult.image(intent, image, pendingImage.get());
         }
         if (intent == UserIntent.IMAGE_GENERATE) {
             log.info("[AI][IMAGE_GENERATE][START] userId={}", userId);
             String imagePrompt = aiChatService.prepareImagePrompt(userId, userText);
+            log.info("[AI][IMAGE_GENERATE][PROMPT] userId={}, promptLength={}",
+                    userId, imagePrompt.length());
             GeneratedImage image = imageGenerationService.generate(imagePrompt);
-            saveGeneratedImageMemoryQuietly(userId, image, "机器人此前根据用户请求生成了一张图片");
+            saveGeneratedImageMemoryAsync(userId, image, "机器人此前根据用户请求生成了一张图片");
             log.info("[AI][IMAGE_GENERATE][SUCCESS] userId={}, imageBytes={}", userId, image.bytes().length);
             return ReplyResult.image(intent, image, null);
         }
         if (intent == UserIntent.FILE_GENERATE) {
-            return ReplyResult.documents(intent, fileGenerationTool.generate(userId, userText),
-                    pendingImage.orElse(null));
+            return ReplyResult.documents(intent, fileGenerationTool.generate(userId, userText), null);
         }
         if (intent == UserIntent.VOICE_REPLY) {
-            return ReplyResult.audio(intent, aiChatService.chat(userId, userText).reply(),
-                    pendingImage.orElse(null));
+            return ReplyResult.audio(intent, aiChatService.chat(userId, userText).reply(), null);
         }
-        return ReplyResult.text(intent, aiChatService.chat(userId, userText).reply(),
-                pendingImage.orElse(null));
+        return ReplyResult.text(intent, aiChatService.chat(userId, userText).reply(), null);
     }
 
     private void saveSpecialFlowUserMessage(String userId, String userText, UserIntent intent) {
@@ -102,6 +108,15 @@ public class IlinkReplyProcessor {
     }
 
     /** 识别生成图片；失败不影响图片发送。 */
+    private void saveGeneratedImageMemoryAsync(String userId, GeneratedImage generatedImage, String imageSource) {
+        try {
+            CompletableFuture.runAsync(() -> saveGeneratedImageMemoryQuietly(userId, generatedImage, imageSource),
+                    imageMemoryExecutor);
+        } catch (RejectedExecutionException exception) {
+            log.warn("[iLink][GENERATED_IMAGE_MEMORY_REJECTED] userId={}", userId, exception);
+        }
+    }
+
     private void saveGeneratedImageMemoryQuietly(String userId, GeneratedImage generatedImage, String imageSource) {
         try {
             saveImageMemory(userId, new PendingUserImage(generatedImage.bytes(), generatedImage.contentType(), Instant.now()),
@@ -111,7 +126,6 @@ public class IlinkReplyProcessor {
         }
     }
 
-    /** 识图并写入同一用户会话记忆。 */
     private void saveImageMemory(String userId, PendingUserImage image, String imageSource) {
         log.info("[AI][IMAGE_MEMORY_UNDERSTAND][START] userId={}", userId);
         String summary = imageUnderstandingService.understand(image, IMAGE_MEMORY_PROMPT);

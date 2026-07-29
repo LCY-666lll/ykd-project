@@ -92,6 +92,7 @@ public class IlinkReplySender {
     private void sendImageReply(ILinkClient client, String userId, IlinkReplyProcessor.ReplyResult result,
             long startedAt) throws IOException {
         GeneratedImage image = result.image(); client.sendImage(userId, image.bytes(), image.fileName(), null);
+        imageContextService.save(userId, image.bytes());
         log.info("[iLink][REPLY_SENT] userId={}, type=IMAGE, imageBytes={}, elapsedMs={}",
                 userId, image.bytes().length, System.currentTimeMillis() - startedAt);
         clearImageContextIfNeeded(userId, result);
