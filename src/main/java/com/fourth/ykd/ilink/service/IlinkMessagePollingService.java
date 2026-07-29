@@ -1,6 +1,7 @@
 package com.fourth.ykd.ilink.service;
 
 import com.fourth.ykd.ai.service.ImageContextService;
+import com.fourth.ykd.ai.service.ReminderService;
 import com.fourth.ykd.ilink.client.IlinkClientManager;
 import com.github.wechat.ilink.sdk.ILinkClient;
 import com.github.wechat.ilink.sdk.core.model.MessageItem;
@@ -22,6 +23,7 @@ public class IlinkMessagePollingService {
     private final IlinkClientManager clientManager;
     private final IlinkMessageReplyService ilinkMessageReplyService;
     private final ImageContextService imageContextService;
+    private final ReminderService reminderService;
 
     @Scheduled(fixedDelayString = "${ilink.poll-delay-ms:500}")
     public void pollMessages() {
@@ -50,6 +52,9 @@ public class IlinkMessagePollingService {
         }
 
         String contextToken = message.getContext_token();
+        // 用户发送消息说明 iLink 上下文已恢复，通知提醒服务刷新 contextToken
+        reminderService.onUserMessage(fromUserId, contextToken);
+
         String text = extractText(message);
         String voiceText = extractVoiceText(message);
         MessageItem imageItem = extractImageItem(message);

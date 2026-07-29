@@ -45,6 +45,14 @@ public class DeepSeekIntentRouter {
     private static final Pattern DELETE_TASK_PATTERN = pattern(
             "(取消|删除|移除|关闭|停用|清空|清掉).{0,8}(提醒|闹钟|定时|任务)"
                     + "|(提醒|闹钟|定时|任务).{0,8}(取消|删除|不要了|关掉|清掉)");
+    // BugFix#3: 排除被误判为 CREATE_TASK 的疑问/抱怨/查询句
+    // 例如"为什么没提醒我""怎么没提醒""有什么提醒"等不应触发创建提醒
+    private static final Pattern TASK_NEGATIVE_PATTERN = pattern(
+            "^\\s*(为什么|怎么|为啥|是不是|有没有|没有|怎么没|为什么没|咋没)"
+                    + "|(没提醒我|没通知我|提醒呢|通知呢|怎么没提醒|为什么没提醒|咋没提醒)"
+                    + "|(有什么提醒|有哪些提醒|查看提醒|提醒列表|当前提醒|我的提醒|所有提醒|我的定时)"
+                    + "|(为什么没|怎么没|咋没).{0,5}(提醒|通知|叫我)"
+                    + "|(提醒|通知|任务).{0,3}(呢|哪里|在哪|不见了|没了|没来)");
 
 
     private final ChatClient routeChatClient;
@@ -116,6 +124,13 @@ public class DeepSeekIntentRouter {
             return Optional.of(businessCandidates.iterator().next());
         }
         if (businessCandidates.size() > 1) {
+            return Optional.empty();
+        }
+        // BugFix#3: 排除疑问/抱怨/查询句，不误判为 CREATE_TASK 或 DELETE_TASK
+        // 这类文本交由模型路由（通常走 TEXT 或 QUERY_REMINDER 对话回复）
+        if (matches(TASK_NEGATIVE_PATTERN, text)) {
+            log.info("[AI][INTENT_ROUTE] source=LOCAL_RULE, taskNegative=true, skip CREATE_TASK/DELETE_TASK, text={}",
+                    text);
             return Optional.empty();
         }
         if (matches(CREATE_TASK_PATTERN, text)) {

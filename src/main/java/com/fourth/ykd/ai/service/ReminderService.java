@@ -7,4 +7,7 @@ public interface ReminderService {
 
     // 删除用户所有提醒任务，返回确认语
     String deleteReminder(String userId);
+
+    // 用户发送消息时更新 contextToken，用于重新登录后恢复推送能力
+    void onUserMessage(String userId, String contextToken);
 }

@@ -102,4 +102,11 @@ public class ReminderTaskRepository {
     public void deleteByUserId(String userId) {
         jdbcTemplate.update(DELETE_BY_USER_SQL, userId);
     }
+
+    private static final String UPDATE_CONTEXT_TOKEN_SQL =
+            "UPDATE reminder_task SET context_token = ? WHERE user_id = ?";
+
+    public void updateContextToken(String userId, String contextToken) {
+        jdbcTemplate.update(UPDATE_CONTEXT_TOKEN_SQL, contextToken, userId);
+    }
 }

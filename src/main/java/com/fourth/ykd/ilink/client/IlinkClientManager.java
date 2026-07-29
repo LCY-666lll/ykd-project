@@ -3,6 +3,7 @@ package com.fourth.ykd.ilink.client;
 import com.github.wechat.ilink.sdk.ILinkClient;
 import com.github.wechat.ilink.sdk.core.config.ILinkConfig;
 import jakarta.annotation.PreDestroy;
+import java.io.IOException;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -96,6 +97,29 @@ public class IlinkClientManager {
             } catch (Exception exception) {
                 log.warn("[iLink] client close failed: {}", exception.getMessage());
             }
+        }
+    }
+
+    /**
+     * 发送文本消息（提醒推送等主动场景），携带 contextToken 以恢复 iLink 会话上下文。
+     * <p>
+     * contextToken 从用户消息中提取并持久化，避免 SDK 内部缓存失效导致推送失败。
+     * 当前 SDK sendText 不直接接受 contextToken 参数，contextToken 仅用于日志追踪；
+     * 若后续 SDK 升级支持 sendText(userId, text, contextToken)，可替换此处调用。
+     */
+    public void sendText(String userId, String text, String contextToken) {
+        findClient().ifPresent(client -> {
+            try {
+                client.sendText(userId, text);
+                log.info("[iLink][SEND_WITH_CONTEXT] userId={}, hasContextToken={}, textLength={}",
+                        userId, contextToken != null, text.length());
+            } catch (IOException e) {
+                log.error("[iLink][SEND_WITH_CONTEXT_FAILED] userId={}, contextToken={}",
+                        userId, contextToken != null ? contextToken.substring(0, Math.min(8, contextToken.length())) + "..." : "null", e);
+            }
+        });
+        if (findClient().isEmpty()) {
+            log.warn("[iLink][SEND_WITH_CONTEXT_SKIPPED] userId={}, reason=NO_ILINK_CLIENT", userId);
         }
     }
 
