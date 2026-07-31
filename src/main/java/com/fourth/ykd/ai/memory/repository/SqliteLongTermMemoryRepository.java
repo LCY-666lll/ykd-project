@@ -340,7 +340,8 @@ public class SqliteLongTermMemoryRepository {
     /**
      * 查询某个用户当前有效且尚未过期的长期记忆。
      * 结果按重要性、可信度和更新时间排序；
-     * 当前由 MemoryConsolidationService 缩小已有记忆范围，也由 LongTermMemoryAdvisor 读取并注入主模型。
+     * 当前由 MemoryConsolidationService 缩小已有记忆范围，
+     * 也由 MemoryRetrievalService 读取并交给 LongTermMemoryAdvisor 注入主模型。
      */
     public List<MemoryItem> findActiveByUserId(String userId, int limit) {
         if (limit <= 0) {

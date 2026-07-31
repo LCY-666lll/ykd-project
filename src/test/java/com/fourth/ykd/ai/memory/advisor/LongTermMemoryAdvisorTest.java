@@ -4,6 +4,7 @@ import com.fourth.ykd.ai.memory.model.MemoryItem;
 import com.fourth.ykd.ai.memory.model.MemoryStatus;
 import com.fourth.ykd.ai.memory.model.MemoryType;
 import com.fourth.ykd.ai.memory.repository.SqliteLongTermMemoryRepository;
+import com.fourth.ykd.ai.memory.service.MemoryRetrievalService;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.ai.chat.client.ChatClientRequest;
@@ -32,8 +33,10 @@ class LongTermMemoryAdvisorTest {
                 mock(SqliteLongTermMemoryRepository.class);
         CallAdvisorChain chain = mock(CallAdvisorChain.class);
         ChatClientResponse response = mock(ChatClientResponse.class);
+        MemoryRetrievalService retrievalService =
+                new MemoryRetrievalService(repository);
         LongTermMemoryAdvisor advisor =
-                new LongTermMemoryAdvisor(repository, 100);
+                new LongTermMemoryAdvisor(retrievalService, 100);
         ChatClientRequest request = requestFor("user-1");
 
         when(repository.findActiveByUserId("user-1", 8))
@@ -70,8 +73,10 @@ class LongTermMemoryAdvisorTest {
                 mock(SqliteLongTermMemoryRepository.class);
         CallAdvisorChain chain = mock(CallAdvisorChain.class);
         ChatClientResponse response = mock(ChatClientResponse.class);
+        MemoryRetrievalService retrievalService =
+                new MemoryRetrievalService(repository);
         LongTermMemoryAdvisor advisor =
-                new LongTermMemoryAdvisor(repository, 100);
+                new LongTermMemoryAdvisor(retrievalService, 100);
         ChatClientRequest request = ChatClientRequest.builder()
                 .prompt(new Prompt("普通问题"))
                 .build();
@@ -94,8 +99,10 @@ class LongTermMemoryAdvisorTest {
                 mock(SqliteLongTermMemoryRepository.class);
         CallAdvisorChain chain = mock(CallAdvisorChain.class);
         ChatClientResponse response = mock(ChatClientResponse.class);
+        MemoryRetrievalService retrievalService =
+                new MemoryRetrievalService(repository);
         LongTermMemoryAdvisor advisor =
-                new LongTermMemoryAdvisor(repository, 100);
+                new LongTermMemoryAdvisor(retrievalService, 100);
         ChatClientRequest request = requestFor("user-1");
 
         when(repository.findActiveByUserId("user-1", 8))

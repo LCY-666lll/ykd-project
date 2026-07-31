@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import java.time.Instant;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.StringUtils;
@@ -24,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @EnabledIfEnvironmentVariable(named = "DASHSCOPE_INTEGRATION_TEST", matches = "true")
 // 千问官方模型真实集成测试，覆盖文生图、图生图、识图和语音合成。
 class DashScopeOfficialModelIntegrationTest {
+
 
     // 使用大于模型最小尺寸要求的 PNG，避免测试图片自身导致请求失败。
     private static final byte[] TEST_IMAGE = createTestImage();
@@ -50,6 +52,24 @@ class DashScopeOfficialModelIntegrationTest {
 
     @Autowired
     private AudioSynthesisService audioSynthesisService;
+
+    // Spring AI 配置注入 DashScope SDK Embedding 模型。
+    @Autowired
+    private EmbeddingModel embeddingModel;
+
+    /**
+     * 验证 DashScope SDK 能把符合微信机器人场景的中文记忆转换成向量。
+     * 当前只验证向量能够正常生成，不固定向量维度，
+     * 避免后续更换兼容模型时测试因为维度变化而失效。
+     */
+    @Test
+    void shouldCreateEmbedding() {
+        float[] embedding = embeddingModel.embed(
+                "用户希望每天早上收到杭州天气提醒。"
+        );
+
+        assertTrue(embedding.length > 0);
+    }
 
     // 验证官方 SDK 的文生图调用。
     @Test

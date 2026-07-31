@@ -2,7 +2,7 @@ package com.fourth.ykd.ai.config;
 
 import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
 import com.fourth.ykd.ai.memory.advisor.LongTermMemoryAdvisor;
-import com.fourth.ykd.ai.memory.repository.SqliteLongTermMemoryRepository;
+import com.fourth.ykd.ai.memory.service.MemoryRetrievalService;
 import com.fourth.ykd.ai.trace.ReActTraceAdvisor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
@@ -35,11 +35,11 @@ public class SpringAiChatConfig {
      Builder 允许：添加默认 Advisor 添加默认系统配置 最终 build*/
     public ChatClient aiMemoryChatClient(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory,
                                          ToolCallingManager toolCallingManager, SqliteChatMessageRepository sqliteChatMessageRepository,
-                                         SqliteLongTermMemoryRepository longTermMemoryRepository) {
+                                         MemoryRetrievalService memoryRetrievalService) {
 
         LongTermMemoryAdvisor longTermMemoryAdvisor =
                 new LongTermMemoryAdvisor(
-                        longTermMemoryRepository,
+                        memoryRetrievalService,
                         Ordered.HIGHEST_PRECEDENCE + 100
                 );
         /*MessageChatMemoryAdvisor 是一个聊天记忆顾问，也可以理解成一个拦截器。
@@ -61,7 +61,7 @@ public class SpringAiChatConfig {
 
 // 注册到 Builder 内部
         chatClientBuilder.defaultAdvisors(
-                /*LongTermMemoryAdvisor → 注入 SQLite 长期记忆
+                /*LongTermMemoryAdvisor → 检索并注入长期记忆
                 MessageChatMemoryAdvisor → 注入短期聊天窗口
                 ReActTraceAdvisor → 执行主模型和工具循环*/
                 longTermMemoryAdvisor,

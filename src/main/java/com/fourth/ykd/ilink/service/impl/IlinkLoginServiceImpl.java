@@ -38,15 +38,18 @@ public class IlinkLoginServiceImpl implements IlinkLoginService {
             String qrCodeContent = client.executeLogin();
 
             /*
-             client.getLoginFuture()：它代表一个未来才会完成的登录结果,现在还没有登录结果
+             client.getLoginFuture()：获取异步登录任务,它代表一个未来才会完成的登录结果,现在还没有登录结果
              → 先拿到一个 Future → 用户扫码完成后 Future 成功 → 登录失败或取消后 Future 异常完成
              whenComplete 表示无论 Future 成功还是异常完成，都执行回调
+             future.whenComplete((结果, 异常) -> { //完成后执行 });
              */
             client.getLoginFuture().whenComplete((loginContext, throwable) -> {
                 if (throwable == null) {
-                    log.info("[iLink] login succeeded");
+                    log.info(
+                            "[iLink] login succeeded, context={}",
+                            loginContext);
                 } else {
-                    log.warn("[iLink] login failed: {}", throwable.getMessage());
+                    log.warn("[iLink] login failed", throwable);
                 }
             });
 

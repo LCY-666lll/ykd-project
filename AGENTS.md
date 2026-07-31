@@ -53,3 +53,9 @@ MCP 浏览器操作能力第三阶段依赖接入记录：
 2. 已确认 spring-ai-starter-model-deepseek 只保留项目原有的一份声明，spring-ai-starter-mcp-client 只存在一份声明，不删除或改变任何原有模型能力。
 3. 本次依赖接入没有修改 Java、application.properties、微信回复链、数据库、工具调用链或长期记忆逻辑。
 4. 已执行 mvn -q -DskipTests compile 并通过；后续配置和业务接入仍需逐项展示并经用户批准后执行。
+MCP 浏览器操作能力第三阶段配置整理记录：
+1. 已整理 application.properties 的 MCP 浏览器配置段，所有新增说明使用中文；只修改该配置段，不覆盖 DeepSeek、DashScope、iLink、数据库、现有工具或记忆配置。
+2. spring.ai.mcp.client.enabled 默认读取 BROWSER_MCP_ENABLED，缺省值为 false；默认不创建 MCP 客户端、不启动 Playwright 和浏览器，确保新增依赖与配置不影响原有业务启动和调用链。
+3. MCP 客户端使用 SYNC 类型、启动期初始化、30 秒协议请求超时和 ToolCallback 转换，与当前 Spring MVC、同步 ChatClient 和微信回复链保持一致。
+4. Windows STDIO 使用 cmd.exe /c 和拆分后的参数启动 npx；Playwright MCP 固定为 0.0.78，使用 headless、isolated、msedge、5 秒操作超时、30 秒导航超时和 full 页面快照。
+5. 本阶段不启用 MCP、不启动浏览器、不添加 BROWSER_TASK、不修改任何 Java 或测试代码；只执行默认关闭状态下的配置核对和 mvn -q -DskipTests compile。

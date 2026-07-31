@@ -4,6 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .ilink/
+D:/ykd/ykd-project/AGENTS.md
+
 
 ### STS ###
 .apt_generated
@@ -36,7 +38,6 @@ build/
 # Local secrets and runtime logs: never commit these files.
 src/main/resources/application-local.properties
 logs/
-AGENTS.md
 
 # Local SQLite runtime database
 data/

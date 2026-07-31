@@ -1,7 +1,7 @@
 package com.fourth.ykd.ai.memory.advisor;
 
 import com.fourth.ykd.ai.memory.model.MemoryItem;
-import com.fourth.ykd.ai.memory.repository.SqliteLongTermMemoryRepository;
+import com.fourth.ykd.ai.memory.service.MemoryRetrievalService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClientRequest;
 import org.springframework.ai.chat.client.ChatClientResponse;
@@ -17,11 +17,11 @@ import java.util.List;
 /**
  * 长期记忆读取 Advisor。
  * 核心作用：
- * 在主模型真正收到请求之前，根据当前用户 ID 查询 SQLite 长期记忆，
+ * 在主模型真正收到请求之前，根据当前用户 ID 和本轮问题检索长期记忆，
  * 把查到的记忆追加到系统消息中，让主模型能够参考用户的历史信息。
  * 注意：
  * 1. 这里只负责  读取和注入记忆，不负责保存记忆。
- * 2. 不在这里判断记忆和当前问题是否相关，由 主模型自行判断。
+ * 2. 记忆检索策略由 MemoryRetrievalService 统一负责。
  * 3. 长期记忆读取失败时，降级为普通聊天，不能影响用户正常提问。
  * 用户发起聊天
  *     ↓
@@ -29,9 +29,9 @@ import java.util.List;
  *     ↓
  * LongTermMemoryAdvisor.adviseCall()
  *     ↓
- * 从 request.context() 取得 userId
+ * 从 request 中取得 userId 和本轮问题
  *     ↓
- * 查询该用户的 ACTIVE 长期记忆
+ * 调用 MemoryRetrievalService 检索长期记忆
  *     ↓
  * 把记忆包装成安全文本
  *     ↓
@@ -42,12 +42,6 @@ import java.util.List;
 @Slf4j
 public class LongTermMemoryAdvisor implements CallAdvisor {
 
-    /**
-     * 单次最多读取 8 条长期记忆。
-     * 防止一次向模型上下文中加入过多记忆，
-     * 导致 Token 消耗过大、上下文噪声过多。
-     */
-    private static final int MAX_MEMORY_ITEMS = 8;
 
     /**
      * 所有记忆条目的最大字符长度。
@@ -57,10 +51,10 @@ public class LongTermMemoryAdvisor implements CallAdvisor {
     private static final int MAX_MEMORY_CONTEXT_LENGTH = 1_600;
 
     /**
-     * 长期记忆 Repository。
-     * 负责从 SQLite 的长期记忆表中 读取 当前用户的 ACTIVE 记忆。
+     * 长期记忆检索服务。
+     * 负责根据当前用户和本轮问题返回需要注入的记忆。
      */
-    private final SqliteLongTermMemoryRepository memoryRepository;
+    private final MemoryRetrievalService memoryRetrievalService;
 
     /**
      * 当前 Advisor 在 Advisor 链中的执行顺序。
@@ -71,17 +65,16 @@ public class LongTermMemoryAdvisor implements CallAdvisor {
 
     /**
      * 构造方法。
-     *
-     * @param memoryRepository 长期记忆数据库访问对象
+     * @param memoryRetrievalService 长期记忆检索服务
      * @param advisorOrder 当前 Advisor 的执行顺序
      */
     public LongTermMemoryAdvisor(
-            SqliteLongTermMemoryRepository memoryRepository,
+            MemoryRetrievalService memoryRetrievalService,
             //创建 Advisor 时，还要传入执行顺序
             int advisorOrder
     ) {
-        // 保存 Repository，后面用于查询 SQLite 长期记忆。
-        this.memoryRepository = memoryRepository;
+        // 保存检索服务，后面用于取得当前请求需要注入的长期记忆。
+        this.memoryRetrievalService = memoryRetrievalService;
 
         // 保存 Advisor 的执行顺序。
         this.advisorOrder = advisorOrder;
@@ -91,7 +84,7 @@ public class LongTermMemoryAdvisor implements CallAdvisor {
      * 主模型同步调用前执行的核心方法。
      * 执行流程：
      * 1. 从请求上下文中取得当前用户 ID；
-     * 2. 查询当前用户的 ACTIVE 长期记忆；
+     * 2. 取得本轮问题并检索当前请求需要的长期记忆；
      * 3. 将长期记忆包装为安全的系统上下文；
      * 4. 创建加入长期记忆后的新请求；
      * 5. 将新请求继续交给后面的 Advisor 或主模型。
@@ -117,10 +110,12 @@ public class LongTermMemoryAdvisor implements CallAdvisor {
          * 不包含后续 Advisor 和主模型调用。
          */
         try {
+            String userQuery = resolveCurrentQuery(request);
+
             List<MemoryItem> memories =
-                    memoryRepository.findActiveByUserId(
+                    memoryRetrievalService.retrieve(
                             userId,
-                            MAX_MEMORY_ITEMS
+                            userQuery
                     );
 
             if (!memories.isEmpty()) {
@@ -186,6 +181,20 @@ public class LongTermMemoryAdvisor implements CallAdvisor {
         return conversationId == null
                 ? null
                 : String.valueOf(conversationId).trim();
+    }
+
+    /**
+     * 从当前 Prompt 中取得用户本轮问题。
+     * Prompt 没有用户消息时返回空字符串，
+     * 让结构化 SQLite 检索仍可工作，同时避免空指针影响主聊天。
+     * @param request 当前 ChatClient 请求
+     * @return 用户本轮问题；不存在时返回空字符串
+     */
+    private String resolveCurrentQuery(ChatClientRequest request) {
+        if (request.prompt().getUserMessage() == null) {
+            return "";
+        }
+        return request.prompt().getUserMessage().getText();
     }
 
     /**
