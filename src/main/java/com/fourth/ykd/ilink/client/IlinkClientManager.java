@@ -43,7 +43,6 @@ public class IlinkClientManager {
      * 否则旧客户端的线程池、登录状态和消息游标会残留。
      * volatile 只保证单次读取、写入的可见性，不能保证多个操作组合起来是线程安全的,
      * 所以创建和关闭方法还需要加 synchronized。
-
      * createNewClient(),加了 synchronized，而：
      * closeCurrentClient(),也加了 synchronized。
      * 但是不会产生死锁： Java 的 synchronized 是 可重入锁。

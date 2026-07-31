@@ -23,7 +23,7 @@ public class IlinkLoginController {
     private final IlinkQrCodeService ilinkQrCodeService;
 
     /**
-     * 本地联调入口：
+     * 本地联调入口：关闭旧客户端,创建新客户端开,始新登录
      * 打开此地址会发起新的 iLink 登录，并直接返回 PNG 二维码。
      */
     @GetMapping(value = "/qrcode", produces = MediaType.IMAGE_PNG_VALUE)

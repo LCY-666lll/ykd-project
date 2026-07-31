@@ -25,7 +25,10 @@ public class DeepSeekIntentRouter {
     }
 
 
-    /** 优先匹配明确意图，其余请求继续交给现有 DeepSeek 路由。 */
+    /**
+     * 使用独立 DeepSeek 调用判断当前微信消息应该进入哪个业务分支。
+     * Java 只解析模型返回的固定 JSON 意图，不使用关键词或正则决定业务语义。
+     */
     public UserIntent route(String conversationId, String userText, boolean hasPendingImage) {
         String result = routeChatClient.prompt()
                 .system(buildRouteInstructions(hasPendingImage) + recentConversation(conversationId))
@@ -48,6 +51,10 @@ public class DeepSeekIntentRouter {
         }
     }
 
+    /**
+     * 提供最近六条短期会话，帮助路由模型理解“刚才那个”“还是改回去”等省略表达。
+     * 近期会话只用于意图分类，不在该方法中执行任何业务操作。
+     */
     private String recentConversation(String conversationId) {
         List<Message> messages = chatMemory.get(conversationId);
         int start = Math.max(0, messages.size() - 6);
@@ -61,8 +68,8 @@ public class DeepSeekIntentRouter {
     /** 构造仅包含路由规则的系统提示词。 */
     private String buildRouteInstructions(boolean hasPendingImage) {
         String intents = hasPendingImage
-                ? "TEXT, IMAGE_GENERATE, IMAGE_EDIT, IMAGE_UNDERSTAND, FILE_GENERATE, VOICE_REPLY"
-                : "TEXT, IMAGE_GENERATE, FILE_GENERATE, VOICE_REPLY";
+                ? "TEXT, MEMORY_MANAGE, IMAGE_GENERATE, IMAGE_EDIT, IMAGE_UNDERSTAND, FILE_GENERATE, VOICE_REPLY"
+                : "TEXT, MEMORY_MANAGE, IMAGE_GENERATE, FILE_GENERATE, VOICE_REPLY";
         return """
                 你是消息意图路由器，只负责选择意图，不负责回答、搜索、整理内容或生成文件。
                 必须从以下可选意图中选择一个：%s。
@@ -74,6 +81,7 @@ public class DeepSeekIntentRouter {
                 IMAGE_GENERATE：用户本轮明确要求生成一张独立新图片且不使用当前图片时使用；询问以前生成图片的依据、来源、过程或原因时选择 TEXT。
                 VOICE_REPLY：仅当用户明确要求机器人使用语音、声音回答，或把内容读出来时使用。用户发送的是语音消息，不代表要求语音回复。
                 图片理解、图片编辑、图片生成和文件生成请求优先选择各自意图，不因同时出现“语音”而改选 VOICE_REPLY。
+                MEMORY_MANAGE：仅当用户明确要求长期记住、修改、纠正、忘记或删除某项个人信息、偏好、任务或项目事实时使用。询问“你记得什么”“我的默认城市是什么”只是查询已有记忆，应选择 TEXT。
                 TEXT：普通对话、知识问答、搜索请求或文字任务，且没有要求生成、导出或下载文件。
                 “帮我写一篇文章”选择 TEXT；只有明确要求导出、下载或生成文件时才选择 FILE_GENERATE。
                 “用表格列出”不等于 XLSX；只有明确要求 Excel、XLSX、电子表格或表格文件时才选择 FILE_GENERATE。

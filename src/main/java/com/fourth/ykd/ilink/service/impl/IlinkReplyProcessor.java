@@ -87,6 +87,10 @@ public class IlinkReplyProcessor {
         if (intent == UserIntent.FILE_GENERATE) {
             return ReplyResult.documents(intent, fileGenerationTool.generate(userId, userText), null);
         }
+        //明确记忆命令走同步管理入口，必须根据真实写库结果生成回复。
+        if (intent == UserIntent.MEMORY_MANAGE) {
+            return ReplyResult.text(intent, aiChatService.manageMemory(userId, userText).reply(), null);
+        }
         if (intent == UserIntent.VOICE_REPLY) {
             return ReplyResult.audio(intent, aiChatService.chat(userId, userText).reply(), null);
         }

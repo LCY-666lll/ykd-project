@@ -1,6 +1,8 @@
 package com.fourth.ykd.ai.config;
 
 import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
+import com.fourth.ykd.ai.memory.advisor.LongTermMemoryAdvisor;
+import com.fourth.ykd.ai.memory.repository.SqliteLongTermMemoryRepository;
 import com.fourth.ykd.ai.trace.ReActTraceAdvisor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
@@ -32,8 +34,14 @@ public class SpringAiChatConfig {
     如果直接得到已经构造完成的 ChatClient，再添加默认记忆拦截逻辑就不方便。
      Builder 允许：添加默认 Advisor 添加默认系统配置 最终 build*/
     public ChatClient aiMemoryChatClient(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory,
-            ToolCallingManager toolCallingManager, SqliteChatMessageRepository sqliteChatMessageRepository) {
+                                         ToolCallingManager toolCallingManager, SqliteChatMessageRepository sqliteChatMessageRepository,
+                                         SqliteLongTermMemoryRepository longTermMemoryRepository) {
 
+        LongTermMemoryAdvisor longTermMemoryAdvisor =
+                new LongTermMemoryAdvisor(
+                        longTermMemoryRepository,
+                        Ordered.HIGHEST_PRECEDENCE + 100
+                );
         /*MessageChatMemoryAdvisor 是一个聊天记忆顾问，也可以理解成一个拦截器。
         它会在调用大模型前后自动做两件事：
         请求大模型之前：从 ChatMemory 查询历史消息，并加入当前请求
@@ -42,12 +50,9 @@ public class SpringAiChatConfig {
         它帮你自动完成：读取历史消息 → 拼接当前问题 → 调用模型 → 保存本轮对话
         MessageChatMemoryAdvisor ：负责从记忆中读取历史消息，将这些消息作为消息集合加入Prompt的组件
         使用这个 chatMemory，创建一个负责聊天记忆的 Advisor：
-
         这个 advisor 会在每次调用模型之前执行。
-        执行时它会拿到：
-        ChatMemory.CONVERSATION_ID = userId
-        然后内部大概等价于：
-        List<Message> history = chatMemory.get(userId);
+        执行时它会拿到：ChatMemory.CONVERSATION_ID = userId
+        然后内部大概等价于：List<Message> history = chatMemory.get(userId);
         */
         MessageChatMemoryAdvisor memoryAdvisor =
                 MessageChatMemoryAdvisor.builder(chatMemory)
@@ -55,7 +60,12 @@ public class SpringAiChatConfig {
                         .build();
 
 // 注册到 Builder 内部
-        chatClientBuilder.defaultAdvisors(memoryAdvisor,
+        chatClientBuilder.defaultAdvisors(
+                /*LongTermMemoryAdvisor → 注入 SQLite 长期记忆
+                MessageChatMemoryAdvisor → 注入短期聊天窗口
+                ReActTraceAdvisor → 执行主模型和工具循环*/
+                longTermMemoryAdvisor,
+                memoryAdvisor,
                 new ReActTraceAdvisor(toolCallingManager, Ordered.HIGHEST_PRECEDENCE + 300,
                         chatMemory, sqliteChatMessageRepository));
 

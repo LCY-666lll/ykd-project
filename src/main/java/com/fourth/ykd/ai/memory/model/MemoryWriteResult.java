@@ -26,7 +26,7 @@ public record MemoryWriteResult(
         CONFIRMED,
 
         /**
-         * 新记忆替代了具有相同 memoryKey 的旧版本。
+         * 新记忆替代了合并模型命中的一条或多条旧版本。
          */
         REPLACED,
 

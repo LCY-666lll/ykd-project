@@ -8,9 +8,9 @@ package com.fourth.ykd.ai.memory.model;
 public enum MemoryOperation {
 
     /**
-     * 新增一条记忆，或者更新已有记忆。
-     * 最终是插入新记录还是替换旧版本，
-     * 由 LongTermMemoryService 根据数据库现状判断。
+     * 用户新增、确认或纠正了一项长期事实。
+     * 记忆合并模型会结合已有 ACTIVE 记忆，
+     * 进一步决定执行 CREATE、CONFIRM、REPLACE 或 IGNORE。
      */
     UPSERT,
 

@@ -40,6 +40,30 @@ class DeepSeekIntentRouterTest {
     }
 
     @Test
+    void shouldUseMemoryManageWhenModelChoosesIt() {
+        ChatClient.Builder builder = mock(ChatClient.Builder.class);
+        ChatClient chatClient = mock(ChatClient.class, RETURNS_DEEP_STUBS);
+        ChatMemory chatMemory = mock(ChatMemory.class);
+        when(builder.build()).thenReturn(chatClient);
+        when(chatMemory.get("user-1")).thenReturn(List.of());
+        when(chatClient.prompt()
+                .system(anyString())
+                .user("以后没有指定城市时默认查询杭州天气")
+                .call()
+                .content())
+                .thenReturn("{\"intent\":\"MEMORY_MANAGE\"}");
+
+        DeepSeekIntentRouter router = new DeepSeekIntentRouter(builder, chatMemory);
+
+        UserIntent result = router.route(
+                "user-1",
+                "以后没有指定城市时默认查询杭州天气",
+                false
+        );
+
+        assertThat(result).isEqualTo(UserIntent.MEMORY_MANAGE);
+    }
+    @Test
     void shouldUseImageGenerationWhenModelChoosesIt() {
         ChatClient.Builder builder = mock(ChatClient.Builder.class);
         ChatClient chatClient = mock(ChatClient.class, RETURNS_DEEP_STUBS);

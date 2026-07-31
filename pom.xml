@@ -100,7 +100,11 @@
             <artifactId>wechat-ilink-sdk</artifactId>
             <version>2.3.3</version>
         </dependency>
-
+        <!-- MCP 客户端：用于连接 Playwright MCP 等外部工具服务 -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-mcp-client</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.google.zxing</groupId>
             <artifactId>core</artifactId>

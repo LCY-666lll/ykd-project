@@ -97,6 +97,27 @@ class IlinkReplyProcessorTest {
         assertThat(result.imageToClear()).isNull();
     }
 
+    @Test
+    void shouldExecuteMemoryManagementSynchronously() {
+        ProcessorFixture fixture = new ProcessorFixture();
+        String userText = "以后没有指定城市时默认查询杭州天气";
+        when(fixture.imageContextService.findActive("user-1"))
+                .thenReturn(Optional.empty());
+        when(fixture.intentRouter.route("user-1", userText, false))
+                .thenReturn(UserIntent.MEMORY_MANAGE);
+        when(fixture.aiChatService.manageMemory("user-1", userText))
+                .thenReturn(new AiChatResponse("已将默认天气城市更新为杭州。"));
+
+        IlinkReplyProcessor.ReplyResult result = fixture.processor.process(
+                "user-1",
+                userText,
+                false
+        );
+
+        assertThat(result.intent()).isEqualTo(UserIntent.MEMORY_MANAGE);
+        assertThat(result.answer()).isEqualTo("已将默认天气城市更新为杭州。");
+        verify(fixture.aiChatService).manageMemory("user-1", userText);
+    }
     private static final class ProcessorFixture {
         private final AiChatService aiChatService = mock(AiChatService.class);
         private final DeepSeekIntentRouter intentRouter = mock(DeepSeekIntentRouter.class);
