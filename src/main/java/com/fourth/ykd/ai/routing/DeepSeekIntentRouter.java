@@ -38,6 +38,14 @@ public class DeepSeekIntentRouter {
     private static final Pattern VOICE_REPLY_PATTERN = pattern(
             "用语音.{0,8}(回复|回答|告诉|说)|语音回复|语音回答|说给我听|读给我听|读出来"
                     + "|发一段语音|用声音.{0,8}(回复|回答|告诉)");
+    /** 二维码生成请求，走工具调用而非图片生成 */
+    private static final Pattern QRCODE_PATTERN = pattern(
+            "生成.{0,10}二维码|二维码.{0,10}生成|转成二维码|转二维码|做成二维码|制作二维码|创建二维码"
+                    + "|把.{0,20}(转|做|生成|制作).{0,5}二维码|二维码图片|二维码链接");
+    /** 追问图片/文件状态的请求，不是生成新图片 */
+    private static final Pattern FOLLOW_UP_PATTERN = pattern(
+            "(生成|做|画|制作)的(图片|图|文件|二维码)(呢|在哪|哪里|怎么没有|怎么看不到|去哪了|发给我|给我看看)"
+                    + "|(图片|图|文件|二维码)(呢|在哪|哪里|怎么没有|怎么看不到|去哪了|发给我|给我看看)");
 
     private final ChatClient routeChatClient;
     private final ChatMemory chatMemory;
@@ -104,6 +112,16 @@ public class DeepSeekIntentRouter {
             businessCandidates.add(UserIntent.IMAGE_UNDERSTAND);
         }
 
+        // 二维码生成走工具调用，优先级高于图片生成
+        if (matches(QRCODE_PATTERN, text)) {
+            return Optional.of(UserIntent.TEXT);
+        }
+
+        // 追问图片/文件状态的请求，不是生成新图片
+        if (matches(FOLLOW_UP_PATTERN, text)) {
+            return Optional.of(UserIntent.TEXT);
+        }
+
         if (businessCandidates.size() == 1) {
             return Optional.of(businessCandidates.iterator().next());
         }
@@ -152,9 +170,10 @@ public class DeepSeekIntentRouter {
                 TEXT：普通对话、知识问答、搜索请求或文字任务，且没有要求生成、导出或下载文件。
                 “帮我写一篇文章”选择 TEXT；只有明确要求导出、下载或生成文件时才选择 FILE_GENERATE。
                 “用表格列出”不等于 XLSX；只有明确要求 Excel、XLSX、电子表格或表格文件时才选择 FILE_GENERATE。
-                存在当前图片时，“换背景”选择 IMAGE_EDIT，“图片里有什么”选择 IMAGE_UNDERSTAND。
+                “生成二维码”选择 TEXT（二维码通过工具生成，不是图片生成）。
+                存在当前图片时，”换背景”选择 IMAGE_EDIT，”图片里有什么”选择 IMAGE_UNDERSTAND。
                 请求包含多个连续业务任务时，选择用户最终要求交付的主要结果类型。
-                只能返回 JSON 对象，格式必须严格为 {"intent":"TEXT"}，不要输出解释、Markdown、文件内容或其他文字。
+                只能返回 JSON 对象，格式必须严格为 {“intent”:”TEXT”}，不要输出解释、Markdown、文件内容或其他文字。
                 """.formatted(intents);
     }
 }

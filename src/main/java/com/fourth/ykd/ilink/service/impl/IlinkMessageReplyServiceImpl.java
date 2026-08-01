@@ -1,4 +1,5 @@
 package com.fourth.ykd.ilink.service.impl;
+import com.fourth.ykd.ai.service.FileParsingService;
 import com.fourth.ykd.ilink.service.IlinkMessageReplyService;
 import com.github.wechat.ilink.sdk.ILinkClient;
 import java.util.concurrent.*;
@@ -14,12 +15,13 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
     private final IlinkReplyProcessor replyProcessor;
     private final IlinkReplySender replySender;
     private final Executor replyExecutor;
+    private final FileParsingService fileParsingService;
     private final ConcurrentMap<String, CompletableFuture<Void>> replyChains = new ConcurrentHashMap<>();
 
     /** 注入回复处理、发送和串行执行所需组件。 */
     public IlinkMessageReplyServiceImpl(IlinkReplyProcessor replyProcessor, IlinkReplySender replySender,
-            @Qualifier("iLinkReplyExecutor") Executor replyExecutor) {
-        this.replyProcessor = replyProcessor; this.replySender = replySender; this.replyExecutor = replyExecutor;
+            @Qualifier("iLinkReplyExecutor") Executor replyExecutor, FileParsingService fileParsingService) {
+        this.replyProcessor = replyProcessor; this.replySender = replySender; this.replyExecutor = replyExecutor; this.fileParsingService = fileParsingService;
     }
     /** 提交文字消息。 */
     @Override public void submit(ILinkClient client, String userId, String userText) {
@@ -37,6 +39,13 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
     @Override public void submitVoiceRecognitionFailed(ILinkClient client, String userId) {
         if (StringUtils.hasText(userId)) enqueue(userId, () -> replySender.sendVoiceRecognitionFailureMessage(client, userId), () -> replySender.sendVoiceRecognitionFailureMessage(client, userId));
     }
+
+    /** 提交文件消息。 */
+    @Override public void submitFileReceived(ILinkClient client, String userId, String fileName, byte[] fileBytes) {
+        if (StringUtils.hasText(userId) && fileBytes != null && fileBytes.length > 0) {
+            enqueue(userId, () -> replyFile(client, userId, fileName, fileBytes), () -> replySender.sendFailureMessage(client, userId));
+        }
+    }
     /** 将任务串接到同一用户已有任务之后。 */
     private void enqueue(String userId, Runnable task, Runnable rejectedTask) {
         try {
@@ -53,6 +62,23 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
         try { replyProcessor.saveReceivedImageMemory(userId); }
         catch (RuntimeException exception) { log.error("[iLink][IMAGE_MEMORY_SAVE_FAILED] userId={}", userId, exception); }
         replySender.sendImageReceivedConfirmation(client, userId);
+    }
+
+    /** 解析文件内容并回复。 */
+    private void replyFile(ILinkClient client, String userId, String fileName, byte[] fileBytes) {
+        long startedAt = System.currentTimeMillis();
+        replySender.startTypingQuietly(client, userId);
+        try {
+            String content = fileParsingService.parse(fileName, fileBytes);
+            replyProcessor.saveFileMemory(userId, fileName, content);
+            String prompt = "请根据文件【" + fileName + "】的内容回答用户问题。文件内容已在记忆中。";
+            replySender.sendTextModeReply(client, userId, replyProcessor.process(userId, prompt, false), startedAt);
+        } catch (Exception exception) {
+            log.error("[iLink][FILE_PARSE_FAILED] userId={}, fileName={}", userId, fileName, exception);
+            replySender.sendFailureMessage(client, userId);
+        } finally {
+            replySender.stopTypingQuietly(client, userId);
+        }
     }
     /** 处理并发送文字回复。 */
     private void reply(ILinkClient client, String userId, String userText) {

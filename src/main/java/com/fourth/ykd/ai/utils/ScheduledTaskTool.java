@@ -41,6 +41,7 @@ public class ScheduledTaskTool {
 
     public static void setCurrentUserId(String userId) { CURRENT_USER_ID.set(userId); }
     public static void clearCurrentUserId() { CURRENT_USER_ID.remove(); }
+    public static String getCurrentUserId() { return CURRENT_USER_ID.get(); }
 
     /** 启动时恢复未执行的定时任务 */
     @PostConstruct

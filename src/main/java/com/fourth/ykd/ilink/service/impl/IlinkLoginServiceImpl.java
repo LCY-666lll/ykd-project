@@ -7,6 +7,7 @@ import com.fourth.ykd.ilink.dto.IlinkLoginQrResponse;
 import com.fourth.ykd.ilink.dto.IlinkLoginStatusResponse;
 import com.fourth.ykd.ilink.service.IlinkLoginService;
 import com.github.wechat.ilink.sdk.ILinkClient;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,22 @@ public class IlinkLoginServiceImpl implements IlinkLoginService {
     private final IlinkProperties properties;
 
     private final IlinkClientManager clientManager;
+
+    /**
+     * 应用启动时尝试从本地会话文件恢复登录，避免每次重启都要扫码。
+     */
+    @PostConstruct
+    public void tryAutoRestore() {
+        if (!properties.isEnabled()) {
+            return;
+        }//restoreFromSession() 加了同步锁，防止并发创建客户端
+        boolean restored = clientManager.restoreFromSession();
+        if (restored) {
+            log.info("[iLink] 获取成功");
+        } else {
+            log.info("[iLink] no valid session, please scan QR code to login");
+        }
+    }
 
     @Override
     public IlinkLoginQrResponse startLogin() {
@@ -45,9 +62,14 @@ public class IlinkLoginServiceImpl implements IlinkLoginService {
              */
             client.getLoginFuture().whenComplete((loginContext, throwable) -> {
                 if (throwable == null) {
-                    log.info("[iLink] login succeeded");
+                    log.info("[iLink] login succeeded, loginContext={}", loginContext);
+                    try {
+                        clientManager.saveLoginContext(loginContext);
+                    } catch (Exception e) {
+                        log.error("[iLink] saveSession threw exception", e);
+                    }
                 } else {
-                    log.warn("[iLink] login failed: {}", throwable.getMessage());
+                    log.warn("[iLink] login failed: {}", throwable.getMessage(), throwable);
                 }
             });
 

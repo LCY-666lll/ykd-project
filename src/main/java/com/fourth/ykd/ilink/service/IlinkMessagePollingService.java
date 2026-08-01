@@ -3,6 +3,7 @@ package com.fourth.ykd.ilink.service;
 import com.fourth.ykd.ai.service.ImageContextService;
 import com.fourth.ykd.ilink.client.IlinkClientManager;
 import com.github.wechat.ilink.sdk.ILinkClient;
+import com.github.wechat.ilink.sdk.core.model.FileItem;
 import com.github.wechat.ilink.sdk.core.model.MessageItem;
 import com.github.wechat.ilink.sdk.core.model.WeixinMessage;
 import java.io.IOException;
@@ -52,8 +53,13 @@ public class IlinkMessagePollingService {
         String text = extractText(message);
         String voiceText = extractVoiceText(message);
         MessageItem imageItem = extractImageItem(message);
+        MessageItem fileItem = extractFileItem(message);
         if (imageItem != null) {
             saveImageContext(client, fromUserId, imageItem);
+        }
+        if (fileItem != null) {
+            saveFileContext(client, fromUserId, fileItem);
+            return;
         }
         if (StringUtils.hasText(voiceText)) {
             log.info("[iLink][VOICE_RECOGNIZED] fromUserId={}, text={}", fromUserId, voiceText);
@@ -135,5 +141,28 @@ public class IlinkMessagePollingService {
             }
         }
         return null;
+    }
+
+    private MessageItem extractFileItem(WeixinMessage message) {
+        if (message.getItem_list() == null) {
+            return null;
+        }
+        for (MessageItem item : message.getItem_list()) {
+            if (item.getFile_item() != null) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    private void saveFileContext(ILinkClient client, String userId, MessageItem fileItem) {
+        try {
+            byte[] fileBytes = client.downloadFileFromMessageItem(fileItem);
+            String fileName = fileItem.getFile_item().getFile_name();
+            ilinkMessageReplyService.submitFileReceived(client, userId, fileName, fileBytes);
+            log.info("[iLink][FILE_CONTEXT_SAVED] userId={}, fileName={}, fileBytes={}", userId, fileName, fileBytes.length);
+        } catch (IOException | RuntimeException exception) {
+            log.warn("[iLink][FILE_CONTEXT_SAVE_FAILED] userId={}, reason={}", userId, exception.getMessage());
+        }
     }
 }

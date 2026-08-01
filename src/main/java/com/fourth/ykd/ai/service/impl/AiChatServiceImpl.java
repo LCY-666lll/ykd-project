@@ -3,6 +3,7 @@ package com.fourth.ykd.ai.service.impl;
 import com.fourth.ykd.ai.dto.AiChatResponse;
 import com.fourth.ykd.ai.dto.PersistedChatMessage;
 import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
+import com.fourth.ykd.ai.rag.RagService;
 import com.fourth.ykd.ai.service.AiChatService;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.messages.Message;
@@ -42,12 +43,12 @@ public class AiChatServiceImpl implements AiChatService {
             7. 用户出现翻译、译成、转成、英文、日语、韩语等翻译意图时，必须调用 translate_text，模型不得自行翻译。用户说上文、上面、这句、这段、刚才或前一条时，从聊天记忆取得最近一条可翻译文本后作为工具 text 参数。用户未说明目标语言时，只追问目标语言，不调用工具。translate_text 调用失败时，只说明翻译服务失败，不得自行补翻译。
             8. 用户提出算式或要求精确数值计算时，必须调用 calculate_math_expression，不得由模型自行估算。
             9. 用户查询真实当前日期、时间或计算当前日期与目标日期的间隔时，调用 get_time_info。
-            10. 聊天历史中出现“【图片识别记忆】”时，它是用户此前发送图片的后台识别结果。用户询问图片、这张图、图中内容、上面的文字、里面的人或物等相关问题时，优先依据该记忆回答；与图片无关的问题忽略该记忆，不得编造图片中不存在的内容。
+            10. 聊天历史中出现”【图片识别记忆】”时，它是用户此前发送图片的后台识别结果。用户询问图片、这张图、图中内容、上面的文字、里面的人或物等相关问题时，优先依据该记忆回答；与图片无关的问题忽略该记忆，不得编造图片中不存在的内容。
             11. 聊天历史和长期记忆仅用于理解用户的指代、延续同一任务、已确认的用户偏好或此前生成内容。
                     用户本轮提出独立的新问题时，不得把历史消息中的旧回答、旧事实或旧工具结果当作本轮答案的依据。
                     天气、新闻、时间、价格、政策等可能变化的信息，必须以本轮工具查询结果为准。
-                    用户明确说“新话题”“不要参考历史”或“忽略之前内容”时，本轮不得使用聊天历史。
-            """;
+                    用户明确说”新话题””不要参考历史”或”忽略之前内容”时，本轮不得使用聊天历史。
+    """;
 
     private static final int PERSISTED_MEMORY_LIMIT = 20;
 
@@ -71,9 +72,15 @@ public class AiChatServiceImpl implements AiChatService {
 
     private final ScheduledTaskTool scheduledTaskTool;
 
+    private final EmailTool emailTool;
+
+    private final QrCodeTool qrCodeTool;
+
     private final ChatMemory chatMemory;
 
     private final SqliteChatMessageRepository sqliteChatMessageRepository;
+
+    private final RagService ragService;
 
     @Override
     public AiChatResponse chat(String message) {
@@ -105,21 +112,30 @@ public class AiChatServiceImpl implements AiChatService {
 
         // 设置定时任务工具的当前用户ID
         ScheduledTaskTool.setCurrentUserId(normalizedConversationId);
+
+        // RAG：从向量库检索与用户问题相关的文档片段
+        String ragContext = ragService.retrieve(normalizedMessage, normalizedConversationId);
+
+        String systemPrompt = TOOL_USAGE_INSTRUCTIONS + """
+                系统已支持 PDF、DOCX、XLSX 文件生成，以及文生图、参考图编辑、图片识别和语音合成。
+                不得声称这些能力不存在或无法使用；用户追问先前生成结果时，应基于聊天记忆如实说明。
+                当用户明确要求语音回复时，外层系统会把回答正文合成为语音；你只需正常回答用户的问题，
+                输出适合朗读的正文，不得声称自己只能文本交互、不能语音回复，也不要解释语音合成过程。
+                用户要求定时执行任务时（如定时提醒、定时查天气、定时搜索等），使用 schedule_task 工具。
+                用户要取消定时任务时，使用 cancel_scheduled_task 工具。
+                用户要查看定时任务列表时，使用 list_scheduled_tasks 工具。
+                """;
+        if (!ragContext.isEmpty()) {
+            systemPrompt += "\n\n以下是从用户历史文档中检索到的相关内容，请参考回答（如果与当前问题无关则忽略）：\n" + ragContext;
+        }
+
         String answer;
         try {
             answer = springAiChatClient.prompt()
-                    .system(TOOL_USAGE_INSTRUCTIONS + """
-                            系统已支持 PDF、DOCX、XLSX 文件生成，以及文生图、参考图编辑、图片识别和语音合成。
-                            不得声称这些能力不存在或无法使用；用户追问先前生成结果时，应基于聊天记忆如实说明。
-                            当用户明确要求语音回复时，外层系统会把回答正文合成为语音；你只需正常回答用户的问题，
-                            输出适合朗读的正文，不得声称自己只能文本交互、不能语音回复，也不要解释语音合成过程。
-                            用户要求定时执行任务时（如定时提醒、定时查天气、定时搜索等），使用 schedule_task 工具。
-                            用户要取消定时任务时，使用 cancel_scheduled_task 工具。
-                            用户要查看定时任务列表时，使用 list_scheduled_tasks 工具。
-                            """)
+                    .system(systemPrompt)
                     .user(normalizedMessage)
                     .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
-                    .tools(mathCalculatorTools,timeTool,baiduSearchTool,weatherTool,translationTool,scheduledTaskTool)
+                    .tools(mathCalculatorTools,timeTool,baiduSearchTool,weatherTool,translationTool,scheduledTaskTool,emailTool,qrCodeTool)
                     .call()
                     .content();
         } finally {

@@ -1,6 +1,7 @@
 package com.fourth.ykd.ilink.service.impl;
 import com.fourth.ykd.ai.dto.*;
 import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
+import com.fourth.ykd.ai.rag.RagService;
 import com.fourth.ykd.ai.routing.*;
 import com.fourth.ykd.ai.service.*;
 import com.fourth.ykd.ai.utils.FileGenerationTool;
@@ -28,19 +29,21 @@ public class IlinkReplyProcessor {
     private final FileGenerationTool fileGenerationTool;
     private final ChatMemory chatMemory;
     private final SqliteChatMessageRepository sqliteChatMessageRepository;
+    private final RagService ragService;
 
     /** 注入现有的回复处理依赖。 */
     public IlinkReplyProcessor(AiChatService aiChatService, DeepSeekIntentRouter intentRouter,
             ImageGenerationService imageGenerationService, ImageReferenceGenerationService imageReferenceGenerationService,
             ImageUnderstandingService imageUnderstandingService, ImageContextService imageContextService,
             FileGenerationTool fileGenerationTool, ChatMemory chatMemory,
-            SqliteChatMessageRepository sqliteChatMessageRepository) {
+            SqliteChatMessageRepository sqliteChatMessageRepository, RagService ragService) {
         this.aiChatService = aiChatService; this.intentRouter = intentRouter;
         this.imageGenerationService = imageGenerationService;
         this.imageReferenceGenerationService = imageReferenceGenerationService;
         this.imageUnderstandingService = imageUnderstandingService; this.imageContextService = imageContextService;
         this.fileGenerationTool = fileGenerationTool; this.chatMemory = chatMemory;
         this.sqliteChatMessageRepository = sqliteChatMessageRepository;
+        this.ragService = ragService;
     }
 
     /** 按现有意图执行业务，并产出待发送结果。 */
@@ -94,6 +97,21 @@ public class IlinkReplyProcessor {
         }
         sqliteChatMessageRepository.save(userId, PersistedChatMessage.Role.USER, userText.trim());
     }
+    /** 将文件内容写入聊天记忆。 */
+    public void saveFileMemory(String userId, String fileName, String content) {
+        String fileMemoryText = """
+                【文件解析记忆】
+                用户发送了文件「%s」，内容如下：
+                %s
+                """.formatted(fileName, content);
+        chatMemory.add(userId, List.of(new AssistantMessage(fileMemoryText)));
+        sqliteChatMessageRepository.save(userId, PersistedChatMessage.Role.ASSISTANT, fileMemoryText);
+        sqliteChatMessageRepository.softDeleteOldMessages(userId, 100);
+        // RAG：将文件内容切块存入向量库，支持长期语义检索
+        ragService.ingestDocument(content, userId, fileName);
+        log.info("[iLink][FILE_MEMORY_SAVED] userId={}, fileName={}, contentLength={}", userId, fileName, content.length());
+    }
+
     /** 将当前待处理图片写入聊天记忆。 */
     public void saveReceivedImageMemory(String userId) {
         PendingUserImage image = imageContextService.findActive(userId)
@@ -123,6 +141,8 @@ public class IlinkReplyProcessor {
         chatMemory.add(userId, List.of(new AssistantMessage(imageMemoryText)));
         sqliteChatMessageRepository.save(userId, PersistedChatMessage.Role.ASSISTANT, imageMemoryText);
         sqliteChatMessageRepository.softDeleteOldMessages(userId, 100);
+        // RAG：将图片识别结果存入向量库，支持长期语义检索
+        ragService.ingestDocument(summary, userId, "图片识别_" + imageSource);
         log.info("[AI][IMAGE_MEMORY_UNDERSTAND][SUCCESS] userId={}, summaryLength={}", userId, summary.length());
     }
 
