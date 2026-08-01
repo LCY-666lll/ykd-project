@@ -91,6 +91,7 @@ public class IlinkClientManager {
         }
 
         try {
+            //读取 JSON，解析出 botToken、userId、botId、baseUrl、updatesCursor  上次登录的凭证
             ObjectMapper mapper = new ObjectMapper();
             Map<String, Object> map = mapper.readValue(path.toFile(), Map.class);
 
@@ -173,7 +174,7 @@ public class IlinkClientManager {
      * 直接使用 loginContext 保存会话，绕过 client.isLoggedIn() 检查。
      * 用于登录成功回调时，SDK 内部状态可能还未更新的情况。
      */
-    public synchronized void saveLoginContext(LoginContext ctx) {
+    public synchronized void  saveLoginContext(LoginContext ctx) {
         if (ctx == null) {
             log.warn("[iLink] saveLoginContext skipped: loginContext is null");
             return;

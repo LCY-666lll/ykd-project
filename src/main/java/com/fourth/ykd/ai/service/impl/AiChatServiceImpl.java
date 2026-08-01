@@ -44,6 +44,11 @@ public class AiChatServiceImpl implements AiChatService {
             8. 用户提出算式或要求精确数值计算时，必须调用 calculate_math_expression，不得由模型自行估算。
             9. 用户查询真实当前日期、时间或计算当前日期与目标日期的间隔时，调用 get_time_info。
             10. 聊天历史中出现”【图片识别记忆】”时，它是用户此前发送图片的后台识别结果。用户询问图片、这张图、图中内容、上面的文字、里面的人或物等相关问题时，优先依据该记忆回答；与图片无关的问题忽略该记忆，不得编造图片中不存在的内容。
+            11. 用户想找工作、投递简历、搜索岗位时，使用猎聘工具流程：
+                a. 先调用 search_liepin_jobs 搜索岗位，主动询问用户期望岗位、城市、薪资等条件；
+                b. 搜索结果展示后，询问用户要投递哪些岗位（展示时不要展示链接，只展示序号、标题、公司、薪资、城市）；
+                c. 用户确认后调用 apply_liepin_jobs，传入用户选择的序号（如"1,3,5"或"全部"），工具会自动根据序号查找对应的岗位链接并投递；
+                d. 投递完成后汇报结果。不得在用户未确认的情况下自动投递。
             11. 聊天历史和长期记忆仅用于理解用户的指代、延续同一任务、已确认的用户偏好或此前生成内容。
                     用户本轮提出独立的新问题时，不得把历史消息中的旧回答、旧事实或旧工具结果当作本轮答案的依据。
                     天气、新闻、时间、价格、政策等可能变化的信息，必须以本轮工具查询结果为准。
@@ -75,6 +80,8 @@ public class AiChatServiceImpl implements AiChatService {
     private final EmailTool emailTool;
 
     private final QrCodeTool qrCodeTool;
+
+    private final LiepinApplyTool liepinApplyTool;
 
     private final ChatMemory chatMemory;
 
@@ -124,6 +131,7 @@ public class AiChatServiceImpl implements AiChatService {
                 用户要求定时执行任务时（如定时提醒、定时查天气、定时搜索等），使用 schedule_task 工具。
                 用户要取消定时任务时，使用 cancel_scheduled_task 工具。
                 用户要查看定时任务列表时，使用 list_scheduled_tasks 工具。
+                用户想找工作、投递简历时，可以使用猎聘工具帮用户搜索岗位并投递简历。
                 """;
         if (!ragContext.isEmpty()) {
             systemPrompt += "\n\n以下是从用户历史文档中检索到的相关内容，请参考回答（如果与当前问题无关则忽略）：\n" + ragContext;
@@ -135,7 +143,7 @@ public class AiChatServiceImpl implements AiChatService {
                     .system(systemPrompt)
                     .user(normalizedMessage)
                     .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
-                    .tools(mathCalculatorTools,timeTool,baiduSearchTool,weatherTool,translationTool,scheduledTaskTool,emailTool,qrCodeTool)
+                    .tools(mathCalculatorTools,timeTool,baiduSearchTool,weatherTool,translationTool,scheduledTaskTool,emailTool,qrCodeTool,liepinApplyTool)
                     .call()
                     .content();
         } finally {

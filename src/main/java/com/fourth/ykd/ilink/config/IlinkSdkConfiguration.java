@@ -15,7 +15,7 @@ SDK 配置 ILinkConfig
         ↓
 ILinkClient.builder().config(...)*/
 @Configuration
-@EnableConfigurationProperties(IlinkProperties.class)
+@EnableConfigurationProperties({IlinkProperties.class, LiepinProperties.class})
 public class IlinkSdkConfiguration {
 
     @Bean
