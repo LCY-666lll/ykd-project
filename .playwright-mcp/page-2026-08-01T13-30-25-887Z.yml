@@ -1,0 +1,169 @@
+- generic [ref=f4e2]:
+  - generic [ref=f4e4]:
+    - link [ref=f4e5] [cursor=pointer]:
+      - /url: https://travel.hangzhou.com.cn/index.htm
+    - generic [ref=f4e6]:
+      - link "首页" [ref=f4e7] [cursor=pointer]:
+        - /url: https://travel.hangzhou.com.cn/index.htm
+      - link "旅游资讯" [ref=f4e8] [cursor=pointer]:
+        - /url: https://travel.hangzhou.com.cn/lyzx/index.htm
+      - link "City Walk" [ref=f4e9] [cursor=pointer]:
+        - /url: https://travel.hangzhou.com.cn/node_208636.html
+      - link "韵味杭州" [ref=f4e10] [cursor=pointer]:
+        - /url: https://ywhz.hangzhou.com.cn/hssj/content/content_6257251.htm
+      - generic [ref=f4e11]:
+        - generic:
+          - textbox [ref=f4e12]: 杭州旅游
+          - button "搜索" [ref=f4e13]
+  - generic [ref=f4e14]:
+    - generic [ref=f4e15]:
+      - text: 所在位置：
+      - link "旅游频道" [ref=f4e16] [cursor=pointer]:
+        - /url: https://travel.hangzhou.com.cn/index.htm
+    - generic [ref=f4e17]:
+      - list [ref=f4e18]:
+        - listitem [ref=f4e19]:
+          - link "· 湘湖绣球花开 如堆云叠雪" [ref=f4e20] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2026-03/28/content_9198137.html
+          - generic [ref=f4e21]: 2026-03-28
+        - listitem [ref=f4e22]:
+          - link "· 春日赏花去" [ref=f4e23] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2026-03/21/content_9194392.html
+          - generic [ref=f4e24]: 2026-03-21
+        - listitem [ref=f4e25]:
+          - link "· 春日顶流回归 2026太子湾郁金香花展如约开启" [ref=f4e26] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2026-03/07/content_9187639.html
+          - generic [ref=f4e27]: 2026-03-07
+        - listitem [ref=f4e28]:
+          - link "· 颜值惊人，非常出片，法喜寺500多岁古玉兰绽放" [ref=f4e29] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2026-03/07/content_9187638.html
+          - generic [ref=f4e30]: 2026-03-07
+        - listitem [ref=f4e31]:
+          - link "· 2026醉三都野樱季喊你天路寻樱 山野赴春" [ref=f4e32] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2026-02/26/content_9182790.html
+          - generic [ref=f4e33]: 2026-02-26
+        - listitem [ref=f4e34]
+        - listitem [ref=f4e35]:
+          - link "· 杭州“诗画富春江”交旅融合精品航线全线复通" [ref=f4e36] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/lyzx/content/2026-02/13/content_9178183.html
+          - generic [ref=f4e37]: 2026-02-13
+        - listitem [ref=f4e38]:
+          - link "· 西湖景区春节总客流量同比增长16.17%" [ref=f4e39] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/lyzx/content/2026-02/24/content_9181641.html
+          - generic [ref=f4e40]: 2026-02-24
+        - listitem [ref=f4e41]:
+          - link "· 鼓楼门前 迎新雅韵" [ref=f4e42] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2024-12/30/content_8833675.html
+          - generic [ref=f4e43]: 2024-12-30
+        - listitem [ref=f4e44]:
+          - link "· 一条线路，贯穿“江浙沪”朋友圈" [ref=f4e45] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2024-12/30/content_8833673.html
+          - generic [ref=f4e46]: 2024-12-30
+        - listitem [ref=f4e47]:
+          - link "· 亭亭簇蕊芳满园" [ref=f4e48] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2024-08/28/content_8779447.html
+          - generic [ref=f4e49]: 2024-08-28
+        - listitem [ref=f4e50]
+        - listitem [ref=f4e51]:
+          - link "· 这个夏天年轻人喜欢追日，这里有杭州9个日出观赏点" [ref=f4e52] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2024-08/28/content_8779442.html
+          - generic [ref=f4e53]: 2024-08-28
+        - listitem [ref=f4e54]:
+          - link "· 石蒜花想开了" [ref=f4e55] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2024-08/27/content_8778896.html
+          - generic [ref=f4e56]: 2024-08-27
+        - listitem [ref=f4e57]:
+          - link "· 在西湖边低调了近800年 世外桃源赵公堤你去过吗？“赵公”是南宋任期最长的“杭州市长”" [ref=f4e58] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2024-04/13/content_8715097.html
+          - generic [ref=f4e59]: 2024-04-13
+        - listitem [ref=f4e60]:
+          - link "· 杭州河桥古镇：何仙姑的家乡，你愿意来这里看千亩油菜花盛开吗？" [ref=f4e61] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2024-03/30/content_8709029.html
+          - generic [ref=f4e62]: 2024-03-30
+        - listitem [ref=f4e63]:
+          - link "· 西湖桃花迎来最佳观赏期" [ref=f4e64] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2024-03/30/content_8709028.html
+          - generic [ref=f4e65]: 2024-03-30
+        - listitem [ref=f4e66]
+        - listitem [ref=f4e67]:
+          - link "· 樱花盛放正当时" [ref=f4e68] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2024-03/23/content_8705487.html
+          - generic [ref=f4e69]: 2024-03-23
+        - listitem [ref=f4e70]:
+          - link "· 一年一度“春天之约”来了 太子湾春季花展开幕" [ref=f4e71] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2024-03/09/content_8698839.html
+          - generic [ref=f4e72]: 2024-03-09
+        - listitem [ref=f4e73]:
+          - link "· 杭州，樱花开了" [ref=f4e74] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2024-02/29/content_8694868.html
+          - generic [ref=f4e75]: 2024-02-29
+        - listitem [ref=f4e76]:
+          - link "· 春意盎然" [ref=f4e77] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2024-02/07/content_8686736.html
+          - generic [ref=f4e78]: 2024-02-07
+        - listitem [ref=f4e79]:
+          - link "· 杭州千岛湖出现云海奇观" [ref=f4e80] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2024-01/26/content_8680901.html
+          - generic [ref=f4e81]: 2024-01-26
+        - listitem [ref=f4e82]
+        - listitem [ref=f4e83]:
+          - link "· 富春江生态画卷" [ref=f4e84] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2023-12/28/content_8667452.html
+          - generic [ref=f4e85]: 2023-12-28
+        - listitem [ref=f4e86]:
+          - link "· 冬日千岛湖宛若仙境，美不胜收" [ref=f4e87] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2023-12/28/content_8667450.html
+          - generic [ref=f4e88]: 2023-12-28
+        - listitem [ref=f4e89]:
+          - link "· 冬日美景" [ref=f4e90] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2023-12/27/content_8666310.html
+          - generic [ref=f4e91]: 2023-12-27
+        - listitem [ref=f4e92]:
+          - link "· 大运河畔有场“城市寻踪”活动主题展等你来“探索”" [ref=f4e93] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2023-12/26/content_8665705.html
+          - generic [ref=f4e94]: 2023-12-26
+        - listitem [ref=f4e95]:
+          - link "· 冬日限定美景" [ref=f4e96] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2023-12/25/content_8665260.html
+          - generic [ref=f4e97]: 2023-12-25
+        - listitem [ref=f4e98]
+        - listitem [ref=f4e99]:
+          - link "· 冬日晚霞 绚丽如画" [ref=f4e100] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2023-12/25/content_8665699.html
+          - generic [ref=f4e101]: 2023-12-25
+        - listitem [ref=f4e102]:
+          - link "· 仁和冬捕节暨首届渔文化国风生活嘉年华来啦" [ref=f4e103] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2023-12/22/content_8664234.html
+          - generic [ref=f4e104]: 2023-12-22
+        - listitem [ref=f4e105]:
+          - link "· 候鸟家园" [ref=f4e106] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2023-12/21/content_8663483.html
+          - generic [ref=f4e107]: 2023-12-21
+        - listitem [ref=f4e108]:
+          - link "· 千岛湖层林尽染 叠翠流金" [ref=f4e109] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2023-12/15/content_8660060.html
+          - generic [ref=f4e110]: 2023-12-15
+        - listitem [ref=f4e111]:
+          - link "· 湘湖秋色浓" [ref=f4e112] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/content/2023-12/12/content_8658589.html
+          - generic [ref=f4e113]: 2023-12-12
+      - list [ref=f4e114]:
+        - listitem [ref=f4e115]:
+          - link "1" [ref=f4e116] [cursor=pointer]:
+            - /url: javascript:void(0)
+        - listitem [ref=f4e117]:
+          - link "2" [ref=f4e118] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/node_208636_2.html
+        - listitem [ref=f4e119]:
+          - link "下一页" [ref=f4e120] [cursor=pointer]:
+            - /url: https://travel.hangzhou.com.cn/node_208636_2.html
+  - generic [ref=f4e121]:
+    - paragraph [ref=f4e122]: 增值电信业务经营许可证：浙B2-20110366 | 信息网络传播视听节目许可证：1105105 | 互联网新闻信息服务许可证：33120170003
+    - paragraph [ref=f4e123]:
+      - text: 网络文化经营许可:浙网文[2021]1187-055号 |
+      - link "工信部备案号：浙ICP备11041366号-1" [ref=f4e124] [cursor=pointer]:
+        - /url: http://www.beian.miit.gov.cn
+      - text: "|"
+      - link "浙公网安备：33010002000058号" [ref=f4e125] [cursor=pointer]:
+        - /url: http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010002000058
+    - paragraph [ref=f4e126]: 杭州网(杭州网络传媒有限公司)版权所有未经授权禁止复制或镜像

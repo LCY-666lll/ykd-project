@@ -1,0 +1,1423 @@
+- generic [ref=f4e2]:
+  - generic [ref=f4e3]:
+    - link "Skip to content" [ref=f4e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=f4e6]:
+      - heading "Navigation Menu" [level=2] [ref=f4e7]
+      - generic [ref=f4e8]:
+        - link "Homepage" [ref=f4e10] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f4e13]:
+          - navigation "Global" [ref=f4e16]:
+            - list [ref=f4e17]:
+              - listitem [ref=f4e18]:
+                - button "Platform" [ref=f4e20] [cursor=pointer]
+              - listitem [ref=f4e23]:
+                - button "Solutions" [ref=f4e25] [cursor=pointer]
+              - listitem [ref=f4e28]:
+                - button "Resources" [ref=f4e30] [cursor=pointer]
+              - listitem [ref=f4e33]:
+                - button "Open Source" [ref=f4e35] [cursor=pointer]
+              - listitem [ref=f4e38]:
+                - button "Enterprise" [ref=f4e40] [cursor=pointer]
+              - listitem [ref=f4e43]:
+                - link "Pricing" [ref=f4e44] [cursor=pointer]:
+                  - /url: https://github.com/pricing
+          - generic [ref=f4e46]:
+            - button "Search or jump to…" [ref=f4e49] [cursor=pointer]
+            - link "Sign in" [ref=f4e54] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Ftopics%2Frag
+            - link "Sign up" [ref=f4e55] [cursor=pointer]:
+              - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2Ftopics%2Frag&source=header
+            - button "Appearance settings" [ref=f4e58] [cursor=pointer]
+  - main [ref=f4e61]:
+    - navigation "Explore navigation" [ref=f4e63]:
+      - generic [ref=f4e64]:
+        - link "Explore" [ref=f4e65] [cursor=pointer]:
+          - /url: /explore
+        - link "Topics" [ref=f4e66] [cursor=pointer]:
+          - /url: /topics
+        - link "Trending" [ref=f4e67] [cursor=pointer]:
+          - /url: /trending
+        - link "Collections" [ref=f4e68] [cursor=pointer]:
+          - /url: /collections
+        - link "Events" [ref=f4e69] [cursor=pointer]:
+          - /url: /events
+        - link "GitHub Sponsors" [ref=f4e70] [cursor=pointer]:
+          - /url: /sponsors/explore
+    - generic [ref=f4e71]:
+      - generic [ref=f4e74]:
+        - generic [ref=f4e75]:
+          - generic [ref=f4e76]: "#"
+          - heading "rag" [level=1] [ref=f4e77]
+        - link "You must be signed in to star a repository" [ref=f4e80] [cursor=pointer]:
+          - /url: /login?return_to=%2Ftopic.rag
+          - text: Star
+      - generic [ref=f4e84]:
+        - generic [ref=f4e85]:
+          - heading "Here are 37,651 public repositories matching this topic..." [level=2] [ref=f4e86]
+          - generic [ref=f4e87]:
+            - group [ref=f4e88]:
+              - 'button "Language: All" [ref=f4e89] [cursor=pointer]'
+            - group [ref=f4e90]:
+              - 'button "Sort: Most stars" [ref=f4e91] [cursor=pointer]'
+          - article [ref=f4e92]:
+            - link "dify" [ref=f4e93] [cursor=pointer]:
+              - /url: /langgenius/dify
+              - img "dify"
+            - generic [ref=f4e95]:
+              - heading [level=3] [ref=f4e100]:
+                - link "langgenius" [ref=f4e101] [cursor=pointer]:
+                  - /url: /langgenius
+                - text: /
+                - link "dify" [ref=f4e102] [cursor=pointer]:
+                  - /url: /langgenius/dify
+              - link "You must be signed in to star a repository" [ref=f4e105] [cursor=pointer]:
+                - /url: /login?return_to=%2Flanggenius%2Fdify
+                - text: Star
+                - generic "150979 users starred this repository" [ref=f4e108]: 151k
+            - 'navigation "Repository menu: langgenius/dify" [ref=f4e109]':
+              - list [ref=f4e110]:
+                - listitem [ref=f4e111]:
+                  - link "Code" [ref=f4e112] [cursor=pointer]:
+                    - /url: /langgenius/dify
+                - listitem [ref=f4e115]:
+                  - link "Issues" [ref=f4e116] [cursor=pointer]:
+                    - /url: /langgenius/dify/issues
+                - listitem [ref=f4e120]:
+                  - link "Pull requests" [ref=f4e121] [cursor=pointer]:
+                    - /url: /langgenius/dify/pulls
+                - listitem [ref=f4e124]:
+                  - link "Discussions" [ref=f4e125] [cursor=pointer]:
+                    - /url: /langgenius/dify/discussions
+            - generic [ref=f4e128]:
+              - paragraph [ref=f4e130]: Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.
+              - generic [ref=f4e131]:
+                - link "python" [ref=f4e132] [cursor=pointer]:
+                  - /url: /topics/python
+                - link "agent" [ref=f4e133] [cursor=pointer]:
+                  - /url: /topics/agent
+                - link "workflow" [ref=f4e134] [cursor=pointer]:
+                  - /url: /topics/workflow
+                - link "automation" [ref=f4e135] [cursor=pointer]:
+                  - /url: /topics/automation
+                - link "ai" [ref=f4e136] [cursor=pointer]:
+                  - /url: /topics/ai
+                - link "skills" [ref=f4e137] [cursor=pointer]:
+                  - /url: /topics/skills
+                - link "mcp" [ref=f4e138] [cursor=pointer]:
+                  - /url: /topics/mcp
+                - link "nextjs" [ref=f4e139] [cursor=pointer]:
+                  - /url: /topics/nextjs
+                - link "orchestration" [ref=f4e140] [cursor=pointer]:
+                  - /url: /topics/orchestration
+                - link "openai" [ref=f4e141] [cursor=pointer]:
+                  - /url: /topics/openai
+                - link "gpt" [ref=f4e142] [cursor=pointer]:
+                  - /url: /topics/gpt
+                - link "low-code" [ref=f4e143] [cursor=pointer]:
+                  - /url: /topics/low-code
+                - link "no-code" [ref=f4e144] [cursor=pointer]:
+                  - /url: /topics/no-code
+                - link "claude" [ref=f4e145] [cursor=pointer]:
+                  - /url: /topics/claude
+                - link "rag" [ref=f4e146] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "llm" [ref=f4e147] [cursor=pointer]:
+                  - /url: /topics/llm
+                - link "genai" [ref=f4e148] [cursor=pointer]:
+                  - /url: /topics/genai
+                - link "agentic-framework" [ref=f4e149] [cursor=pointer]:
+                  - /url: /topics/agentic-framework
+                - link "agentic-workflow" [ref=f4e150] [cursor=pointer]:
+                  - /url: /topics/agentic-workflow
+                - link "agentic-ai" [ref=f4e151] [cursor=pointer]:
+                  - /url: /topics/agentic-ai
+              - list [ref=f4e153]:
+                - listitem [ref=f4e154]: Updated Aug 1, 202650 minutes ago
+                - listitem [ref=f4e155]:
+                  - generic [ref=f4e156]: TypeScript
+          - article [ref=f4e158]:
+            - link "open-webui" [ref=f4e159] [cursor=pointer]:
+              - /url: /open-webui/open-webui
+              - img "open-webui"
+            - generic [ref=f4e161]:
+              - heading [level=3] [ref=f4e166]:
+                - link "open-webui" [ref=f4e167] [cursor=pointer]:
+                  - /url: /open-webui
+                - text: /
+                - link "open-webui" [ref=f4e168] [cursor=pointer]:
+                  - /url: /open-webui/open-webui
+              - generic [ref=f4e169]:
+                - link "Sponsor @open-webui" [ref=f4e170] [cursor=pointer]:
+                  - /url: /sponsors/open-webui
+                  - generic [ref=f4e171]: Sponsor
+                - link "You must be signed in to star a repository" [ref=f4e176] [cursor=pointer]:
+                  - /url: /login?return_to=%2Fopen-webui%2Fopen-webui
+                  - text: Star
+                  - generic "147512 users starred this repository" [ref=f4e179]: 148k
+            - 'navigation "Repository menu: open-webui/open-webui" [ref=f4e180]':
+              - list [ref=f4e181]:
+                - listitem [ref=f4e182]:
+                  - link "Code" [ref=f4e183] [cursor=pointer]:
+                    - /url: /open-webui/open-webui
+                - listitem [ref=f4e186]:
+                  - link "Issues" [ref=f4e187] [cursor=pointer]:
+                    - /url: /open-webui/open-webui/issues
+                - listitem [ref=f4e191]:
+                  - link "Pull requests" [ref=f4e192] [cursor=pointer]:
+                    - /url: /open-webui/open-webui/pulls
+                - listitem [ref=f4e195]:
+                  - link "Discussions" [ref=f4e196] [cursor=pointer]:
+                    - /url: /open-webui/open-webui/discussions
+            - generic [ref=f4e199]:
+              - paragraph [ref=f4e201]: User-friendly AI Interface (Supports Ollama, OpenAI API, ...)
+              - generic [ref=f4e202]:
+                - link "ui" [ref=f4e203] [cursor=pointer]:
+                  - /url: /topics/ui
+                - link "ai" [ref=f4e204] [cursor=pointer]:
+                  - /url: /topics/ai
+                - link "mcp" [ref=f4e205] [cursor=pointer]:
+                  - /url: /topics/mcp
+                - link "openapi" [ref=f4e206] [cursor=pointer]:
+                  - /url: /topics/openapi
+                - link "self-hosted" [ref=f4e207] [cursor=pointer]:
+                  - /url: /topics/self-hosted
+                - link "openai" [ref=f4e208] [cursor=pointer]:
+                  - /url: /topics/openai
+                - link "webui" [ref=f4e209] [cursor=pointer]:
+                  - /url: /topics/webui
+                - link "rag" [ref=f4e210] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "llm" [ref=f4e211] [cursor=pointer]:
+                  - /url: /topics/llm
+                - link "llms" [ref=f4e212] [cursor=pointer]:
+                  - /url: /topics/llms
+                - link "ollama" [ref=f4e213] [cursor=pointer]:
+                  - /url: /topics/ollama
+                - link "llm-ui" [ref=f4e214] [cursor=pointer]:
+                  - /url: /topics/llm-ui
+                - link "ollama-webui" [ref=f4e215] [cursor=pointer]:
+                  - /url: /topics/ollama-webui
+                - link "llm-webui" [ref=f4e216] [cursor=pointer]:
+                  - /url: /topics/llm-webui
+                - link "open-webui" [ref=f4e217] [cursor=pointer]:
+                  - /url: /topics/open-webui
+              - list [ref=f4e219]:
+                - listitem [ref=f4e220]: Updated Aug 1, 20266 hours ago
+                - listitem [ref=f4e221]:
+                  - generic [ref=f4e222]: Python
+          - article [ref=f4e224]:
+            - link "langchain" [ref=f4e225] [cursor=pointer]:
+              - /url: /langchain-ai/langchain
+              - img "langchain"
+            - generic [ref=f4e227]:
+              - heading [level=3] [ref=f4e232]:
+                - link "langchain-ai" [ref=f4e233] [cursor=pointer]:
+                  - /url: /langchain-ai
+                - text: /
+                - link "langchain" [ref=f4e234] [cursor=pointer]:
+                  - /url: /langchain-ai/langchain
+              - link "You must be signed in to star a repository" [ref=f4e237] [cursor=pointer]:
+                - /url: /login?return_to=%2Flangchain-ai%2Flangchain
+                - text: Star
+                - generic "143162 users starred this repository" [ref=f4e240]: 143k
+            - 'navigation "Repository menu: langchain-ai/langchain" [ref=f4e241]':
+              - list [ref=f4e242]:
+                - listitem [ref=f4e243]:
+                  - link "Code" [ref=f4e244] [cursor=pointer]:
+                    - /url: /langchain-ai/langchain
+                - listitem [ref=f4e247]:
+                  - link "Issues" [ref=f4e248] [cursor=pointer]:
+                    - /url: /langchain-ai/langchain/issues
+                - listitem [ref=f4e252]:
+                  - link "Pull requests" [ref=f4e253] [cursor=pointer]:
+                    - /url: /langchain-ai/langchain/pulls
+                - listitem [ref=f4e256]:
+                  - link "Discussions" [ref=f4e257] [cursor=pointer]:
+                    - /url: /langchain-ai/langchain/discussions
+            - generic [ref=f4e260]:
+              - paragraph [ref=f4e262]: The agent engineering platform.
+              - generic [ref=f4e263]:
+                - link "python" [ref=f4e264] [cursor=pointer]:
+                  - /url: /topics/python
+                - link "open-source" [ref=f4e265] [cursor=pointer]:
+                  - /url: /topics/open-source
+                - link "enterprise" [ref=f4e266] [cursor=pointer]:
+                  - /url: /topics/enterprise
+                - link "framework" [ref=f4e267] [cursor=pointer]:
+                  - /url: /topics/framework
+                - link "typescript" [ref=f4e268] [cursor=pointer]:
+                  - /url: /topics/typescript
+                - link "ai" [ref=f4e269] [cursor=pointer]:
+                  - /url: /topics/ai
+                - link "gemini" [ref=f4e270] [cursor=pointer]:
+                  - /url: /topics/gemini
+                - link "openai" [ref=f4e271] [cursor=pointer]:
+                  - /url: /topics/openai
+                - link "multiagent" [ref=f4e272] [cursor=pointer]:
+                  - /url: /topics/multiagent
+                - link "agents" [ref=f4e273] [cursor=pointer]:
+                  - /url: /topics/agents
+                - link "ai-agents" [ref=f4e274] [cursor=pointer]:
+                  - /url: /topics/ai-agents
+                - link "rag" [ref=f4e275] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "pydantic" [ref=f4e276] [cursor=pointer]:
+                  - /url: /topics/pydantic
+                - link "llm" [ref=f4e277] [cursor=pointer]:
+                  - /url: /topics/llm
+                - link "generative-ai" [ref=f4e278] [cursor=pointer]:
+                  - /url: /topics/generative-ai
+                - link "chatgpt" [ref=f4e279] [cursor=pointer]:
+                  - /url: /topics/chatgpt
+                - link "langchain" [ref=f4e280] [cursor=pointer]:
+                  - /url: /topics/langchain
+                - link "anthropic" [ref=f4e281] [cursor=pointer]:
+                  - /url: /topics/anthropic
+                - link "langgraph" [ref=f4e282] [cursor=pointer]:
+                  - /url: /topics/langgraph
+                - link "deepagents" [ref=f4e283] [cursor=pointer]:
+                  - /url: /topics/deepagents
+              - list [ref=f4e285]:
+                - listitem [ref=f4e286]: Updated Aug 1, 20264 hours ago
+                - listitem [ref=f4e287]:
+                  - generic [ref=f4e288]: Python
+          - article [ref=f4e290]:
+            - generic [ref=f4e292]:
+              - heading [level=3] [ref=f4e297]:
+                - link "Shubhamsaboo" [ref=f4e298] [cursor=pointer]:
+                  - /url: /Shubhamsaboo
+                - text: /
+                - link "awesome-llm-apps" [ref=f4e299] [cursor=pointer]:
+                  - /url: /Shubhamsaboo/awesome-llm-apps
+              - link "You must be signed in to star a repository" [ref=f4e302] [cursor=pointer]:
+                - /url: /login?return_to=%2FShubhamsaboo%2Fawesome-llm-apps
+                - text: Star
+                - generic "129504 users starred this repository" [ref=f4e305]: 130k
+            - 'navigation "Repository menu: Shubhamsaboo/awesome-llm-apps" [ref=f4e306]':
+              - list [ref=f4e307]:
+                - listitem [ref=f4e308]:
+                  - link "Code" [ref=f4e309] [cursor=pointer]:
+                    - /url: /Shubhamsaboo/awesome-llm-apps
+                - listitem [ref=f4e312]:
+                  - link "Issues" [ref=f4e313] [cursor=pointer]:
+                    - /url: /Shubhamsaboo/awesome-llm-apps/issues
+                - listitem [ref=f4e317]:
+                  - link "Pull requests" [ref=f4e318] [cursor=pointer]:
+                    - /url: /Shubhamsaboo/awesome-llm-apps/pulls
+            - generic [ref=f4e321]:
+              - paragraph [ref=f4e323]: 100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.
+              - generic [ref=f4e324]:
+                - link "python" [ref=f4e325] [cursor=pointer]:
+                  - /url: /topics/python
+                - link "agents" [ref=f4e326] [cursor=pointer]:
+                  - /url: /topics/agents
+                - link "rag" [ref=f4e327] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "llms" [ref=f4e328] [cursor=pointer]:
+                  - /url: /topics/llms
+              - list [ref=f4e330]:
+                - listitem [ref=f4e331]: Updated Jul 31, 20262 days ago
+                - listitem [ref=f4e332]:
+                  - generic [ref=f4e333]: Python
+          - article [ref=f4e335]:
+            - generic [ref=f4e337]:
+              - heading [level=3] [ref=f4e342]:
+                - link "Graphify-Labs" [ref=f4e343] [cursor=pointer]:
+                  - /url: /Graphify-Labs
+                - text: /
+                - link "graphify" [ref=f4e344] [cursor=pointer]:
+                  - /url: /Graphify-Labs/graphify
+              - link "You must be signed in to star a repository" [ref=f4e347] [cursor=pointer]:
+                - /url: /login?return_to=%2FGraphify-Labs%2Fgraphify
+                - text: Star
+                - generic "100036 users starred this repository" [ref=f4e350]: 100k
+            - 'navigation "Repository menu: Graphify-Labs/graphify" [ref=f4e351]':
+              - list [ref=f4e352]:
+                - listitem [ref=f4e353]:
+                  - link "Code" [ref=f4e354] [cursor=pointer]:
+                    - /url: /Graphify-Labs/graphify
+                - listitem [ref=f4e357]:
+                  - link "Issues" [ref=f4e358] [cursor=pointer]:
+                    - /url: /Graphify-Labs/graphify/issues
+                - listitem [ref=f4e362]:
+                  - link "Pull requests" [ref=f4e363] [cursor=pointer]:
+                    - /url: /Graphify-Labs/graphify/pulls
+                - listitem [ref=f4e366]:
+                  - link "Discussions" [ref=f4e367] [cursor=pointer]:
+                    - /url: /Graphify-Labs/graphify/discussions
+            - generic [ref=f4e370]:
+              - paragraph [ref=f4e372]: "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store."
+              - generic [ref=f4e373]:
+                - link "tree-sitter" [ref=f4e374] [cursor=pointer]:
+                  - /url: /topics/tree-sitter
+                - link "skills" [ref=f4e375] [cursor=pointer]:
+                  - /url: /topics/skills
+                - link "mcp" [ref=f4e376] [cursor=pointer]:
+                  - /url: /topics/mcp
+                - link "code-analysis" [ref=f4e377] [cursor=pointer]:
+                  - /url: /topics/code-analysis
+                - link "ast" [ref=f4e378] [cursor=pointer]:
+                  - /url: /topics/ast
+                - link "gemini" [ref=f4e379] [cursor=pointer]:
+                  - /url: /topics/gemini
+                - link "knowledge-graph" [ref=f4e380] [cursor=pointer]:
+                  - /url: /topics/knowledge-graph
+                - link "code-search" [ref=f4e381] [cursor=pointer]:
+                  - /url: /topics/code-search
+                - link "developer-tools" [ref=f4e382] [cursor=pointer]:
+                  - /url: /topics/developer-tools
+                - link "cursor" [ref=f4e383] [cursor=pointer]:
+                  - /url: /topics/cursor
+                - link "leiden" [ref=f4e384] [cursor=pointer]:
+                  - /url: /topics/leiden
+                - link "codex" [ref=f4e385] [cursor=pointer]:
+                  - /url: /topics/codex
+                - link "ai-agents" [ref=f4e386] [cursor=pointer]:
+                  - /url: /topics/ai-agents
+                - link "rag" [ref=f4e387] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "llm" [ref=f4e388] [cursor=pointer]:
+                  - /url: /topics/llm
+                - link "graphrag" [ref=f4e389] [cursor=pointer]:
+                  - /url: /topics/graphrag
+                - link "antigravity" [ref=f4e390] [cursor=pointer]:
+                  - /url: /topics/antigravity
+                - link "claude-code" [ref=f4e391] [cursor=pointer]:
+                  - /url: /topics/claude-code
+                - link "openclaw" [ref=f4e392] [cursor=pointer]:
+                  - /url: /topics/openclaw
+              - list [ref=f4e394]:
+                - listitem [ref=f4e395]: Updated Aug 1, 202613 hours ago
+                - listitem [ref=f4e396]:
+                  - generic [ref=f4e397]: Python
+          - article [ref=f4e399]:
+            - link [ref=f4e400] [cursor=pointer]:
+              - /url: /thedotmack/claude-mem
+              - img "claude-mem" [ref=f4e401]
+            - generic [ref=f4e403]:
+              - heading [level=3] [ref=f4e408]:
+                - link "thedotmack" [ref=f4e409] [cursor=pointer]:
+                  - /url: /thedotmack
+                - text: /
+                - link "claude-mem" [ref=f4e410] [cursor=pointer]:
+                  - /url: /thedotmack/claude-mem
+              - generic [ref=f4e411]:
+                - link "Sponsor @thedotmack" [ref=f4e412] [cursor=pointer]:
+                  - /url: /sponsors/thedotmack
+                  - generic [ref=f4e413]: Sponsor
+                - link "You must be signed in to star a repository" [ref=f4e418] [cursor=pointer]:
+                  - /url: /login?return_to=%2Fthedotmack%2Fclaude-mem
+                  - text: Star
+                  - generic "89225 users starred this repository" [ref=f4e421]: 89.2k
+            - 'navigation "Repository menu: thedotmack/claude-mem" [ref=f4e422]':
+              - list [ref=f4e423]:
+                - listitem [ref=f4e424]:
+                  - link "Code" [ref=f4e425] [cursor=pointer]:
+                    - /url: /thedotmack/claude-mem
+                - listitem [ref=f4e428]:
+                  - link "Issues" [ref=f4e429] [cursor=pointer]:
+                    - /url: /thedotmack/claude-mem/issues
+                - listitem [ref=f4e433]:
+                  - link "Pull requests" [ref=f4e434] [cursor=pointer]:
+                    - /url: /thedotmack/claude-mem/pulls
+                - listitem [ref=f4e437]:
+                  - link "Discussions" [ref=f4e438] [cursor=pointer]:
+                    - /url: /thedotmack/claude-mem/discussions
+            - generic [ref=f4e441]:
+              - paragraph [ref=f4e443]: Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More
+              - generic [ref=f4e444]:
+                - link "ai" [ref=f4e445] [cursor=pointer]:
+                  - /url: /topics/ai
+                - link "sqlite" [ref=f4e446] [cursor=pointer]:
+                  - /url: /topics/sqlite
+                - link "embeddings" [ref=f4e447] [cursor=pointer]:
+                  - /url: /topics/embeddings
+                - link "artificial-intelligence" [ref=f4e448] [cursor=pointer]:
+                  - /url: /topics/artificial-intelligence
+                - link "ai-agents" [ref=f4e449] [cursor=pointer]:
+                  - /url: /topics/ai-agents
+                - link "claude" [ref=f4e450] [cursor=pointer]:
+                  - /url: /topics/claude
+                - link "memory-engine" [ref=f4e451] [cursor=pointer]:
+                  - /url: /topics/memory-engine
+                - link "long-term-memory" [ref=f4e452] [cursor=pointer]:
+                  - /url: /topics/long-term-memory
+                - link "rag" [ref=f4e453] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "anthropic" [ref=f4e454] [cursor=pointer]:
+                  - /url: /topics/anthropic
+                - link "chromadb" [ref=f4e455] [cursor=pointer]:
+                  - /url: /topics/chromadb
+                - link "ai-memory" [ref=f4e456] [cursor=pointer]:
+                  - /url: /topics/ai-memory
+                - link "mem0" [ref=f4e457] [cursor=pointer]:
+                  - /url: /topics/mem0
+                - link "claude-code" [ref=f4e458] [cursor=pointer]:
+                  - /url: /topics/claude-code
+                - link "supermemory" [ref=f4e459] [cursor=pointer]:
+                  - /url: /topics/supermemory
+                - link "openmemory" [ref=f4e460] [cursor=pointer]:
+                  - /url: /topics/openmemory
+                - link "claude-agents" [ref=f4e461] [cursor=pointer]:
+                  - /url: /topics/claude-agents
+                - link "claude-agent-sdk" [ref=f4e462] [cursor=pointer]:
+                  - /url: /topics/claude-agent-sdk
+                - link "claude-code-plugin" [ref=f4e463] [cursor=pointer]:
+                  - /url: /topics/claude-code-plugin
+                - link "claude-skills" [ref=f4e464] [cursor=pointer]:
+                  - /url: /topics/claude-skills
+              - list [ref=f4e466]:
+                - listitem [ref=f4e467]: Updated Aug 1, 202610 hours ago
+                - listitem [ref=f4e468]:
+                  - generic [ref=f4e469]: JavaScript
+          - article [ref=f4e471]:
+            - generic [ref=f4e473]:
+              - heading [level=3] [ref=f4e478]:
+                - link "PaddlePaddle" [ref=f4e479] [cursor=pointer]:
+                  - /url: /PaddlePaddle
+                - text: /
+                - link "PaddleOCR" [ref=f4e480] [cursor=pointer]:
+                  - /url: /PaddlePaddle/PaddleOCR
+              - link "You must be signed in to star a repository" [ref=f4e483] [cursor=pointer]:
+                - /url: /login?return_to=%2FPaddlePaddle%2FPaddleOCR
+                - text: Star
+                - generic "86720 users starred this repository" [ref=f4e486]: 86.7k
+            - 'navigation "Repository menu: PaddlePaddle/PaddleOCR" [ref=f4e487]':
+              - list [ref=f4e488]:
+                - listitem [ref=f4e489]:
+                  - link "Code" [ref=f4e490] [cursor=pointer]:
+                    - /url: /PaddlePaddle/PaddleOCR
+                - listitem [ref=f4e493]:
+                  - link "Issues" [ref=f4e494] [cursor=pointer]:
+                    - /url: /PaddlePaddle/PaddleOCR/issues
+                - listitem [ref=f4e498]:
+                  - link "Pull requests" [ref=f4e499] [cursor=pointer]:
+                    - /url: /PaddlePaddle/PaddleOCR/pulls
+                - listitem [ref=f4e502]:
+                  - link "Discussions" [ref=f4e503] [cursor=pointer]:
+                    - /url: /PaddlePaddle/PaddleOCR/discussions
+            - generic [ref=f4e506]:
+              - paragraph [ref=f4e508]: Turn any PDF or image document into structured data for your AI. A powerful, lightweight OCR toolkit that bridges the gap between images/PDFs and LLMs. Supports 100+ languages.
+              - generic [ref=f4e509]:
+                - link "ocr" [ref=f4e510] [cursor=pointer]:
+                  - /url: /topics/ocr
+                - link "pdf-parser" [ref=f4e511] [cursor=pointer]:
+                  - /url: /topics/pdf-parser
+                - link "kie" [ref=f4e512] [cursor=pointer]:
+                  - /url: /topics/kie
+                - link "document-translation" [ref=f4e513] [cursor=pointer]:
+                  - /url: /topics/document-translation
+                - link "rag" [ref=f4e514] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "chineseocr" [ref=f4e515] [cursor=pointer]:
+                  - /url: /topics/chineseocr
+                - link "ai4science" [ref=f4e516] [cursor=pointer]:
+                  - /url: /topics/ai4science
+                - link "pp-ocr" [ref=f4e517] [cursor=pointer]:
+                  - /url: /topics/pp-ocr
+                - link "document-parsing" [ref=f4e518] [cursor=pointer]:
+                  - /url: /topics/document-parsing
+                - link "pp-structure" [ref=f4e519] [cursor=pointer]:
+                  - /url: /topics/pp-structure
+                - link "pdf-extractor-rag" [ref=f4e520] [cursor=pointer]:
+                  - /url: /topics/pdf-extractor-rag
+                - link "pdf2markdown" [ref=f4e521] [cursor=pointer]:
+                  - /url: /topics/pdf2markdown
+                - link "paddleocr-vl" [ref=f4e522] [cursor=pointer]:
+                  - /url: /topics/paddleocr-vl
+              - list [ref=f4e524]:
+                - listitem [ref=f4e525]: Updated Jul 22, 2026last week
+                - listitem [ref=f4e526]:
+                  - generic [ref=f4e527]: Python
+          - article [ref=f4e529]:
+            - generic [ref=f4e531]:
+              - heading [level=3] [ref=f4e536]:
+                - link "infiniflow" [ref=f4e537] [cursor=pointer]:
+                  - /url: /infiniflow
+                - text: /
+                - link "ragflow" [ref=f4e538] [cursor=pointer]:
+                  - /url: /infiniflow/ragflow
+              - link "You must be signed in to star a repository" [ref=f4e541] [cursor=pointer]:
+                - /url: /login?return_to=%2Finfiniflow%2Fragflow
+                - text: Star
+                - generic "86556 users starred this repository" [ref=f4e544]: 86.6k
+            - 'navigation "Repository menu: infiniflow/ragflow" [ref=f4e545]':
+              - list [ref=f4e546]:
+                - listitem [ref=f4e547]:
+                  - link "Code" [ref=f4e548] [cursor=pointer]:
+                    - /url: /infiniflow/ragflow
+                - listitem [ref=f4e551]:
+                  - link "Issues" [ref=f4e552] [cursor=pointer]:
+                    - /url: /infiniflow/ragflow/issues
+                - listitem [ref=f4e556]:
+                  - link "Pull requests" [ref=f4e557] [cursor=pointer]:
+                    - /url: /infiniflow/ragflow/pulls
+                - listitem [ref=f4e560]:
+                  - link "Discussions" [ref=f4e561] [cursor=pointer]:
+                    - /url: /infiniflow/ragflow/discussions
+            - generic [ref=f4e564]:
+              - paragraph [ref=f4e566]: RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs
+              - generic [ref=f4e567]:
+                - link "ai" [ref=f4e568] [cursor=pointer]:
+                  - /url: /topics/ai
+                - link "ai-agents" [ref=f4e569] [cursor=pointer]:
+                  - /url: /topics/ai-agents
+                - link "knowledge-compilation" [ref=f4e570] [cursor=pointer]:
+                  - /url: /topics/knowledge-compilation
+                - link "rag" [ref=f4e571] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "context-engine" [ref=f4e572] [cursor=pointer]:
+                  - /url: /topics/context-engine
+                - link "retrieval-augmented-generation" [ref=f4e573] [cursor=pointer]:
+                  - /url: /topics/retrieval-augmented-generation
+                - link "llm-apps" [ref=f4e574] [cursor=pointer]:
+                  - /url: /topics/llm-apps
+                - link "context-management" [ref=f4e575] [cursor=pointer]:
+                  - /url: /topics/context-management
+                - link "agentic-search" [ref=f4e576] [cursor=pointer]:
+                  - /url: /topics/agentic-search
+                - link "agentic-ai" [ref=f4e577] [cursor=pointer]:
+                  - /url: /topics/agentic-ai
+                - link "context-engineering" [ref=f4e578] [cursor=pointer]:
+                  - /url: /topics/context-engineering
+                - link "agent-harness" [ref=f4e579] [cursor=pointer]:
+                  - /url: /topics/agent-harness
+                - link "agentic-retrieval" [ref=f4e580] [cursor=pointer]:
+                  - /url: /topics/agentic-retrieval
+                - link "harness-engineering" [ref=f4e581] [cursor=pointer]:
+                  - /url: /topics/harness-engineering
+              - list [ref=f4e583]:
+                - listitem [ref=f4e584]: Updated Aug 1, 2026now
+                - listitem [ref=f4e585]:
+                  - generic [ref=f4e586]: Go
+          - article [ref=f4e588]:
+            - generic [ref=f4e590]:
+              - heading [level=3] [ref=f4e595]:
+                - link "dair-ai" [ref=f4e596] [cursor=pointer]:
+                  - /url: /dair-ai
+                - text: /
+                - link "Prompt-Engineering-Guide" [ref=f4e597] [cursor=pointer]:
+                  - /url: /dair-ai/Prompt-Engineering-Guide
+              - generic [ref=f4e598]:
+                - link "Sponsor @dair-ai" [ref=f4e599] [cursor=pointer]:
+                  - /url: /sponsors/dair-ai
+                  - generic [ref=f4e600]: Sponsor
+                - link "You must be signed in to star a repository" [ref=f4e605] [cursor=pointer]:
+                  - /url: /login?return_to=%2Fdair-ai%2FPrompt-Engineering-Guide
+                  - text: Star
+                  - generic "77176 users starred this repository" [ref=f4e608]: 77.2k
+            - 'navigation "Repository menu: dair-ai/Prompt-Engineering-Guide" [ref=f4e609]':
+              - list [ref=f4e610]:
+                - listitem [ref=f4e611]:
+                  - link "Code" [ref=f4e612] [cursor=pointer]:
+                    - /url: /dair-ai/Prompt-Engineering-Guide
+                - listitem [ref=f4e615]:
+                  - link "Issues" [ref=f4e616] [cursor=pointer]:
+                    - /url: /dair-ai/Prompt-Engineering-Guide/issues
+                - listitem [ref=f4e620]:
+                  - link "Pull requests" [ref=f4e621] [cursor=pointer]:
+                    - /url: /dair-ai/Prompt-Engineering-Guide/pulls
+            - generic [ref=f4e624]:
+              - paragraph [ref=f4e626]: 🐙 Guides, papers, lessons, notebooks and resources for prompt engineering, context engineering, RAG, and AI Agents.
+              - generic [ref=f4e627]:
+                - link "agent" [ref=f4e628] [cursor=pointer]:
+                  - /url: /topics/agent
+                - link "deep-learning" [ref=f4e629] [cursor=pointer]:
+                  - /url: /topics/deep-learning
+                - link "openai" [ref=f4e630] [cursor=pointer]:
+                  - /url: /topics/openai
+                - link "language-model" [ref=f4e631] [cursor=pointer]:
+                  - /url: /topics/language-model
+                - link "agents" [ref=f4e632] [cursor=pointer]:
+                  - /url: /topics/agents
+                - link "ai-agents" [ref=f4e633] [cursor=pointer]:
+                  - /url: /topics/ai-agents
+                - link "rag" [ref=f4e634] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "prompt-engineering" [ref=f4e635] [cursor=pointer]:
+                  - /url: /topics/prompt-engineering
+                - link "llms" [ref=f4e636] [cursor=pointer]:
+                  - /url: /topics/llms
+                - link "generative-ai" [ref=f4e637] [cursor=pointer]:
+                  - /url: /topics/generative-ai
+                - link "chatgpt" [ref=f4e638] [cursor=pointer]:
+                  - /url: /topics/chatgpt
+              - list [ref=f4e640]:
+                - listitem [ref=f4e641]: Updated Mar 11, 2026on Mar 12
+                - listitem [ref=f4e642]:
+                  - generic [ref=f4e643]: MDX
+          - article [ref=f4e645]:
+            - generic [ref=f4e647]:
+              - heading [level=3] [ref=f4e652]:
+                - link "datawhalechina" [ref=f4e653] [cursor=pointer]:
+                  - /url: /datawhalechina
+                - text: /
+                - link "hello-agents" [ref=f4e654] [cursor=pointer]:
+                  - /url: /datawhalechina/hello-agents
+              - link "You must be signed in to star a repository" [ref=f4e657] [cursor=pointer]:
+                - /url: /login?return_to=%2Fdatawhalechina%2Fhello-agents
+                - text: Star
+                - generic "69953 users starred this repository" [ref=f4e660]: 70k
+            - 'navigation "Repository menu: datawhalechina/hello-agents" [ref=f4e661]':
+              - list [ref=f4e662]:
+                - listitem [ref=f4e663]:
+                  - link "Code" [ref=f4e664] [cursor=pointer]:
+                    - /url: /datawhalechina/hello-agents
+                - listitem [ref=f4e667]:
+                  - link "Issues" [ref=f4e668] [cursor=pointer]:
+                    - /url: /datawhalechina/hello-agents/issues
+                - listitem [ref=f4e672]:
+                  - link "Pull requests" [ref=f4e673] [cursor=pointer]:
+                    - /url: /datawhalechina/hello-agents/pulls
+                - listitem [ref=f4e676]:
+                  - link "Discussions" [ref=f4e677] [cursor=pointer]:
+                    - /url: /datawhalechina/hello-agents/discussions
+            - generic [ref=f4e680]:
+              - paragraph [ref=f4e682]: 📚 《从零开始构建智能体》——从零开始的智能体原理与实践教程
+              - generic [ref=f4e683]:
+                - link "agent" [ref=f4e684] [cursor=pointer]:
+                  - /url: /topics/agent
+                - link "tutorial" [ref=f4e685] [cursor=pointer]:
+                  - /url: /topics/tutorial
+                - link "rag" [ref=f4e686] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "llm" [ref=f4e687] [cursor=pointer]:
+                  - /url: /topics/llm
+              - list [ref=f4e689]:
+                - listitem [ref=f4e690]: Updated Jul 31, 2026yesterday
+                - listitem [ref=f4e691]:
+                  - generic [ref=f4e692]: Python
+          - article [ref=f4e694]:
+            - link "anything-llm" [ref=f4e695] [cursor=pointer]:
+              - /url: /Mintplex-Labs/anything-llm
+              - img "anything-llm"
+            - generic [ref=f4e697]:
+              - heading [level=3] [ref=f4e702]:
+                - link "Mintplex-Labs" [ref=f4e703] [cursor=pointer]:
+                  - /url: /Mintplex-Labs
+                - text: /
+                - link "anything-llm" [ref=f4e704] [cursor=pointer]:
+                  - /url: /Mintplex-Labs/anything-llm
+              - generic [ref=f4e705]:
+                - link "Sponsor @Mintplex-Labs" [ref=f4e706] [cursor=pointer]:
+                  - /url: /sponsors/Mintplex-Labs
+                  - generic [ref=f4e707]: Sponsor
+                - link "You must be signed in to star a repository" [ref=f4e712] [cursor=pointer]:
+                  - /url: /login?return_to=%2FMintplex-Labs%2Fanything-llm
+                  - text: Star
+                  - generic "64186 users starred this repository" [ref=f4e715]: 64.2k
+            - 'navigation "Repository menu: Mintplex-Labs/anything-llm" [ref=f4e716]':
+              - list [ref=f4e717]:
+                - listitem [ref=f4e718]:
+                  - link "Code" [ref=f4e719] [cursor=pointer]:
+                    - /url: /Mintplex-Labs/anything-llm
+                - listitem [ref=f4e722]:
+                  - link "Issues" [ref=f4e723] [cursor=pointer]:
+                    - /url: /Mintplex-Labs/anything-llm/issues
+                - listitem [ref=f4e727]:
+                  - link "Pull requests" [ref=f4e728] [cursor=pointer]:
+                    - /url: /Mintplex-Labs/anything-llm/pulls
+            - generic [ref=f4e731]:
+              - paragraph [ref=f4e733]: Stop renting your intelligence. Own it with AnythingLLM. Everything you need for a powerful local-first agent experience
+              - generic [ref=f4e734]:
+                - link "no-code" [ref=f4e735] [cursor=pointer]:
+                  - /url: /topics/no-code
+                - link "ai-agents" [ref=f4e736] [cursor=pointer]:
+                  - /url: /topics/ai-agents
+                - link "multimodal" [ref=f4e737] [cursor=pointer]:
+                  - /url: /topics/multimodal
+                - link "rag" [ref=f4e738] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "vector-database" [ref=f4e739] [cursor=pointer]:
+                  - /url: /topics/vector-database
+                - link "llm" [ref=f4e740] [cursor=pointer]:
+                  - /url: /topics/llm
+                - link "localai" [ref=f4e741] [cursor=pointer]:
+                  - /url: /topics/localai
+                - link "local-ai" [ref=f4e742] [cursor=pointer]:
+                  - /url: /topics/local-ai
+                - link "agentic-ai" [ref=f4e743] [cursor=pointer]:
+                  - /url: /topics/agentic-ai
+                - link "computer-use" [ref=f4e744] [cursor=pointer]:
+                  - /url: /topics/computer-use
+                - link "self-hosted-ai" [ref=f4e745] [cursor=pointer]:
+                  - /url: /topics/self-hosted-ai
+                - link "agent-orchestration" [ref=f4e746] [cursor=pointer]:
+                  - /url: /topics/agent-orchestration
+                - link "agent-harness" [ref=f4e747] [cursor=pointer]:
+                  - /url: /topics/agent-harness
+                - link "open-claw" [ref=f4e748] [cursor=pointer]:
+                  - /url: /topics/open-claw
+                - link "hermes-agent" [ref=f4e749] [cursor=pointer]:
+                  - /url: /topics/hermes-agent
+                - link "agent-computer" [ref=f4e750] [cursor=pointer]:
+                  - /url: /topics/agent-computer
+              - list [ref=f4e752]:
+                - listitem [ref=f4e753]: Updated Jul 31, 2026yesterday
+                - listitem [ref=f4e754]:
+                  - generic [ref=f4e755]: JavaScript
+          - article [ref=f4e757]:
+            - generic [ref=f4e759]:
+              - heading [level=3] [ref=f4e764]:
+                - link "headroomlabs-ai" [ref=f4e765] [cursor=pointer]:
+                  - /url: /headroomlabs-ai
+                - text: /
+                - link "headroom" [ref=f4e766] [cursor=pointer]:
+                  - /url: /headroomlabs-ai/headroom
+              - link "You must be signed in to star a repository" [ref=f4e769] [cursor=pointer]:
+                - /url: /login?return_to=%2Fheadroomlabs-ai%2Fheadroom
+                - text: Star
+                - generic "63774 users starred this repository" [ref=f4e772]: 63.8k
+            - 'navigation "Repository menu: headroomlabs-ai/headroom" [ref=f4e773]':
+              - list [ref=f4e774]:
+                - listitem [ref=f4e775]:
+                  - link "Code" [ref=f4e776] [cursor=pointer]:
+                    - /url: /headroomlabs-ai/headroom
+                - listitem [ref=f4e779]:
+                  - link "Issues" [ref=f4e780] [cursor=pointer]:
+                    - /url: /headroomlabs-ai/headroom/issues
+                - listitem [ref=f4e784]:
+                  - link "Pull requests" [ref=f4e785] [cursor=pointer]:
+                    - /url: /headroomlabs-ai/headroom/pulls
+                - listitem [ref=f4e788]:
+                  - link "Discussions" [ref=f4e789] [cursor=pointer]:
+                    - /url: /headroomlabs-ai/headroom/discussions
+            - generic [ref=f4e792]:
+              - paragraph [ref=f4e794]: Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 20% fewer tokens for coding agents, 60-95% fewer tokens for JSON, same answers. Library, proxy, MCP server.
+              - generic [ref=f4e795]:
+                - link "python" [ref=f4e796] [cursor=pointer]:
+                  - /url: /topics/python
+                - link "agent" [ref=f4e797] [cursor=pointer]:
+                  - /url: /topics/agent
+                - link "typescript" [ref=f4e798] [cursor=pointer]:
+                  - /url: /topics/typescript
+                - link "compression" [ref=f4e799] [cursor=pointer]:
+                  - /url: /topics/compression
+                - link "ai" [ref=f4e800] [cursor=pointer]:
+                  - /url: /topics/ai
+                - link "proxy" [ref=f4e801] [cursor=pointer]:
+                  - /url: /topics/proxy
+                - link "mcp" [ref=f4e802] [cursor=pointer]:
+                  - /url: /topics/mcp
+                - link "tokens" [ref=f4e803] [cursor=pointer]:
+                  - /url: /topics/tokens
+                - link "openai" [ref=f4e804] [cursor=pointer]:
+                  - /url: /topics/openai
+                - link "cursor" [ref=f4e805] [cursor=pointer]:
+                  - /url: /topics/cursor
+                - link "rag" [ref=f4e806] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "fastapi" [ref=f4e807] [cursor=pointer]:
+                  - /url: /topics/fastapi
+                - link "llm" [ref=f4e808] [cursor=pointer]:
+                  - /url: /topics/llm
+                - link "prompt-engineering" [ref=f4e809] [cursor=pointer]:
+                  - /url: /topics/prompt-engineering
+                - link "langchain" [ref=f4e810] [cursor=pointer]:
+                  - /url: /topics/langchain
+                - link "anthropic" [ref=f4e811] [cursor=pointer]:
+                  - /url: /topics/anthropic
+                - link "context-window" [ref=f4e812] [cursor=pointer]:
+                  - /url: /topics/context-window
+                - link "claude-code" [ref=f4e813] [cursor=pointer]:
+                  - /url: /topics/claude-code
+                - link "token-optimization" [ref=f4e814] [cursor=pointer]:
+                  - /url: /topics/token-optimization
+                - link "context-engineering" [ref=f4e815] [cursor=pointer]:
+                  - /url: /topics/context-engineering
+              - list [ref=f4e817]:
+                - listitem [ref=f4e818]: Updated Aug 1, 20269 hours ago
+                - listitem [ref=f4e819]:
+                  - generic [ref=f4e820]: Python
+          - article [ref=f4e822]:
+            - generic [ref=f4e824]:
+              - heading [level=3] [ref=f4e829]:
+                - link "mem0ai" [ref=f4e830] [cursor=pointer]:
+                  - /url: /mem0ai
+                - text: /
+                - link "mem0" [ref=f4e831] [cursor=pointer]:
+                  - /url: /mem0ai/mem0
+              - link "You must be signed in to star a repository" [ref=f4e834] [cursor=pointer]:
+                - /url: /login?return_to=%2Fmem0ai%2Fmem0
+                - text: Star
+                - generic "62255 users starred this repository" [ref=f4e837]: 62.3k
+            - 'navigation "Repository menu: mem0ai/mem0" [ref=f4e838]':
+              - list [ref=f4e839]:
+                - listitem [ref=f4e840]:
+                  - link "Code" [ref=f4e841] [cursor=pointer]:
+                    - /url: /mem0ai/mem0
+                - listitem [ref=f4e844]:
+                  - link "Issues" [ref=f4e845] [cursor=pointer]:
+                    - /url: /mem0ai/mem0/issues
+                - listitem [ref=f4e849]:
+                  - link "Pull requests" [ref=f4e850] [cursor=pointer]:
+                    - /url: /mem0ai/mem0/pulls
+                - listitem [ref=f4e853]:
+                  - link "Discussions" [ref=f4e854] [cursor=pointer]:
+                    - /url: /mem0ai/mem0/discussions
+            - generic [ref=f4e857]:
+              - paragraph [ref=f4e859]: Universal memory layer for AI Agents
+              - generic [ref=f4e860]:
+                - link "python" [ref=f4e861] [cursor=pointer]:
+                  - /url: /topics/python
+                - link "application" [ref=f4e862] [cursor=pointer]:
+                  - /url: /topics/application
+                - link "state-management" [ref=f4e863] [cursor=pointer]:
+                  - /url: /topics/state-management
+                - link "ai" [ref=f4e864] [cursor=pointer]:
+                  - /url: /topics/ai
+                - link "memory" [ref=f4e865] [cursor=pointer]:
+                  - /url: /topics/memory
+                - link "chatbots" [ref=f4e866] [cursor=pointer]:
+                  - /url: /topics/chatbots
+                - link "memory-management" [ref=f4e867] [cursor=pointer]:
+                  - /url: /topics/memory-management
+                - link "agents" [ref=f4e868] [cursor=pointer]:
+                  - /url: /topics/agents
+                - link "ai-agents" [ref=f4e869] [cursor=pointer]:
+                  - /url: /topics/ai-agents
+                - link "long-term-memory" [ref=f4e870] [cursor=pointer]:
+                  - /url: /topics/long-term-memory
+                - link "rag" [ref=f4e871] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "llm" [ref=f4e872] [cursor=pointer]:
+                  - /url: /topics/llm
+                - link "chatgpt" [ref=f4e873] [cursor=pointer]:
+                  - /url: /topics/chatgpt
+                - link "genai" [ref=f4e874] [cursor=pointer]:
+                  - /url: /topics/genai
+              - list [ref=f4e876]:
+                - listitem [ref=f4e877]: Updated Aug 1, 202631 minutes ago
+                - listitem [ref=f4e878]:
+                  - generic [ref=f4e879]: Python
+          - article [ref=f4e881]:
+            - link "llm-app" [ref=f4e882] [cursor=pointer]:
+              - /url: /pathwaycom/llm-app
+              - img "llm-app"
+            - generic [ref=f4e884]:
+              - heading [level=3] [ref=f4e889]:
+                - link "pathwaycom" [ref=f4e890] [cursor=pointer]:
+                  - /url: /pathwaycom
+                - text: /
+                - link "llm-app" [ref=f4e891] [cursor=pointer]:
+                  - /url: /pathwaycom/llm-app
+              - link "You must be signed in to star a repository" [ref=f4e894] [cursor=pointer]:
+                - /url: /login?return_to=%2Fpathwaycom%2Fllm-app
+                - text: Star
+                - generic "58922 users starred this repository" [ref=f4e897]: 58.9k
+            - 'navigation "Repository menu: pathwaycom/llm-app" [ref=f4e898]':
+              - list [ref=f4e899]:
+                - listitem [ref=f4e900]:
+                  - link "Code" [ref=f4e901] [cursor=pointer]:
+                    - /url: /pathwaycom/llm-app
+                - listitem [ref=f4e904]:
+                  - link "Issues" [ref=f4e905] [cursor=pointer]:
+                    - /url: /pathwaycom/llm-app/issues
+                - listitem [ref=f4e909]:
+                  - link "Pull requests" [ref=f4e910] [cursor=pointer]:
+                    - /url: /pathwaycom/llm-app/pulls
+                - listitem [ref=f4e913]:
+                  - link "Discussions" [ref=f4e914] [cursor=pointer]:
+                    - /url: /pathwaycom/llm-app/discussions
+            - generic [ref=f4e917]:
+              - paragraph [ref=f4e919]: Ready-to-run cloud templates for RAG, AI pipelines, and enterprise search with live data. 🐳Docker-friendly.⚡Always in sync with Sharepoint, Google Drive, S3, Kafka, PostgreSQL, real-time data APIs, and more.
+              - generic [ref=f4e920]:
+                - link "machine-learning" [ref=f4e921] [cursor=pointer]:
+                  - /url: /topics/machine-learning
+                - link "real-time" [ref=f4e922] [cursor=pointer]:
+                  - /url: /topics/real-time
+                - link "chatbot" [ref=f4e923] [cursor=pointer]:
+                  - /url: /topics/chatbot
+                - link "pathway" [ref=f4e924] [cursor=pointer]:
+                  - /url: /topics/pathway
+                - link "open-ai" [ref=f4e925] [cursor=pointer]:
+                  - /url: /topics/open-ai
+                - link "rag" [ref=f4e926] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "vector-database" [ref=f4e927] [cursor=pointer]:
+                  - /url: /topics/vector-database
+                - link "hugging-face" [ref=f4e928] [cursor=pointer]:
+                  - /url: /topics/hugging-face
+                - link "llm" [ref=f4e929] [cursor=pointer]:
+                  - /url: /topics/llm
+                - link "llmops" [ref=f4e930] [cursor=pointer]:
+                  - /url: /topics/llmops
+                - link "vector-index" [ref=f4e931] [cursor=pointer]:
+                  - /url: /topics/vector-index
+                - link "llm-prompting" [ref=f4e932] [cursor=pointer]:
+                  - /url: /topics/llm-prompting
+                - link "llm-security" [ref=f4e933] [cursor=pointer]:
+                  - /url: /topics/llm-security
+                - link "llm-local" [ref=f4e934] [cursor=pointer]:
+                  - /url: /topics/llm-local
+                - link "retrieval-augmented-generation" [ref=f4e935] [cursor=pointer]:
+                  - /url: /topics/retrieval-augmented-generation
+              - list [ref=f4e937]:
+                - listitem [ref=f4e938]: Updated Jul 5, 2026last month
+                - listitem [ref=f4e939]:
+                  - generic [ref=f4e940]: Jupyter Notebook
+          - article [ref=f4e942]:
+            - link "Flowise" [ref=f4e943] [cursor=pointer]:
+              - /url: /FlowiseAI/Flowise
+              - img "Flowise"
+            - generic [ref=f4e945]:
+              - heading [level=3] [ref=f4e950]:
+                - link "FlowiseAI" [ref=f4e951] [cursor=pointer]:
+                  - /url: /FlowiseAI
+                - text: /
+                - link "Flowise" [ref=f4e952] [cursor=pointer]:
+                  - /url: /FlowiseAI/Flowise
+              - generic [ref=f4e953]:
+                - link "Sponsor @FlowiseAI" [ref=f4e954] [cursor=pointer]:
+                  - /url: /sponsors/FlowiseAI
+                  - generic [ref=f4e955]: Sponsor
+                - link "You must be signed in to star a repository" [ref=f4e960] [cursor=pointer]:
+                  - /url: /login?return_to=%2FFlowiseAI%2FFlowise
+                  - text: Star
+                  - generic "55082 users starred this repository" [ref=f4e963]: 55.1k
+            - 'navigation "Repository menu: FlowiseAI/Flowise" [ref=f4e964]':
+              - list [ref=f4e965]:
+                - listitem [ref=f4e966]:
+                  - link "Code" [ref=f4e967] [cursor=pointer]:
+                    - /url: /FlowiseAI/Flowise
+                - listitem [ref=f4e970]:
+                  - link "Issues" [ref=f4e971] [cursor=pointer]:
+                    - /url: /FlowiseAI/Flowise/issues
+                - listitem [ref=f4e975]:
+                  - link "Pull requests" [ref=f4e976] [cursor=pointer]:
+                    - /url: /FlowiseAI/Flowise/pulls
+                - listitem [ref=f4e979]:
+                  - link "Discussions" [ref=f4e980] [cursor=pointer]:
+                    - /url: /FlowiseAI/Flowise/discussions
+            - generic [ref=f4e983]:
+              - paragraph [ref=f4e985]: Build AI Agents, Visually
+              - generic [ref=f4e986]:
+                - link "react" [ref=f4e987] [cursor=pointer]:
+                  - /url: /topics/react
+                - link "javascript" [ref=f4e988] [cursor=pointer]:
+                  - /url: /topics/javascript
+                - link "typescript" [ref=f4e989] [cursor=pointer]:
+                  - /url: /topics/typescript
+                - link "chatbot" [ref=f4e990] [cursor=pointer]:
+                  - /url: /topics/chatbot
+                - link "artificial-intelligence" [ref=f4e991] [cursor=pointer]:
+                  - /url: /topics/artificial-intelligence
+                - link "openai" [ref=f4e992] [cursor=pointer]:
+                  - /url: /topics/openai
+                - link "multiagent-systems" [ref=f4e993] [cursor=pointer]:
+                  - /url: /topics/multiagent-systems
+                - link "agents" [ref=f4e994] [cursor=pointer]:
+                  - /url: /topics/agents
+                - link "workflow-automation" [ref=f4e995] [cursor=pointer]:
+                  - /url: /topics/workflow-automation
+                - link "low-code" [ref=f4e996] [cursor=pointer]:
+                  - /url: /topics/low-code
+                - link "no-code" [ref=f4e997] [cursor=pointer]:
+                  - /url: /topics/no-code
+                - link "rag" [ref=f4e998] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "large-language-models" [ref=f4e999] [cursor=pointer]:
+                  - /url: /topics/large-language-models
+                - link "chatgpt" [ref=f4e1000] [cursor=pointer]:
+                  - /url: /topics/chatgpt
+                - link "langchain" [ref=f4e1001] [cursor=pointer]:
+                  - /url: /topics/langchain
+                - link "agentic-workflow" [ref=f4e1002] [cursor=pointer]:
+                  - /url: /topics/agentic-workflow
+                - link "agentic-ai" [ref=f4e1003] [cursor=pointer]:
+                  - /url: /topics/agentic-ai
+              - list [ref=f4e1005]:
+                - listitem [ref=f4e1006]: Updated Jul 31, 202620 hours ago
+                - listitem [ref=f4e1007]:
+                  - generic [ref=f4e1008]: TypeScript
+          - article [ref=f4e1010]:
+            - generic [ref=f4e1012]:
+              - heading [level=3] [ref=f4e1017]:
+                - link "run-llama" [ref=f4e1018] [cursor=pointer]:
+                  - /url: /run-llama
+                - text: /
+                - link "llama_index" [ref=f4e1019] [cursor=pointer]:
+                  - /url: /run-llama/llama_index
+              - link "You must be signed in to star a repository" [ref=f4e1022] [cursor=pointer]:
+                - /url: /login?return_to=%2Frun-llama%2Fllama_index
+                - text: Star
+                - generic "51275 users starred this repository" [ref=f4e1025]: 51.3k
+            - 'navigation "Repository menu: run-llama/llama_index" [ref=f4e1026]':
+              - list [ref=f4e1027]:
+                - listitem [ref=f4e1028]:
+                  - link "Code" [ref=f4e1029] [cursor=pointer]:
+                    - /url: /run-llama/llama_index
+                - listitem [ref=f4e1032]:
+                  - link "Issues" [ref=f4e1033] [cursor=pointer]:
+                    - /url: /run-llama/llama_index/issues
+                - listitem [ref=f4e1037]:
+                  - link "Pull requests" [ref=f4e1038] [cursor=pointer]:
+                    - /url: /run-llama/llama_index/pulls
+                - listitem [ref=f4e1041]:
+                  - link "Discussions" [ref=f4e1042] [cursor=pointer]:
+                    - /url: /run-llama/llama_index/discussions
+            - generic [ref=f4e1045]:
+              - paragraph [ref=f4e1047]: LlamaIndex is the leading document agent and OCR platform
+              - generic [ref=f4e1048]:
+                - link "application" [ref=f4e1049] [cursor=pointer]:
+                  - /url: /topics/application
+                - link "data" [ref=f4e1050] [cursor=pointer]:
+                  - /url: /topics/data
+                - link "framework" [ref=f4e1051] [cursor=pointer]:
+                  - /url: /topics/framework
+                - link "agents" [ref=f4e1052] [cursor=pointer]:
+                  - /url: /topics/agents
+                - link "fine-tuning" [ref=f4e1053] [cursor=pointer]:
+                  - /url: /topics/fine-tuning
+                - link "multi-agents" [ref=f4e1054] [cursor=pointer]:
+                  - /url: /topics/multi-agents
+                - link "rag" [ref=f4e1055] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "vector-database" [ref=f4e1056] [cursor=pointer]:
+                  - /url: /topics/vector-database
+                - link "llm" [ref=f4e1057] [cursor=pointer]:
+                  - /url: /topics/llm
+                - link "llamaindex" [ref=f4e1058] [cursor=pointer]:
+                  - /url: /topics/llamaindex
+              - list [ref=f4e1060]:
+                - listitem [ref=f4e1061]: Updated Aug 1, 20265 hours ago
+                - listitem [ref=f4e1062]:
+                  - generic [ref=f4e1063]: Python
+          - article [ref=f4e1065]:
+            - generic [ref=f4e1067]:
+              - heading [level=3] [ref=f4e1072]:
+                - link "jeecgboot" [ref=f4e1073] [cursor=pointer]:
+                  - /url: /jeecgboot
+                - text: /
+                - link "JeecgBoot" [ref=f4e1074] [cursor=pointer]:
+                  - /url: /jeecgboot/JeecgBoot
+              - link "You must be signed in to star a repository" [ref=f4e1077] [cursor=pointer]:
+                - /url: /login?return_to=%2Fjeecgboot%2FJeecgBoot
+                - text: Star
+                - generic "47227 users starred this repository" [ref=f4e1080]: 47.2k
+            - 'navigation "Repository menu: jeecgboot/JeecgBoot" [ref=f4e1081]':
+              - list [ref=f4e1082]:
+                - listitem [ref=f4e1083]:
+                  - link "Code" [ref=f4e1084] [cursor=pointer]:
+                    - /url: /jeecgboot/JeecgBoot
+                - listitem [ref=f4e1087]:
+                  - link "Issues" [ref=f4e1088] [cursor=pointer]:
+                    - /url: /jeecgboot/JeecgBoot/issues
+                - listitem [ref=f4e1092]:
+                  - link "Pull requests" [ref=f4e1093] [cursor=pointer]:
+                    - /url: /jeecgboot/JeecgBoot/pulls
+            - generic [ref=f4e1096]:
+              - paragraph [ref=f4e1098]: 【低代码迈入v2.0时代，一句话即可生成整个系统】企业级AI低代码平台，一键生成前后端代码甚至整个系统。 AI Skills 一句话画流程、设计表单、生成报表、大屏。内置 AI应用平台涵盖：AI聊天、知识库、流程编排、MCP插件等，兼容主流大模型。引领AI低代码「Skills 生成 → 在线配置 → 代码生成 → 手工合并->AI修改」开发模式，解决 Java 项目 90% 重复工作，提高效率又不失灵活。
+              - generic [ref=f4e1099]:
+                - link "agent" [ref=f4e1100] [cursor=pointer]:
+                  - /url: /topics/agent
+                - link "cli" [ref=f4e1101] [cursor=pointer]:
+                  - /url: /topics/cli
+                - link "ai" [ref=f4e1102] [cursor=pointer]:
+                  - /url: /topics/ai
+                - link "skills" [ref=f4e1103] [cursor=pointer]:
+                  - /url: /topics/skills
+                - link "mcp" [ref=f4e1104] [cursor=pointer]:
+                  - /url: /topics/mcp
+                - link "codegenerator" [ref=f4e1105] [cursor=pointer]:
+                  - /url: /topics/codegenerator
+                - link "antd" [ref=f4e1106] [cursor=pointer]:
+                  - /url: /topics/antd
+                - link "springboot" [ref=f4e1107] [cursor=pointer]:
+                  - /url: /topics/springboot
+                - link "activiti" [ref=f4e1108] [cursor=pointer]:
+                  - /url: /topics/activiti
+                - link "mybatis-plus" [ref=f4e1109] [cursor=pointer]:
+                  - /url: /topics/mybatis-plus
+                - link "codex" [ref=f4e1110] [cursor=pointer]:
+                  - /url: /topics/codex
+                - link "springcloud" [ref=f4e1111] [cursor=pointer]:
+                  - /url: /topics/springcloud
+                - link "low-code" [ref=f4e1112] [cursor=pointer]:
+                  - /url: /topics/low-code
+                - link "flowable" [ref=f4e1113] [cursor=pointer]:
+                  - /url: /topics/flowable
+                - link "rag" [ref=f4e1114] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "vue3" [ref=f4e1115] [cursor=pointer]:
+                  - /url: /topics/vue3
+                - link "llm" [ref=f4e1116] [cursor=pointer]:
+                  - /url: /topics/llm
+                - link "langchain4j" [ref=f4e1117] [cursor=pointer]:
+                  - /url: /topics/langchain4j
+                - link "spring-ai" [ref=f4e1118] [cursor=pointer]:
+                  - /url: /topics/spring-ai
+                - link "claude-code" [ref=f4e1119] [cursor=pointer]:
+                  - /url: /topics/claude-code
+              - list [ref=f4e1121]:
+                - listitem [ref=f4e1122]: Updated Jul 30, 20262 days ago
+                - listitem [ref=f4e1123]:
+                  - generic [ref=f4e1124]: Java
+          - article [ref=f4e1126]:
+            - link "milvus" [ref=f4e1127] [cursor=pointer]:
+              - /url: /milvus-io/milvus
+              - img "milvus"
+            - generic [ref=f4e1129]:
+              - heading [level=3] [ref=f4e1134]:
+                - link "milvus-io" [ref=f4e1135] [cursor=pointer]:
+                  - /url: /milvus-io
+                - text: /
+                - link "milvus" [ref=f4e1136] [cursor=pointer]:
+                  - /url: /milvus-io/milvus
+              - link "You must be signed in to star a repository" [ref=f4e1139] [cursor=pointer]:
+                - /url: /login?return_to=%2Fmilvus-io%2Fmilvus
+                - text: Star
+                - generic "45447 users starred this repository" [ref=f4e1142]: 45.4k
+            - 'navigation "Repository menu: milvus-io/milvus" [ref=f4e1143]':
+              - list [ref=f4e1144]:
+                - listitem [ref=f4e1145]:
+                  - link "Code" [ref=f4e1146] [cursor=pointer]:
+                    - /url: /milvus-io/milvus
+                - listitem [ref=f4e1149]:
+                  - link "Issues" [ref=f4e1150] [cursor=pointer]:
+                    - /url: /milvus-io/milvus/issues
+                - listitem [ref=f4e1154]:
+                  - link "Pull requests" [ref=f4e1155] [cursor=pointer]:
+                    - /url: /milvus-io/milvus/pulls
+                - listitem [ref=f4e1158]:
+                  - link "Discussions" [ref=f4e1159] [cursor=pointer]:
+                    - /url: /milvus-io/milvus/discussions
+            - generic [ref=f4e1162]:
+              - paragraph [ref=f4e1164]: Milvus is a high-performance, cloud-native vector database built for scalable vector ANN search
+              - generic [ref=f4e1165]:
+                - link "golang" [ref=f4e1166] [cursor=pointer]:
+                  - /url: /topics/golang
+                - link "distributed" [ref=f4e1167] [cursor=pointer]:
+                  - /url: /topics/distributed
+                - link "nearest-neighbor-search" [ref=f4e1168] [cursor=pointer]:
+                  - /url: /topics/nearest-neighbor-search
+                - link "cloud-native" [ref=f4e1169] [cursor=pointer]:
+                  - /url: /topics/cloud-native
+                - link "image-search" [ref=f4e1170] [cursor=pointer]:
+                  - /url: /topics/image-search
+                - link "vector-similarity" [ref=f4e1171] [cursor=pointer]:
+                  - /url: /topics/vector-similarity
+                - link "faiss" [ref=f4e1172] [cursor=pointer]:
+                  - /url: /topics/faiss
+                - link "anns" [ref=f4e1173] [cursor=pointer]:
+                  - /url: /topics/anns
+                - link "rag" [ref=f4e1174] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "hnsw" [ref=f4e1175] [cursor=pointer]:
+                  - /url: /topics/hnsw
+                - link "vector-search" [ref=f4e1176] [cursor=pointer]:
+                  - /url: /topics/vector-search
+                - link "vector-database" [ref=f4e1177] [cursor=pointer]:
+                  - /url: /topics/vector-database
+                - link "llm" [ref=f4e1178] [cursor=pointer]:
+                  - /url: /topics/llm
+                - link "embedding-database" [ref=f4e1179] [cursor=pointer]:
+                  - /url: /topics/embedding-database
+                - link "embedding-store" [ref=f4e1180] [cursor=pointer]:
+                  - /url: /topics/embedding-store
+                - link "vector-store" [ref=f4e1181] [cursor=pointer]:
+                  - /url: /topics/vector-store
+                - link "embedding-similarity" [ref=f4e1182] [cursor=pointer]:
+                  - /url: /topics/embedding-similarity
+                - link "diskann" [ref=f4e1183] [cursor=pointer]:
+                  - /url: /topics/diskann
+              - list [ref=f4e1185]:
+                - listitem [ref=f4e1186]: Updated Aug 1, 20262 hours ago
+                - listitem [ref=f4e1187]:
+                  - generic [ref=f4e1188]: Go
+          - article [ref=f4e1190]:
+            - link "quivr" [ref=f4e1191] [cursor=pointer]:
+              - /url: /QuivrHQ/quivr
+              - img "quivr"
+            - generic [ref=f4e1193]:
+              - heading [level=3] [ref=f4e1198]:
+                - link "QuivrHQ" [ref=f4e1199] [cursor=pointer]:
+                  - /url: /QuivrHQ
+                - text: /
+                - link "quivr" [ref=f4e1200] [cursor=pointer]:
+                  - /url: /QuivrHQ/quivr
+              - link "You must be signed in to star a repository" [ref=f4e1203] [cursor=pointer]:
+                - /url: /login?return_to=%2FQuivrHQ%2Fquivr
+                - text: Star
+                - generic "39372 users starred this repository" [ref=f4e1206]: 39.4k
+            - 'navigation "Repository menu: QuivrHQ/quivr" [ref=f4e1207]':
+              - list [ref=f4e1208]:
+                - listitem [ref=f4e1209]:
+                  - link "Code" [ref=f4e1210] [cursor=pointer]:
+                    - /url: /QuivrHQ/quivr
+                - listitem [ref=f4e1213]:
+                  - link "Issues" [ref=f4e1214] [cursor=pointer]:
+                    - /url: /QuivrHQ/quivr/issues
+                - listitem [ref=f4e1218]:
+                  - link "Pull requests" [ref=f4e1219] [cursor=pointer]:
+                    - /url: /QuivrHQ/quivr/pulls
+                - listitem [ref=f4e1222]:
+                  - link "Discussions" [ref=f4e1223] [cursor=pointer]:
+                    - /url: /QuivrHQ/quivr/discussions
+            - generic [ref=f4e1226]:
+              - paragraph [ref=f4e1228]: "Opiniated RAG for integrating GenAI in your apps 🧠 Focus on your product rather than the RAG. Easy integration in existing products with customisation! Any LLM: GPT4, Groq, Llama. Any Vectorstore: PGVector, Faiss. Any Files. Anyway you want."
+              - generic [ref=f4e1229]:
+                - link "react" [ref=f4e1230] [cursor=pointer]:
+                  - /url: /topics/react
+                - link "javascript" [ref=f4e1231] [cursor=pointer]:
+                  - /url: /topics/javascript
+                - link "html" [ref=f4e1232] [cursor=pointer]:
+                  - /url: /topics/html
+                - link "api" [ref=f4e1233] [cursor=pointer]:
+                  - /url: /topics/api
+                - link "docker" [ref=f4e1234] [cursor=pointer]:
+                  - /url: /topics/docker
+                - link "security" [ref=f4e1235] [cursor=pointer]:
+                  - /url: /topics/security
+                - link "privacy" [ref=f4e1236] [cursor=pointer]:
+                  - /url: /topics/privacy
+                - link "framework" [ref=f4e1237] [cursor=pointer]:
+                  - /url: /topics/framework
+                - link "typescript" [ref=f4e1238] [cursor=pointer]:
+                  - /url: /topics/typescript
+                - link "database" [ref=f4e1239] [cursor=pointer]:
+                  - /url: /topics/database
+                - link "ai" [ref=f4e1240] [cursor=pointer]:
+                  - /url: /topics/ai
+                - link "frontend" [ref=f4e1241] [cursor=pointer]:
+                  - /url: /topics/frontend
+                - link "vector" [ref=f4e1242] [cursor=pointer]:
+                  - /url: /topics/vector
+                - link "chatbot" [ref=f4e1243] [cursor=pointer]:
+                  - /url: /topics/chatbot
+                - link "postgresql" [ref=f4e1244] [cursor=pointer]:
+                  - /url: /topics/postgresql
+                - link "openai" [ref=f4e1245] [cursor=pointer]:
+                  - /url: /topics/openai
+                - link "rag" [ref=f4e1246] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "groq" [ref=f4e1247] [cursor=pointer]:
+                  - /url: /topics/groq
+                - link "llm" [ref=f4e1248] [cursor=pointer]:
+                  - /url: /topics/llm
+                - link "chatgpt" [ref=f4e1249] [cursor=pointer]:
+                  - /url: /topics/chatgpt
+              - list [ref=f4e1251]:
+                - listitem [ref=f4e1252]: Updated Jul 9, 2025on Jul 9, 2025
+                - listitem [ref=f4e1253]:
+                  - generic [ref=f4e1254]: Python
+          - article [ref=f4e1256]:
+            - link "langgraph" [ref=f4e1257] [cursor=pointer]:
+              - /url: /langchain-ai/langgraph
+              - img "langgraph"
+            - generic [ref=f4e1259]:
+              - heading [level=3] [ref=f4e1264]:
+                - link "langchain-ai" [ref=f4e1265] [cursor=pointer]:
+                  - /url: /langchain-ai
+                - text: /
+                - link "langgraph" [ref=f4e1266] [cursor=pointer]:
+                  - /url: /langchain-ai/langgraph
+              - link "You must be signed in to star a repository" [ref=f4e1269] [cursor=pointer]:
+                - /url: /login?return_to=%2Flangchain-ai%2Flanggraph
+                - text: Star
+                - generic "38623 users starred this repository" [ref=f4e1272]: 38.6k
+            - 'navigation "Repository menu: langchain-ai/langgraph" [ref=f4e1273]':
+              - list [ref=f4e1274]:
+                - listitem [ref=f4e1275]:
+                  - link "Code" [ref=f4e1276] [cursor=pointer]:
+                    - /url: /langchain-ai/langgraph
+                - listitem [ref=f4e1279]:
+                  - link "Issues" [ref=f4e1280] [cursor=pointer]:
+                    - /url: /langchain-ai/langgraph/issues
+                - listitem [ref=f4e1284]:
+                  - link "Pull requests" [ref=f4e1285] [cursor=pointer]:
+                    - /url: /langchain-ai/langgraph/pulls
+            - generic [ref=f4e1288]:
+              - paragraph [ref=f4e1290]: Build resilient agents.
+              - generic [ref=f4e1291]:
+                - link "python" [ref=f4e1292] [cursor=pointer]:
+                  - /url: /topics/python
+                - link "open-source" [ref=f4e1293] [cursor=pointer]:
+                  - /url: /topics/open-source
+                - link "enterprise" [ref=f4e1294] [cursor=pointer]:
+                  - /url: /topics/enterprise
+                - link "framework" [ref=f4e1295] [cursor=pointer]:
+                  - /url: /topics/framework
+                - link "ai" [ref=f4e1296] [cursor=pointer]:
+                  - /url: /topics/ai
+                - link "gemini" [ref=f4e1297] [cursor=pointer]:
+                  - /url: /topics/gemini
+                - link "openai" [ref=f4e1298] [cursor=pointer]:
+                  - /url: /topics/openai
+                - link "multiagent" [ref=f4e1299] [cursor=pointer]:
+                  - /url: /topics/multiagent
+                - link "agents" [ref=f4e1300] [cursor=pointer]:
+                  - /url: /topics/agents
+                - link "ai-agents" [ref=f4e1301] [cursor=pointer]:
+                  - /url: /topics/ai-agents
+                - link "rag" [ref=f4e1302] [cursor=pointer]:
+                  - /url: /topics/rag
+                - link "pydantic" [ref=f4e1303] [cursor=pointer]:
+                  - /url: /topics/pydantic
+                - link "llm" [ref=f4e1304] [cursor=pointer]:
+                  - /url: /topics/llm
+                - link "generative-ai" [ref=f4e1305] [cursor=pointer]:
+                  - /url: /topics/generative-ai
+                - link "chatgpt" [ref=f4e1306] [cursor=pointer]:
+                  - /url: /topics/chatgpt
+                - link "langchain" [ref=f4e1307] [cursor=pointer]:
+                  - /url: /topics/langchain
+                - link "langgraph" [ref=f4e1308] [cursor=pointer]:
+                  - /url: /topics/langgraph
+                - link "deepagents" [ref=f4e1309] [cursor=pointer]:
+                  - /url: /topics/deepagents
+              - list [ref=f4e1311]:
+                - listitem [ref=f4e1312]: Updated Aug 1, 20267 hours ago
+                - listitem [ref=f4e1313]:
+                  - generic [ref=f4e1314]: Python
+          - button "Load more…" [ref=f4e1317] [cursor=pointer]
+        - generic [ref=f4e1318]:
+          - generic [ref=f4e1319]:
+            - heading "Improve this page" [level=2] [ref=f4e1320]
+            - paragraph [ref=f4e1321]: Add a description, image, and links to the rag topic page so that developers can more easily learn about it.
+            - paragraph [ref=f4e1322]:
+              - link "Curate this topic" [ref=f4e1323] [cursor=pointer]:
+                - /url: https://github.com/github/explore/tree/master/CONTRIBUTING.md?source=add-description-rag
+          - generic [ref=f4e1326]:
+            - heading "Add this topic to your repo" [level=2] [ref=f4e1327]
+            - paragraph [ref=f4e1328]: To associate your repository with the rag topic, visit your repo's landing page and select "manage topics."
+            - paragraph [ref=f4e1329]:
+              - link "Learn more" [ref=f4e1330] [cursor=pointer]:
+                - /url: https://docs.github.com/en/articles/classifying-your-repository-with-topics
+  - contentinfo [ref=f4e1333]:
+    - heading "Footer" [level=2] [ref=f4e1334]
+    - generic [ref=f4e1335]:
+      - generic [ref=f4e1336]:
+        - link "GitHub Homepage" [ref=f4e1337] [cursor=pointer]:
+          - /url: https://github.com
+        - generic [ref=f4e1340]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=f4e1341]:
+        - heading "Footer navigation" [level=3] [ref=f4e1342]
+        - list "Footer navigation" [ref=f4e1343]:
+          - listitem [ref=f4e1344]:
+            - link "Terms" [ref=f4e1345] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=f4e1346]:
+            - link "Privacy" [ref=f4e1347] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=f4e1348]:
+            - link "Security" [ref=f4e1349] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=f4e1350]:
+            - link "Status" [ref=f4e1351] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=f4e1352]:
+            - link "Community" [ref=f4e1353] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=f4e1354]:
+            - link "Docs" [ref=f4e1355] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=f4e1356]:
+            - link "Contact" [ref=f4e1357] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=f4e1358]:
+            - button "Manage cookies" [ref=f4e1360] [cursor=pointer]
+          - listitem [ref=f4e1361]:
+            - button "Do not share my personal information" [ref=f4e1363] [cursor=pointer]

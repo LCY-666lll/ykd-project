@@ -112,6 +112,10 @@ public class LongTermMemoryAdvisor implements CallAdvisor {
         try {
             String userQuery = resolveCurrentQuery(request);
 
+            if (isCapabilityQuestion(userQuery)) {
+                return chain.nextCall(request);
+            }
+
             List<MemoryItem> memories =
                     memoryRetrievalService.retrieve(
                             userId,
@@ -124,7 +128,10 @@ public class LongTermMemoryAdvisor implements CallAdvisor {
 
                 if (StringUtils.hasText(memoryContext)) {
                     Prompt prompt = request.prompt()
-                            .augmentSystemMessage(memoryContext);
+                            .augmentSystemMessage(systemMessage -> systemMessage.mutate()
+                                    .text(systemMessage.getText() + System.lineSeparator() + System.lineSeparator()
+                                            + memoryContext)
+                                    .build());
 
                     requestToUse = request.mutate()
                             .prompt(prompt)
@@ -161,6 +168,22 @@ public class LongTermMemoryAdvisor implements CallAdvisor {
      * @param request 当前聊天请求
      * @return 当前用户 ID；不存在时返回 null
      */
+    private boolean isCapabilityQuestion(String userQuery) {
+        if (!StringUtils.hasText(userQuery)) {
+            return false;
+        }
+
+        String normalizedQuery = userQuery.replaceAll("\\s+", "");
+        return normalizedQuery.contains("\u4f60\u80fd\u5e72\u5565")
+                || normalizedQuery.contains("\u4f60\u80fd\u505a\u4ec0\u4e48")
+                || normalizedQuery.contains("\u4f60\u4f1a\u5e72\u5565")
+                || normalizedQuery.contains("\u4f60\u4f1a\u505a\u4ec0\u4e48")
+                || normalizedQuery.contains("\u6709\u4ec0\u4e48\u80fd\u529b")
+                || normalizedQuery.contains("\u80fd\u529b\u662f\u4ec0\u4e48")
+                || normalizedQuery.contains("\u4f60\u6709\u4ec0\u4e48\u529f\u80fd")
+                || normalizedQuery.contains("\u4f60\u6709\u54ea\u4e9b\u529f\u80fd");
+    }
+
     private String resolveUserId(ChatClientRequest request) {
         /*
          * 从请求上下文 Map 中，

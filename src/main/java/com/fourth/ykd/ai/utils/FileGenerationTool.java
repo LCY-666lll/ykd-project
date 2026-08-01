@@ -160,7 +160,7 @@ public class FileGenerationTool {
             try {
                 return objectMapper.readValue(json, FileDraft.class);
             } catch (JsonProcessingException exception) {
-                log.warn("[AI][FILE_GENERATE][JSON_PARSE_FAILED] rawDraft={}", rawDraft, exception);
+                log.warn("[AI][FILE_GENERATE][JSON_PARSE_FAILED] rawDraftLength={}, reason={}", rawDraft.length(), exception.getOriginalMessage());
             }
         } else {
             log.warn("[AI][FILE_GENERATE][JSON_MISSING] rawDraft={}", rawDraft);

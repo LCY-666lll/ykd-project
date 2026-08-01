@@ -59,3 +59,45 @@ MCP 浏览器操作能力第三阶段配置整理记录：
 3. MCP 客户端使用 SYNC 类型、启动期初始化、30 秒协议请求超时和 ToolCallback 转换，与当前 Spring MVC、同步 ChatClient 和微信回复链保持一致。
 4. Windows STDIO 使用 cmd.exe /c 和拆分后的参数启动 npx；Playwright MCP 固定为 0.0.78，使用 headless、isolated、msedge、5 秒操作超时、30 秒导航超时和 full 页面快照。
 5. 本阶段不启用 MCP、不启动浏览器、不添加 BROWSER_TASK、不修改任何 Java 或测试代码；只执行默认关闭状态下的配置核对和 mvn -q -DskipTests compile。
+
+MCP 浏览器操作能力第四阶段启动与工具发现验证记录：
+1. 新增 PlaywrightMcpStartupIntegrationTest，使用 ApplicationContextRunner 仅加载 Spring AI MCP 的 STDIO、客户端和 ToolCallback 自动配置，不启动完整 Spring Boot，不扫描项目业务包。
+2. 测试通过 ConfigDataApplicationContextInitializer 读取现有 application.properties，仅在测试上下文覆盖 spring.ai.mcp.client.enabled=true。
+3. 已验证 playwright 连接成功绑定 cmd.exe、npx、@playwright/mcp@0.0.78、msedge、超时和快照参数。
+4. 已验证 Spring AI 通过 STDIO 完成 MCP 初始化和工具发现，并生成 SyncMcpToolCallbackProvider；工具列表至少包含 browser_navigate、browser_snapshot、browser_click 和 browser_close。
+5. 测试由 RUN_BROWSER_MCP_INTEGRATION_TEST=true 显式启用，普通测试默认不会启动 Playwright MCP。
+6. 测试上下文未加载 iLink、SQLite、DeepSeek、DashScope、长期记忆和微信消息轮询组件。
+7. 已执行 mvn -q -DskipTests compile 并通过；首次 MCP 测试因受限环境禁止访问 npm 缓存外资源而失败，未产生残留进程；随后在允许访问 npm 的环境中执行指定测试并通过。
+8. 成功验证时 Playwright MCP 返回协议版本 2024-11-05 和 tools 能力；测试退出码为 0，测试前后相关进程数量均为 17，没有本阶段新增的 Playwright MCP、Node、Edge 或 Java 残留进程。
+9. 本阶段只验证 MCP 启动、配置绑定和工具发现，尚未增加 BROWSER_TASK、工具安全过滤、域名限制或微信业务接入。
+
+MCP 浏览器操作能力第五阶段安全工具过滤记录：
+1. 新增 BrowserMcpToolProviderTest，覆盖 MCP Provider 缺失时返回空工具数组、白名单工具保留、危险及未知工具过滤、BrowserMcpToolProvider 不注册为全局 ToolCallbackProvider。
+2. BrowserMcpToolProvider 继续使用 Optional<SyncMcpToolCallbackProvider>，MCP 默认关闭时不会因为缺少 Provider 影响应用启动。
+3. 白名单仅允许 browser_navigate、browser_snapshot、browser_find、browser_click、browser_type、browser_fill_form、browser_select_option、browser_wait_for、browser_tabs、browser_navigate_back、browser_take_screenshot 和 browser_close；browser_evaluate、browser_run_code_unsafe、browser_file_upload 及未知工具默认不放行。
+4. 本阶段没有修改 BrowserMcpToolProvider、BROWSER_TASK、DeepSeekIntentRouter、BrowserTaskService、IlinkReplyProcessor、普通 ChatClient、微信回复链、数据库、配置或长期记忆逻辑。
+MCP 浏览器操作能力第六阶段：网址输入与公开读取边界优化记录：
+1. 用户只发送明确 http 或 https 公开网址时，DeepSeekIntentRouter 即使模型返回 TEXT 或无法解析模型结果，也会路由为 BROWSER_TASK；浏览器服务不会立即启动 MCP，而是提示用户补充读取、总结、查找、筛选或点击等操作。
+2. 网址提取在网址后紧跟中文任务描述时于中文边界结束，例如“https://interview.javaguide.cn/帮我总结一下”会访问 https://interview.javaguide.cn/，并将后续中文识别为用户动作。
+3. BrowserTaskService 的系统提示词明确：仅可读取无需登录即可见的公开标题、正文、列表、公告、日期、作者和公开元数据；允许在明确请求下点击、筛选、翻页、查找、摘要、提取、比较和整理公开内容。
+4. 系统提示词同时明确禁止读取登录、付费墙、验证码、短信验证或扫码验证之后的内容，禁止读取账号密码、Cookie、Token、个人资料、订单、私信或其他私人数据，禁止下载文件。
+5. 已新增裸网址补动作、网址后中文动作提取和 URL 路由回退的单元测试；执行 mvn -q -DskipTests compile 及浏览器、路由、微信分流定向测试均通过。
+AI 助手能力说明提示词优化记录：
+1. 普通聊天系统提示词已集中声明当前项目能力：实时新闻与天气、时间日期、数学计算、翻译、PDF/DOCX/XLSX 文件生成与微信发送、文生图、参考图编辑、图片识别、语音回复、长期记忆管理，以及用户提供明确公开网址和动作时的真实浏览器操作。
+2. 已明确浏览器仅处理公开网页；登录、验证码、支付、购买、发布、删除、上传、下载和私人数据读取均属于禁止边界。
+3. 已明确聊天历史中“不能生成文件”“没有网页浏览工具”等旧回答是过期错误信息，模型不得复述或据此限制当前能力。
+4. 未修改 MCP 浏览器会话、ChatMemory 写入、SQLite、长期记忆、路由规则、文件工具或安全工具白名单。
+5. 已新增 AiChatServiceImplCapabilityInstructionsTest，并执行 mvn -q -DskipTests compile 及能力提示词、文件格式、浏览器路由定向测试通过。
+AI 助手能力说明提示词强化记录：
+1. 微信实测发现模型曾因追求简短而仅列出基础工具，遗漏文件、图片、语音、记忆和公开网页能力；本次将能力询问改为必须逐项列出八类能力的固定提示词，不允许为简短省略。
+2. 已明确即使普通 ChatClient 当前未直接挂载文件、图片、语音或浏览器工具，也不得推断系统没有这些能力；这些能力由外层意图分流和微信发送链路执行。
+3. 已禁止能力回答根据用户历史偏好作出无关承诺，避免把“能做什么”误答成特定行程或未完成事项。
+4. 仅修改 AiChatServiceImpl 的能力提示词及其单测；未修改 MCP 会话、ChatMemory、SQLite、长期记忆、路由、文件工具或浏览器安全边界。
+5. 已执行 mvn -q -DskipTests compile 及 AiChatServiceImplCapabilityInstructionsTest、DeepSeekIntentRouterTest、FileGenerationToolTypeTest 通过。
+
+????????????????
+1. ??? Spring AI 1.1.2 ? Prompt.augmentSystemMessage(String) ???? SystemMessage ??????????????????????????????
+2. LongTermMemoryAdvisor ??????? SystemMessage ?? long-term-memory ???????????????
+3. ????? / ????? / ????? / ??????????????????????????????????????
+4. ?? LongTermMemoryAdvisorSystemPromptTest??????????????????????????
+5. ??? mvn -q '-Dtest=LongTermMemoryAdvisorTest,LongTermMemoryAdvisorSystemPromptTest' test ? mvn -q -DskipTests compile?????

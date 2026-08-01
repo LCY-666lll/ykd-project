@@ -6,6 +6,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.fourth.ykd.ai.dto.AiChatResponse;
+import com.fourth.ykd.ai.browser.BrowserTaskService;
 import com.fourth.ykd.ai.dto.GeneratedImage;
 import com.fourth.ykd.ai.dto.PendingUserImage;
 import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.messages.UserMessage;
 
 /** 验证图片上下文和文生图提示词分流。 */
 class IlinkReplyProcessorTest {
@@ -118,6 +120,58 @@ class IlinkReplyProcessorTest {
         assertThat(result.answer()).isEqualTo("已将默认天气城市更新为杭州。");
         verify(fixture.aiChatService).manageMemory("user-1", userText);
     }
+    @Test
+    void shouldUseVoiceSpecificChatForVoiceReply() {
+        ProcessorFixture fixture = new ProcessorFixture();
+        String userText = "语音告诉我学习笔记怎么整理";
+
+        when(fixture.imageContextService.findActive("user-1")).thenReturn(Optional.empty());
+        when(fixture.intentRouter.route("user-1", userText, false)).thenReturn(UserIntent.VOICE_REPLY);
+        when(fixture.aiChatService.chatForVoiceReply("user-1", userText))
+                .thenReturn(new AiChatResponse("我会先提取目录，再按专题整理重点。"));
+
+        IlinkReplyProcessor.ReplyResult result = fixture.processor.process("user-1", userText, false);
+
+        assertThat(result.type()).isEqualTo(IlinkReplyProcessor.ReplyResultType.AUDIO);
+        assertThat(result.answer()).isEqualTo("我会先提取目录，再按专题整理重点。");
+        verify(fixture.aiChatService).chatForVoiceReply("user-1", userText);
+    }
+
+    @Test
+    void shouldDelegateBrowserTaskAndReturnTextReply() {
+        ProcessorFixture fixture = new ProcessorFixture();
+        String userText = "打开 https://example.com 并告诉我页面标题";
+
+        when(fixture.imageContextService.findActive("user-1")).thenReturn(Optional.empty());
+        when(fixture.intentRouter.route("user-1", userText, false)).thenReturn(UserIntent.BROWSER_TASK);
+        when(fixture.browserTaskService.execute("user-1", userText)).thenReturn("页面标题是 Example Domain");
+
+        IlinkReplyProcessor.ReplyResult result = fixture.processor.process("user-1", userText, false);
+
+        assertThat(result.type()).isEqualTo(IlinkReplyProcessor.ReplyResultType.TEXT);
+        assertThat(result.intent()).isEqualTo(UserIntent.BROWSER_TASK);
+        assertThat(result.answer()).isEqualTo("页面标题是 Example Domain");
+        verify(fixture.browserTaskService).execute("user-1", userText);
+    }
+
+    @Test
+    void shouldReuseRecentUrlForBrowserFollowUp() {
+        ProcessorFixture fixture = new ProcessorFixture();
+        String userText = "\u8fd9\u4e2a\u7f51\u5740\u7684\u4f5c\u8005\u662f\u4ec0\u4e48\uff1f";
+        String recentUrl = "https://example.com/article";
+
+        when(fixture.imageContextService.findActive("user-1")).thenReturn(Optional.empty());
+        when(fixture.intentRouter.route("user-1", userText, false)).thenReturn(UserIntent.BROWSER_TASK);
+        when(fixture.chatMemory.get("user-1")).thenReturn(List.of(new UserMessage(recentUrl)));
+        when(fixture.browserTaskService.execute("user-1", recentUrl + System.lineSeparator() + userText))
+                .thenReturn("\u4f5c\u8005\u662f Example");
+
+        IlinkReplyProcessor.ReplyResult result = fixture.processor.process("user-1", userText, false);
+
+        assertThat(result.intent()).isEqualTo(UserIntent.BROWSER_TASK);
+        verify(fixture.browserTaskService).execute("user-1", recentUrl + System.lineSeparator() + userText);
+    }
+
     private static final class ProcessorFixture {
         private final AiChatService aiChatService = mock(AiChatService.class);
         private final DeepSeekIntentRouter intentRouter = mock(DeepSeekIntentRouter.class);
@@ -127,6 +181,7 @@ class IlinkReplyProcessorTest {
         private final ImageUnderstandingService understandingService = mock(ImageUnderstandingService.class);
         private final ImageContextService imageContextService = mock(ImageContextService.class);
         private final ChatMemory chatMemory = mock(ChatMemory.class);
+        private final BrowserTaskService browserTaskService = mock(BrowserTaskService.class);
         private final IlinkReplyProcessor processor = new IlinkReplyProcessor(
                 aiChatService,
                 intentRouter,
@@ -137,7 +192,8 @@ class IlinkReplyProcessorTest {
                 mock(FileGenerationTool.class),
                 chatMemory,
                 mock(SqliteChatMessageRepository.class),
-                command -> { }
+                command -> { },
+                browserTaskService
         );
     }
 }

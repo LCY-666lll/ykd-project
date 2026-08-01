@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.messages.UserMessage;
 
 /** 验证意图路由结果完全由模型结合上下文决定。 */
 class DeepSeekIntentRouterTest {
@@ -86,5 +87,53 @@ class DeepSeekIntentRouterTest {
         );
 
         assertThat(result).isEqualTo(UserIntent.IMAGE_GENERATE);
+    }
+
+    @Test
+    void shouldUseBrowserTaskWhenModelChoosesItForExplicitUrl() {
+        ChatClient.Builder builder = mock(ChatClient.Builder.class);
+        ChatClient chatClient = mock(ChatClient.class, RETURNS_DEEP_STUBS);
+        ChatMemory chatMemory = mock(ChatMemory.class);
+        String userText = "打开 https://example.com 并查看页面标题";
+        when(builder.build()).thenReturn(chatClient);
+        when(chatMemory.get("user-1")).thenReturn(List.of());
+        when(chatClient.prompt().system(anyString()).user(userText).call().content())
+                .thenReturn("{\"intent\":\"BROWSER_TASK\"}");
+
+        DeepSeekIntentRouter router = new DeepSeekIntentRouter(builder, chatMemory);
+
+        assertThat(router.route("user-1", userText, false)).isEqualTo(UserIntent.BROWSER_TASK);
+    }
+
+    @Test
+    void shouldDowngradeBrowserTaskWithoutExplicitUrlToText() {
+        ChatClient.Builder builder = mock(ChatClient.Builder.class);
+        ChatClient chatClient = mock(ChatClient.class, RETURNS_DEEP_STUBS);
+        ChatMemory chatMemory = mock(ChatMemory.class);
+        String userText = "帮我打开学校官网查看通知";
+        when(builder.build()).thenReturn(chatClient);
+        when(chatMemory.get("user-1")).thenReturn(List.of());
+        when(chatClient.prompt().system(anyString()).user(userText).call().content())
+                .thenReturn("{\"intent\":\"BROWSER_TASK\"}");
+
+        DeepSeekIntentRouter router = new DeepSeekIntentRouter(builder, chatMemory);
+
+        assertThat(router.route("user-1", userText, false)).isEqualTo(UserIntent.TEXT);
+    }
+
+    @Test
+    void shouldRouteBareUrlToBrowserTaskWhenModelChoosesText() {
+        ChatClient.Builder builder = mock(ChatClient.Builder.class);
+        ChatClient chatClient = mock(ChatClient.class, RETURNS_DEEP_STUBS);
+        ChatMemory chatMemory = mock(ChatMemory.class);
+        String userText = "https://developer.aliyun.com/article/1392013";
+        when(builder.build()).thenReturn(chatClient);
+        when(chatMemory.get("user-1")).thenReturn(List.of());
+        when(chatClient.prompt().system(anyString()).user(userText).call().content())
+                .thenReturn("{\"intent\":\"TEXT\"}");
+
+        DeepSeekIntentRouter router = new DeepSeekIntentRouter(builder, chatMemory);
+
+        assertThat(router.route("user-1", userText, false)).isEqualTo(UserIntent.BROWSER_TASK);
     }
 }

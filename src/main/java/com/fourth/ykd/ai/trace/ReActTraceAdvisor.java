@@ -34,19 +34,29 @@ public class ReActTraceAdvisor extends ToolCallAdvisor {
     private static final String TRACE_CONTEXT_KEY = ReActTraceAdvisor.class.getName() + ".trace";
     private static final int MAX_LOG_LENGTH = 1_500;
     private static final int MAX_EVIDENCE_MEMORY_LENGTH = 4_000;
-    private static final int MAX_TOOL_ROUNDS = 8;
+    private static final int DEFAULT_MAX_TOOL_ROUNDS = 8;
     private static final Pattern SENSITIVE_VALUE_PATTERN = Pattern.compile(
             "(?i)(\\\"?(?:api[-_]?key|access[-_]?key|secret|token|password|authorization)\\\"?\\s*[:=]\\s*)(\\\"(?:\\\\.|[^\\\"])*\\\"|[^,}\\s]+)"
     );
 
     private final ChatMemory chatMemory;
     private final SqliteChatMessageRepository sqliteChatMessageRepository;
+    private final int maxToolRounds;
 
     public ReActTraceAdvisor(ToolCallingManager toolCallingManager, int advisorOrder,
             ChatMemory chatMemory, SqliteChatMessageRepository sqliteChatMessageRepository) {
+        this(toolCallingManager, advisorOrder, chatMemory, sqliteChatMessageRepository, DEFAULT_MAX_TOOL_ROUNDS);
+    }
+
+    public ReActTraceAdvisor(ToolCallingManager toolCallingManager, int advisorOrder,
+            ChatMemory chatMemory, SqliteChatMessageRepository sqliteChatMessageRepository, int maxToolRounds) {
         super(toolCallingManager, advisorOrder);
+        if (maxToolRounds < 1) {
+            throw new IllegalArgumentException("maxToolRounds must be positive");
+        }
         this.chatMemory = chatMemory;
         this.sqliteChatMessageRepository = sqliteChatMessageRepository;
+        this.maxToolRounds = maxToolRounds;
     }
 
     @Override
@@ -94,7 +104,7 @@ public class ReActTraceAdvisor extends ToolCallAdvisor {
         List<AssistantMessage.ToolCall> toolCalls =
                 output == null ? List.of() : output.getToolCalls();
         if (!toolCalls.isEmpty()) {
-            if (trace.toolRounds >= MAX_TOOL_ROUNDS) {
+            if (trace.toolRounds >= maxToolRounds) {
                 log.warn("[AI][REACT][STOP] traceId={}, toolRounds={}, reason=MAX_TOOL_ROUNDS",
                         trace.traceId, trace.toolRounds);
                 throw new BusinessException(50007, "本次任务需要的工具调用过多，已停止执行，请拆分请求后重试");

@@ -15,11 +15,16 @@ import org.springframework.stereotype.Component;
 public class DeepSeekIntentRouter {
     private static final Pattern INTENT_PATTERN = Pattern.compile("\\\"intent\\\"\\s*:\\s*\\\"([A-Z_]+)\\\"");
 
+    private static final Pattern HTTP_URL_PATTERN = Pattern.compile("(?i)https?://\\S+");
+
     private final ChatClient routeChatClient;
     private final ChatMemory chatMemory;
 
     /** 创建独立的意图路由客户端。 */
-    public DeepSeekIntentRouter(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory) {
+    public DeepSeekIntentRouter(
+            ChatClient.Builder chatClientBuilder,
+            ChatMemory chatMemory
+    ) {
         this.routeChatClient = chatClientBuilder.build();
         this.chatMemory = chatMemory;
     }
@@ -37,11 +42,26 @@ public class DeepSeekIntentRouter {
                 .content();
         Matcher matcher = INTENT_PATTERN.matcher(result == null ? "" : result);
         if (!matcher.find()) {
+            if (containsExplicitHttpUrl(userText)) {
+                log.info("[AI][INTENT_ROUTE] source=URL_FALLBACK, intent=BROWSER_TASK");
+                return UserIntent.BROWSER_TASK;
+            }
             log.warn("[AI][INTENT_ROUTE] source=MODEL_FALLBACK, intent=TEXT, result={}", result);
             return UserIntent.TEXT;
         }
         try {
             UserIntent intent = UserIntent.valueOf(matcher.group(1));
+
+            if (intent == UserIntent.BROWSER_TASK && !containsExplicitHttpUrl(userText) && !hasRecentPublicUrl(conversationId)) {
+                log.warn("[AI][INTENT_ROUTE] source=MODEL_FALLBACK, intent=TEXT, reason=NO_EXPLICIT_URL");
+                return UserIntent.TEXT;
+            }
+
+
+            if (intent == UserIntent.TEXT && containsExplicitHttpUrl(userText)) {
+                log.info("[AI][INTENT_ROUTE] source=URL_FALLBACK, intent=BROWSER_TASK");
+                return UserIntent.BROWSER_TASK;
+            }
             log.info("[AI][INTENT_ROUTE] source=MODEL, intent={}", intent);
             return intent;
         } catch (IllegalArgumentException exception) {
@@ -65,11 +85,21 @@ public class DeepSeekIntentRouter {
         return result.toString();
     }
 
+    private boolean hasRecentPublicUrl(String conversationId) {
+        return chatMemory.get(conversationId).stream()
+                .map(Message::getText)
+                .anyMatch(this::containsExplicitHttpUrl);
+    }
+
+    private boolean containsExplicitHttpUrl(String userText) {
+        return userText != null && HTTP_URL_PATTERN.matcher(userText).find();
+    }
+
     /** 构造仅包含路由规则的系统提示词。 */
     private String buildRouteInstructions(boolean hasPendingImage) {
         String intents = hasPendingImage
-                ? "TEXT, MEMORY_MANAGE, IMAGE_GENERATE, IMAGE_EDIT, IMAGE_UNDERSTAND, FILE_GENERATE, VOICE_REPLY"
-                : "TEXT, MEMORY_MANAGE, IMAGE_GENERATE, FILE_GENERATE, VOICE_REPLY";
+                ? "TEXT, MEMORY_MANAGE, IMAGE_GENERATE, IMAGE_EDIT, IMAGE_UNDERSTAND, FILE_GENERATE, VOICE_REPLY, BROWSER_TASK"
+                : "TEXT, MEMORY_MANAGE, IMAGE_GENERATE, FILE_GENERATE, VOICE_REPLY, BROWSER_TASK";
         return """
                 你是消息意图路由器，只负责选择意图，不负责回答、搜索、整理内容或生成文件。
                 必须从以下可选意图中选择一个：%s。
@@ -82,6 +112,16 @@ public class DeepSeekIntentRouter {
                 VOICE_REPLY：仅当用户明确要求机器人使用语音、声音回答，或把内容读出来时使用。用户发送的是语音消息，不代表要求语音回复。
                 图片理解、图片编辑、图片生成和文件生成请求优先选择各自意图，不因同时出现“语音”而改选 VOICE_REPLY。
                 MEMORY_MANAGE：仅当用户明确要求长期记住、修改、纠正、忘记或删除某项个人信息、偏好、任务或项目事实时使用。询问“你记得什么”“我的默认城市是什么”只是查询已有记忆，应选择 TEXT。
+                BROWSER_TASK：仅当用户提供明确的公开 http 或 https 网址，
+                并且要求实际打开网页、点击链接、填写非敏感查询条件、筛选、翻页、
+                等待动态页面或读取网页结果时使用。
+                普通“搜索某信息”“查一下新闻”等请求仍选择 TEXT。
+                用户只发送公开网址、但未说明要做什么时，也选择 BROWSER_TASK；
+                后续浏览器任务会提示用户补充读取、总结、查找、筛选或点击等明确动作，
+                若近期会话含公开网址，用户追问“这个网址”或“上面文章”的公开内容时，可选择 BROWSER_TASK 并重新访问该网址。
+                不得把这种情况当作普通 TEXT 聊天。
+
+                本轮和近期会话都没有公开网址时，不得选择 BROWSER_TASK。
                 TEXT：普通对话、知识问答、搜索请求或文字任务，且没有要求生成、导出或下载文件。
                 “帮我写一篇文章”选择 TEXT；只有明确要求导出、下载或生成文件时才选择 FILE_GENERATE。
                 “用表格列出”不等于 XLSX；只有明确要求 Excel、XLSX、电子表格或表格文件时才选择 FILE_GENERATE。

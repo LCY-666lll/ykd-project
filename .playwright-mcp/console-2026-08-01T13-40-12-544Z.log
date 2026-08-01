@@ -1,0 +1,187 @@
+[      22ms] [LOG] Analytics data: {type: pageleave, sessionId: 4814978f-6969-4a00-9a35-bef1df8c2bf3, page: Object, stayTime: 587, scrollDepth: 45} @ https://tongji.0571ai.cn/analytics-tracker-auto.min.js:2
+[    1235ms] [LOG] 校验文件已成功获取 {callArticle: Array(2), callH5: Array(1), callPicture: Array(2), callVideo: Array(2), callLive: Array(3)} @ https://mjs.sinaimg.cn/umd/base-tools-nph/1.1.24/index.min.js:1
+[    1249ms] [LOG] 校验文件已成功获取 {sinanews://sina.cn/main/main.pg: Array(2), sinanews://sina.cn/video/detail.pg: Array(2), sinanews://sina.cn/video/singlePlayer.pg: Array(2), sinanews://sina.cn/article/detail.pg: Array(2), sinanews://sina.cn/video/ad.pg: Array(6)} @ https://mjs.sinaimg.cn/umd/base-tools-nph/1.1.24/index.min.js:1
+[    1818ms] [LOG] ===currentWm==== false @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1819ms] [LOG] ===currentWm==== false @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1843ms] [LOG] ===currentWm==== false @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1844ms] [LOG] ===currentWm==== false @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1844ms] [LOG] ===currentWm==== false @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1856ms] [LOG] [referrer]:  @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1856ms] [LOG] ---ZtCallBack---: sinanews://sina.cn/article/detail.pg?newsId=7879776538-1d5abd91a06801iglo-cms-mp&dataid=comos:nikahaq8862600 @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1857ms] [LOG] [log]==> callStrategy version 1.0.33 @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1859ms] [LOG] ==回退拦截组件 @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1866ms] [LOG] function(t){this._init(t)} @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1871ms] [LOG] mounted @ https://mjs.sinaimg.cn/umd/base-tools-nph-strategy/1.1.40/index.min.js:1
+[    1871ms] [LOG] getDomInfo false @ https://mjs.sinaimg.cn/umd/base-tools-nph-strategy/1.1.40/index.min.js:1
+[    1909ms] [ERROR] Access to XMLHttpRequest at 'https://gk.sina.cn/v1/gkmatch?id=r565,r1548' from origin 'https://k.sina.cn' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://k.sina.cn/article_7879776538_1d5abd91a06801iglo.html:878
+[    1909ms] [LOG] Error: status is 0
+    at r.onreadystatechange (https://mjs.sinaimg.cn/umd/base_tools_pushdialog/3.0.8/index.min.js:1:60627) @ https://mjs.sinaimg.cn/umd/base_tools_pushdialog/3.0.8/index.min.js:0
+[    1909ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://gk.sina.cn/v1/gkmatch?id=r565,r1548:0
+[    1912ms] [ERROR] Access to XMLHttpRequest at 'https://gk.sina.cn/v1/gkmatch?id=r1' from origin 'https://k.sina.cn' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://k.sina.cn/article_7879776538_1d5abd91a06801iglo.html:0
+[    1912ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://gk.sina.cn/v1/gkmatch?id=r1:0
+[    1960ms] [ERROR] Access to XMLHttpRequest at 'https://gk.sina.cn/v1/qematch?id=r86,r373,r1274' from origin 'https://k.sina.cn' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://k.sina.cn/article_7879776538_1d5abd91a06801iglo.html:0
+[    1961ms] [LOG] 工部试验手浪基准对照：undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1961ms] [LOG] 工部试验手浪基准对照：undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1963ms] [LOG] 工部试验手浪基准对照：undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1963ms] [LOG] 工部试验手浪基准对照：undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1963ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://gk.sina.cn/v1/qematch?id=r86,r373,r1274:0
+[    1964ms] [ERROR] Access to XMLHttpRequest at 'https://gk.sina.cn/v1/gkmatch?id=r241,r3731,r2815,r3003,r1615,r640,r611,r606,r457,r458,r650,r664,r811,r240,r3011,r1745,r1560,r2030,r3877' from origin 'https://k.sina.cn' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://k.sina.cn/article_7879776538_1d5abd91a06801iglo.html:0
+[    1965ms] [LOG] 工部试验手浪基准对照：undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1965ms] [LOG] 工部试验手浪基准对照：undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1967ms] [LOG] gk undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1967ms] [LOG] undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1968ms] [LOG] ====664公布==== @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1968ms] [LOG] 【=====240====】 undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1969ms] [ERROR] TypeError: Cannot read properties of undefined (reading '0')
+    at n.<anonymous> (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:60:826460)
+    at p (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:11:617)
+    at Generator.<anonymous> (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:11:1964)
+    at Generator.next (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:11:980)
+    at i (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:16:5070)
+    at s (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:16:5273) @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:21
+[    1969ms] [LOG] ====FloatBtn错误==== TypeError: Cannot read properties of undefined (reading '0')
+    at n.<anonymous> (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:60:47837)
+    at p (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:11:617)
+    at Generator.<anonymous> (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:11:1964)
+    at Generator.next (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:11:980)
+    at i (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:16:5070)
+    at s (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:16:5273) @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1970ms] [LOG] Error: status is 0
+    at o.onreadystatechange (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:16:11061) @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1970ms] [LOG] 工部试验手浪基准对照：undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1970ms] [LOG] 工部试验手浪基准对照：undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    1970ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://gk.sina.cn/v1/gkmatch?id=r241,r3731,r2815,r3003,r1615,r640,r611,r606,r457,r458,r650,r664,r811,r240,r3011,r1745,r1560,r2030,r3877:0
+[    1983ms] Error: status is 0
+    at o.onreadystatechange (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:16:11061)
+[    1983ms] TypeError: Cannot read properties of undefined (reading 'conf')
+    at n.<anonymous> (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:60:53800)
+    at p (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:11:617)
+    at Generator.<anonymous> (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:11:1964)
+    at Generator.next (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:11:980)
+    at i (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:16:5070)
+    at s (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:16:5273)
+[    2040ms] [ERROR] Access to XMLHttpRequest at 'https://gk.sina.cn/v1/gkmatch?id=r3005' from origin 'https://k.sina.cn' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://k.sina.cn/article_7879776538_1d5abd91a06801iglo.html:0
+[    2040ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://gk.sina.cn/v1/gkmatch?id=r3005:0
+[    2084ms] [LOG] account : SinaNews @ https://mjss.sinaimg.cn/wap/online/public/qusetMobile/201705221616/js/quset_mobile.min.js:0
+[    2084ms] [LOG] channel : compony @ https://mjss.sinaimg.cn/wap/online/public/qusetMobile/201705221616/js/quset_mobile.min.js:0
+[    2084ms] [LOG] point : H5 @ https://mjss.sinaimg.cn/wap/online/public/qusetMobile/201705221616/js/quset_mobile.min.js:0
+[    2084ms] [LOG] platform : pc @ https://mjss.sinaimg.cn/wap/online/public/qusetMobile/201705221616/js/quset_mobile.min.js:0
+[    2147ms] [ERROR] Access to XMLHttpRequest at 'https://gk.sina.cn/v1/gkmatch?id=r682,r799,r3023,r3011' from origin 'https://k.sina.cn' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://k.sina.cn/article_7879776538_1d5abd91a06801iglo.html:0
+[    2148ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://gk.sina.cn/v1/gkmatch?id=r682,r799,r3023,r3011:0
+[    2184ms] [LOG] getDomInfo true @ https://mjs.sinaimg.cn/umd/base-tools-nph-strategy/1.1.40/index.min.js:1
+[    2582ms] [LOG] 这个pdps:PDPS000000056105没有vision字段或者为空 @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:21
+[    2584ms] [LOG] proxy callback JSHandle@node {content: Array(1), id: PDPS000000056105, size: 750*120, type: hf} undefined undefined undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2584ms] [LOG] 89px @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2584ms] [LOG] [Object] @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2588ms] [LOG] 这个pdps:PDPS000000067809没有vision字段或者为空 @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:21
+[    2589ms] [LOG] proxy callback JSHandle@node {content: Array(1), id: PDPS000000067809, size: 1280*720, type: blogbf} undefined undefined undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2589ms] [LOG] 720px @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2589ms] [LOG] [Object, Object] @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2622ms] [LOG] proxy callback JSHandle@node {ad_id: adm_415351_16436, adext: {"adid":"adm_415351_16436_16851","adunitid":"PDPS000000057573"}, adid: adm_415351_16436_16851, adsource: brand, adtype: 02} undefined undefined undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2622ms] [LOG] 240px @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2622ms] [LOG] [Object, Object, Object] @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2624ms] [LOG] proxy callback JSHandle@node {ad_id: adm_415319_16518, adext: {"adid":"adm_415319_16518_16676","adunitid":"PDPS000000067590"}, adid: adm_415319_16518_16676, adsource: brand, adtype: 02} undefined undefined undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2624ms] [LOG] 240px @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2625ms] [LOG] [Object, Object, Object, Object] @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2627ms] [LOG] proxy callback JSHandle@node {ad_id: adm_415343_16455, adext: {"adid":"adm_415343_16455_16617","adunitid":"PDPS000000067591"}, adid: adm_415343_16455_16617, adsource: brand, adtype: 02} undefined undefined undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2627ms] [LOG] 89px @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2627ms] [LOG] [Object, Object, Object, Object, Object] @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2629ms] [LOG] proxy callback JSHandle@node {ad_id: adm_415260_16607, adext: {"adid":"adm_415260_16607_16760","adunitid":"PDPS000000067592"}, adid: adm_415260_16607_16760, adsource: brand, adtype: 02} undefined undefined undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2630ms] [LOG] 89px @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2630ms] [LOG] [Object, Object, Object, Object, Object, Object] @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    2641ms] [ERROR] Access to XMLHttpRequest at 'https://gk.sina.cn/v1/gkmatch?id=r666' from origin 'https://k.sina.cn' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://k.sina.cn/article_7879776538_1d5abd91a06801iglo.html:0
+[    2641ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://gk.sina.cn/v1/gkmatch?id=r666:0
+[    3049ms] [ERROR] Access to XMLHttpRequest at 'https://gk.sina.cn/v1/gkmatch?id=r1703,r1704' from origin 'https://k.sina.cn' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://k.sina.cn/article_7879776538_1d5abd91a06801iglo.html:0
+[    3050ms] [LOG] getGongBu Error: status is 0
+    at o.onreadystatechange (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:16:11061) undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:40
+[    3050ms] [LOG] getGongBu Error: status is 0
+    at o.onreadystatechange (https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:16:11061) undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:40
+[    3064ms] [LOG] getDomInfo true @ https://mjs.sinaimg.cn/umd/base-tools-nph-strategy/1.1.40/index.min.js:1
+[    3064ms] [LOG] getDomInfo true @ https://mjs.sinaimg.cn/umd/base-tools-nph-strategy/1.1.40/index.min.js:1
+[    3065ms] [LOG] getGongBu ProgressEvent undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:40
+[    3066ms] [LOG] getGongBu ProgressEvent undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:40
+[    3066ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://gk.sina.cn/v1/gkmatch?id=r1703,r1704:0
+[    3188ms] [LOG] proxy callback JSHandle@node {ad_id: adm_415241_16632, adext: {"adid":"adm_415241_16632_16780","adunitid":"PDPS000000067114"}, adid: adm_415241_16632_16780, adsource: brand, adtype: 02} undefined undefined undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3189ms] [LOG] 240px @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3189ms] [LOG] [Object, Object, Object, Object, Object, Object, Object] @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3190ms] [LOG] proxy callback JSHandle@node {ad_id: adm_415236_16638, adext: {"adid":"adm_415236_16638_16786","adunitid":"PDPS000000059757"}, adid: adm_415236_16638_16786, adsource: brand, adtype: 02} undefined undefined undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3191ms] [LOG] 89px @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3191ms] [LOG] [Object, Object, Object, Object, Object, Object, Object, Object] @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3194ms] [LOG] proxy callback JSHandle@node {ad_id: adm_415301_16508, adext: {"adid":"adm_415301_16508_16666","adunitid":"PDPS000000059762"}, adid: adm_415301_16508_16666, adsource: brand, adtype: 02} undefined undefined undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3195ms] [LOG] 89px @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3195ms] [LOG] [Object, Object, Object, Object, Object, Object, Object, Object, Object] @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3197ms] [LOG] proxy callback JSHandle@node {ad_id: adm_415287_16559, adext: {"adid":"adm_415287_16559_16715","adunitid":"PDPS000000056239"}, adid: adm_415287_16559_16715, adsource: brand, adtype: 02} undefined undefined undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3197ms] [LOG] 89px @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3197ms] [LOG] [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3265ms] [LOG] triggerCallST1 @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:40
+[    3265ms] [LOG] getDomInfo true @ https://mjs.sinaimg.cn/umd/base-tools-nph-strategy/1.1.40/index.min.js:1
+[    3369ms] [LOG] proxy callback JSHandle@node {ad_id: adm_415321_16510, adext: {"adid":"adm_415321_16510_16668","adunitid":"PDPS000000059758"}, adid: adm_415321_16510_16668, adsource: brand, adtype: 02} undefined undefined undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3369ms] [LOG] 89px @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3369ms] [LOG] [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3370ms] [LOG] proxy callback JSHandle@node {ad_id: adm_415277_16568, adext: {"adid":"adm_415277_16568_16724","adunitid":"PDPS000000059759"}, adid: adm_415277_16568_16724, adsource: brand, adtype: 02} undefined undefined undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3371ms] [LOG] 240px @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3371ms] [LOG] [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3372ms] [LOG] proxy callback JSHandle@node {ad_id: adm_415257_16616, adext: {"adid":"adm_415257_16616_16764","adunitid":"PDPS000000059760"}, adid: adm_415257_16616_16764, adsource: brand, adtype: 02} undefined undefined undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3372ms] [LOG] 240px @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3372ms] [LOG] [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3373ms] [LOG] proxy callback JSHandle@node {ad_id: adm_415284_16562, adext: {"adid":"adm_415284_16562_16718","adunitid":"PDPS000000059761"}, adid: adm_415284_16562_16718, adsource: brand, adtype: 02} undefined undefined undefined @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3373ms] [LOG] 89px @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3374ms] [LOG] [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:52
+[    3411ms] [ERROR] Access to XMLHttpRequest at 'https://gk.sina.cn/v1/gkmatch?id=r694' from origin 'https://k.sina.cn' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://k.sina.cn/article_7879776538_1d5abd91a06801iglo.html:0
+[    3411ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://gk.sina.cn/v1/gkmatch?id=r694:0
+[    3496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_ABORTED @ https://xls.gongkaohao.cn/common/cx/w/ff_y/resource/pfw.js:0
+[    3496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_ABORTED @ https://xls.gongkaohao.cn/site/u_pox_x/ql/production/em.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://xls.gongkaohao.cn/site/ql-k/source/t-tmhd/openjs/r.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/b_wvey_yx_yl.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/a-vu-dx/resource/x/static/wxe.js:0
+[    3519ms] [ERROR] Access to XMLHttpRequest at 'https://gk.sina.cn/v1/gkmatch?id=r1617' from origin 'https://k.sina.cn' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://k.sina.cn/article_7879776538_1d5abd91a06801iglo.html:0
+[    3519ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://gk.sina.cn/v1/gkmatch?id=r1617:0
+[    3527ms] [LOG] Log API response: Response @ https://n.sinaimg.cn/default/7bd4e141/20251210/log.js:21
+[    3496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_ABORTED @ https://xls.gongkaohao.cn/common/cx/w/ff_y/resource/pfw.js:0
+[    3496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_ABORTED @ https://xls.gongkaohao.cn/site/u_pox_x/ql/production/em.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://xls.gongkaohao.cn/site/ql-k/source/t-tmhd/openjs/r.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/b_wvey_yx_yl.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/a-vu-dx/resource/x/static/wxe.js:0
+[    3496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_ABORTED @ https://xls.gongkaohao.cn/common/cx/w/ff_y/resource/pfw.js:0
+[    3496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_ABORTED @ https://xls.gongkaohao.cn/site/u_pox_x/ql/production/em.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://xls.gongkaohao.cn/site/ql-k/source/t-tmhd/openjs/r.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/b_wvey_yx_yl.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/a-vu-dx/resource/x/static/wxe.js:0
+[    3496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_ABORTED @ https://xls.gongkaohao.cn/common/cx/w/ff_y/resource/pfw.js:0
+[    3496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_ABORTED @ https://xls.gongkaohao.cn/site/u_pox_x/ql/production/em.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://xls.gongkaohao.cn/site/ql-k/source/t-tmhd/openjs/r.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/b_wvey_yx_yl.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/a-vu-dx/resource/x/static/wxe.js:0
+[    3496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_ABORTED @ https://xls.gongkaohao.cn/common/cx/w/ff_y/resource/pfw.js:0
+[    3496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_ABORTED @ https://xls.gongkaohao.cn/site/u_pox_x/ql/production/em.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://xls.gongkaohao.cn/site/ql-k/source/t-tmhd/openjs/r.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/b_wvey_yx_yl.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/a-vu-dx/resource/x/static/wxe.js:0
+[    3496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_ABORTED @ https://xls.gongkaohao.cn/common/cx/w/ff_y/resource/pfw.js:0
+[    3496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_ABORTED @ https://xls.gongkaohao.cn/site/u_pox_x/ql/production/em.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://xls.gongkaohao.cn/site/ql-k/source/t-tmhd/openjs/r.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/b_wvey_yx_yl.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/a-vu-dx/resource/x/static/wxe.js:0
+[    3496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_ABORTED @ https://xls.gongkaohao.cn/common/cx/w/ff_y/resource/pfw.js:0
+[    3496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_ABORTED @ https://xls.gongkaohao.cn/site/u_pox_x/ql/production/em.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://xls.gongkaohao.cn/site/ql-k/source/t-tmhd/openjs/r.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/b_wvey_yx_yl.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/a-vu-dx/resource/x/static/wxe.js:0
+[    3496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_ABORTED @ https://xls.gongkaohao.cn/common/cx/w/ff_y/resource/pfw.js:0
+[    3496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_ABORTED @ https://xls.gongkaohao.cn/site/u_pox_x/ql/production/em.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://xls.gongkaohao.cn/site/ql-k/source/t-tmhd/openjs/r.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/b_wvey_yx_yl.js:0
+[    3500ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/a-vu-dx/resource/x/static/wxe.js:0
+[    3586ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://xls.gongkaohao.cn/common/yt_sb_bu/p/source/ib.js:0
+[    3587ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://xls.gongkaohao.cn/production/wr/source/qz/z/sng_s.js:0
+[    3589ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/a-vu-dx/resource/x/static/wxe.js:0
+[    3592ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://zcsj.gongweiwang.cn/common/a/production/vud/resource/x/common/xwx/e.js:0
+[    3593ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://xls.gongkaohao.cn/source/vqp_yyr/static/mf/openjs/p.js:0
+[    3596ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://xls.gongkaohao.cn/site/to/resource/n-ww/production/p-kdk.js:0
+[    3867ms] [LOG] 【ad-cb】 {isInsertOK: true, dom: div.jkl20260801.sina_tj_blogbf} @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    3867ms] [LOG] 【openingAd】-show Sat Aug 01 2026 21:40:16 GMT+0800 (中国标准时间) @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    4664ms] [LOG] load @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    4664ms] [LOG] swiper-container init @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    4672ms] [LOG] oncehis @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    4722ms] [LOG] {attr: 1785591, cE: 612762, cS: 612570, dC: 617205, dCLE: 615671} @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59
+[    8878ms] [LOG] 【openingAd】-closed Sat Aug 01 2026 21:40:21 GMT+0800 (中国标准时间) @ https://mjs.sinaimg.cn/wap/project/articlev4/1.1.334/index/static/js/index.min.js:59

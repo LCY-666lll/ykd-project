@@ -2,6 +2,7 @@ package com.fourth.ykd.ilink.service.impl;
 import com.fourth.ykd.ilink.service.IlinkMessageReplyService;
 import com.github.wechat.ilink.sdk.ILinkClient;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -23,26 +24,45 @@ public class IlinkMessageReplyServiceImpl implements IlinkMessageReplyService {
     }
     /** 提交文字消息。 */
     @Override public void submit(ILinkClient client, String userId, String userText) {
-        if (StringUtils.hasText(userId) && StringUtils.hasText(userText)) enqueue(userId, () -> reply(client, userId, userText.trim()), () -> { });
+        if (StringUtils.hasText(userId) && StringUtils.hasText(userText)) enqueue(userId, () -> reply(client, userId, userText.trim()), () -> { }, () -> replySender.sendQueueWaitingMessage(client, userId));
     }
     /** 提交图片确认任务。 */
     @Override public void submitImageReceived(ILinkClient client, String userId) {
-        if (StringUtils.hasText(userId)) enqueue(userId, () -> replyImageReceived(client, userId), () -> { });
+        if (StringUtils.hasText(userId)) enqueue(userId, () -> replyImageReceived(client, userId), () -> { }, () -> replySender.sendQueueWaitingMessage(client, userId));
     }
     /** 提交已识别文本的语音消息。 */
     @Override public void submitVoice(ILinkClient client, String userId, String voiceText) {
-        if (StringUtils.hasText(userId) && StringUtils.hasText(voiceText)) enqueue(userId, () -> replyVoice(client, userId, voiceText.trim()), () -> replySender.sendVoiceReplyFailureMessage(client, userId));
+        if (StringUtils.hasText(userId) && StringUtils.hasText(voiceText)) enqueue(userId, () -> replyVoice(client, userId, voiceText.trim()), () -> replySender.sendVoiceReplyFailureMessage(client, userId), () -> replySender.sendQueueWaitingMessage(client, userId));
     }
     /** 提交语音识别失败提示。 */
     @Override public void submitVoiceRecognitionFailed(ILinkClient client, String userId) {
-        if (StringUtils.hasText(userId)) enqueue(userId, () -> replySender.sendVoiceRecognitionFailureMessage(client, userId), () -> replySender.sendVoiceRecognitionFailureMessage(client, userId));
+        if (StringUtils.hasText(userId)) enqueue(userId, () -> replySender.sendVoiceRecognitionFailureMessage(client, userId), () -> replySender.sendVoiceRecognitionFailureMessage(client, userId), () -> replySender.sendQueueWaitingMessage(client, userId));
     }
     /** 将任务串接到同一用户已有任务之后。 */
-    private void enqueue(String userId, Runnable task, Runnable rejectedTask) {
+    private void enqueue(String userId, Runnable task, Runnable rejectedTask, Runnable queuedFeedback) {
+        long enqueuedAt = System.currentTimeMillis();
+        log.info("[iLink][REPLY_ENQUEUED] userId={}", userId);
+        AtomicBoolean hasPendingPredecessor = new AtomicBoolean(false);
+
         try {
-            CompletableFuture<Void> current = replyChains.compute(userId, (key, previous) ->
-                    (previous == null ? CompletableFuture.completedFuture(null) : previous.handle((value, error) -> null)).thenRunAsync(task, replyExecutor));
+            CompletableFuture<Void> current = replyChains.compute(userId, (key, previous) -> {
+                hasPendingPredecessor.set(previous != null && !previous.isDone());
+                CompletableFuture<Void> predecessor = previous == null
+                        ? CompletableFuture.completedFuture(null)
+                        : previous.handle((value, error) -> null);
+
+                return predecessor.thenRunAsync(() -> {
+                    long queueWaitMs = System.currentTimeMillis() - enqueuedAt;
+                    log.info("[iLink][REPLY_STARTED] userId={}, queueWaitMs={}",
+                            userId, queueWaitMs);
+                    task.run();
+                }, replyExecutor);
+            });
             current.whenComplete((value, error) -> replyChains.remove(userId, current));
+
+            if (hasPendingPredecessor.get()) {
+                queuedFeedback.run();
+            }
         } catch (RejectedExecutionException exception) {
             log.warn("[iLink][REPLY_REJECTED] userId={}", userId, exception);
             rejectedTask.run();

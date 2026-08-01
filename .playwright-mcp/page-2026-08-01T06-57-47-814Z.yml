@@ -1,0 +1,353 @@
+- generic [active] [ref=f4e1]:
+  - link "欢迎进入 政策_中国政府网,盲人用户使用操作智能引导，请按快捷键Ctrl+Alt+R；阅读详细操作说明请按快捷键Ctrl+Alt+问号键。":
+    - /url: javascript:void(0)
+  - generic [ref=f4e5]:
+    - link "中国政府网" [ref=f4e7] [cursor=pointer]:
+      - /url: https://www.gov.cn/
+    - generic [ref=f4e9]:
+      - textbox [ref=f4e10]
+      - button [ref=f4e11] [cursor=pointer]
+    - list [ref=f4e12]:
+      - listitem [ref=f4e13]:
+        - link "首页" [ref=f4e14] [cursor=pointer]:
+          - /url: https://www.gov.cn/
+      - listitem [ref=f4e15]: "|"
+      - listitem [ref=f4e16]:
+        - link "简" [ref=f4e17] [cursor=pointer]:
+          - /url: https://www.gov.cn
+      - listitem [ref=f4e18]: "|"
+      - listitem [ref=f4e19]:
+        - link "繁" [ref=f4e20] [cursor=pointer]:
+          - /url: http://big5.www.gov.cn/gate/big5/www.gov.cn/
+      - listitem [ref=f4e21]: "|"
+      - listitem [ref=f4e22]:
+        - link "EN" [ref=f4e23] [cursor=pointer]:
+          - /url: http://english.www.gov.cn/
+      - listitem [ref=f4e24]: "|"
+      - listitem [ref=f4e25]:
+        - link "登录" [ref=f4e26] [cursor=pointer]:
+          - /url: javascript:void(0);
+      - listitem [ref=f4e27]: "|"
+      - listitem [ref=f4e28]:
+        - link "邮箱" [ref=f4e29] [cursor=pointer]:
+          - /url: https://mail.www.gov.cn/nsmail/index.html
+      - listitem [ref=f4e30]: "|"
+      - listitem [ref=f4e31]:
+        - link "无障碍" [ref=f4e32] [cursor=pointer]:
+          - /url: javascript:;
+  - generic [ref=f4e33]:
+    - generic [ref=f4e34]:
+      - textbox [ref=f4e36]
+      - link "政策文件高级搜索":
+        - /url: ../search/zhengce/zcwjgjss/
+    - link "最新政策" [ref=f4e40] [cursor=pointer]:
+      - /url: ./zuixin/
+    - generic [ref=f4e41]:
+      - generic [ref=f4e42]:
+        - list [ref=f4e43]:
+          - listitem [ref=f4e44]:
+            - link "国务院关于印发《知识产权保护和运用“十五五”规划》的通知" [ref=f4e45] [cursor=pointer]:
+              - /url: https://www.gov.cn/zhengce/content/202607/content_7077199.htm
+            - text: 2026-07-31
+          - listitem [ref=f4e46]:
+            - link "国务院关于出境入境管理的规定" [ref=f4e47] [cursor=pointer]:
+              - /url: https://www.gov.cn/zhengce/content/202607/content_7077172.htm
+            - text: 2026-07-31
+          - listitem [ref=f4e48]:
+            - link "中共中央 国务院转发《中央宣传部、司法部关于开展法治宣传教育的第九个五年规划（2026－2030年）》" [ref=f4e49] [cursor=pointer]:
+              - /url: ./202607/content_7076696.htm
+            - text: 2026-07-27
+          - listitem [ref=f4e50]:
+            - link "国办印发《关于国务院行政复议案件处理程序的若干规定》的通知" [ref=f4e51] [cursor=pointer]:
+              - /url: https://www.gov.cn/zhengce/content/202607/content_7076684.htm
+            - text: 2026-07-27
+          - listitem [ref=f4e52]:
+            - link "国务院关于同意将山东省潍坊市列为国家历史文化名城的批复" [ref=f4e53] [cursor=pointer]:
+              - /url: https://www.gov.cn/zhengce/content/202607/content_7076508.htm
+            - text: 2026-07-24
+          - listitem [ref=f4e54]:
+            - link "中共中央 国务院印发《关于加强新时代社会工作的意见》" [ref=f4e55] [cursor=pointer]:
+              - /url: ./202607/content_7076433.htm
+            - text: 2026-07-23
+          - listitem [ref=f4e56]:
+            - link "国务院关于印发《全民健身计划（2026—2030年）》的通知" [ref=f4e57] [cursor=pointer]:
+              - /url: https://www.gov.cn/zhengce/content/202607/content_7076420.htm
+            - text: 2026-07-23
+          - listitem [ref=f4e58]:
+            - link "国务院办公厅转发生态环境部等部门《群众身边水体保护治理行动方案》" [ref=f4e59] [cursor=pointer]:
+              - /url: https://www.gov.cn/zhengce/content/202607/content_7075364.htm
+            - text: 2026-07-14
+        - link "更多>>" [ref=f4e61] [cursor=pointer]:
+          - /url: ./zuixin/
+      - generic [ref=f4e62]:
+        - link [ref=f4e63] [cursor=pointer]:
+          - /url: ./wenjian/zhongyang/
+          - img "中央文件" [ref=f4e64]
+        - generic [ref=f4e65]:
+          - link [ref=f4e67] [cursor=pointer]:
+            - /url: ./gongbao/guowuyuan1954_1999/
+          - link "国务院公报" [ref=f4e68] [cursor=pointer]:
+            - /url: ../gongbao/currentissue.htm
+        - link [ref=f4e69] [cursor=pointer]:
+          - /url: ../gongbao/currentissue.htm
+          - img "国务院公报" [ref=f4e70]
+        - generic "政府信息公开" [ref=f4e71]:
+          - link "政府信息公开" [ref=f4e72] [cursor=pointer]:
+            - /url: ./xxgk/
+    - generic [ref=f4e73]:
+      - list:
+        - listitem [ref=f4e74]:
+          - link [ref=f4e75] [cursor=pointer]:
+            - /url: https://sousuo.www.gov.cn/zcwjk/policyDocumentLibrary?q=&t=zhengcelibrary&orpro=
+            - img "国务院政策文件库" [ref=f4e76]
+        - listitem [ref=f4e77]:
+          - link [ref=f4e78] [cursor=pointer]:
+            - /url: https://www.gov.cn/zhengce/qiye/
+            - img "惠企助企政策集纳查询" [ref=f4e79]
+    - link "政策解读" [ref=f4e81] [cursor=pointer]:
+      - /url: ./jiedu/
+    - generic [ref=f4e82]:
+      - generic [ref=f4e83]:
+        - list:
+          - listitem [ref=f4e84]:
+            - heading [level=5] [ref=f4e85]:
+              - link "《工业绿色低碳发展“十五五”规划》解读" [ref=f4e86] [cursor=pointer]:
+                - /url: ./202607/content_7077144.htm
+            - paragraph [ref=f4e87]:
+              - link "为加快推动工业绿色低碳发展，积极稳妥推进和实现碳达峰，促进经济社会发展全面绿色转型，工业和信息化部近日印发了《工业绿色低碳发展“十五五”规划》。" [ref=f4e88] [cursor=pointer]:
+                - /url: ./202607/content_7077144.htm
+            - generic [ref=f4e89]: 2026-07-31
+          - listitem [ref=f4e90]:
+            - heading [level=5] [ref=f4e91]:
+              - link "司法部负责人就《关于国务院行政复议案件处理程序的若干规定》答记者问" [ref=f4e92] [cursor=pointer]:
+                - /url: ./202607/content_7077013.htm
+            - paragraph [ref=f4e93]:
+              - link "2026年7月22日，国务院办公厅印发《关于国务院行政复议案件处理程序的若干规定》，自印发之日起施行。" [ref=f4e94] [cursor=pointer]:
+                - /url: ./202607/content_7077013.htm
+            - generic [ref=f4e95]: 2026-07-30
+          - listitem [ref=f4e96]:
+            - heading [level=5] [ref=f4e97]:
+              - link "《医疗卫生强基工程中医药行动方案》政策解读" [ref=f4e98] [cursor=pointer]:
+                - /url: ./202607/content_7076911.htm
+            - paragraph [ref=f4e99]:
+              - link "近日，国家中医药管理局等11部门联合印发了《医疗卫生强基工程中医药行动方案》。" [ref=f4e100] [cursor=pointer]:
+                - /url: ./202607/content_7076911.htm
+            - generic [ref=f4e101]: 2026-07-29
+          - listitem [ref=f4e102]:
+            - heading [level=5] [ref=f4e103]:
+              - link "中国空调15天运到欧洲，靠它→" [ref=f4e104] [cursor=pointer]:
+                - /url: ./202607/content_7076863.htm
+            - paragraph [ref=f4e105]:
+              - link "中欧班列横亘亚欧、连接东西，有效衔接生产和消费，极大促进了沿线国家商品流通与产业互补，运输货物品类覆盖53大门类、5万多个品种。" [ref=f4e106] [cursor=pointer]:
+                - /url: ./202607/content_7076863.htm
+            - generic [ref=f4e107]: 2026-07-28
+          - listitem [ref=f4e108]:
+            - heading [level=5] [ref=f4e109]:
+              - link "从税收大数据看上半年经济运行亮点" [ref=f4e110] [cursor=pointer]:
+                - /url: ./202607/content_7076856.htm
+            - paragraph [ref=f4e111]:
+              - link "7月28日，在国新办“开局起步‘十五五’”系列主题新闻发布会上，国家税务总局局长胡静林从税收大数据的角度分析了上半年经济运行亮点。" [ref=f4e112] [cursor=pointer]:
+                - /url: ./202607/content_7076856.htm
+            - generic [ref=f4e113]: 2026-07-28
+          - listitem [ref=f4e114]:
+            - heading [level=5] [ref=f4e115]:
+              - link "扩量提质、可靠替代 可再生能源有了“十五五”发展路线图" [ref=f4e116] [cursor=pointer]:
+                - /url: ./202607/content_7076489.htm
+            - paragraph [ref=f4e117]:
+              - link "国家发展改革委、国家能源局发布《可再生能源发展“十五五”规划》，提出“十五五”时期可再生能源发展的总量目标、发电目标、非电利用目标和可靠替代目标，部署七方面重点任务。" [ref=f4e118] [cursor=pointer]:
+                - /url: ./202607/content_7076489.htm
+            - generic [ref=f4e119]: 2026-07-24
+          - listitem [ref=f4e120]:
+            - heading [level=5] [ref=f4e121]:
+              - link "《工业绿色低碳发展“十五五”规划》解读" [ref=f4e122] [cursor=pointer]:
+                - /url: ./202607/content_7077144.htm
+            - paragraph [ref=f4e123]:
+              - link "为加快推动工业绿色低碳发展，积极稳妥推进和实现碳达峰，促进经济社会发展全面绿色转型，工业和信息化部近日印发了《工业绿色低碳发展“十五五”规划》。" [ref=f4e124] [cursor=pointer]:
+                - /url: ./202607/content_7077144.htm
+            - generic [ref=f4e125]: 2026-07-31
+          - listitem [ref=f4e126]:
+            - heading [level=5] [ref=f4e127]:
+              - link "司法部负责人就《关于国务院行政复议案件处理程序的若干规定》答记者问" [ref=f4e128] [cursor=pointer]:
+                - /url: ./202607/content_7077013.htm
+            - paragraph [ref=f4e129]:
+              - link "2026年7月22日，国务院办公厅印发《关于国务院行政复议案件处理程序的若干规定》，自印发之日起施行。" [ref=f4e130] [cursor=pointer]:
+                - /url: ./202607/content_7077013.htm
+            - generic [ref=f4e131]: 2026-07-30
+          - listitem [ref=f4e132]:
+            - heading [level=5] [ref=f4e133]:
+              - link "《医疗卫生强基工程中医药行动方案》政策解读" [ref=f4e134] [cursor=pointer]:
+                - /url: ./202607/content_7076911.htm
+            - paragraph [ref=f4e135]:
+              - link "近日，国家中医药管理局等11部门联合印发了《医疗卫生强基工程中医药行动方案》。" [ref=f4e136] [cursor=pointer]:
+                - /url: ./202607/content_7076911.htm
+            - generic [ref=f4e137]: 2026-07-29
+          - listitem [ref=f4e138]:
+            - heading [level=5] [ref=f4e139]:
+              - link "中国空调15天运到欧洲，靠它→" [ref=f4e140] [cursor=pointer]:
+                - /url: ./202607/content_7076863.htm
+            - paragraph [ref=f4e141]:
+              - link "中欧班列横亘亚欧、连接东西，有效衔接生产和消费，极大促进了沿线国家商品流通与产业互补，运输货物品类覆盖53大门类、5万多个品种。" [ref=f4e142] [cursor=pointer]:
+                - /url: ./202607/content_7076863.htm
+            - generic [ref=f4e143]: 2026-07-28
+          - listitem [ref=f4e144]:
+            - heading [level=5] [ref=f4e145]:
+              - link "从税收大数据看上半年经济运行亮点" [ref=f4e146] [cursor=pointer]:
+                - /url: ./202607/content_7076856.htm
+            - paragraph [ref=f4e147]:
+              - link "7月28日，在国新办“开局起步‘十五五’”系列主题新闻发布会上，国家税务总局局长胡静林从税收大数据的角度分析了上半年经济运行亮点。" [ref=f4e148] [cursor=pointer]:
+                - /url: ./202607/content_7076856.htm
+            - generic [ref=f4e149]: 2026-07-28
+          - listitem [ref=f4e150]:
+            - heading [level=5] [ref=f4e151]:
+              - link "扩量提质、可靠替代 可再生能源有了“十五五”发展路线图" [ref=f4e152] [cursor=pointer]:
+                - /url: ./202607/content_7076489.htm
+            - paragraph [ref=f4e153]:
+              - link "国家发展改革委、国家能源局发布《可再生能源发展“十五五”规划》，提出“十五五”时期可再生能源发展的总量目标、发电目标、非电利用目标和可靠替代目标，部署七方面重点任务。" [ref=f4e154] [cursor=pointer]:
+                - /url: ./202607/content_7076489.htm
+            - generic [ref=f4e155]: 2026-07-24
+      - link [ref=f4e156] [cursor=pointer]:
+        - /url: javascript:;
+      - link [ref=f4e157] [cursor=pointer]:
+        - /url: javascript:;
+    - list [ref=f4e158]:
+      - listitem [ref=f4e159]:
+        - link [ref=f4e160] [cursor=pointer]:
+          - /url: https://www.gov.cn/yaowen/liebiao/202603/content_7062625.htm
+          - img "政府工作报告" [ref=f4e161]
+        - link [ref=f4e163] [cursor=pointer]:
+          - /url: https://www.gov.cn/yaowen/liebiao/202603/content_7062625.htm
+          - img "政府工作报告" [ref=f4e164]
+      - listitem [ref=f4e165]:
+        - link [ref=f4e166] [cursor=pointer]:
+          - /url: https://www.gov.cn/zhengce/xzfgk/
+          - img "国家行政法规库" [ref=f4e167]
+        - link [ref=f4e169] [cursor=pointer]:
+          - /url: https://www.gov.cn/zhengce/xzfgk/
+          - img "国家行政法规库" [ref=f4e170]
+      - listitem [ref=f4e171]:
+        - link [ref=f4e172] [cursor=pointer]:
+          - /url: https://www.gov.cn/zhengce/qiye/
+          - img "惠企助企政策集纳查询" [ref=f4e173]
+        - link [ref=f4e175] [cursor=pointer]:
+          - /url: https://www.gov.cn/zhengce/qiye/
+          - img "惠企助企政策集纳查询" [ref=f4e176]
+      - listitem [ref=f4e177]:
+        - link [ref=f4e178] [cursor=pointer]:
+          - /url: https://www.gov.cn/zhengce/xxgk/gjgzk/index.htm
+          - img "国家规章库" [ref=f4e179]
+        - link [ref=f4e181] [cursor=pointer]:
+          - /url: https://www.gov.cn/zhengce/xxgk/gjgzk/index.htm
+          - img "国家规章库" [ref=f4e182]
+    - link "图解政策" [ref=f4e184] [cursor=pointer]:
+      - /url: ./jiedu/tujie/
+    - list [ref=f4e188]:
+      - listitem [ref=f4e189]:
+        - link [ref=f4e190] [cursor=pointer]:
+          - /url: ./jiedu/tujie/202607/content_7077213.htm
+          - img "图表：《工业绿色低碳发展“十五五”规划》发布" [ref=f4e191]
+        - link "图表：《工业绿色低碳发展“十五五”规划》发布" [ref=f4e193] [cursor=pointer]:
+          - /url: ./jiedu/tujie/202607/content_7077213.htm
+      - listitem [ref=f4e194]:
+        - link [ref=f4e195] [cursor=pointer]:
+          - /url: ./jiedu/tujie/202607/content_7077092.htm
+          - img "图表：2025年我国“三新”经济增加值占GDP比重达18.39%" [ref=f4e196]
+        - link "图表：2025年我国“三新”经济增加值占GDP比重达18.39%" [ref=f4e198] [cursor=pointer]:
+          - /url: ./jiedu/tujie/202607/content_7077092.htm
+      - listitem [ref=f4e199]:
+        - link [ref=f4e200] [cursor=pointer]:
+          - /url: ./jiedu/tujie/202607/content_7077091.htm
+          - img "图表：养老服务消费补贴惠及约200万中度以上失能老年人" [ref=f4e201]
+        - link "图表：养老服务消费补贴惠及约200万中度以上失能老年人" [ref=f4e203] [cursor=pointer]:
+          - /url: ./jiedu/tujie/202607/content_7077091.htm
+      - listitem [ref=f4e204]:
+        - link [ref=f4e205] [cursor=pointer]:
+          - /url: ./jiedu/tujie/202607/content_7077089.htm
+          - img "图表：2026年上半年全国规模以上文化企业营收同比增长4.6%" [ref=f4e206]
+        - link "图表：2026年上半年全国规模以上文化企业营收同比增长4.6%" [ref=f4e208] [cursor=pointer]:
+          - /url: ./jiedu/tujie/202607/content_7077089.htm
+      - listitem [ref=f4e209]:
+        - link [ref=f4e210] [cursor=pointer]:
+          - /url: ./jiedu/tujie/202607/content_7076970.htm
+          - img "图表：2026年上半年全国社会物流总额为181.1万亿元" [ref=f4e211]
+        - link "图表：2026年上半年全国社会物流总额为181.1万亿元" [ref=f4e213] [cursor=pointer]:
+          - /url: ./jiedu/tujie/202607/content_7076970.htm
+    - generic [ref=f4e216]:
+      - list [ref=f4e218]:
+        - listitem [ref=f4e219]: 链接：
+        - listitem [ref=f4e220]:
+          - link "全国人大" [ref=f4e221] [cursor=pointer]:
+            - /url: http://www.npc.gov.cn/
+        - listitem [ref=f4e222]: "|"
+        - listitem [ref=f4e223]:
+          - link "全国政协" [ref=f4e224] [cursor=pointer]:
+            - /url: http://www.cppcc.gov.cn/
+        - listitem [ref=f4e225]: "|"
+        - listitem [ref=f4e226]:
+          - link "国家监察委员会" [ref=f4e227] [cursor=pointer]:
+            - /url: http://www.ccdi.gov.cn/
+        - listitem [ref=f4e228]: "|"
+        - listitem [ref=f4e229]:
+          - link "最高人民法院" [ref=f4e230] [cursor=pointer]:
+            - /url: http://www.court.gov.cn/
+        - listitem [ref=f4e231]: "|"
+        - listitem [ref=f4e232]:
+          - link "最高人民检察院" [ref=f4e233] [cursor=pointer]:
+            - /url: http://www.spp.gov.cn/
+      - list [ref=f4e235]:
+        - listitem [ref=f4e236]:
+          - link "国务院部门网站" [ref=f4e237] [cursor=pointer]:
+            - /url: https://www.gov.cn/home/2023-03/29/content_5748953.htm
+        - listitem [ref=f4e238]: "|"
+        - listitem [ref=f4e239]:
+          - link "地方政府网站" [ref=f4e240] [cursor=pointer]:
+            - /url: https://www.gov.cn/home/2023-03/29/content_5748954.htm
+        - listitem [ref=f4e241]: "|"
+        - listitem [ref=f4e242]:
+          - link "驻港澳机构网站" [ref=f4e243] [cursor=pointer]:
+            - /url: https://www.gov.cn/home/2023-03/29/content_5748955.htm
+        - listitem [ref=f4e244]: "|"
+        - listitem [ref=f4e245]:
+          - link "驻外机构" [ref=f4e246] [cursor=pointer]:
+            - /url: https://www.gov.cn/home/2023-03/29/content_5748956.htm
+      - generic [ref=f4e247]:
+        - generic [ref=f4e248]:
+          - link [ref=f4e251] [cursor=pointer]:
+            - /url: https://bszs.conac.cn/sitename?method=show&id=081D1D6883441A53E053012819AC0DAA
+          - generic [ref=f4e255]:
+            - generic [ref=f4e256]:
+              - link "中国政府网" [ref=f4e258] [cursor=pointer]:
+                - /url: https://www.gov.cn/index.htm
+              - text: "|"
+              - link "关于本网" [ref=f4e260] [cursor=pointer]:
+                - /url: https://www.gov.cn/home/2016-05/11/content_5046257.htm
+              - text: "|"
+              - link "网站声明" [ref=f4e262] [cursor=pointer]:
+                - /url: https://www.gov.cn/home/2014-02/23/content_5046258.htm
+              - text: "|"
+              - link "联系我们" [ref=f4e264] [cursor=pointer]:
+                - /url: https://www.gov.cn/home/2014-02/23/content_5046259.htm
+              - text: "|"
+              - link "网站纠错" [ref=f4e266] [cursor=pointer]:
+                - /url: https://www.gov.cn/fuwu/jiucuopage.html
+            - generic [ref=f4e267]:
+              - paragraph [ref=f4e268]: 主办单位：国务院办公厅 运行维护单位：中国政府网运行中心
+              - paragraph [ref=f4e269]: 版权所有：中国政府网 中文域名：中国政府网.政务
+              - paragraph [ref=f4e270]:
+                - text: 网站标识码bm01000001
+                - link "京ICP备05070218号" [ref=f4e271] [cursor=pointer]:
+                  - /url: https://beian.miit.gov.cn/#/Integrated/index
+                - link "京公网安备11010202000001号" [ref=f4e273] [cursor=pointer]:
+                  - /url: http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010202000001
+        - generic [ref=f4e274]:
+          - link "国务院客户端" [ref=f4e276] [cursor=pointer]:
+            - /url: http://app.www.gov.cn/download/Chinese.html
+          - link "国务院客户端小程序" [ref=f4e279] [cursor=pointer]:
+            - /url: https://www.gov.cn/guowuyuan/gwykhdxcx/xiaochengxu.html
+          - generic [ref=f4e281]:
+            - link [ref=f4e282] [cursor=pointer]:
+              - /url: https://www.gov.cn/home/2014-02/18/content_5046260.htm
+            - link [ref=f4e284] [cursor=pointer]:
+              - /url: https://www.gov.cn/home/2014-02/18/content_5046260.htm
+            - paragraph [ref=f4e286]:
+              - link "中国政府网微博、微信" [ref=f4e287] [cursor=pointer]:
+                - /url: https://www.gov.cn/home/2014-02/18/content_5046260.htm

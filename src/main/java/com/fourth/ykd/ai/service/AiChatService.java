@@ -7,6 +7,8 @@ public interface AiChatService {
     AiChatResponse chat(String message);
 
     AiChatResponse chat(String conversationId, String message);
+    AiChatResponse chatForVoiceReply(String conversationId, String message);
+
 
     /**
      * 同步执行用户明确提出的长期记忆新增、纠正或删除请求。

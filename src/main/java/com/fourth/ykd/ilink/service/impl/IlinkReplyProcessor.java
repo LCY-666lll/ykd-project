@@ -1,4 +1,5 @@
 package com.fourth.ykd.ilink.service.impl;
+import com.fourth.ykd.ai.browser.BrowserTaskService;
 import com.fourth.ykd.ai.dto.*;
 import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
 import com.fourth.ykd.ai.routing.*;
@@ -11,6 +12,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.ai.chat.messages.Message;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,7 @@ public class IlinkReplyProcessor {
             请识别这张图片，并生成供后续多轮聊天使用的中文图片记忆。
             只描述图片中确实可见的内容；不确定时明确说明无法确认；不要寒暄、提问或编造。
             """;
+    private static final java.util.regex.Pattern HTTP_URL_PATTERN = java.util.regex.Pattern.compile("(?i)https?://\\S+");
     private final AiChatService aiChatService;
     private final DeepSeekIntentRouter intentRouter;
     private final ImageGenerationService imageGenerationService;
@@ -33,14 +37,15 @@ public class IlinkReplyProcessor {
     private final ChatMemory chatMemory;
     private final SqliteChatMessageRepository sqliteChatMessageRepository;
     private final Executor imageMemoryExecutor;
-
+    private final BrowserTaskService browserTaskService;
     /** 注入现有的回复处理依赖。 */
     public IlinkReplyProcessor(AiChatService aiChatService, DeepSeekIntentRouter intentRouter,
-            ImageGenerationService imageGenerationService, ImageReferenceGenerationService imageReferenceGenerationService,
-            ImageUnderstandingService imageUnderstandingService, ImageContextService imageContextService,
-            FileGenerationTool fileGenerationTool, ChatMemory chatMemory,
-            SqliteChatMessageRepository sqliteChatMessageRepository,
-            @Qualifier("iLinkReplyExecutor") Executor imageMemoryExecutor) {
+                               ImageGenerationService imageGenerationService, ImageReferenceGenerationService imageReferenceGenerationService,
+                               ImageUnderstandingService imageUnderstandingService, ImageContextService imageContextService,
+                               FileGenerationTool fileGenerationTool, ChatMemory chatMemory,
+                               SqliteChatMessageRepository sqliteChatMessageRepository,
+                               @Qualifier("memoryExecutor") Executor imageMemoryExecutor,
+                               BrowserTaskService browserTaskService) {
         this.aiChatService = aiChatService; this.intentRouter = intentRouter;
         this.imageGenerationService = imageGenerationService;
         this.imageReferenceGenerationService = imageReferenceGenerationService;
@@ -48,6 +53,7 @@ public class IlinkReplyProcessor {
         this.fileGenerationTool = fileGenerationTool; this.chatMemory = chatMemory;
         this.sqliteChatMessageRepository = sqliteChatMessageRepository;
         this.imageMemoryExecutor = imageMemoryExecutor;
+        this.browserTaskService = browserTaskService;
     }
 
     /** 按现有意图执行业务，并产出待发送结果。 */
@@ -84,6 +90,17 @@ public class IlinkReplyProcessor {
             log.info("[AI][IMAGE_GENERATE][SUCCESS] userId={}, imageBytes={}", userId, image.bytes().length);
             return ReplyResult.image(intent, image, null);
         }
+        if (intent == UserIntent.BROWSER_TASK) {
+            log.info("[AI][BROWSER_TASK][START] userId={}", userId);
+            String browserRequest = resolveBrowserRequest(userId, userText);
+            String answer = browserTaskService.execute(userId, browserRequest);
+            chatMemory.add(userId, List.of(new AssistantMessage(answer)));
+            sqliteChatMessageRepository.save(userId, PersistedChatMessage.Role.ASSISTANT, answer);
+            sqliteChatMessageRepository.softDeleteOldMessages(userId, 100);
+            log.info("[AI][BROWSER_TASK][FINISHED] userId={}, answerLength={}",
+                    userId, answer.length());
+            return ReplyResult.text(intent, answer, null);
+        }
         if (intent == UserIntent.FILE_GENERATE) {
             return ReplyResult.documents(intent, fileGenerationTool.generate(userId, userText), null);
         }
@@ -92,17 +109,49 @@ public class IlinkReplyProcessor {
             return ReplyResult.text(intent, aiChatService.manageMemory(userId, userText).reply(), null);
         }
         if (intent == UserIntent.VOICE_REPLY) {
-            return ReplyResult.audio(intent, aiChatService.chat(userId, userText).reply(), null);
+            return ReplyResult.audio(intent, aiChatService.chatForVoiceReply(userId, userText).reply(), null);
         }
         return ReplyResult.text(intent, aiChatService.chat(userId, userText).reply(), null);
     }
 
+    private String resolveBrowserRequest(String userId, String userText) {
+        String request = userText == null ? "" : userText.trim();
+        if (HTTP_URL_PATTERN.matcher(request).find()) {
+            return request;
+        }
+        List<Message> messages = chatMemory.get(userId);
+        for (int index = messages.size() - 1; index >= 0; index--) {
+            java.util.regex.Matcher matcher = HTTP_URL_PATTERN.matcher(messages.get(index).getText());
+            String latestUrl = null;
+            while (matcher.find()) {
+                latestUrl = matcher.group();
+            }
+            if (latestUrl != null) {
+                return latestUrl + System.lineSeparator() + request;
+            }
+        }
+        return request;
+    }
+
     private void saveSpecialFlowUserMessage(String userId, String userText, UserIntent intent) {
-        if (intent != UserIntent.IMAGE_GENERATE && intent != UserIntent.IMAGE_EDIT
-                && intent != UserIntent.IMAGE_UNDERSTAND && intent != UserIntent.FILE_GENERATE) {
+        if (intent != UserIntent.IMAGE_GENERATE
+                && intent != UserIntent.IMAGE_EDIT
+                && intent != UserIntent.IMAGE_UNDERSTAND
+                && intent != UserIntent.FILE_GENERATE
+                && intent != UserIntent.BROWSER_TASK) {
             return;
         }
-        sqliteChatMessageRepository.save(userId, PersistedChatMessage.Role.USER, userText.trim());
+        String normalizedUserText = userText.trim();
+
+        sqliteChatMessageRepository.save(
+                userId,
+                PersistedChatMessage.Role.USER,
+                normalizedUserText
+        );
+
+        if (intent == UserIntent.BROWSER_TASK) {
+            chatMemory.add(userId, List.of(new UserMessage(normalizedUserText)));
+        }
     }
     /** 将当前待处理图片写入聊天记忆。 */
     public void saveReceivedImageMemory(String userId) {

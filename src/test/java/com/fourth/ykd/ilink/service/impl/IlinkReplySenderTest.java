@@ -55,6 +55,13 @@ class IlinkReplySenderTest {
     }
 
     @Test
+    void shouldSendQueueWaitingMessageDirectly() throws Exception {
+        sender.sendQueueWaitingMessage(client, USER_ID);
+
+        verify(client).sendText(USER_ID, "上一条消息仍在处理中，已收到本条消息，完成后会按顺序继续处理。");
+    }
+
+    @Test
     void shouldSynthesizeAudioOnlyForExplicitVoiceReply() throws Exception {
         byte[] audioBytes = {1, 2, 3};
         when(audioSynthesisService.synthesize("语音回答内容"))

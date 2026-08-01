@@ -9,5 +9,6 @@ public enum UserIntent {
     IMAGE_EDIT,
     IMAGE_UNDERSTAND,
     FILE_GENERATE,
-    VOICE_REPLY
+    VOICE_REPLY,
+    BROWSER_TASK
 }

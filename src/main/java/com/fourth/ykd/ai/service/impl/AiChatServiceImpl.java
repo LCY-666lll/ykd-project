@@ -45,13 +45,36 @@ public class AiChatServiceImpl implements AiChatService {
             8. 用户提出算式或要求精确数值计算时，必须调用 calculate_math_expression，不得由模型自行估算。
             9. 用户查询真实当前日期、时间或计算当前日期与目标日期的间隔时，调用 get_time_info。
             10. 聊天历史中出现“【图片识别记忆】”时，它是用户此前发送图片的后台识别结果。用户询问图片、这张图、图中内容、上面的文字、里面的人或物等相关问题时，优先依据该记忆回答；与图片无关的问题忽略该记忆，不得编造图片中不存在的内容。
-            11. 聊天历史和长期记忆仅用于理解用户的指代、延续同一任务、已确认的用户偏好或此前生成内容。
+            11. 聊天历史和长期记忆仅用于理解用户的指代延续同一任务、已确认的用户偏好或此前生成内容。
                     用户本轮提出独立的新问题时，不得把历史消息中的旧回答、旧事实或旧工具结果当作本轮答案的依据。
                     天气、新闻、时间、价格、政策等可能变化的信息，必须以本轮工具查询结果为准。
                     用户明确说“新话题”“不要参考历史”或“忽略之前内容”时，本轮不得使用聊天历史。
             """;
 
+    private static final String CURRENT_CAPABILITY_INSTRUCTIONS = """
+
+            当前系统能力说明：当用户问“你能做什么”“你能干啥”“你的能力是什么”时，必须完整列出以下全部八类能力；不得为了简短而省略任何一类，也不得只回答本轮已挂载的工具。
+            1. 对话与上下文：中文问答、写作、分析，以及结合近期聊天记录理解追问。
+            2. 实时工具：实时新闻搜索、当前天气和未来天气预报、时间日期、数学计算及翻译。
+            3. 文件：生成并通过微信发送 PDF、Word/DOCX、Excel/XLSX 文件。
+            4. 图片：文生图、基于参考图编辑图片、图片识别。
+            5. 语音：根据用户明确要求发送语音回复。
+            6. 记忆：按用户明确请求记住、查询、修改或删除长期偏好和事实。
+            7. 公开网页：用户提供明确的公开 http 或 https 网址，并说明查看、总结、查找、点击、筛选或翻页等动作时，可通过真实浏览器访问公开页面并返回结果。
+            8. 安全边界：浏览器仅处理公开网页；不得登录、接收或填写验证码、短信或扫码验证，不得支付、购买、发布、删除、上传或下载文件，不得读取账号密码、Cookie、Token、个人资料、订单、私信或其他私人数据。
+
+            对能力询问，使用编号列表逐项说明以上八类；不要仅说“天气、新闻、计算、翻译”等基础能力，不要根据用户历史偏好扩展为无关的行程承诺。
+            本轮 ChatClient 未直接挂载文件、图片、语音或浏览器工具，不代表系统没有这些能力：这些能力由外层意图分流和微信发送链路执行，必须如实说明。
+
+            若用户的请求触及安全边界，应明确说明具体受限操作；不要否认其他已具备的能力。
+            """;
     private static final int PERSISTED_MEMORY_LIMIT = 20;
+    private static final String VOICE_REPLY_INSTRUCTIONS = """
+            本轮回答将由系统合成为微信语音。只输出应当朗读给用户的自然中文正文。
+            严禁提及模型、ChatClient、工具是否挂载、语音或音频能否生成、语音如何合成、消息是否发送成功、
+            外层链路、上传、CDN、失败原因或让用户重新触发语音。
+            不要声明“我不能生成语音”或“我没有语音工具”；直接回答用户的问题即可。
+            """;
 
     private static final int MAX_PERSISTED_MEMORY_MESSAGES = 100;
 
@@ -84,6 +107,15 @@ public class AiChatServiceImpl implements AiChatService {
 
     @Override
     public AiChatResponse chat(String conversationId, String message) {
+        return chat(conversationId, message, "");
+    }
+
+    @Override
+    public AiChatResponse chatForVoiceReply(String conversationId, String message) {
+        return chat(conversationId, message, VOICE_REPLY_INSTRUCTIONS);
+    }
+
+    private AiChatResponse chat(String conversationId, String message, String additionalSystemInstructions) {
         if (!StringUtils.hasText(message)) {
             throw new BusinessException(40001, "消息内容不能为空");
         }
@@ -106,12 +138,7 @@ public class AiChatServiceImpl implements AiChatService {
         log.info("[AI][MEMORY_CHAT] conversationId={}", normalizedConversationId);
 
         String answer = springAiChatClient.prompt()
-                .system(TOOL_USAGE_INSTRUCTIONS + """
-                        系统已支持 PDF、DOCX、XLSX 文件生成，以及文生图、参考图编辑、图片识别和语音合成。
-                        不得声称这些能力不存在或无法使用；用户追问先前生成结果时，应基于聊天记忆如实说明。
-                        当用户明确要求语音回复时，外层系统会把回答正文合成为语音；你只需正常回答用户的问题，
-                        输出适合朗读的正文，不得声称自己只能文本交互、不能语音回复，也不要解释语音合成过程。
-                        """)
+                .system(buildChatSystemInstructions() + additionalSystemInstructions)
                 .user(normalizedMessage)
                 .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
                 .tools(mathCalculatorTools,timeTool,baiduSearchTool,weatherTool,translationTool)
@@ -139,6 +166,10 @@ public class AiChatServiceImpl implements AiChatService {
         );
 
         return new AiChatResponse(normalizedAnswer);
+    }
+
+    static String buildChatSystemInstructions() {
+        return TOOL_USAGE_INSTRUCTIONS + CURRENT_CAPABILITY_INSTRUCTIONS;
     }
 
     /*明确记忆管理请求的同步处理流程：

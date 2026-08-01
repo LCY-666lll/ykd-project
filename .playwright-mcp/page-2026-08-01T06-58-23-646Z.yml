@@ -1,0 +1,25 @@
+- generic [ref=f8e7]:
+  - generic [ref=f8e8]:
+    - img "Workflow" [ref=f8e9]
+    - generic [ref=f8e10]: 学得比别人好一点
+  - generic [ref=f8e11]:
+    - generic [ref=f8e12]:
+      - generic [ref=f8e14]:
+        - generic [ref=f8e15]:
+          - generic [ref=f8e16]: 手机号码
+          - textbox [ref=f8e18]
+        - generic [ref=f8e19]:
+          - generic [ref=f8e20]: 验证码
+          - generic [ref=f8e21]:
+            - textbox [ref=f8e23]
+            - generic [ref=f8e24] [cursor=pointer]: 发送验证码
+        - generic [ref=f8e26]:
+          - generic [ref=f8e27]:
+            - checkbox "记住我" [ref=f8e28]
+            - generic [ref=f8e29]: 记住我
+          - link "密码登录" [ref=f8e31] [cursor=pointer]:
+            - /url: "#"
+        - button "登录" [ref=f8e33] [cursor=pointer]
+      - generic [ref=f8e34]: 其他方式登录
+    - link [ref=f8e42] [cursor=pointer]:
+      - /url: javascript:;

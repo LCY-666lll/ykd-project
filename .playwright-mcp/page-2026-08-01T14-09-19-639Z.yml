@@ -1,0 +1,1467 @@
+- generic [active] [ref=f6e1]:
+  - generic [ref=f6e2]:
+    - generic [ref=f6e3]:
+      - link "Skip to content" [ref=f6e4] [cursor=pointer]:
+        - /url: "#start-of-content"
+      - banner [ref=f6e6]:
+        - heading "Navigation Menu" [level=2] [ref=f6e7]
+        - generic [ref=f6e8]:
+          - link "Homepage" [ref=f6e10] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f6e13]:
+            - navigation "Global" [ref=f6e16]:
+              - list [ref=f6e17]:
+                - listitem [ref=f6e18]:
+                  - button "Platform" [ref=f6e20] [cursor=pointer]
+                - listitem [ref=f6e23]:
+                  - button "Solutions" [ref=f6e25] [cursor=pointer]
+                - listitem [ref=f6e28]:
+                  - button "Resources" [ref=f6e30] [cursor=pointer]
+                - listitem [ref=f6e33]:
+                  - button "Open Source" [ref=f6e35] [cursor=pointer]
+                - listitem [ref=f6e38]:
+                  - button "Enterprise" [ref=f6e40] [cursor=pointer]
+                - listitem [ref=f6e43]:
+                  - link "Pricing" [ref=f6e44] [cursor=pointer]:
+                    - /url: https://github.com/pricing
+            - generic [ref=f6e46]:
+              - button "Search or jump to…" [ref=f6e49] [cursor=pointer]
+              - link "Sign in" [ref=f6e54] [cursor=pointer]:
+                - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Flanggenius%2Fdify
+              - link "Sign up" [ref=f6e55] [cursor=pointer]:
+                - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=langgenius%2Fdify
+              - button "Appearance settings" [ref=f6e58] [cursor=pointer]
+    - main [ref=f6e62]:
+      - generic [ref=f6e63]:
+        - generic [ref=f6e64]:
+          - generic [ref=f6e66]:
+            - link "langgenius" [ref=f6e70] [cursor=pointer]:
+              - /url: /langgenius
+            - generic [ref=f6e71]: /
+            - strong [ref=f6e72]:
+              - link "dify" [ref=f6e73] [cursor=pointer]:
+                - /url: /langgenius/dify
+            - generic [ref=f6e74]: Public
+          - generic [ref=f6e75]:
+            - list:
+              - listitem [ref=f6e76]:
+                - link "You must be signed in to change notification settings" [ref=f6e77] [cursor=pointer]:
+                  - /url: /login?return_to=%2Flanggenius%2Fdify
+                  - text: Notifications
+              - listitem [ref=f6e80]:
+                - link "Fork 23.8k" [ref=f6e81] [cursor=pointer]:
+                  - /url: /login?return_to=%2Flanggenius%2Fdify
+                  - text: Fork
+                  - generic "23,813" [ref=f6e84]: 23.8k
+              - listitem [ref=f6e85]:
+                - link "You must be signed in to star a repository" [ref=f6e87] [cursor=pointer]:
+                  - /url: /login?return_to=%2Flanggenius%2Fdify
+                  - text: Star
+                  - generic "150979 users starred this repository" [ref=f6e90]: 151k
+        - navigation "Repository" [ref=f6e91]:
+          - list [ref=f6e92]:
+            - listitem [ref=f6e93]:
+              - link "Code" [ref=f6e94] [cursor=pointer]:
+                - /url: /langgenius/dify
+            - listitem [ref=f6e98]:
+              - link "Issues 293" [ref=f6e99] [cursor=pointer]:
+                - /url: /langgenius/dify/issues
+                - generic [ref=f6e103]: Issues
+                - generic "293" [ref=f6e104]
+            - listitem [ref=f6e105]:
+              - link "Pull requests 644" [ref=f6e106] [cursor=pointer]:
+                - /url: /langgenius/dify/pulls
+                - generic [ref=f6e109]: Pull requests
+                - generic "644" [ref=f6e110]
+            - listitem [ref=f6e111]:
+              - link "Discussions" [ref=f6e112] [cursor=pointer]:
+                - /url: /langgenius/dify/discussions
+            - listitem [ref=f6e116]:
+              - link "Actions" [ref=f6e117] [cursor=pointer]:
+                - /url: /langgenius/dify/actions
+            - listitem [ref=f6e121]:
+              - link "Security and quality 20" [ref=f6e122] [cursor=pointer]:
+                - /url: /langgenius/dify/security
+                - generic [ref=f6e125]: Security and quality
+                - generic "20" [ref=f6e126]
+            - listitem [ref=f6e127]:
+              - link "Insights" [ref=f6e128] [cursor=pointer]:
+                - /url: /langgenius/dify/pulse
+      - generic [ref=f6e145]:
+        - generic [ref=f6e148]:
+          - generic [ref=f6e149]:
+            - generic [ref=f6e150]:
+              - button "main branch" [ref=f6e152] [cursor=pointer]:
+                - generic [ref=f6e153]: main
+              - generic [ref=f6e157]:
+                - link [ref=f6e158] [cursor=pointer]:
+                  - /url: /langgenius/dify/branches
+                  - generic [ref=f6e161]:
+                    - strong [ref=f6e162]: "655"
+                    - text: Branches
+                - link [ref=f6e163] [cursor=pointer]:
+                  - /url: /langgenius/dify/tags
+                  - generic [ref=f6e166]:
+                    - strong [ref=f6e167]: "176"
+                    - text: Tags
+            - generic [ref=f6e168]:
+              - combobox "Go to file" [ref=f6e176]
+              - button "Code" [ref=f6e177] [cursor=pointer]
+          - generic [ref=f6e180]:
+            - generic [ref=f6e181]:
+              - heading "Folders and files" [level=2] [ref=f6e182]
+              - table "Folders and files" [ref=f6e183]:
+                - rowgroup:
+                  - row "Name Last commit message Last commit date":
+                    - columnheader "Name"
+                    - columnheader "Last commit message"
+                    - columnheader "Last commit date"
+                - rowgroup [ref=f6e184]:
+                  - row [ref=f6e185]:
+                    - 'cell "Latest commit lyzno1 autofix-ci[bot] commits by lyzno1 and commits by autofix-ci[bot] refactor(web): align Base UI state consumers (#39864) Open commit details success Commit b682433 · Aug 1, 20261 hour ago History 12,194 Commits" [ref=f6e186]':
+                      - generic [ref=f6e187]:
+                        - heading "Latest commit" [level=2] [ref=f6e188]
+                        - generic [ref=f6e189]:
+                          - generic [ref=f6e190]:
+                            - generic [ref=f6e192]:
+                              - img "lyzno1" [ref=f6e193]
+                              - img "autofix-ci[bot]" [ref=f6e194]
+                            - link "commits by lyzno1" [ref=f6e196] [cursor=pointer]:
+                              - /url: /langgenius/dify/commits?author=lyzno1
+                              - text: lyzno1
+                            - generic [ref=f6e197]: and
+                            - link "commits by autofix-ci[bot]" [ref=f6e199] [cursor=pointer]:
+                              - /url: /langgenius/dify/commits?author=autofix-ci%5Bbot%5D
+                              - text: autofix-ci[bot]
+                          - generic [ref=f6e200]:
+                            - generic [ref=f6e202]:
+                              - 'link "refactor(web): align Base UI state consumers (" [ref=f6e203] [cursor=pointer]':
+                                - /url: /langgenius/dify/commit/b6824334cf527504efff4785f8ccefd4b85943c5
+                              - link "#39864" [ref=f6e204] [cursor=pointer]:
+                                - /url: https://github.com/langgenius/dify/pull/39864
+                              - link ")" [ref=f6e205] [cursor=pointer]:
+                                - /url: /langgenius/dify/commit/b6824334cf527504efff4785f8ccefd4b85943c5
+                            - button "Open commit details" [ref=f6e206] [cursor=pointer]
+                            - button "success" [ref=f6e209] [cursor=pointer]
+                        - generic [ref=f6e212]:
+                          - generic [ref=f6e214]:
+                            - link "Commit b682433" [ref=f6e215] [cursor=pointer]:
+                              - /url: /langgenius/dify/commit/b6824334cf527504efff4785f8ccefd4b85943c5
+                              - text: b682433
+                            - text: ·
+                            - generic "Aug 1, 2026, 21:09 GMT+8" [ref=f6e216]: Aug 1, 20261 hour ago
+                          - generic [ref=f6e217]:
+                            - heading "History" [level=2] [ref=f6e218]
+                            - link "12,194 Commits" [ref=f6e219] [cursor=pointer]:
+                              - /url: /langgenius/dify/commits/main/
+                  - row [ref=f6e222]:
+                    - cell [ref=f6e223]:
+                      - link ".agents/skills, (Directory)" [ref=f6e230] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/.agents/skills
+                        - text: .agents/skills
+                    - cell [ref=f6e231]:
+                      - generic [ref=f6e233]:
+                        - 'link "refactor(agents): simplify repository context (" [ref=f6e234] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/fd2e26f8e6705af416154d4e3a5a4a0cdf348376
+                        - link "#39583" [ref=f6e235] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39583
+                        - link ")" [ref=f6e236] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/fd2e26f8e6705af416154d4e3a5a4a0cdf348376
+                    - cell "Jul 26, 2026last week" [ref=f6e237]
+                  - row [ref=f6e239]:
+                    - cell [ref=f6e240]:
+                      - link ".claude, (Directory)" [ref=f6e247] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/.claude
+                        - text: .claude
+                    - cell [ref=f6e248]:
+                      - generic [ref=f6e250]:
+                        - 'link "refactor(agents): simplify repository context (" [ref=f6e251] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/fd2e26f8e6705af416154d4e3a5a4a0cdf348376
+                        - link "#39583" [ref=f6e252] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39583
+                        - link ")" [ref=f6e253] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/fd2e26f8e6705af416154d4e3a5a4a0cdf348376
+                    - cell "Jul 26, 2026last week" [ref=f6e254]
+                  - row [ref=f6e256]:
+                    - cell [ref=f6e257]:
+                      - link ".devcontainer, (Directory)" [ref=f6e264] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/.devcontainer
+                        - text: .devcontainer
+                    - cell [ref=f6e265]:
+                      - generic [ref=f6e267]:
+                        - 'link "fix: add miss celery queue (" [ref=f6e268] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/8baa864c35df88d1cf2360d00d545fc1a7aa0101
+                        - link "#35282" [ref=f6e269] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/35282
+                        - link ")" [ref=f6e270] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/8baa864c35df88d1cf2360d00d545fc1a7aa0101
+                    - cell "Apr 16, 20264 months ago" [ref=f6e271]
+                  - row [ref=f6e273]:
+                    - cell [ref=f6e274]:
+                      - link ".gemini, (Directory)" [ref=f6e281] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/.gemini
+                        - text: .gemini
+                    - cell [ref=f6e282]:
+                      - generic [ref=f6e284]:
+                        - 'link "chore: Add initial configuration for Gemini (" [ref=f6e285] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/a813b9f10382297ef846d00aec4391f44293c1d8
+                        - link "#34012" [ref=f6e286] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/34012
+                        - link ")" [ref=f6e287] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/a813b9f10382297ef846d00aec4391f44293c1d8
+                    - cell "Mar 24, 20265 months ago" [ref=f6e288]
+                  - row [ref=f6e290]:
+                    - cell [ref=f6e291]:
+                      - link ".github, (Directory)" [ref=f6e298] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/.github
+                        - text: .github
+                    - cell [ref=f6e299]:
+                      - generic [ref=f6e301]:
+                        - 'link "feat(agent): make home snapshots optional and use backend defaults (" [ref=f6e302] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/f6683c2c6bd340445b0c0b88b4829a71bf4c5074
+                        - link "#…" [ref=f6e303] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39702
+                    - cell "Jul 29, 20264 days ago" [ref=f6e304]
+                  - row [ref=f6e306]:
+                    - cell [ref=f6e307]:
+                      - link ".vite-hooks, (Directory)" [ref=f6e314] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/.vite-hooks
+                        - text: .vite-hooks
+                    - cell [ref=f6e315]:
+                      - generic [ref=f6e317]:
+                        - 'link "chore: workspace lint (" [ref=f6e318] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/40e040ca1acab7cf8c400bc5e66148e31f0bc01b
+                        - link "#35331" [ref=f6e319] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/35331
+                        - link ")" [ref=f6e320] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/40e040ca1acab7cf8c400bc5e66148e31f0bc01b
+                    - cell "Apr 17, 20264 months ago" [ref=f6e321]
+                  - row [ref=f6e323]:
+                    - cell [ref=f6e324]:
+                      - link ".vscode, (Directory)" [ref=f6e331] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/.vscode
+                        - text: .vscode
+                    - cell [ref=f6e332]:
+                      - generic [ref=f6e334]:
+                        - 'link "perf(workflow-generator): parallelize node config generation (" [ref=f6e335] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/9de7e0fe4427952117eb93885004f4496b97aaa9
+                        - link "#38975" [ref=f6e336] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/38975
+                        - link ")" [ref=f6e337] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/9de7e0fe4427952117eb93885004f4496b97aaa9
+                    - cell "Jul 17, 20262 weeks ago" [ref=f6e338]
+                  - row [ref=f6e340]:
+                    - cell [ref=f6e341]:
+                      - link "api, (Directory)" [ref=f6e348] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/api
+                        - text: api
+                    - cell [ref=f6e349]:
+                      - generic [ref=f6e351]:
+                        - 'link "fix(api): bound billing service HTTP timeouts (" [ref=f6e352] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/eec0e2e44e7255a97fb67734f64b96df02a29263
+                        - link "#39874" [ref=f6e353] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/issues/39874
+                        - link ") (" [ref=f6e354] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/eec0e2e44e7255a97fb67734f64b96df02a29263
+                        - link "#39875" [ref=f6e355] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39875
+                        - link ")" [ref=f6e356] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/eec0e2e44e7255a97fb67734f64b96df02a29263
+                    - cell "Aug 1, 20263 hours ago" [ref=f6e357]
+                  - row [ref=f6e359]:
+                    - cell [ref=f6e360]:
+                      - link "cli, (Directory)" [ref=f6e367] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/cli
+                        - text: cli
+                    - cell [ref=f6e368]:
+                      - generic [ref=f6e370]:
+                        - 'link "chore: bump version to 1.16.1 (" [ref=f6e371] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/59b879d2dfd3957160edecf4d35ac24d1c7032b8
+                        - link "#39653" [ref=f6e372] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39653
+                        - link ")" [ref=f6e373] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/59b879d2dfd3957160edecf4d35ac24d1c7032b8
+                    - cell "Jul 28, 20265 days ago" [ref=f6e374]
+                  - row [ref=f6e376]:
+                    - cell [ref=f6e377]:
+                      - link "dev, (Directory)" [ref=f6e384] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/dev
+                        - text: dev
+                    - cell [ref=f6e385]:
+                      - generic [ref=f6e387]:
+                        - 'link "ci: enforce strict checks for unit tests (" [ref=f6e388] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/eef709e475ba641fd35eb213f0a1a4fb1e374191
+                        - link "#39682" [ref=f6e389] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39682
+                        - link ")" [ref=f6e390] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/eef709e475ba641fd35eb213f0a1a4fb1e374191
+                    - cell "Jul 28, 20264 days ago" [ref=f6e391]
+                  - row [ref=f6e393]:
+                    - cell [ref=f6e394]:
+                      - link "dify-agent-runtime, (Directory)" [ref=f6e401] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/dify-agent-runtime
+                        - text: dify-agent-runtime
+                    - cell [ref=f6e402]:
+                      - generic [ref=f6e404]:
+                        - 'link "chore: add E2B sync and tini supervision (" [ref=f6e405] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/6506aaae835818768f313b2b362e846fdd52c4c5
+                        - link "#39705" [ref=f6e406] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39705
+                        - link ")" [ref=f6e407] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/6506aaae835818768f313b2b362e846fdd52c4c5
+                    - cell "Jul 29, 20264 days ago" [ref=f6e408]
+                  - row [ref=f6e410]:
+                    - cell [ref=f6e411]:
+                      - link "dify-agent, (Directory)" [ref=f6e418] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/dify-agent
+                        - text: dify-agent
+                    - cell [ref=f6e419]:
+                      - generic [ref=f6e421]:
+                        - 'link "fix: fix hardcode /home/dify (" [ref=f6e422] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/080a1d42f2387c6c9729ff49d71a6344c40d3b0e
+                        - link "#39767" [ref=f6e423] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39767
+                        - link ")" [ref=f6e424] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/080a1d42f2387c6c9729ff49d71a6344c40d3b0e
+                    - cell "Jul 29, 20263 days ago" [ref=f6e425]
+                  - row [ref=f6e427]:
+                    - cell [ref=f6e428]:
+                      - link "docker, (Directory)" [ref=f6e435] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/docker
+                        - text: docker
+                    - cell [ref=f6e436]:
+                      - generic [ref=f6e438]:
+                        - 'link "docs: remove trailing whitespace in docker/README.md (" [ref=f6e439] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/bea2f78e0935058602f8e17c6f17645368e3cee9
+                        - link "#39808" [ref=f6e440] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39808
+                        - link ")" [ref=f6e441] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/bea2f78e0935058602f8e17c6f17645368e3cee9
+                    - cell "Jul 31, 20262 days ago" [ref=f6e442]
+                  - row [ref=f6e444]:
+                    - cell [ref=f6e445]:
+                      - link "docs, (Directory)" [ref=f6e452] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/docs
+                        - text: docs
+                    - cell [ref=f6e453]:
+                      - 'link "docs: Broken Grafana link in Turkish README (placeholder text instead…" [ref=f6e456] [cursor=pointer]':
+                        - /url: /langgenius/dify/commit/8511a3143ebba860068f9a5fc30f7a3d74c06126
+                    - cell "Jul 26, 2026last week" [ref=f6e457]
+                  - row [ref=f6e459]:
+                    - cell [ref=f6e460]:
+                      - link "e2e, (Directory)" [ref=f6e467] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/e2e
+                        - text: e2e
+                    - cell [ref=f6e468]:
+                      - generic [ref=f6e470]:
+                        - 'link "refactor(e2e): unify seeded runtime orchestration (" [ref=f6e471] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/fd412a82e9325554eb7345681d19c49623d9eb45
+                        - link "#39700" [ref=f6e472] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39700
+                        - link ")" [ref=f6e473] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/fd412a82e9325554eb7345681d19c49623d9eb45
+                    - cell "Jul 28, 20264 days ago" [ref=f6e474]
+                  - row [ref=f6e476]:
+                    - cell [ref=f6e477]:
+                      - link "images, (Directory)" [ref=f6e484] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/images
+                        - text: images
+                    - cell [ref=f6e485]:
+                      - generic [ref=f6e487]:
+                        - 'link "feat: update banner (" [ref=f6e488] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/27f400e13f85b656fc57ac7d7bcb120b6ba8161b
+                        - link "#23095" [ref=f6e489] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/23095
+                        - link ")" [ref=f6e490] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/27f400e13f85b656fc57ac7d7bcb120b6ba8161b
+                    - cell "Jul 29, 2025last year" [ref=f6e491]
+                  - row [ref=f6e493]:
+                    - cell [ref=f6e494]:
+                      - link "packages, (Directory)" [ref=f6e501] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/packages
+                        - text: packages
+                    - cell [ref=f6e502]:
+                      - generic [ref=f6e504]:
+                        - 'link "refactor(ui): simplify scroll area API (" [ref=f6e505] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/7e30aba12a32e0d99c529ef7bb81ec4f46bfdc76
+                        - link "#39857" [ref=f6e506] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39857
+                        - link ")" [ref=f6e507] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/7e30aba12a32e0d99c529ef7bb81ec4f46bfdc76
+                    - cell "Jul 31, 2026yesterday" [ref=f6e508]
+                  - row [ref=f6e510]:
+                    - cell [ref=f6e511]:
+                      - link "scripts, (Directory)" [ref=f6e518] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/scripts
+                        - text: scripts
+                    - cell [ref=f6e519]:
+                      - generic [ref=f6e521]:
+                        - 'link "ci: replace custom noqa markers with guard ignores (" [ref=f6e522] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/04158ac8ea8e57c109d7df5f325b54121ad36b2d
+                        - link "#39679" [ref=f6e523] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39679
+                        - link ")" [ref=f6e524] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/04158ac8ea8e57c109d7df5f325b54121ad36b2d
+                    - cell "Jul 28, 20264 days ago" [ref=f6e525]
+                  - row [ref=f6e527]:
+                    - cell [ref=f6e528]:
+                      - link "sdks, (Directory)" [ref=f6e535] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/sdks
+                        - text: sdks
+                    - cell [ref=f6e536]:
+                      - generic [ref=f6e538]:
+                        - 'link "chore: migrate linting to vp lint with ESLint fallback (" [ref=f6e539] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/eb71e47f3b58c0081f76c9d9a46abee3dec7a02b
+                        - link "#38834" [ref=f6e540] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/38834
+                        - link ")" [ref=f6e541] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/eb71e47f3b58c0081f76c9d9a46abee3dec7a02b
+                    - cell "Jul 13, 20263 weeks ago" [ref=f6e542]
+                  - row [ref=f6e544]:
+                    - cell [ref=f6e545]:
+                      - link "web, (Directory)" [ref=f6e552] [cursor=pointer]:
+                        - /url: /langgenius/dify/tree/main/web
+                        - text: web
+                    - cell [ref=f6e553]:
+                      - generic [ref=f6e555]:
+                        - 'link "refactor(web): align Base UI state consumers (" [ref=f6e556] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/b6824334cf527504efff4785f8ccefd4b85943c5
+                        - link "#39864" [ref=f6e557] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39864
+                        - link ")" [ref=f6e558] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/b6824334cf527504efff4785f8ccefd4b85943c5
+                    - cell "Aug 1, 20261 hour ago" [ref=f6e559]
+                  - row [ref=f6e561]:
+                    - cell [ref=f6e562]:
+                      - link ".coveragerc, (File)" [ref=f6e569] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/.coveragerc
+                        - text: .coveragerc
+                    - cell [ref=f6e570]:
+                      - generic [ref=f6e572]:
+                        - 'link "test(api): manage backend pytest services natively (" [ref=f6e573] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/34a89416f7896a058e802855e0ba5023b5f9d2c0
+                        - link "#36235" [ref=f6e574] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/36235
+                        - link ")" [ref=f6e575] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/34a89416f7896a058e802855e0ba5023b5f9d2c0
+                    - cell "May 19, 20263 months ago" [ref=f6e576]
+                  - row [ref=f6e578]:
+                    - cell [ref=f6e579]:
+                      - link ".dockerignore, (File)" [ref=f6e586] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/.dockerignore
+                        - text: .dockerignore
+                    - cell [ref=f6e587]:
+                      - generic [ref=f6e589]:
+                        - 'link "feat: adding dify cli (" [ref=f6e590] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/a728e0ac69fdc5deac5811e3bfedf51dd1a920e1
+                        - link "#36348" [ref=f6e591] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/36348
+                        - link ")" [ref=f6e592] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/a728e0ac69fdc5deac5811e3bfedf51dd1a920e1
+                    - cell "May 26, 20263 months ago" [ref=f6e593]
+                  - row [ref=f6e595]:
+                    - cell [ref=f6e596]:
+                      - link ".editorconfig, (File)" [ref=f6e603] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/.editorconfig
+                        - text: .editorconfig
+                    - cell [ref=f6e604]:
+                      - generic [ref=f6e606]:
+                        - 'link "fix: add .ts and .mjs to EditorConfig indent rules (" [ref=f6e607] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/859f73c19d982f79346b4943020da5de1d5837b4
+                        - link "#28397" [ref=f6e608] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/28397
+                        - link ")" [ref=f6e609] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/859f73c19d982f79346b4943020da5de1d5837b4
+                    - cell "Nov 20, 20259 months ago" [ref=f6e610]
+                  - row [ref=f6e612]:
+                    - cell [ref=f6e613]:
+                      - link ".gitattributes, (File)" [ref=f6e620] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/.gitattributes
+                        - text: .gitattributes
+                    - cell [ref=f6e621]:
+                      - generic [ref=f6e623]:
+                        - 'link "feat: adding dify cli (" [ref=f6e624] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/a728e0ac69fdc5deac5811e3bfedf51dd1a920e1
+                        - link "#36348" [ref=f6e625] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/36348
+                        - link ")" [ref=f6e626] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/a728e0ac69fdc5deac5811e3bfedf51dd1a920e1
+                    - cell "May 26, 20263 months ago" [ref=f6e627]
+                  - row [ref=f6e629]:
+                    - cell [ref=f6e630]:
+                      - link ".gitignore, (File)" [ref=f6e637] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/.gitignore
+                        - text: .gitignore
+                    - cell [ref=f6e638]:
+                      - generic [ref=f6e640]:
+                        - 'link "feat(agent): shellctl rewritten in go (" [ref=f6e641] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/302d7b1e1bca8c18c4b871c57035ded94b2e58c4
+                        - link "#38841" [ref=f6e642] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/38841
+                        - link ")" [ref=f6e643] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/302d7b1e1bca8c18c4b871c57035ded94b2e58c4
+                    - cell "Jul 15, 20263 weeks ago" [ref=f6e644]
+                  - row [ref=f6e646]:
+                    - cell [ref=f6e647]:
+                      - link ".nvmrc, (File)" [ref=f6e654] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/.nvmrc
+                        - text: .nvmrc
+                    - cell [ref=f6e655]:
+                      - generic [ref=f6e657]:
+                        - 'link "refactor: introduce pnpm workspace (" [ref=f6e658] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/52a4bea88f45a30bc8c5a9fa3c031cb00a57be5a
+                        - link "#34241" [ref=f6e659] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/34241
+                        - link ")" [ref=f6e660] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/52a4bea88f45a30bc8c5a9fa3c031cb00a57be5a
+                    - cell "Mar 30, 20265 months ago" [ref=f6e661]
+                  - row [ref=f6e663]:
+                    - cell [ref=f6e664]:
+                      - link "AGENTS.md, (File)" [ref=f6e671] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/AGENTS.md
+                        - text: AGENTS.md
+                    - cell [ref=f6e672]:
+                      - generic [ref=f6e674]:
+                        - 'link "refactor(agents): simplify repository context (" [ref=f6e675] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/fd2e26f8e6705af416154d4e3a5a4a0cdf348376
+                        - link "#39583" [ref=f6e676] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39583
+                        - link ")" [ref=f6e677] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/fd2e26f8e6705af416154d4e3a5a4a0cdf348376
+                    - cell "Jul 26, 2026last week" [ref=f6e678]
+                  - row [ref=f6e680]:
+                    - cell [ref=f6e681]:
+                      - link "AUTHORS, (File)" [ref=f6e688] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/AUTHORS
+                        - text: AUTHORS
+                    - cell [ref=f6e689]:
+                      - link "Initial commit" [ref=f6e692] [cursor=pointer]:
+                        - /url: /langgenius/dify/commit/db896255d625e2418787f1b53f0dac091c57df1e
+                    - cell "May 15, 20233 years ago" [ref=f6e693]
+                  - row [ref=f6e695]:
+                    - cell [ref=f6e696]:
+                      - link "CLAUDE.md, (Symlink to file)" [ref=f6e703] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/CLAUDE.md
+                        - text: CLAUDE.md
+                    - cell [ref=f6e704]:
+                      - generic [ref=f6e706]:
+                        - 'link "refactor: remove Claude-specific references from documentation files (" [ref=f6e707] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/ecb22226d6d2862ba88d1f702204c55dca7367eb
+                        - link "#…" [ref=f6e708] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/25760
+                    - cell "Sep 16, 202511 months ago" [ref=f6e709]
+                  - row [ref=f6e711]:
+                    - cell [ref=f6e712]:
+                      - link "CONTRIBUTING.md, (File)" [ref=f6e719] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/CONTRIBUTING.md
+                        - text: CONTRIBUTING.md
+                    - cell [ref=f6e720]:
+                      - generic [ref=f6e722]:
+                        - 'link "docs: simplify frontend testing guidance (" [ref=f6e723] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/35ace0ea1858d5307c3a2fe270e76945efe74dda
+                        - link "#38909" [ref=f6e724] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/38909
+                        - link ")" [ref=f6e725] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/35ace0ea1858d5307c3a2fe270e76945efe74dda
+                    - cell "Jul 14, 20263 weeks ago" [ref=f6e726]
+                  - row [ref=f6e728]:
+                    - cell [ref=f6e729]:
+                      - link "LICENSE, (File)" [ref=f6e736] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/LICENSE
+                        - text: LICENSE
+                    - cell [ref=f6e737]:
+                      - generic [ref=f6e739]:
+                        - link "remove business contact info in license (" [ref=f6e740] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/d565802ea119de3b4aba5ec9e20e40162eef1d64
+                        - link "#16985" [ref=f6e741] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/16985
+                        - link ")" [ref=f6e742] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/d565802ea119de3b4aba5ec9e20e40162eef1d64
+                    - cell "Mar 28, 2025last year" [ref=f6e743]
+                  - row [ref=f6e745]:
+                    - cell [ref=f6e746]:
+                      - link "Makefile, (File)" [ref=f6e753] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/Makefile
+                        - text: Makefile
+                    - cell [ref=f6e754]:
+                      - generic [ref=f6e756]:
+                        - 'link "ci: simplify test workflow execution (" [ref=f6e757] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/75f7069541fb79c0c8db62be6f6e50c6afa66630
+                        - link "#39318" [ref=f6e758] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39318
+                        - link ")" [ref=f6e759] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/75f7069541fb79c0c8db62be6f6e50c6afa66630
+                    - cell "Jul 21, 20262 weeks ago" [ref=f6e760]
+                  - row [ref=f6e762]:
+                    - cell [ref=f6e763]:
+                      - link "README.md, (File)" [ref=f6e770] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/README.md
+                        - text: README.md
+                    - cell [ref=f6e771]:
+                      - generic [ref=f6e773]:
+                        - 'link "docs: note minimum Docker Compose version (" [ref=f6e774] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/97489d5a4411eff40193ad93ad6078f064a75790
+                        - link "#39374" [ref=f6e775] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39374
+                        - link ")" [ref=f6e776] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/97489d5a4411eff40193ad93ad6078f064a75790
+                    - cell "Jul 22, 2026last week" [ref=f6e777]
+                  - row [ref=f6e779]:
+                    - cell [ref=f6e780]:
+                      - link "SECURITY.md, (File)" [ref=f6e787] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/SECURITY.md
+                        - text: SECURITY.md
+                    - cell [ref=f6e788]:
+                      - generic [ref=f6e790]:
+                        - 'link "docs: add security policy (" [ref=f6e791] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/72e040ead3ee89480921e169d44ac2e40b675cfd
+                        - link "#36873" [ref=f6e792] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/36873
+                        - link ")" [ref=f6e793] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/72e040ead3ee89480921e169d44ac2e40b675cfd
+                    - cell "Jun 1, 20263 months ago" [ref=f6e794]
+                  - row [ref=f6e796]:
+                    - cell [ref=f6e797]:
+                      - link "codecov.yml, (File)" [ref=f6e804] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/codecov.yml
+                        - text: codecov.yml
+                    - cell [ref=f6e805]:
+                      - 'link "refactor(dify-ui): finish primitive migration from web/base/ui to @la…" [ref=f6e808] [cursor=pointer]':
+                        - /url: /langgenius/dify/commit/dfcc0f8863b58d87ae579450b65509a54f7eb49d
+                    - cell "Apr 17, 20264 months ago" [ref=f6e809]
+                  - row [ref=f6e811]:
+                    - cell [ref=f6e812]:
+                      - link "depot.json, (File)" [ref=f6e819] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/depot.json
+                        - text: depot.json
+                    - cell [ref=f6e820]:
+                      - generic [ref=f6e822]:
+                        - 'link "chore(ci): move image builds to depot (" [ref=f6e823] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/23648141c9f8c48a46e6820f0034254ef2aff948
+                        - link "#35575" [ref=f6e824] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/35575
+                        - link ")" [ref=f6e825] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/23648141c9f8c48a46e6820f0034254ef2aff948
+                    - cell "Apr 27, 20264 months ago" [ref=f6e826]
+                  - row [ref=f6e828]:
+                    - cell [ref=f6e829]:
+                      - link "eslint.config.mjs, (File)" [ref=f6e836] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/eslint.config.mjs
+                        - text: eslint.config.mjs
+                    - cell [ref=f6e837]:
+                      - generic [ref=f6e839]:
+                        - 'link "chore: migrate static checks to vp check (" [ref=f6e840] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/e35187f37626a1d3a7af5bedbebc19d40cf20cb5
+                        - link "#38850" [ref=f6e841] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/38850
+                        - link ")" [ref=f6e842] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/e35187f37626a1d3a7af5bedbebc19d40cf20cb5
+                    - cell "Jul 13, 20263 weeks ago" [ref=f6e843]
+                  - row [ref=f6e845]:
+                    - cell [ref=f6e846]:
+                      - link "lint.config.ts, (File)" [ref=f6e853] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/lint.config.ts
+                        - text: lint.config.ts
+                    - cell [ref=f6e854]:
+                      - generic [ref=f6e856]:
+                        - 'link "chore: canonicalize Tailwind classes (" [ref=f6e857] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/0441d27cac47c37e6bf9fce297e54f435c670e9f
+                        - link "#39762" [ref=f6e858] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39762
+                        - link ")" [ref=f6e859] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/0441d27cac47c37e6bf9fce297e54f435c670e9f
+                    - cell "Jul 29, 20263 days ago" [ref=f6e860]
+                  - row [ref=f6e862]:
+                    - cell [ref=f6e863]:
+                      - link "oxlint-suppressions.json, (File)" [ref=f6e870] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/oxlint-suppressions.json
+                        - text: oxlint-suppressions.json
+                    - cell [ref=f6e871]:
+                      - generic [ref=f6e873]:
+                        - 'link "refactor(web): align Base UI state consumers (" [ref=f6e874] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/b6824334cf527504efff4785f8ccefd4b85943c5
+                        - link "#39864" [ref=f6e875] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39864
+                        - link ")" [ref=f6e876] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/b6824334cf527504efff4785f8ccefd4b85943c5
+                    - cell "Aug 1, 20261 hour ago" [ref=f6e877]
+                  - row [ref=f6e879]:
+                    - cell [ref=f6e880]:
+                      - link "package.json, (File)" [ref=f6e887] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/package.json
+                        - text: package.json
+                    - cell [ref=f6e888]:
+                      - generic [ref=f6e890]:
+                        - 'link "chore: canonicalize Tailwind classes (" [ref=f6e891] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/0441d27cac47c37e6bf9fce297e54f435c670e9f
+                        - link "#39762" [ref=f6e892] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39762
+                        - link ")" [ref=f6e893] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/0441d27cac47c37e6bf9fce297e54f435c670e9f
+                    - cell "Jul 29, 20263 days ago" [ref=f6e894]
+                  - row [ref=f6e896]:
+                    - cell [ref=f6e897]:
+                      - link "pnpm-lock.yaml, (File)" [ref=f6e904] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/pnpm-lock.yaml
+                        - text: pnpm-lock.yaml
+                    - cell [ref=f6e905]:
+                      - generic [ref=f6e907]:
+                        - 'link "chore: canonicalize Tailwind classes (" [ref=f6e908] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/0441d27cac47c37e6bf9fce297e54f435c670e9f
+                        - link "#39762" [ref=f6e909] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39762
+                        - link ")" [ref=f6e910] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/0441d27cac47c37e6bf9fce297e54f435c670e9f
+                    - cell "Jul 29, 20263 days ago" [ref=f6e911]
+                  - row [ref=f6e913]:
+                    - cell [ref=f6e914]:
+                      - link "pnpm-workspace.yaml, (File)" [ref=f6e921] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/pnpm-workspace.yaml
+                        - text: pnpm-workspace.yaml
+                    - cell [ref=f6e922]:
+                      - generic [ref=f6e924]:
+                        - 'link "chore: canonicalize Tailwind classes (" [ref=f6e925] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/0441d27cac47c37e6bf9fce297e54f435c670e9f
+                        - link "#39762" [ref=f6e926] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/39762
+                        - link ")" [ref=f6e927] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/0441d27cac47c37e6bf9fce297e54f435c670e9f
+                    - cell "Jul 29, 20263 days ago" [ref=f6e928]
+                  - row [ref=f6e930]:
+                    - cell [ref=f6e931]:
+                      - link "vite.config.ts, (File)" [ref=f6e938] [cursor=pointer]:
+                        - /url: /langgenius/dify/blob/main/vite.config.ts
+                        - text: vite.config.ts
+                    - cell [ref=f6e939]:
+                      - generic [ref=f6e941]:
+                        - 'link "chore: improve static check performance (" [ref=f6e942] [cursor=pointer]':
+                          - /url: /langgenius/dify/commit/61d2ad572a77cc4a717126f1ce42115603b3447c
+                        - link "#38866" [ref=f6e943] [cursor=pointer]:
+                          - /url: https://github.com/langgenius/dify/pull/38866
+                        - link ")" [ref=f6e944] [cursor=pointer]:
+                          - /url: /langgenius/dify/commit/61d2ad572a77cc4a717126f1ce42115603b3447c
+                    - cell "Jul 13, 20263 weeks ago" [ref=f6e945]
+            - generic [ref=f6e948]:
+              - generic [ref=f6e949]:
+                - heading "Repository files navigation" [level=2] [ref=f6e950]
+                - navigation "Repository files" [ref=f6e951]:
+                  - list [ref=f6e952]:
+                    - listitem [ref=f6e953]:
+                      - link "README" [ref=f6e954] [cursor=pointer]:
+                        - /url: "#"
+                    - listitem [ref=f6e956]:
+                      - link "Code of conduct" [ref=f6e957] [cursor=pointer]:
+                        - /url: "#"
+                    - listitem [ref=f6e959]:
+                      - link "Contributing" [ref=f6e960] [cursor=pointer]:
+                        - /url: "#"
+                    - listitem [ref=f6e962]:
+                      - link "License" [ref=f6e963] [cursor=pointer]:
+                        - /url: "#"
+                    - listitem [ref=f6e965]:
+                      - link "Security" [ref=f6e966] [cursor=pointer]:
+                        - /url: "#"
+                - button "Outline" [ref=f6e968] [cursor=pointer]
+              - article [ref=f6e972]:
+                - paragraph [ref=f6e973]:
+                  - link [ref=f6e974] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/images/GitHub_README_if.png
+                    - img "cover-v5-optimized" [ref=f6e975]
+                - paragraph [ref=f6e976]:
+                  - link "Dify Cloud" [ref=f6e977] [cursor=pointer]:
+                    - /url: https://cloud.dify.ai
+                  - text: ·
+                  - link "Self-hosting" [ref=f6e978] [cursor=pointer]:
+                    - /url: https://docs.dify.ai/getting-started/install-self-hosted
+                  - text: ·
+                  - link "Documentation" [ref=f6e979] [cursor=pointer]:
+                    - /url: https://docs.dify.ai
+                  - text: ·
+                  - link "Dify edition overview" [ref=f6e980] [cursor=pointer]:
+                    - /url: https://dify.ai/pricing
+                - paragraph [ref=f6e981]:
+                  - link [ref=f6e982] [cursor=pointer]:
+                    - /url: https://dify.ai
+                    - img "Static Badge" [ref=f6e983]
+                  - link [ref=f6e984] [cursor=pointer]:
+                    - /url: https://dify.ai/pricing
+                    - img "Static Badge" [ref=f6e985]
+                  - link [ref=f6e986] [cursor=pointer]:
+                    - /url: https://discord.gg/FngNHpbcY7
+                    - img "chat on Discord" [ref=f6e987]
+                  - link [ref=f6e988] [cursor=pointer]:
+                    - /url: https://reddit.com/r/difyai
+                    - img "join Reddit" [ref=f6e989]
+                  - link [ref=f6e990] [cursor=pointer]:
+                    - /url: https://twitter.com/intent/follow?screen_name=dify_ai
+                    - img "follow on X(Twitter)" [ref=f6e991]
+                  - link [ref=f6e992] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/company/langgenius/
+                    - img "follow on LinkedIn" [ref=f6e993]
+                  - link [ref=f6e994] [cursor=pointer]:
+                    - /url: https://hub.docker.com/u/langgenius
+                    - img "Docker Pulls" [ref=f6e995]
+                  - link [ref=f6e996] [cursor=pointer]:
+                    - /url: https://github.com/langgenius/dify/graphs/commit-activity
+                    - img "Commits last month" [ref=f6e997]
+                  - link [ref=f6e998] [cursor=pointer]:
+                    - /url: https://github.com/langgenius/dify/
+                    - img "Issues closed" [ref=f6e999]
+                  - link [ref=f6e1000] [cursor=pointer]:
+                    - /url: https://github.com/langgenius/dify/discussions/
+                    - img "Discussion posts" [ref=f6e1001]
+                  - link [ref=f6e1002] [cursor=pointer]:
+                    - /url: https://insights.linuxfoundation.org/project/langgenius-dify
+                    - img "LFX Health Score" [ref=f6e1003]
+                  - link [ref=f6e1004] [cursor=pointer]:
+                    - /url: https://insights.linuxfoundation.org/project/langgenius-dify
+                    - img "LFX Contributors" [ref=f6e1005]
+                  - link [ref=f6e1006] [cursor=pointer]:
+                    - /url: https://insights.linuxfoundation.org/project/langgenius-dify
+                    - img "LFX Active Contributors" [ref=f6e1007]
+                - paragraph [ref=f6e1008]:
+                  - link [ref=f6e1009] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/README.md
+                    - img "README in English" [ref=f6e1010]
+                  - link [ref=f6e1011] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docs/zh-TW/README.md
+                    - img "繁體中文文件" [ref=f6e1012]
+                  - link [ref=f6e1013] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docs/zh-CN/README.md
+                    - img "简体中文文件" [ref=f6e1014]
+                  - link [ref=f6e1015] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docs/ja-JP/README.md
+                    - img "日本語のREADME" [ref=f6e1016]
+                  - link [ref=f6e1017] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docs/es-ES/README.md
+                    - img "README en Español" [ref=f6e1018]
+                  - link [ref=f6e1019] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docs/fr-FR/README.md
+                    - img "README en Français" [ref=f6e1020]
+                  - link [ref=f6e1021] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docs/tlh/README.md
+                    - img "README tlhIngan Hol" [ref=f6e1022]
+                  - link [ref=f6e1023] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docs/ko-KR/README.md
+                    - img "README in Korean" [ref=f6e1024]
+                  - link [ref=f6e1025] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docs/ar-SA/README.md
+                    - img "README بالعربية" [ref=f6e1026]
+                  - link [ref=f6e1027] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docs/tr-TR/README.md
+                    - img "Türkçe README" [ref=f6e1028]
+                  - link [ref=f6e1029] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docs/vi-VN/README.md
+                    - img "README Tiếng Việt" [ref=f6e1030]
+                  - link [ref=f6e1031] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docs/de-DE/README.md
+                    - img "README in Deutsch" [ref=f6e1032]
+                  - link [ref=f6e1033] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docs/it-IT/README.md
+                    - img "README in Italiano" [ref=f6e1034]
+                  - link [ref=f6e1035] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docs/pt-BR/README.md
+                    - img "README em Português do Brasil" [ref=f6e1036]
+                  - link [ref=f6e1037] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docs/sl-SI/README.md
+                    - img "README Slovenščina" [ref=f6e1038]
+                  - link [ref=f6e1039] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docs/bn-BD/README.md
+                    - img "README in বাংলা" [ref=f6e1040]
+                  - link [ref=f6e1041] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docs/hi-IN/README.md
+                    - img "README in हिन्दी" [ref=f6e1042]
+                - paragraph [ref=f6e1043]:
+                  - text: Dify is an open-source LLM app development platform. Its intuitive interface combines AI workflow, RAG pipeline, agent capabilities, model management, observability features (including
+                  - link "Opik" [ref=f6e1044] [cursor=pointer]:
+                    - /url: https://www.comet.com/docs/opik/integrations/dify
+                  - text: ","
+                  - link "Langfuse" [ref=f6e1045] [cursor=pointer]:
+                    - /url: https://docs.langfuse.com
+                  - text: ", and"
+                  - link "Arize Phoenix" [ref=f6e1046] [cursor=pointer]:
+                    - /url: https://docs.arize.com/phoenix
+                  - text: ") and more, letting you quickly go from prototype to production. Here's a list of the core features:"
+                - generic [ref=f6e1047]:
+                  - heading "Quick start" [level=2] [ref=f6e1048]
+                  - 'link "Permalink: Quick start" [ref=f6e1049] [cursor=pointer]':
+                    - /url: "#quick-start"
+                - blockquote [ref=f6e1052]:
+                  - paragraph [ref=f6e1053]: "Before installing Dify, make sure your machine meets the following minimum system requirements:"
+                  - list [ref=f6e1054]:
+                    - listitem [ref=f6e1055]: CPU >= 2 Core
+                    - listitem [ref=f6e1056]: RAM >= 4 GiB
+                - paragraph [ref=f6e1057]:
+                  - text: The easiest way to start the Dify server is through
+                  - link "Docker Compose" [ref=f6e1058] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docker/docker-compose.yaml
+                  - text: . Before running Dify with the following commands, make sure that
+                  - link "Docker" [ref=f6e1059] [cursor=pointer]:
+                    - /url: https://docs.docker.com/get-docker/
+                  - text: "and Docker Compose v2.24.0 or later are installed on your machine:"
+                - generic [ref=f6e1060]:
+                  - generic [ref=f6e1061]: cd dify cd docker cp .env.example .env docker compose up -d
+                  - button "Copy code to clipboard" [ref=f6e1063] [cursor=pointer]
+                - paragraph [ref=f6e1067]:
+                  - text: After running, you can access the Dify dashboard in your browser at
+                  - link "http://localhost/install" [ref=f6e1068] [cursor=pointer]:
+                    - /url: http://localhost/install
+                  - text: and start the initialization process.
+                - generic [ref=f6e1069]:
+                  - heading "Seeking help" [level=4] [ref=f6e1070]
+                  - 'link "Permalink: Seeking help" [ref=f6e1071] [cursor=pointer]':
+                    - /url: "#seeking-help"
+                - paragraph [ref=f6e1074]:
+                  - text: Please refer to our
+                  - link "FAQ" [ref=f6e1075] [cursor=pointer]:
+                    - /url: https://docs.dify.ai/getting-started/install-self-hosted/faqs
+                  - text: if you encounter problems setting up Dify. Reach out to
+                  - link "the community and us" [ref=f6e1076] [cursor=pointer]:
+                    - /url: "#community--contact"
+                  - text: if you are still having issues.
+                - blockquote [ref=f6e1077]:
+                  - paragraph [ref=f6e1078]:
+                    - text: If you'd like to contribute to Dify or do additional development, refer to our
+                    - link "guide to deploying from source code" [ref=f6e1079] [cursor=pointer]:
+                      - /url: https://docs.dify.ai/getting-started/install-self-hosted/local-source-code
+                - generic [ref=f6e1080]:
+                  - heading "Key features" [level=2] [ref=f6e1081]
+                  - 'link "Permalink: Key features" [ref=f6e1082] [cursor=pointer]':
+                    - /url: "#key-features"
+                - paragraph [ref=f6e1085]:
+                  - strong [ref=f6e1086]: 1. Workflow
+                  - text: ": Build and test powerful AI workflows on a visual canvas, leveraging all the following features and beyond."
+                - paragraph [ref=f6e1087]:
+                  - strong [ref=f6e1088]: 2. Comprehensive model support
+                  - text: ": Seamless integration with hundreds of proprietary / open-source LLMs from dozens of inference providers and self-hosted solutions, covering GPT, Mistral, Llama3, and any OpenAI API-compatible models. A full list of supported model providers can be found"
+                  - link "here" [ref=f6e1089] [cursor=pointer]:
+                    - /url: https://docs.dify.ai/getting-started/readme/model-providers
+                  - text: .
+                - paragraph [ref=f6e1090]:
+                  - link [ref=f6e1091] [cursor=pointer]:
+                    - /url: https://private-user-images.githubusercontent.com/13230914/321881730-5a17bdbe-097a-4100-8363-40255b70f6e3.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3ODU1OTM2NTYsIm5iZiI6MTc4NTU5MzM1NiwicGF0aCI6Ii8xMzIzMDkxNC8zMjE4ODE3MzAtNWExN2JkYmUtMDk3YS00MTAwLTgzNjMtNDAyNTViNzBmNmUzLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjA4MDElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwODAxVDE0MDkxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWI5ZDZiMjU2ZGFlZDgwMDFjN2U3YmEzOGM2MzU3YWY5ZWUzMGI3ODM5YjIwY2JlODhlMmI2MzY0ZWU4NDQwZDkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JnJlc3BvbnNlLWNvbnRlbnQtdHlwZT1pbWFnZSUyRnBuZyJ9.L3IEG3wiaWxc3zapZLKAgOmMPzoj1ohcdikSYXTZuQ8
+                    - img "providers-v5" [ref=f6e1092]
+                - paragraph [ref=f6e1093]:
+                  - strong [ref=f6e1094]: 3. Prompt IDE
+                  - text: ": Intuitive interface for crafting prompts, comparing model performance, and adding additional features such as text-to-speech to a chat-based app."
+                - paragraph [ref=f6e1095]:
+                  - strong [ref=f6e1096]: 4. RAG Pipeline
+                  - text: ": Extensive RAG capabilities that cover everything from document ingestion to retrieval, with out-of-box support for text extraction from PDFs, PPTs, and other common document formats."
+                - paragraph [ref=f6e1097]:
+                  - strong [ref=f6e1098]: 5. Agent capabilities
+                  - text: ": You can define agents based on LLM Function Calling or ReAct, and add pre-built or custom tools for the agent. Dify provides 50+ built-in tools for AI agents, such as Google Search, DALL·E, Stable Diffusion and WolframAlpha."
+                - paragraph [ref=f6e1099]:
+                  - strong [ref=f6e1100]: 6. LLMOps
+                  - text: ": Monitor and analyze application logs and performance over time. You could continuously improve prompts, datasets, and models based on production data and annotations."
+                - paragraph [ref=f6e1101]:
+                  - strong [ref=f6e1102]: 7. Backend-as-a-Service
+                  - text: ": All of Dify's offerings come with corresponding APIs, so you could effortlessly integrate Dify into your own business logic."
+                - generic [ref=f6e1103]:
+                  - heading "Using Dify" [level=2] [ref=f6e1104]
+                  - 'link "Permalink: Using Dify" [ref=f6e1105] [cursor=pointer]':
+                    - /url: "#using-dify"
+                - list [ref=f6e1108]:
+                  - listitem [ref=f6e1109]:
+                    - paragraph [ref=f6e1110]:
+                      - strong [ref=f6e1111]: Cloud
+                      - text: We host a
+                      - link "Dify Cloud" [ref=f6e1112] [cursor=pointer]:
+                        - /url: https://dify.ai
+                      - text: service for anyone to try with zero setup. It provides all the capabilities of the self-deployed version, and includes 200 free GPT-4 calls in the sandbox plan. If you run into issues with Dify Cloud,
+                      - link "contact our Cloud support team" [ref=f6e1113] [cursor=pointer]:
+                        - /url: mailto:cloud@dify.ai?subject=%5BGitHub%5DDify%20Cloud%20Support
+                      - text: .
+                  - listitem [ref=f6e1114]:
+                    - paragraph [ref=f6e1115]:
+                      - strong [ref=f6e1116]: Self-hosting Dify Community Edition
+                      - text: Quickly get Dify running in your environment with this
+                      - link "starter guide" [ref=f6e1117] [cursor=pointer]:
+                        - /url: "#quick-start"
+                      - text: . Use our
+                      - link "documentation" [ref=f6e1118] [cursor=pointer]:
+                        - /url: https://docs.dify.ai
+                      - text: for further references and more in-depth instructions.
+                  - listitem [ref=f6e1119]:
+                    - paragraph [ref=f6e1120]:
+                      - strong [ref=f6e1121]: Dify for enterprise / organizations
+                      - text: We provide additional enterprise-centric features.
+                      - link "Send us an email" [ref=f6e1122] [cursor=pointer]:
+                        - /url: mailto:business@dify.ai?subject=%5BGitHub%5DBusiness%20License%20Inquiry
+                      - text: to discuss your enterprise needs.
+                - generic [ref=f6e1123]:
+                  - heading "Staying ahead" [level=2] [ref=f6e1124]
+                  - 'link "Permalink: Staying ahead" [ref=f6e1125] [cursor=pointer]':
+                    - /url: "#staying-ahead"
+                - paragraph [ref=f6e1128]: Star Dify on GitHub and be instantly notified of new releases.
+                - paragraph [ref=f6e1129]:
+                  - generic:
+                    - generic:
+                      - link:
+                        - /url: https://private-user-images.githubusercontent.com/13230914/320902970-b823edc1-6388-4e25-ad45-2f6b187adbb4.gif?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3ODU1OTM2NTYsIm5iZiI6MTc4NTU5MzM1NiwicGF0aCI6Ii8xMzIzMDkxNC8zMjA5MDI5NzAtYjgyM2VkYzEtNjM4OC00ZTI1LWFkNDUtMmY2YjE4N2FkYmI0LmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjA4MDElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwODAxVDE0MDkxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWNiNDVjMjkyNGM2ZmYyMDMwOTQ3ZTAxMjUwYjlkOTI3ZDI2MGQ4OGVlMGQ2ZGQ2ZGZjZmIwMjJjZjYzYWIyZmEmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JnJlc3BvbnNlLWNvbnRlbnQtdHlwZT1pbWFnZSUyRmdpZiJ9.1hNyhE8klVkcCM2VdmCyB4qwTecJppKcOuRO9qKVAM8
+                      - button
+                - generic [ref=f6e1130]:
+                  - heading "Advanced Setup" [level=2] [ref=f6e1131]
+                  - 'link "Permalink: Advanced Setup" [ref=f6e1132] [cursor=pointer]':
+                    - /url: "#advanced-setup"
+                - generic [ref=f6e1135]:
+                  - heading "Custom configurations" [level=3] [ref=f6e1136]
+                  - 'link "Permalink: Custom configurations" [ref=f6e1137] [cursor=pointer]':
+                    - /url: "#custom-configurations"
+                - paragraph [ref=f6e1140]:
+                  - text: If you need to customize the configuration, edit
+                  - code [ref=f6e1141]: docker/.env
+                  - text: . The essential startup defaults live in
+                  - link [ref=f6e1142] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/docker/.env.example
+                    - code [ref=f6e1143]: docker/.env.example
+                  - text: ", and optional advanced variables are split under"
+                  - code [ref=f6e1144]: docker/envs/
+                  - text: by theme. After making any changes, re-run
+                  - code [ref=f6e1145]: docker compose up -d
+                  - text: from the
+                  - code [ref=f6e1146]: docker
+                  - text: directory. You can find the full list of available environment variables
+                  - link "here" [ref=f6e1147] [cursor=pointer]:
+                    - /url: https://docs.dify.ai/getting-started/install-self-hosted/environments
+                  - text: .
+                - generic [ref=f6e1148]:
+                  - heading "Metrics Monitoring with Grafana" [level=3] [ref=f6e1149]
+                  - 'link "Permalink: Metrics Monitoring with Grafana" [ref=f6e1150] [cursor=pointer]':
+                    - /url: "#metrics-monitoring-with-grafana"
+                - paragraph [ref=f6e1153]: Import the dashboard to Grafana, using Dify's PostgreSQL database as data source, to monitor metrics in granularity of apps, tenants, messages, and more.
+                - list [ref=f6e1154]:
+                  - listitem [ref=f6e1155]:
+                    - link "Grafana Dashboard by @bowenliang123" [ref=f6e1156] [cursor=pointer]:
+                      - /url: https://github.com/bowenliang123/dify-grafana-dashboard
+                - generic [ref=f6e1157]:
+                  - heading "Deployment with Kubernetes" [level=3] [ref=f6e1158]
+                  - 'link "Permalink: Deployment with Kubernetes" [ref=f6e1159] [cursor=pointer]':
+                    - /url: "#deployment-with-kubernetes"
+                - paragraph [ref=f6e1162]:
+                  - text: If you'd like to configure a highly available setup, there are community-contributed
+                  - link "Helm Charts" [ref=f6e1163] [cursor=pointer]:
+                    - /url: https://helm.sh/
+                  - text: and YAML files which allow Dify to be deployed on Kubernetes.
+                - list [ref=f6e1164]:
+                  - listitem [ref=f6e1165]:
+                    - link "Helm Chart by @LeoQuote" [ref=f6e1166] [cursor=pointer]:
+                      - /url: https://github.com/douban/charts/tree/master/charts/dify
+                  - listitem [ref=f6e1167]:
+                    - link "Helm Chart by @BorisPolonsky" [ref=f6e1168] [cursor=pointer]:
+                      - /url: https://github.com/BorisPolonsky/dify-helm
+                  - listitem [ref=f6e1169]:
+                    - link "Helm Chart by @magicsong" [ref=f6e1170] [cursor=pointer]:
+                      - /url: https://github.com/magicsong/ai-charts
+                  - listitem [ref=f6e1171]:
+                    - link "YAML file by @Winson-030" [ref=f6e1172] [cursor=pointer]:
+                      - /url: https://github.com/Winson-030/dify-kubernetes
+                  - listitem [ref=f6e1173]:
+                    - link "YAML file by @wyy-holding" [ref=f6e1174] [cursor=pointer]:
+                      - /url: https://github.com/wyy-holding/dify-k8s
+                  - listitem [ref=f6e1175]:
+                    - link "🚀 NEW! YAML files (Supports Dify v1.6.0) by @Zhoneym" [ref=f6e1176] [cursor=pointer]:
+                      - /url: https://github.com/Zhoneym/DifyAI-Kubernetes
+                - generic [ref=f6e1177]:
+                  - heading "Using Terraform for Deployment" [level=4] [ref=f6e1178]
+                  - 'link "Permalink: Using Terraform for Deployment" [ref=f6e1179] [cursor=pointer]':
+                    - /url: "#using-terraform-for-deployment"
+                - paragraph [ref=f6e1182]:
+                  - text: Deploy Dify to Cloud Platform with a single click using
+                  - link "terraform" [ref=f6e1183] [cursor=pointer]:
+                    - /url: https://www.terraform.io/
+                - generic [ref=f6e1184]:
+                  - heading "Azure Global" [level=5] [ref=f6e1185]
+                  - 'link "Permalink: Azure Global" [ref=f6e1186] [cursor=pointer]':
+                    - /url: "#azure-global"
+                - list [ref=f6e1189]:
+                  - listitem [ref=f6e1190]:
+                    - link "Azure Terraform by @nikawang" [ref=f6e1191] [cursor=pointer]:
+                      - /url: https://github.com/nikawang/dify-azure-terraform
+                - generic [ref=f6e1192]:
+                  - heading "Google Cloud" [level=5] [ref=f6e1193]
+                  - 'link "Permalink: Google Cloud" [ref=f6e1194] [cursor=pointer]':
+                    - /url: "#google-cloud"
+                - list [ref=f6e1197]:
+                  - listitem [ref=f6e1198]:
+                    - link "Google Cloud Terraform by @sotazum" [ref=f6e1199] [cursor=pointer]:
+                      - /url: https://github.com/DeNA/dify-google-cloud-terraform
+                - generic [ref=f6e1200]:
+                  - heading "Using AWS CDK for Deployment" [level=4] [ref=f6e1201]
+                  - 'link "Permalink: Using AWS CDK for Deployment" [ref=f6e1202] [cursor=pointer]':
+                    - /url: "#using-aws-cdk-for-deployment"
+                - paragraph [ref=f6e1205]:
+                  - text: Deploy Dify to AWS with
+                  - link "CDK" [ref=f6e1206] [cursor=pointer]:
+                    - /url: https://aws.amazon.com/cdk/
+                - generic [ref=f6e1207]:
+                  - heading "AWS" [level=5] [ref=f6e1208]
+                  - 'link "Permalink: AWS" [ref=f6e1209] [cursor=pointer]':
+                    - /url: "#aws"
+                - list [ref=f6e1212]:
+                  - listitem [ref=f6e1213]:
+                    - link "AWS CDK by @KevinZhao (EKS based)" [ref=f6e1214] [cursor=pointer]:
+                      - /url: https://github.com/aws-samples/solution-for-deploying-dify-on-aws
+                  - listitem [ref=f6e1215]:
+                    - link "AWS CDK by @tmokmss (ECS based)" [ref=f6e1216] [cursor=pointer]:
+                      - /url: https://github.com/aws-samples/dify-self-hosted-on-aws
+                - generic [ref=f6e1217]:
+                  - heading "Using Alibaba Cloud Computing Nest" [level=4] [ref=f6e1218]
+                  - 'link "Permalink: Using Alibaba Cloud Computing Nest" [ref=f6e1219] [cursor=pointer]':
+                    - /url: "#using-alibaba-cloud-computing-nest"
+                - paragraph [ref=f6e1222]:
+                  - text: Quickly deploy Dify to Alibaba cloud with
+                  - link "Alibaba Cloud Computing Nest" [ref=f6e1223] [cursor=pointer]:
+                    - /url: https://computenest.console.aliyun.com/service/instance/create/default?type=user&ServiceName=Dify%E7%A4%BE%E5%8C%BA%E7%89%88
+                - generic [ref=f6e1224]:
+                  - heading "Using Alibaba Cloud Data Management" [level=4] [ref=f6e1225]
+                  - 'link "Permalink: Using Alibaba Cloud Data Management" [ref=f6e1226] [cursor=pointer]':
+                    - /url: "#using-alibaba-cloud-data-management"
+                - paragraph [ref=f6e1229]:
+                  - text: One-Click deploy Dify to Alibaba Cloud with
+                  - link "Alibaba Cloud Data Management" [ref=f6e1230] [cursor=pointer]:
+                    - /url: https://www.alibabacloud.com/help/en/dms/dify-in-invitational-preview/
+                - generic [ref=f6e1231]:
+                  - heading "Deploy to AKS with Azure Devops Pipeline" [level=4] [ref=f6e1232]
+                  - 'link "Permalink: Deploy to AKS with Azure Devops Pipeline" [ref=f6e1233] [cursor=pointer]':
+                    - /url: "#deploy-to-aks-with-azure-devops-pipeline"
+                - paragraph [ref=f6e1236]:
+                  - text: One-Click deploy Dify to AKS with
+                  - link "Azure Devops Pipeline Helm Chart by @LeoZhang" [ref=f6e1237] [cursor=pointer]:
+                    - /url: https://github.com/Ruiruiz30/Dify-helm-chart-AKS
+                - generic [ref=f6e1238]:
+                  - heading "Contributing" [level=2] [ref=f6e1239]
+                  - 'link "Permalink: Contributing" [ref=f6e1240] [cursor=pointer]':
+                    - /url: "#contributing"
+                - paragraph [ref=f6e1243]:
+                  - text: For those who'd like to contribute code, see our
+                  - link "Contribution Guide" [ref=f6e1244] [cursor=pointer]:
+                    - /url: https://github.com/langgenius/dify/blob/main/CONTRIBUTING.md
+                  - text: . At the same time, please consider supporting Dify by sharing it on social media and at events and conferences.
+                - blockquote [ref=f6e1245]:
+                  - paragraph [ref=f6e1246]:
+                    - text: We are looking for contributors to help translate Dify into languages other than Mandarin or English. If you are interested in helping, please see the
+                    - link "i18n README" [ref=f6e1247] [cursor=pointer]:
+                      - /url: https://github.com/langgenius/dify/blob/main/web/i18n-config/README.md
+                    - text: for more information, and leave us a comment in the
+                    - code [ref=f6e1248]: global-users
+                    - text: channel of our
+                    - link "Discord Community Server" [ref=f6e1249] [cursor=pointer]:
+                      - /url: https://discord.gg/8Tpq4AcN9c
+                    - text: .
+                - generic [ref=f6e1250]:
+                  - heading "Community & contact" [level=2] [ref=f6e1251]
+                  - 'link "Permalink: Community & contact" [ref=f6e1252] [cursor=pointer]':
+                    - /url: "#community--contact"
+                - list [ref=f6e1255]:
+                  - listitem [ref=f6e1256]:
+                    - link "GitHub Discussion" [ref=f6e1257] [cursor=pointer]:
+                      - /url: https://github.com/langgenius/dify/discussions
+                    - text: ". Best for: sharing feedback and asking questions."
+                  - listitem [ref=f6e1258]:
+                    - link "GitHub Issues" [ref=f6e1259] [cursor=pointer]:
+                      - /url: https://github.com/langgenius/dify/issues
+                    - text: ". Best for: bugs you encounter using Dify.AI, and feature proposals. See our"
+                    - link "Contribution Guide" [ref=f6e1260] [cursor=pointer]:
+                      - /url: https://github.com/langgenius/dify/blob/main/CONTRIBUTING.md
+                    - text: .
+                  - listitem [ref=f6e1261]:
+                    - link "Discord" [ref=f6e1262] [cursor=pointer]:
+                      - /url: https://discord.gg/FngNHpbcY7
+                    - text: ". Best for: sharing your applications and hanging out with the community."
+                  - listitem [ref=f6e1263]:
+                    - link "X(Twitter)" [ref=f6e1264] [cursor=pointer]:
+                      - /url: https://twitter.com/dify_ai
+                    - text: ". Best for: sharing your applications and hanging out with the community."
+                - paragraph [ref=f6e1265]:
+                  - strong [ref=f6e1266]: Contributors
+                - link [ref=f6e1267] [cursor=pointer]:
+                  - /url: https://github.com/langgenius/dify/graphs/contributors
+                - generic [ref=f6e1269]:
+                  - heading "Star History" [level=2] [ref=f6e1270]
+                  - 'link "Permalink: Star History" [ref=f6e1271] [cursor=pointer]':
+                    - /url: "#star-history"
+                - link [ref=f6e1274] [cursor=pointer]:
+                  - /url: https://www.star-history.com/?repos=langgenius%2Fdify&type=date&legend=top-left
+                  - img "Star History Chart" [ref=f6e1277]
+                - generic [ref=f6e1278]:
+                  - heading "Security disclosure" [level=2] [ref=f6e1279]
+                  - 'link "Permalink: Security disclosure" [ref=f6e1280] [cursor=pointer]':
+                    - /url: "#security-disclosure"
+                - paragraph [ref=f6e1283]:
+                  - text: To protect your privacy, please avoid posting security issues on GitHub. Instead, report issues to
+                  - link "security@dify.ai" [ref=f6e1284] [cursor=pointer]:
+                    - /url: mailto:security@dify.ai
+                  - text: ", and our team will respond with detailed answer."
+                - generic [ref=f6e1285]:
+                  - heading "License" [level=2] [ref=f6e1286]
+                  - 'link "Permalink: License" [ref=f6e1287] [cursor=pointer]':
+                    - /url: "#license"
+                - paragraph [ref=f6e1290]:
+                  - text: This repository is licensed under the
+                  - link "Dify Open Source License" [ref=f6e1291] [cursor=pointer]:
+                    - /url: /langgenius/dify/blob/main/LICENSE
+                  - text: ", based on Apache 2.0 with additional conditions."
+        - generic [ref=f6e1294]:
+          - generic [ref=f6e1295]:
+            - heading "About" [level=2] [ref=f6e1296]
+            - paragraph [ref=f6e1297]: Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.
+            - generic "https://dify.ai" [ref=f6e1301]:
+              - link "dify.ai" [ref=f6e1302] [cursor=pointer]:
+                - /url: https://dify.ai
+            - heading "Topics" [level=3] [ref=f6e1303]
+            - generic [ref=f6e1304]:
+              - link "agent" [ref=f6e1305] [cursor=pointer]:
+                - /url: /topics/agent
+              - link "agentic-ai" [ref=f6e1306] [cursor=pointer]:
+                - /url: /topics/agentic-ai
+              - link "agentic-framework" [ref=f6e1307] [cursor=pointer]:
+                - /url: /topics/agentic-framework
+              - link "agentic-workflow" [ref=f6e1308] [cursor=pointer]:
+                - /url: /topics/agentic-workflow
+              - link "ai" [ref=f6e1309] [cursor=pointer]:
+                - /url: /topics/ai
+              - link "automation" [ref=f6e1310] [cursor=pointer]:
+                - /url: /topics/automation
+              - link "claude" [ref=f6e1311] [cursor=pointer]:
+                - /url: /topics/claude
+              - link "genai" [ref=f6e1312] [cursor=pointer]:
+                - /url: /topics/genai
+              - link "gpt" [ref=f6e1313] [cursor=pointer]:
+                - /url: /topics/gpt
+              - link "llm" [ref=f6e1314] [cursor=pointer]:
+                - /url: /topics/llm
+              - link "low-code" [ref=f6e1315] [cursor=pointer]:
+                - /url: /topics/low-code
+              - link "mcp" [ref=f6e1316] [cursor=pointer]:
+                - /url: /topics/mcp
+              - link "nextjs" [ref=f6e1317] [cursor=pointer]:
+                - /url: /topics/nextjs
+              - link "no-code" [ref=f6e1318] [cursor=pointer]:
+                - /url: /topics/no-code
+              - link "openai" [ref=f6e1319] [cursor=pointer]:
+                - /url: /topics/openai
+              - link "orchestration" [ref=f6e1320] [cursor=pointer]:
+                - /url: /topics/orchestration
+              - link "python" [ref=f6e1321] [cursor=pointer]:
+                - /url: /topics/python
+              - link "rag" [ref=f6e1322] [cursor=pointer]:
+                - /url: /topics/rag
+              - link "skills" [ref=f6e1323] [cursor=pointer]:
+                - /url: /topics/skills
+              - link "workflow" [ref=f6e1324] [cursor=pointer]:
+                - /url: /topics/workflow
+            - heading "Resources" [level=3] [ref=f6e1325]
+            - link "Readme" [ref=f6e1327] [cursor=pointer]:
+              - /url: "#readme-ov-file"
+            - link "License" [ref=f6e1331] [cursor=pointer]:
+              - /url: "#License-1-ov-file"
+            - heading "Code of conduct" [level=3] [ref=f6e1334]
+            - link "Code of conduct" [ref=f6e1336] [cursor=pointer]:
+              - /url: /langgenius/dify#coc-ov-file
+            - heading "Contributing" [level=3] [ref=f6e1339]
+            - link "Contributing" [ref=f6e1341] [cursor=pointer]:
+              - /url: "#contributing-ov-file"
+            - heading "Security policy" [level=3] [ref=f6e1344]
+            - link "Security policy" [ref=f6e1346] [cursor=pointer]:
+              - /url: "#security-ov-file"
+            - link "Activity" [ref=f6e1350] [cursor=pointer]:
+              - /url: /langgenius/dify/activity
+            - link "Custom properties" [ref=f6e1354] [cursor=pointer]:
+              - /url: /langgenius/dify/custom-properties
+            - heading "Stars" [level=3] [ref=f6e1357]
+            - link [ref=f6e1359] [cursor=pointer]:
+              - /url: /langgenius/dify/stargazers
+              - strong [ref=f6e1363]: 151.0k
+              - text: stars
+            - heading "Watchers" [level=3] [ref=f6e1364]
+            - link [ref=f6e1366] [cursor=pointer]:
+              - /url: /langgenius/dify/watchers
+              - strong [ref=f6e1370]: "819"
+              - text: watching
+            - heading "Forks" [level=3] [ref=f6e1371]
+            - link [ref=f6e1373] [cursor=pointer]:
+              - /url: /langgenius/dify/forks
+              - strong [ref=f6e1377]: 23.8k
+              - text: forks
+            - link "Report repository" [ref=f6e1379] [cursor=pointer]:
+              - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2Flanggenius%2Fdify&report=langgenius+%28user%29
+          - generic [ref=f6e1380]:
+            - heading "Releases (168)" [level=2] [ref=f6e1381]:
+              - generic [ref=f6e1382]:
+                - link "Releases" [ref=f6e1383] [cursor=pointer]:
+                  - /url: /langgenius/dify/releases
+                - generic [ref=f6e1384]: "168"
+                - generic [ref=f6e1385]: (168)
+            - link "Release v1.16.1 - Bug Fixes and Security Enhancements Latest Jul 28, 20264 days ago" [ref=f6e1386] [cursor=pointer]:
+              - /url: /langgenius/dify/releases/tag/1.16.1
+              - generic [ref=f6e1389]:
+                - generic [ref=f6e1390]:
+                  - generic "Release v1.16.1 - Bug Fixes and Security Enhancements" [ref=f6e1391]
+                  - generic [ref=f6e1392]: Latest
+                - generic [ref=f6e1393]: Jul 28, 20264 days ago
+            - link "+ 167 releases" [ref=f6e1395] [cursor=pointer]:
+              - /url: /langgenius/dify/releases
+          - generic [ref=f6e1396]:
+            - heading "Used by (710)" [level=2] [ref=f6e1397]:
+              - generic [ref=f6e1398]:
+                - link "Used by" [ref=f6e1399] [cursor=pointer]:
+                  - /url: /langgenius/dify/network/dependents
+                - generic [ref=f6e1400]: "710"
+                - generic [ref=f6e1401]: (710)
+            - link "@Exeltive-Group-Ltd @AIAutomation-MRDIY @sam1am @TencentEdgeOne @LeandrodaSilva + 705" [ref=f6e1402] [cursor=pointer]:
+              - /url: /langgenius/dify/network/dependents
+              - generic [ref=f6e1404]:
+                - img "@Exeltive-Group-Ltd" [ref=f6e1405]
+                - img "@AIAutomation-MRDIY" [ref=f6e1406]
+                - img "@sam1am" [ref=f6e1407]
+                - img "@TencentEdgeOne" [ref=f6e1408]
+                - img "@LeandrodaSilva" [ref=f6e1409]
+              - generic [ref=f6e1410]: + 705
+          - generic [ref=f6e1411]:
+            - heading "Contributors (1,399)" [level=2] [ref=f6e1412]:
+              - generic [ref=f6e1413]:
+                - link "Contributors" [ref=f6e1414] [cursor=pointer]:
+                  - /url: /langgenius/dify/graphs/contributors
+                - generic [ref=f6e1415]: 1,399
+                - generic [ref=f6e1416]: (1,399)
+            - list [ref=f6e1417]:
+              - listitem [ref=f6e1418]:
+                - link [ref=f6e1419] [cursor=pointer]:
+                  - /url: /autofix-ci[bot]
+                  - img "@autofix-ci[bot]" [ref=f6e1420]
+              - listitem [ref=f6e1421]:
+                - link [ref=f6e1422] [cursor=pointer]:
+                  - /url: /crazywoola
+                  - img "@crazywoola" [ref=f6e1423]
+              - listitem [ref=f6e1424]:
+                - link [ref=f6e1425] [cursor=pointer]:
+                  - /url: /laipz8200
+                  - img "@laipz8200" [ref=f6e1426]
+              - listitem [ref=f6e1427]:
+                - link [ref=f6e1428] [cursor=pointer]:
+                  - /url: /lyzno1
+                  - img "@lyzno1" [ref=f6e1429]
+              - listitem [ref=f6e1430]:
+                - link [ref=f6e1431] [cursor=pointer]:
+                  - /url: /iamjoel
+                  - img "@iamjoel" [ref=f6e1432]
+              - listitem [ref=f6e1433]:
+                - link [ref=f6e1434] [cursor=pointer]:
+                  - /url: /takatost
+                  - img "@takatost" [ref=f6e1435]
+              - listitem [ref=f6e1436]:
+                - link [ref=f6e1437] [cursor=pointer]:
+                  - /url: /asukaminato0721
+                  - img "@asukaminato0721" [ref=f6e1438]
+              - listitem [ref=f6e1439]:
+                - link [ref=f6e1440] [cursor=pointer]:
+                  - /url: /hjlarry
+                  - img "@hjlarry" [ref=f6e1441]
+              - listitem [ref=f6e1442]:
+                - link [ref=f6e1443] [cursor=pointer]:
+                  - /url: /JohnJyong
+                  - img "@JohnJyong" [ref=f6e1444]
+              - listitem [ref=f6e1445]:
+                - link [ref=f6e1446] [cursor=pointer]:
+                  - /url: /zxhlyh
+                  - img "@zxhlyh" [ref=f6e1447]
+              - listitem [ref=f6e1448]:
+                - link [ref=f6e1449] [cursor=pointer]:
+                  - /url: /bowenliang123
+                  - img "@bowenliang123" [ref=f6e1450]
+              - listitem [ref=f6e1451]:
+                - link [ref=f6e1452] [cursor=pointer]:
+                  - /url: /hyoban
+                  - img "@hyoban" [ref=f6e1453]
+              - listitem [ref=f6e1454]:
+                - link [ref=f6e1455] [cursor=pointer]:
+                  - /url: /dependabot[bot]
+                  - img "@dependabot[bot]" [ref=f6e1456]
+              - listitem [ref=f6e1457]:
+                - link [ref=f6e1458] [cursor=pointer]:
+                  - /url: /fatelei
+                  - img "@fatelei" [ref=f6e1459]
+            - link "+ 1,385 contributors" [ref=f6e1461] [cursor=pointer]:
+              - /url: /langgenius/dify/graphs/contributors
+          - generic [ref=f6e1462]:
+            - heading "Languages" [level=2] [ref=f6e1463]
+            - generic [ref=f6e1465]:
+              - 'progressbar "TypeScript: 50.6%" [ref=f6e1466]'
+              - 'progressbar "Python: 45.3%" [ref=f6e1467]'
+              - 'progressbar "JavaScript: 1.9%" [ref=f6e1468]'
+              - 'progressbar "MDX: 1.1%" [ref=f6e1469]'
+              - 'progressbar "CSS: 0.3%" [ref=f6e1470]'
+              - 'progressbar "Go: 0.3%" [ref=f6e1471]'
+              - 'progressbar "Other: 0.5%" [ref=f6e1472]'
+            - list [ref=f6e1473]:
+              - listitem [ref=f6e1474]:
+                - link "TypeScript 50.6%" [ref=f6e1475] [cursor=pointer]:
+                  - /url: /langgenius/dify/search?l=typescript
+                  - generic [ref=f6e1477]: TypeScript
+                  - generic [ref=f6e1478]: 50.6%
+              - listitem [ref=f6e1479]:
+                - link "Python 45.3%" [ref=f6e1480] [cursor=pointer]:
+                  - /url: /langgenius/dify/search?l=python
+                  - generic [ref=f6e1482]: Python
+                  - generic [ref=f6e1483]: 45.3%
+              - listitem [ref=f6e1484]:
+                - link "JavaScript 1.9%" [ref=f6e1485] [cursor=pointer]:
+                  - /url: /langgenius/dify/search?l=javascript
+                  - generic [ref=f6e1487]: JavaScript
+                  - generic [ref=f6e1488]: 1.9%
+              - listitem [ref=f6e1489]:
+                - link "MDX 1.1%" [ref=f6e1490] [cursor=pointer]:
+                  - /url: /langgenius/dify/search?l=mdx
+                  - generic [ref=f6e1492]: MDX
+                  - generic [ref=f6e1493]: 1.1%
+              - listitem [ref=f6e1494]:
+                - link "CSS 0.3%" [ref=f6e1495] [cursor=pointer]:
+                  - /url: /langgenius/dify/search?l=css
+                  - generic [ref=f6e1497]: CSS
+                  - generic [ref=f6e1498]: 0.3%
+              - listitem [ref=f6e1499]:
+                - link "Go 0.3%" [ref=f6e1500] [cursor=pointer]:
+                  - /url: /langgenius/dify/search?l=go
+                  - generic [ref=f6e1502]: Go
+                  - generic [ref=f6e1503]: 0.3%
+              - listitem [ref=f6e1504]:
+                - link "Other 0.5%" [ref=f6e1505] [cursor=pointer]:
+                  - /url: /langgenius/dify/search?l=Other
+                  - generic [ref=f6e1507]: Other
+                  - generic [ref=f6e1508]: 0.5%
+    - contentinfo [ref=f6e1510]:
+      - heading "Footer" [level=2] [ref=f6e1511]
+      - generic [ref=f6e1512]:
+        - generic [ref=f6e1513]:
+          - link "GitHub Homepage" [ref=f6e1514] [cursor=pointer]:
+            - /url: https://github.com
+          - generic [ref=f6e1517]: © 2026 GitHub, Inc.
+        - navigation "Footer" [ref=f6e1518]:
+          - heading "Footer navigation" [level=3] [ref=f6e1519]
+          - list "Footer navigation" [ref=f6e1520]:
+            - listitem [ref=f6e1521]:
+              - link "Terms" [ref=f6e1522] [cursor=pointer]:
+                - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+            - listitem [ref=f6e1523]:
+              - link "Privacy" [ref=f6e1524] [cursor=pointer]:
+                - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+            - listitem [ref=f6e1525]:
+              - link "Security" [ref=f6e1526] [cursor=pointer]:
+                - /url: https://github.com/security
+            - listitem [ref=f6e1527]:
+              - link "Status" [ref=f6e1528] [cursor=pointer]:
+                - /url: https://www.githubstatus.com/
+            - listitem [ref=f6e1529]:
+              - link "Community" [ref=f6e1530] [cursor=pointer]:
+                - /url: https://github.community/
+            - listitem [ref=f6e1531]:
+              - link "Docs" [ref=f6e1532] [cursor=pointer]:
+                - /url: https://docs.github.com/
+            - listitem [ref=f6e1533]:
+              - link "Contact" [ref=f6e1534] [cursor=pointer]:
+                - /url: https://support.github.com?tags=dotcom-footer
+            - listitem [ref=f6e1535]:
+              - button "Manage cookies" [ref=f6e1537] [cursor=pointer]
+            - listitem [ref=f6e1538]:
+              - button "Do not share my personal information" [ref=f6e1540] [cursor=pointer]
+  - alert [ref=f6e1543]

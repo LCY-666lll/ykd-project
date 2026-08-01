@@ -1,0 +1,44 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - link [ref=e5] [cursor=pointer]:
+      - /url: https://travel.hangzhou.com.cn/index.htm
+    - generic [ref=e6]:
+      - link "首页" [ref=e7] [cursor=pointer]:
+        - /url: https://travel.hangzhou.com.cn/index.htm
+      - link "旅游资讯" [ref=e8] [cursor=pointer]:
+        - /url: https://travel.hangzhou.com.cn/lyzx/index.htm
+      - link "City Walk" [ref=e9] [cursor=pointer]:
+        - /url: https://travel.hangzhou.com.cn/node_208636.html
+      - link "韵味杭州" [ref=e10] [cursor=pointer]:
+        - /url: https://ywhz.hangzhou.com.cn/hssj/content/content_6257251.htm
+      - generic [ref=e11]:
+        - generic:
+          - textbox [ref=e12]: 杭州旅游
+          - button "搜索" [ref=e13]
+  - generic [ref=e14]:
+    - generic [ref=e15]:
+      - text: 所在位置：
+      - link "旅游频道" [ref=e16] [cursor=pointer]:
+        - /url: https://travel.hangzhou.com.cn/index.htm
+      - text: ">"
+      - link "旅游资讯" [ref=e17] [cursor=pointer]:
+        - /url: https://travel.hangzhou.com.cn/lyzx/index.htm
+    - generic [ref=e18]:
+      - generic [ref=e19]: 灯光秀换“夏装”
+      - generic [ref=e20]: 发布时间：2026-06-02 08:39:13
+      - generic [ref=e21]:
+        - paragraph [ref=e22]:
+          - img "图为昨晚人们在钱江新城城市阳台观看“夏季版”灯光秀。" [ref=e23]
+        - paragraph [ref=e24]: 图为昨晚人们在钱江新城城市阳台观看“夏季版”灯光秀。
+        - paragraph [ref=e25]: 昨天起，钱塘江两岸常态化灯光秀正式调整为更具夏日风情的“夏季版”，为市民和游客开启一场贯穿整个夏天的视觉盛宴。
+      - generic [ref=e26]: 来源：每日商报 作者：摄/商报记者 项凯 编辑：陈周滢
+  - generic [ref=e27]:
+    - paragraph [ref=e28]: 增值电信业务经营许可证：浙B2-20110366 | 信息网络传播视听节目许可证：1105105 | 互联网新闻信息服务许可证：33120170003
+    - paragraph [ref=e29]:
+      - text: 网络文化经营许可:浙网文[2021]1187-055号 |
+      - link "工信部备案号：浙ICP备11041366号-1" [ref=e30] [cursor=pointer]:
+        - /url: http://www.beian.miit.gov.cn
+      - text: "|"
+      - link "浙公网安备：33010002000058号" [ref=e31] [cursor=pointer]:
+        - /url: http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010002000058
+    - paragraph [ref=e32]: 杭州网(杭州网络传媒有限公司)版权所有未经授权禁止复制或镜像

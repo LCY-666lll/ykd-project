@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class IlinkReplySender {
     private static final String VOICE_CAPABILITY_TIP = "如果您想与我语音交流，我也可以回复您语音哦。";
+    private static final String QUEUE_WAITING_TIP =
+            "上一条消息仍在处理中，已收到本条消息，完成后会按顺序继续处理。";
 
     private final AudioSynthesisService audioSynthesisService;
     private final ImageContextService imageContextService;
@@ -77,6 +79,16 @@ public class IlinkReplySender {
     public void sendVoiceRecognitionFailureMessage(ILinkClient client, String userId) { sendTextQuietly(client, userId, "这段语音暂时没有识别出文字，请重新发一遍或改用文字。"); }
     /** 发送语音处理失败提示。 */
     public void sendVoiceReplyFailureMessage(ILinkClient client, String userId) { sendTextQuietly(client, userId, "语音回复处理失败了，请稍后再试或改用文字。"); }
+
+    /** 提示用户当前消息已进入等待队列，不写入聊天或长期记忆。 */
+    public void sendQueueWaitingMessage(ILinkClient client, String userId) {
+        try {
+            client.sendText(userId, QUEUE_WAITING_TIP);
+            log.info("[iLink][QUEUE_WAITING_MESSAGE_SENT] userId={}", userId);
+        } catch (IOException exception) {
+            log.warn("[iLink][QUEUE_WAITING_MESSAGE_SEND_FAILED] userId={}", userId, exception);
+        }
+    }
 
     /** 逐个发送生成文件。 */
     private void sendDocumentReply(ILinkClient client, String userId, IlinkReplyProcessor.ReplyResult result,

@@ -1,0 +1,54 @@
+- generic [ref=f2e2]:
+  - generic [ref=f2e4]:
+    - link [ref=f2e5] [cursor=pointer]:
+      - /url: https://travel.hangzhou.com.cn/index.htm
+    - generic [ref=f2e6]:
+      - link "首页" [ref=f2e7] [cursor=pointer]:
+        - /url: https://travel.hangzhou.com.cn/index.htm
+      - link "旅游资讯" [ref=f2e8] [cursor=pointer]:
+        - /url: https://travel.hangzhou.com.cn/lyzx/index.htm
+      - link "City Walk" [ref=f2e9] [cursor=pointer]:
+        - /url: https://travel.hangzhou.com.cn/node_208636.html
+      - link "韵味杭州" [ref=f2e10] [cursor=pointer]:
+        - /url: https://ywhz.hangzhou.com.cn/hssj/content/content_6257251.htm
+      - generic [ref=f2e11]:
+        - generic:
+          - textbox [ref=f2e12]: 杭州旅游
+          - button "搜索" [ref=f2e13]
+  - generic [ref=f2e14]:
+    - generic [ref=f2e15]:
+      - text: 所在位置：
+      - link "旅游频道" [ref=f2e16] [cursor=pointer]:
+        - /url: https://travel.hangzhou.com.cn/index.htm
+      - text: ">"
+      - link "旅游资讯" [ref=f2e17] [cursor=pointer]:
+        - /url: https://travel.hangzhou.com.cn/lyzx/index.htm
+    - generic [ref=f2e18]:
+      - generic [ref=f2e19]: 暑期解锁全新玩法！告别打卡式赶路，来杭州过个“随意节”
+      - generic [ref=f2e20]: 发布时间：2026-07-06 14:39:54
+      - generic [ref=f2e21]:
+        - paragraph [ref=f2e22]: 夏日逐欢，随性赴趣！7月4日，杭州宋城全新暑期主题活动“随意节”正式开启探营模式。景区打破传统固定游览套路，创新推出无攻略、自由化的游玩理念，融合潮流电音、泼水狂欢、全域NPC互动、多元演艺、非遗体验、休闲纳凉等丰富内容，打造全龄适配的夏日沉浸式狂欢场景，为市民游客带来不一样的暑期游玩新体验。本次“随意节”正式运营时间为7月10日至8月23日，贯穿整个盛夏暑期。
+        - paragraph [ref=f2e23]:
+          - img "配图1" [ref=f2e24]
+        - paragraph [ref=f2e25]: 不同于常规景区赶场打卡、按攻略赶路的游玩模式，杭州宋城“随意节”主打“不被定义、随心尽兴”的游玩理念，彻底告别旅行焦虑。在这里，游客无需规划路线、不用追赶场次，可完全跟随自身节奏解锁夏日乐趣，想嗨就嗨、想歇就歇，沉浸式享受松弛暑期时光。
+        - paragraph [ref=f2e26]: 全园沉浸式互动氛围感拉满，古今穿越趣味十足。景区各处遍布特色主题NPC，林冲、苏东坡、青白蛇、功夫爷爷、银人阿明、高赛战甲、花盆人、女书生等超多形象悉数亮相，游走于街巷庭院之间。游客可随时驻足合影、趣味互动，一秒穿梭古今，沉浸式感受宋韵文化与潮流趣味碰撞的独特魅力。
+        - paragraph [ref=f2e27]:
+          - img "配图2" [ref=f2e28]
+        - paragraph [ref=f2e29]: 夏夜狂欢精彩不断，潮流音浪点燃盛夏。景区打造全域电音狂欢体系，创新推出电音泼水、电音云南打跳、电音疗愈等多元新潮玩法，铿锵鼓点搭配汹涌音浪，持续引爆现场氛围。同时，移动花车DJ随机穿梭园区街巷，即兴开演、惊喜空降，游客转角就能邂逅沉浸式派对，随时加入狂欢队伍，自由蹦迪、随性起舞，解锁夏日肆意撒野的快乐。
+        - paragraph [ref=f2e30]: 动静皆宜的游玩模式，适配全年龄段游玩需求。狂欢之余，景区贴心设置休闲纳凉区、非遗轻体验板块，兼顾休闲放松与文化体验。逛累了，游客可落座纳凉区的竹椅藤椅，晚风拂面、静听音乐，享受夏日悠然；兴致盎然时，可投身清凉泼水大战，褪去燥热、尽情撒欢；还能加入英歌舞巡游队伍，跟随雄浑鼓点舞动身姿，沉浸式感受传统民俗的磅礴魅力。
+        - paragraph [ref=f2e31]: “以往出游都是赶场追演出、打卡凑进度，全程紧绷又疲惫，这次来宋城慢悠悠逛一天，自在又舒服，这才是真正的放假！”来自苏州的游客林女士在园区惬意休憩时，连连点赞本次“随意节”的松弛游玩模式。
+        - paragraph [ref=f2e32]:
+          - img "配图3" [ref=f2e33]
+        - paragraph [ref=f2e34]: 暑期演艺盛宴轮番上演，全园天天有好戏。这个夏天，杭州宋城多款全新剧目重磅上线，热血青春歌舞剧《舞动奇迹》以活力舞步点燃夏日舞台，爆笑新剧《梁山开年会了！》解锁水浒好汉趣味职场故事、笑点拉满。与此同时，王牌经典演艺《宋城千古情》持续惊艳亮相，以震撼视听效果带来沉浸式感官盛宴；5D实景剧《大地震》《WA！恐龙》等经典剧目轮番上演，题材丰富、形式多样，全方位满足不同游客的观演需求，让游客一步一景、一逛一赏，时时邂逅精彩。
+        - paragraph [ref=f2e35]: 拒绝游玩标签，释放真我乐趣。这个暑期，杭州宋城“随意节”以全新游览理念、沉浸式互动体验、丰富多元的演艺内容，打破传统景区游玩局限，打造无拘无束、松弛尽兴的夏日狂欢秘境。7月10日至8月23日，不妨走进杭州宋城，挣脱束缚、随心而行，解锁专属于盛夏的肆意狂欢。
+      - generic [ref=f2e36]: 来源：杭州网、杭州通客户端 作者： 编辑：吴燕
+  - generic [ref=f2e37]:
+    - paragraph [ref=f2e38]: 增值电信业务经营许可证：浙B2-20110366 | 信息网络传播视听节目许可证：1105105 | 互联网新闻信息服务许可证：33120170003
+    - paragraph [ref=f2e39]:
+      - text: 网络文化经营许可:浙网文[2021]1187-055号 |
+      - link "工信部备案号：浙ICP备11041366号-1" [ref=f2e40] [cursor=pointer]:
+        - /url: http://www.beian.miit.gov.cn
+      - text: "|"
+      - link "浙公网安备：33010002000058号" [ref=f2e41] [cursor=pointer]:
+        - /url: http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010002000058
+    - paragraph [ref=f2e42]: 杭州网(杭州网络传媒有限公司)版权所有未经授权禁止复制或镜像
