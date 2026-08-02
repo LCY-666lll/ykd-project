@@ -64,3 +64,24 @@ CREATE INDEX IF NOT EXISTS idx_agent_memory_user_status
 
 CREATE INDEX IF NOT EXISTS idx_agent_memory_user_type_status
     ON agent_memory (user_id, memory_type, status);
+-- Persists Redis vector-index synchronization tasks created in SQLite transactions.
+-- Failed tasks remain pending for asynchronous retry without changing SQLite facts.
+CREATE TABLE IF NOT EXISTS memory_index_outbox (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    memory_id TEXT NOT NULL,
+    operation TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'PENDING',
+    retry_count INTEGER NOT NULL DEFAULT 0,
+    next_attempt_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_error TEXT,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    completed_at DATETIME,
+    CHECK (operation IN ('UPSERT', 'DELETE')),
+    CHECK (status IN ('PENDING', 'DONE')),
+    CHECK (retry_count >= 0)
+);
+
+-- Supports due-task filtering and ordering in the background scanner.
+CREATE INDEX IF NOT EXISTS idx_memory_index_outbox_due
+    ON memory_index_outbox (status, next_attempt_at, id);

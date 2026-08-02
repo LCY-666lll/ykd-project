@@ -1,4 +1,0 @@
-[     138ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://cl2.webterren.com/webdig.js?z=21:0
-[     164ms] [LOG] Analytics data: {type: pageview, sessionId: 6ee087df-2cd6-49a7-a0c1-49be23e58adc, visitorId: da950dee-8d79-421a-a180-f6d9686e80ba, page: Object, device: Object} @ https://tongji.0571ai.cn/analytics-tracker-auto.min.js:2
-[     169ms] [LOG] Analytics tracker initialized @ https://tongji.0571ai.cn/analytics-tracker-auto.min.js:11
-[     335ms] [ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable) @ https://tongji.0571ai.cn/api/analytics/track:0

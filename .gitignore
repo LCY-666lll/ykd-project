@@ -1,13 +1,24 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-.ilink/
-D:/ykd/ykd-project/AGENTS.md
+# Maven build output
+/target/
 
+/.mvn/wrapper/maven-wrapper.jar
 
-### STS ###
+# Local runtime state: do not commit
+/data/
+/logs/
+/.ilink/
+/.playwright-mcp/
+
+# Local configuration and secrets
+/src/main/resources/application-local.properties
+
+# IntelliJ IDEA
+/.idea/
+*.iws
+*.iml
+*.ipr
+
+# Eclipse / STS
 .apt_generated
 .classpath
 .factorypath
@@ -16,28 +27,13 @@ D:/ykd/ykd-project/AGENTS.md
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+/build/
 
-### VS Code ###
-.vscode/
-
-# Local secrets and runtime logs: never commit these files.
-src/main/resources/application-local.properties
-logs/
-
-# Local SQLite runtime database
-data/
+# VS Code
+/.vscode/

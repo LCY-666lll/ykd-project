@@ -42,7 +42,7 @@ MCP 浏览器操作能力第二阶段最小落地技术方案：
 7. 第一版明确排除 browser_evaluate、browser_run_code_unsafe、browser_file_upload 以及登录、验证码、短信或扫码验证、支付、购买、删除、发布、上传文件、读取本地文件、绕过反爬或网站安全机制等高风险能力。
 8. 第一版要求用户提供明确公开网址，并通过配置维护允许访问的业务域名。普通搜索能够直接回答时继续使用现有 BaiduSearchTool；只有需要真实网页点击、填写、筛选、分页或动态读取时才进入 BROWSER_TASK。
 9. 稳定性约束：Playwright MCP 版本固定为 0.0.78；Node.js 要求不低于 18；Windows STDIO 使用 cmd.exe /c 调用 npx；MCP 功能必须有独立启用开关；导航和单次操作设置有限超时；继续复用 ReActTraceAdvisor 的最多 8 轮工具调用限制；失败时区分未启用、MCP 未启动、网址不允许、页面不可访问、元素找不到、疑似验证码、工具超时和超出安全范围。
-10. 推荐配置默认为关闭 MCP 浏览器功能，确保 Node、npx 或浏览器环境缺失时不影响微信机器人原有能力；部署或演示环境完成依赖检查后再通过环境变量启用。BrowserTaskService 使用可选 MCP Provider，在功能关闭时返回明确提示，不让整个 Spring Boot 应用启动失败。
+10. 当前项目配置默认开启 MCP 浏览器功能；部署或演示环境必须先完成 Node、npx 和浏览器依赖检查。BrowserTaskService 仍使用可选 MCP Provider，若通过环境变量关闭功能则返回明确提示，不让整个 Spring Boot 应用启动失败。
 11. 预计生产代码改动范围：pom.xml 增加 spring-ai-starter-mcp-client；application.properties 增加启用开关、SYNC/STDIO、请求超时、Playwright 参数和允许域名；UserIntent 增加 BROWSER_TASK；DeepSeekIntentRouter 增加路由规则；新增职责单一的 BrowserTaskService；IlinkReplyProcessor 增加一个文字结果分支。现有微信发送协议、回复队列、数据库表和长期记忆结构不修改。
 12. 预计测试改动范围：DeepSeekIntentRouterTest 增加明确浏览器操作与普通搜索的区分测试；IlinkReplyProcessorTest 增加 BROWSER_TASK 分流测试；BrowserTaskService 测试覆盖功能关闭、域名拒绝、允许网址、工具筛选、任务结果和异常降级。
 13. 实现阶段验收用例至少包括：打开允许域名的公开页面并返回标题；点击链接后返回目标内容；完成一次筛选或表单填写并提取结果；普通“搜索某信息”仍走 TEXT；禁止域名被拒绝；危险操作被拒绝；MCP 关闭或启动失败不影响普通聊天；mvn -q -DskipTests compile 和相关单元测试通过。
@@ -55,7 +55,7 @@ MCP 浏览器操作能力第三阶段依赖接入记录：
 4. 已执行 mvn -q -DskipTests compile 并通过；后续配置和业务接入仍需逐项展示并经用户批准后执行。
 MCP 浏览器操作能力第三阶段配置整理记录：
 1. 已整理 application.properties 的 MCP 浏览器配置段，所有新增说明使用中文；只修改该配置段，不覆盖 DeepSeek、DashScope、iLink、数据库、现有工具或记忆配置。
-2. spring.ai.mcp.client.enabled 默认读取 BROWSER_MCP_ENABLED，缺省值为 false；默认不创建 MCP 客户端、不启动 Playwright 和浏览器，确保新增依赖与配置不影响原有业务启动和调用链。
+2. spring.ai.mcp.client.enabled 默认读取 BROWSER_MCP_ENABLED，缺省值为 true；默认创建 MCP 客户端并启动 Playwright 浏览器，部署环境必须具备对应依赖。仍可通过环境变量显式关闭以停用该能力。
 3. MCP 客户端使用 SYNC 类型、启动期初始化、30 秒协议请求超时和 ToolCallback 转换，与当前 Spring MVC、同步 ChatClient 和微信回复链保持一致。
 4. Windows STDIO 使用 cmd.exe /c 和拆分后的参数启动 npx；Playwright MCP 固定为 0.0.78，使用 headless、isolated、msedge、5 秒操作超时、30 秒导航超时和 full 页面快照。
 5. 本阶段不启用 MCP、不启动浏览器、不添加 BROWSER_TASK、不修改任何 Java 或测试代码；只执行默认关闭状态下的配置核对和 mvn -q -DskipTests compile。
@@ -73,7 +73,7 @@ MCP 浏览器操作能力第四阶段启动与工具发现验证记录：
 
 MCP 浏览器操作能力第五阶段安全工具过滤记录：
 1. 新增 BrowserMcpToolProviderTest，覆盖 MCP Provider 缺失时返回空工具数组、白名单工具保留、危险及未知工具过滤、BrowserMcpToolProvider 不注册为全局 ToolCallbackProvider。
-2. BrowserMcpToolProvider 继续使用 Optional<SyncMcpToolCallbackProvider>，MCP 默认关闭时不会因为缺少 Provider 影响应用启动。
+2. BrowserMcpToolProvider 继续使用 Optional<SyncMcpToolCallbackProvider>；当前 MCP 默认开启，但通过环境变量显式关闭时仍不会因为缺少 Provider 影响应用启动。
 3. 白名单仅允许 browser_navigate、browser_snapshot、browser_find、browser_click、browser_type、browser_fill_form、browser_select_option、browser_wait_for、browser_tabs、browser_navigate_back、browser_take_screenshot 和 browser_close；browser_evaluate、browser_run_code_unsafe、browser_file_upload 及未知工具默认不放行。
 4. 本阶段没有修改 BrowserMcpToolProvider、BROWSER_TASK、DeepSeekIntentRouter、BrowserTaskService、IlinkReplyProcessor、普通 ChatClient、微信回复链、数据库、配置或长期记忆逻辑。
 MCP 浏览器操作能力第六阶段：网址输入与公开读取边界优化记录：
