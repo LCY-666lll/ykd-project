@@ -2,6 +2,7 @@ package com.fourth.ykd.ilink.service.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -100,15 +101,13 @@ class IlinkReplyProcessorTest {
     }
 
     @Test
-    void shouldExecuteMemoryManagementSynchronously() {
+    void shouldReturnImmediateReceiptForMemoryManagement() {
         ProcessorFixture fixture = new ProcessorFixture();
-        String userText = "以后没有指定城市时默认查询杭州天气";
+        String userText = "以后默认查询杭州天气";
         when(fixture.imageContextService.findActive("user-1"))
                 .thenReturn(Optional.empty());
         when(fixture.intentRouter.route("user-1", userText, false))
                 .thenReturn(UserIntent.MEMORY_MANAGE);
-        when(fixture.aiChatService.manageMemory("user-1", userText))
-                .thenReturn(new AiChatResponse("已将默认天气城市更新为杭州。"));
 
         IlinkReplyProcessor.ReplyResult result = fixture.processor.process(
                 "user-1",
@@ -117,9 +116,10 @@ class IlinkReplyProcessorTest {
         );
 
         assertThat(result.intent()).isEqualTo(UserIntent.MEMORY_MANAGE);
-        assertThat(result.answer()).isEqualTo("已将默认天气城市更新为杭州。");
-        verify(fixture.aiChatService).manageMemory("user-1", userText);
+        assertThat(result.answer()).isEqualTo("收到，正在处理你的长期记忆请求，完成后通知你。");
+        verify(fixture.aiChatService, never()).manageMemory("user-1", userText);
     }
+
     @Test
     void shouldUseVoiceSpecificChatForVoiceReply() {
         ProcessorFixture fixture = new ProcessorFixture();

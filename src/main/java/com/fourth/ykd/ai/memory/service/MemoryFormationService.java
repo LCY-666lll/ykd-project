@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 负责调度一轮完整的长期记忆形成流程。
@@ -156,6 +157,9 @@ public class MemoryFormationService {
             String assistantReply,
             String recentConversationContext
     ) {
+        long startedAt = System.nanoTime();
+        long extractionElapsedMs = 0L;
+        long consolidationElapsedMs = 0L;
         final List<MemoryCandidate> candidates;
 
         try {
@@ -163,11 +167,13 @@ public class MemoryFormationService {
             候选 1：用户默认天气城市为杭州
             候选 2：用户正在整理家庭旅行相册
             候选 3：用户希望忘掉此前保存的称呼*/
+            long extractionStartedAt = System.nanoTime();
             candidates = extractionService.extract(
                     userMessage,
                     assistantReply,
                     recentConversationContext
             );
+            extractionElapsedMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - extractionStartedAt);
         } catch (RuntimeException exception) {
             log.error(
                     "[AI][MEMORY_FORMATION][EXTRACTION_FAILED] userId={}",
@@ -191,7 +197,10 @@ public class MemoryFormationService {
                     userId,
                     candidates.size(),
                     actionCounts,
-                    0
+                    0,
+                    extractionElapsedMs,
+                    consolidationElapsedMs,
+                    TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startedAt)
             );
             return buildResult(
                     candidates.size(),
@@ -204,10 +213,12 @@ public class MemoryFormationService {
         final MemoryConsolidationResult consolidationResult;
 
         try {
+            long consolidationStartedAt = System.nanoTime();
             consolidationResult = consolidationService.consolidate(
                     userId,
                     candidates
             );
+            consolidationElapsedMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - consolidationStartedAt);
         } catch (RuntimeException exception) {
             log.error(
                     "[AI][MEMORY_FORMATION][CONSOLIDATION_FAILED] userId={}",
@@ -256,7 +267,10 @@ public class MemoryFormationService {
                 userId,
                 candidates.size(),
                 actionCounts,
-                failedCount
+                failedCount,
+                extractionElapsedMs,
+                consolidationElapsedMs,
+                TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startedAt)
         );
         return buildResult(
                 candidates.size(),
@@ -294,13 +308,16 @@ public class MemoryFormationService {
             String userId,
             int candidateCount,
             Map<MemoryWriteResult.Action, Integer> actionCounts,
-            int failedCount
+            int failedCount,
+            long extractionElapsedMs,
+            long consolidationElapsedMs,
+            long totalElapsedMs
     ) {
         log.info(
                 "[AI][MEMORY_FORMATION][COMPLETED] "
                         + "userId={}, candidateCount={}, "
                         + "created={}, confirmed={}, replaced={}, "
-                        + "deleted={}, ignored={}, failedCount={}",
+                        + "deleted={}, ignored={}, failedCount={}, extractionMs={}, consolidationMs={}, totalMs={}",
                 userId,
                 candidateCount,
                 actionCounts.get(MemoryWriteResult.Action.CREATED),
@@ -308,7 +325,10 @@ public class MemoryFormationService {
                 actionCounts.get(MemoryWriteResult.Action.REPLACED),
                 actionCounts.get(MemoryWriteResult.Action.DELETED),
                 actionCounts.get(MemoryWriteResult.Action.IGNORED),
-                failedCount
+                failedCount,
+                extractionElapsedMs,
+                consolidationElapsedMs,
+                totalElapsedMs
         );
     }
 

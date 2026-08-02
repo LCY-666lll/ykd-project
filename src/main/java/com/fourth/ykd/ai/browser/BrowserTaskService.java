@@ -2,7 +2,9 @@ package com.fourth.ykd.ai.browser;
 
 import com.fourth.ykd.ai.mcp.BrowserMcpToolProvider;
 import com.fourth.ykd.ai.utils.WeatherTool;
+import java.util.Arrays;
 import java.util.UUID;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 /** 浏览器任务的业务入口：校验网址、隔离记忆并只提供允许的 MCP 工具。 */
+@Slf4j
 @Service
 public class BrowserTaskService {
 
@@ -86,6 +89,23 @@ public class BrowserTaskService {
             return answer.trim();
         } catch (Exception e) {
             return "浏览器任务执行失败，可能是页面不可访问、元素找不到、出现验证码或工具超时，请稍后重试。";
+        } finally {
+            closeBrowserQuietly(userId, toolCallbacks);
         }
+    }
+
+    private void closeBrowserQuietly(String userId, ToolCallback[] toolCallbacks) {
+        Arrays.stream(toolCallbacks)
+                .filter(callback -> callback.getToolDefinition() != null)
+                .filter(callback -> "browser_close".equals(callback.getToolDefinition().name()))
+                .findFirst()
+                .ifPresent(callback -> {
+                    try {
+                        callback.call("{}");
+                        log.info("[AI][BROWSER_TASK][CLEANUP] userId={}, action=BROWSER_CLOSE", userId);
+                    } catch (RuntimeException exception) {
+                        log.warn("[AI][BROWSER_TASK][CLEANUP_FAILED] userId={}", userId, exception);
+                    }
+                });
     }
 }

@@ -1,0 +1,4071 @@
+- generic [ref=e2]:
+  - link "跳至主要內容" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e4]:
+    - banner [ref=e5]:
+      - link "带我回家" [ref=e7] [cursor=pointer]:
+        - /url: /
+        - text: JavaGuide(面试突击版)
+      - navigation [ref=e9]:
+        - link "Java 面试" [ref=e11] [cursor=pointer]:
+          - /url: /home.html
+          - generic [ref=e101]: 
+          - text: Java 面试
+        - link "PDF 下载" [ref=e13] [cursor=pointer]:
+          - /url: https://mp.weixin.qq.com/s/q14qXzdM4KTmawyMi5mFpg
+          - generic [ref=e102]: 
+          - text: PDF 下载
+      - generic [ref=e14]:
+        - link "GitHub" [ref=e16] [cursor=pointer]:
+          - /url: https://github.com/Snailclimb/JavaGuide-Interview
+          - img "github icon" [ref=e17]
+        - button [ref=e20] [cursor=pointer]:
+          - img "auto icon" [ref=e21]
+        - search [ref=e23]:
+          - searchbox "搜索" [ref=e24]
+    - complementary [ref=e105]:
+      - list [ref=e106]:
+        - listitem [ref=e107]:
+          - button " 项目介绍" [ref=e109] [cursor=pointer]:
+            - generic [ref=e110]: 
+            - generic [ref=e111]: 项目介绍
+        - listitem [ref=e113]:
+          - button " 面试准备（必看）" [ref=e115] [cursor=pointer]:
+            - generic [ref=e116]: 
+            - generic [ref=e117]: 面试准备（必看）
+        - listitem [ref=e119]:
+          - generic [ref=e120]:
+            - paragraph [ref=e121]:
+              - generic [ref=e122]: 
+              - generic [ref=e123]: Java
+            - list [ref=e124]:
+              - listitem [ref=e125]:
+                - link "Java基础常见面试题总结" [ref=e126] [cursor=pointer]:
+                  - /url: /java/java-basis.html
+              - listitem [ref=e127]:
+                - link "Java集合常见面试题总结" [ref=e128] [cursor=pointer]:
+                  - /url: /java/java-collection.html
+              - listitem [ref=e129]:
+                - link "Java并发常见面试题总结" [ref=e130] [cursor=pointer]:
+                  - /url: /java/java-concurrent.html
+              - listitem [ref=e131]:
+                - link "JVM常见面试题总结" [ref=e132] [cursor=pointer]:
+                  - /url: /java/java-jvm.html
+        - listitem [ref=e133]:
+          - generic [ref=e134]:
+            - paragraph [ref=e135]:
+              - generic [ref=e136]: 
+              - generic [ref=e137]: 计算机基础
+            - list [ref=e138]:
+              - listitem [ref=e139]:
+                - link "计算机网络常见面试题总结" [ref=e140] [cursor=pointer]:
+                  - /url: /cs-basics/network.html
+              - listitem [ref=e141]:
+                - link "操作系统常见面试题总结" [ref=e142] [cursor=pointer]:
+                  - /url: /cs-basics/operating-system.html
+              - listitem [ref=e143]:
+                - link "数据结构常见面试题总结" [ref=e144] [cursor=pointer]:
+                  - /url: /cs-basics/data-structure.html
+              - listitem [ref=e145]:
+                - link "算法常见面试题总结" [ref=e146] [cursor=pointer]:
+                  - /url: /cs-basics/algorithms.html
+        - listitem [ref=e147]:
+          - generic [ref=e148]:
+            - paragraph [ref=e149]:
+              - generic [ref=e150]: 
+              - generic [ref=e151]: 数据库和缓存
+            - list [ref=e152]:
+              - listitem [ref=e153]:
+                - link "MySQL常见面试题总结" [ref=e154] [cursor=pointer]:
+                  - /url: /database/mysql.html
+              - listitem [ref=e155]:
+                - link "Redis常见面试题总结" [ref=e156] [cursor=pointer]:
+                  - /url: /database/redis.html
+        - listitem [ref=e157]:
+          - generic [ref=e158]:
+            - paragraph [ref=e159]:
+              - generic [ref=e160]: 
+              - generic [ref=e161]: 系统设计
+            - list [ref=e162]:
+              - listitem [ref=e163]:
+                - link "Spring和Spring Boot常见面试题总结" [ref=e164] [cursor=pointer]:
+                  - /url: /system-design/spring.html
+              - listitem [ref=e165]:
+                - link "设计模式常见面试题总结" [ref=e166] [cursor=pointer]:
+                  - /url: /system-design/design-pattern.html
+        - listitem [ref=e167]:
+          - generic [ref=e168]:
+            - paragraph [ref=e169]:
+              - generic [ref=e170]: 
+              - generic [ref=e171]: 分布式系统
+            - list [ref=e172]:
+              - listitem [ref=e173]:
+                - link "分布式系统常见面试题总结" [ref=e174] [cursor=pointer]:
+                  - /url: /distributed-system/distributed-system.html
+        - listitem [ref=e175]:
+          - generic [ref=e176]:
+            - paragraph [ref=e177]:
+              - generic [ref=e178]: 
+              - generic [ref=e179]: 测开
+            - list [ref=e180]:
+              - listitem [ref=e181]:
+                - link "测试开发常见面试题总结" [ref=e182] [cursor=pointer]:
+                  - /url: /other/test-development.html
+    - main [ref=e304]:
+      - navigation [ref=e305]
+      - generic [ref=e306]:
+        - heading "Java基础常见面试题总结" [level=1] [ref=e307]
+        - generic [ref=e308]:
+          - generic "作者" [ref=e309]:
+            - img "author icon" [ref=e310]
+            - link "Guide" [ref=e313] [cursor=pointer]:
+              - /url: https://javaguide.cn/article/
+          - generic "分类" [ref=e314]:
+            - img "category icon" [ref=e315]
+            - navigation [ref=e317] [cursor=pointer]: Java
+          - generic "标签" [ref=e318]:
+            - img "tag icon" [ref=e319]
+            - navigation [ref=e321] [cursor=pointer]: Java基础
+          - generic "字数" [ref=e322]:
+            - img "word icon" [ref=e323]
+            - generic [ref=e326]: 约 27192 字
+          - generic "阅读时间" [ref=e327]:
+            - img "timer icon" [ref=e328]
+            - generic [ref=e330]: 大约 91 分钟
+        - separator [ref=e331]
+      - complementary [ref=e333]:
+        - generic [ref=e334]: 此页内容
+        - list [ref=e336]:
+          - listitem [ref=e337]:
+            - link "前言" [ref=e338] [cursor=pointer]:
+              - /url: "#前言"
+          - listitem [ref=e339]:
+            - link "基础概念与常识" [ref=e340] [cursor=pointer]:
+              - /url: "#基础概念与常识"
+          - listitem [ref=e341]:
+            - list [ref=e342]:
+              - listitem [ref=e343]:
+                - link "⭐️JVM vs JDK vs JRE" [ref=e344] [cursor=pointer]:
+                  - /url: "#⭐️jvm-vs-jdk-vs-jre"
+              - listitem [ref=e345]:
+                - list [ref=e346]:
+                  - listitem [ref=e347]:
+                    - link "JVM" [ref=e348] [cursor=pointer]:
+                      - /url: "#jvm"
+                  - listitem [ref=e349]:
+                    - link "JDK 和 JRE" [ref=e350] [cursor=pointer]:
+                      - /url: "#jdk-和-jre"
+              - listitem [ref=e351]:
+                - link "⭐️什么是字节码?采用字节码的好处是什么?" [ref=e352] [cursor=pointer]:
+                  - /url: "#⭐️什么是字节码-采用字节码的好处是什么"
+              - listitem [ref=e353]:
+                - link "⭐️为什么说 Java 语言“编译与解释并存”？" [ref=e354] [cursor=pointer]:
+                  - /url: "#⭐️为什么说-java-语言-编译与解释并存"
+              - listitem [ref=e355]:
+                - link "AOT 有什么优点？为什么不全部使用 AOT 呢？" [ref=e356] [cursor=pointer]:
+                  - /url: "#aot-有什么优点-为什么不全部使用-aot-呢"
+              - listitem [ref=e357]:
+                - link "Oracle JDK vs OpenJDK" [ref=e358] [cursor=pointer]:
+                  - /url: "#oracle-jdk-vs-openjdk"
+          - listitem [ref=e359]:
+            - link "基本语法" [ref=e360] [cursor=pointer]:
+              - /url: "#基本语法"
+          - listitem [ref=e361]:
+            - list [ref=e362]:
+              - listitem [ref=e363]:
+                - link "⭐️自增自减运算符" [ref=e364] [cursor=pointer]:
+                  - /url: "#⭐️自增自减运算符"
+              - listitem [ref=e365]:
+                - link "⭐️移位运算符" [ref=e366] [cursor=pointer]:
+                  - /url: "#⭐️移位运算符"
+          - listitem [ref=e367]:
+            - link "⭐️基本数据类型" [ref=e368] [cursor=pointer]:
+              - /url: "#⭐️基本数据类型"
+          - listitem [ref=e369]:
+            - list [ref=e370]:
+              - listitem [ref=e371]:
+                - link "Java 中的几种基本数据类型了解么？" [ref=e372] [cursor=pointer]:
+                  - /url: "#java-中的几种基本数据类型了解么"
+              - listitem [ref=e373]:
+                - link "基本类型和包装类型的区别？" [ref=e374] [cursor=pointer]:
+                  - /url: "#基本类型和包装类型的区别"
+              - listitem [ref=e375]:
+                - link "包装类型的缓存机制了解么？" [ref=e376] [cursor=pointer]:
+                  - /url: "#包装类型的缓存机制了解么"
+              - listitem [ref=e377]:
+                - link "自动装箱与拆箱了解吗？原理是什么？" [ref=e378] [cursor=pointer]:
+                  - /url: "#自动装箱与拆箱了解吗-原理是什么"
+              - listitem [ref=e379]:
+                - link "为什么浮点数运算的时候会有精度丢失的风险？" [ref=e380] [cursor=pointer]:
+                  - /url: "#为什么浮点数运算的时候会有精度丢失的风险"
+              - listitem [ref=e381]:
+                - link "如何解决浮点数运算的精度丢失问题？" [ref=e382] [cursor=pointer]:
+                  - /url: "#如何解决浮点数运算的精度丢失问题"
+              - listitem [ref=e383]:
+                - link "超过 long 整型的数据应该如何表示？" [ref=e384] [cursor=pointer]:
+                  - /url: "#超过-long-整型的数据应该如何表示"
+          - listitem [ref=e385]:
+            - link "面向对象基础" [ref=e386] [cursor=pointer]:
+              - /url: "#面向对象基础"
+          - listitem [ref=e387]:
+            - list [ref=e388]:
+              - listitem [ref=e389]:
+                - link "⭐️成员变量与局部变量的区别？" [ref=e390] [cursor=pointer]:
+                  - /url: "#⭐️成员变量与局部变量的区别"
+              - listitem [ref=e391]:
+                - link "⭐️静态方法和实例方法有何不同？" [ref=e392] [cursor=pointer]:
+                  - /url: "#⭐️静态方法和实例方法有何不同"
+              - listitem [ref=e393]:
+                - link "⭐️重载和重写有什么区别？" [ref=e394] [cursor=pointer]:
+                  - /url: "#⭐️重载和重写有什么区别"
+              - listitem [ref=e395]:
+                - list [ref=e396]:
+                  - listitem [ref=e397]:
+                    - link "重载" [ref=e398] [cursor=pointer]:
+                      - /url: "#重载"
+                  - listitem [ref=e399]:
+                    - link "重写" [ref=e400] [cursor=pointer]:
+                      - /url: "#重写"
+                  - listitem [ref=e401]:
+                    - link "总结" [ref=e402] [cursor=pointer]:
+                      - /url: "#总结"
+              - listitem [ref=e403]:
+                - link "⭐️面向对象和面向过程的区别" [ref=e404] [cursor=pointer]:
+                  - /url: "#⭐️面向对象和面向过程的区别"
+              - listitem [ref=e405]:
+                - link "⭐️对象的相等和引用相等的区别" [ref=e406] [cursor=pointer]:
+                  - /url: "#⭐️对象的相等和引用相等的区别"
+              - listitem [ref=e407]:
+                - link "⭐️面向对象三大特征" [ref=e408] [cursor=pointer]:
+                  - /url: "#⭐️面向对象三大特征"
+              - listitem [ref=e409]:
+                - list [ref=e410]:
+                  - listitem [ref=e411]:
+                    - link "封装" [ref=e412] [cursor=pointer]:
+                      - /url: "#封装"
+                  - listitem [ref=e413]:
+                    - link "继承" [ref=e414] [cursor=pointer]:
+                      - /url: "#继承"
+                  - listitem [ref=e415]:
+                    - link "多态" [ref=e416] [cursor=pointer]:
+                      - /url: "#多态"
+              - listitem [ref=e417]:
+                - link "⭐️接口和抽象类有什么共同点和区别？" [ref=e418] [cursor=pointer]:
+                  - /url: "#⭐️接口和抽象类有什么共同点和区别"
+              - listitem [ref=e419]:
+                - list [ref=e420]:
+                  - listitem [ref=e421]:
+                    - link "接口和抽象类的共同点" [ref=e422] [cursor=pointer]:
+                      - /url: "#接口和抽象类的共同点"
+                  - listitem [ref=e423]:
+                    - link "接口和抽象类的区别" [ref=e424] [cursor=pointer]:
+                      - /url: "#接口和抽象类的区别"
+              - listitem [ref=e425]:
+                - link "深拷贝和浅拷贝区别了解吗？什么是引用拷贝？" [ref=e426] [cursor=pointer]:
+                  - /url: "#深拷贝和浅拷贝区别了解吗-什么是引用拷贝"
+              - listitem [ref=e427]:
+                - list [ref=e428]:
+                  - listitem [ref=e429]:
+                    - link "浅拷贝" [ref=e430] [cursor=pointer]:
+                      - /url: "#浅拷贝"
+                  - listitem [ref=e431]:
+                    - link "深拷贝" [ref=e432] [cursor=pointer]:
+                      - /url: "#深拷贝"
+          - listitem [ref=e433]:
+            - link "⭐️Object" [ref=e434] [cursor=pointer]:
+              - /url: "#⭐️object"
+          - listitem [ref=e435]:
+            - list [ref=e436]:
+              - listitem [ref=e437]:
+                - link "Object 类的常见方法有哪些？" [ref=e438] [cursor=pointer]:
+                  - /url: "#object-类的常见方法有哪些"
+              - listitem [ref=e439]:
+                - link "== 和 equals() 的区别" [ref=e440] [cursor=pointer]:
+                  - /url: "#和-equals-的区别"
+              - listitem [ref=e441]:
+                - link "hashCode() 有什么用？" [ref=e442] [cursor=pointer]:
+                  - /url: "#hashcode-有什么用"
+              - listitem [ref=e443]:
+                - link "为什么要有 hashCode？" [ref=e444] [cursor=pointer]:
+                  - /url: "#为什么要有-hashcode"
+              - listitem [ref=e445]:
+                - link "为什么重写 equals() 时必须重写 hashCode() 方法？" [ref=e446] [cursor=pointer]:
+                  - /url: "#为什么重写-equals-时必须重写-hashcode-方法"
+          - listitem [ref=e447]:
+            - link "String" [ref=e448] [cursor=pointer]:
+              - /url: "#string"
+          - listitem [ref=e449]:
+            - list [ref=e450]:
+              - listitem [ref=e451]:
+                - link "⭐️String、StringBuffer、StringBuilder 的区别？" [ref=e452] [cursor=pointer]:
+                  - /url: "#⭐️string、stringbuffer、stringbuilder-的区别"
+              - listitem [ref=e453]:
+                - link "⭐️String 为什么是不可变的?" [ref=e454] [cursor=pointer]:
+                  - /url: "#⭐️string-为什么是不可变的"
+              - listitem [ref=e455]:
+                - link "⭐️字符串拼接用“+” 还是 StringBuilder?" [ref=e456] [cursor=pointer]:
+                  - /url: "#⭐️字符串拼接用-还是-stringbuilder"
+              - listitem [ref=e457]:
+                - link "String#equals() 和 Object#equals() 有何区别？" [ref=e458] [cursor=pointer]:
+                  - /url: "#string-equals-和-object-equals-有何区别"
+              - listitem [ref=e459]:
+                - link "⭐️字符串常量池的作用了解吗？" [ref=e460] [cursor=pointer]:
+                  - /url: "#⭐️字符串常量池的作用了解吗"
+              - listitem [ref=e461]:
+                - link "⭐️String s1 = new String(\"abc\");这句话创建了几个字符串对象？" [ref=e462] [cursor=pointer]:
+                  - /url: "#⭐️string-s1-new-string-abc-这句话创建了几个字符串对象"
+              - listitem [ref=e463]:
+                - link "String#intern 方法有什么作用?" [ref=e464] [cursor=pointer]:
+                  - /url: "#string-intern-方法有什么作用"
+              - listitem [ref=e465]:
+                - link "String 类型的变量和常量做“+”运算时发生了什么？" [ref=e466] [cursor=pointer]:
+                  - /url: "#string-类型的变量和常量做-运算时发生了什么"
+          - listitem [ref=e467]:
+            - link "异常" [ref=e468] [cursor=pointer]:
+              - /url: "#异常"
+          - listitem [ref=e469]:
+            - list [ref=e470]:
+              - listitem [ref=e471]:
+                - link "Exception 和 Error 有什么区别？" [ref=e472] [cursor=pointer]:
+                  - /url: "#exception-和-error-有什么区别"
+              - listitem [ref=e473]:
+                - link "⭐️Checked Exception 和 Unchecked Exception 有什么区别？" [ref=e474] [cursor=pointer]:
+                  - /url: "#⭐️checked-exception-和-unchecked-exception-有什么区别"
+              - listitem [ref=e475]:
+                - link "你更倾向于使用 Checked Exception 还是 Unchecked Exception？" [ref=e476] [cursor=pointer]:
+                  - /url: "#你更倾向于使用-checked-exception-还是-unchecked-exception"
+              - listitem [ref=e477]:
+                - link "try-catch-finally 如何使用？" [ref=e478] [cursor=pointer]:
+                  - /url: "#try-catch-finally-如何使用"
+              - listitem [ref=e479]:
+                - link "finally 中的代码一定会执行吗？" [ref=e480] [cursor=pointer]:
+                  - /url: "#finally-中的代码一定会执行吗"
+              - listitem [ref=e481]:
+                - link "⭐️异常使用有哪些需要注意的地方？" [ref=e482] [cursor=pointer]:
+                  - /url: "#⭐️异常使用有哪些需要注意的地方"
+          - listitem [ref=e483]:
+            - link "泛型" [ref=e484] [cursor=pointer]:
+              - /url: "#泛型"
+          - listitem [ref=e485]:
+            - list [ref=e486]:
+              - listitem [ref=e487]:
+                - link "什么是泛型？有什么作用？" [ref=e488] [cursor=pointer]:
+                  - /url: "#什么是泛型-有什么作用"
+              - listitem [ref=e489]:
+                - link "泛型的使用方式有哪几种？" [ref=e490] [cursor=pointer]:
+                  - /url: "#泛型的使用方式有哪几种"
+              - listitem [ref=e491]:
+                - link "项目中哪里用到了泛型？" [ref=e492] [cursor=pointer]:
+                  - /url: "#项目中哪里用到了泛型"
+          - listitem [ref=e493]:
+            - link "⭐️反射" [ref=e494] [cursor=pointer]:
+              - /url: "#⭐️反射"
+          - listitem [ref=e495]:
+            - list [ref=e496]:
+              - listitem [ref=e497]:
+                - link "什么是反射？" [ref=e498] [cursor=pointer]:
+                  - /url: "#什么是反射"
+              - listitem [ref=e499]:
+                - link "反射有什么优缺点？" [ref=e500] [cursor=pointer]:
+                  - /url: "#反射有什么优缺点"
+              - listitem [ref=e501]:
+                - link "反射的应用场景？" [ref=e502] [cursor=pointer]:
+                  - /url: "#反射的应用场景"
+          - listitem [ref=e503]:
+            - link "代理" [ref=e504] [cursor=pointer]:
+              - /url: "#代理"
+          - listitem [ref=e505]:
+            - list [ref=e506]:
+              - listitem [ref=e507]:
+                - link "如何实现动态代理？" [ref=e508] [cursor=pointer]:
+                  - /url: "#如何实现动态代理"
+              - listitem [ref=e509]:
+                - link "静态代理和动态代理有什么区别？" [ref=e510] [cursor=pointer]:
+                  - /url: "#静态代理和动态代理有什么区别"
+              - listitem [ref=e511]:
+                - link "⭐️JDK 动态代理和 CGLIB 动态代理有什么区别？" [ref=e512] [cursor=pointer]:
+                  - /url: "#⭐️jdk-动态代理和-cglib-动态代理有什么区别"
+              - listitem [ref=e513]:
+                - link "⭐️介绍一下动态代理在框架中的实际应用场景" [ref=e514] [cursor=pointer]:
+                  - /url: "#⭐️介绍一下动态代理在框架中的实际应用场景"
+          - listitem [ref=e515]:
+            - link "注解" [ref=e516] [cursor=pointer]:
+              - /url: "#注解"
+          - listitem [ref=e517]:
+            - list [ref=e518]:
+              - listitem [ref=e519]:
+                - link "何谓注解？" [ref=e520] [cursor=pointer]:
+                  - /url: "#何谓注解"
+              - listitem [ref=e521]:
+                - link "注解的解析方法有哪几种？" [ref=e522] [cursor=pointer]:
+                  - /url: "#注解的解析方法有哪几种"
+          - listitem [ref=e523]:
+            - link "⭐️SPI" [ref=e524] [cursor=pointer]:
+              - /url: "#⭐️spi"
+          - listitem [ref=e525]:
+            - list [ref=e526]:
+              - listitem [ref=e527]:
+                - link "何谓 SPI?" [ref=e528] [cursor=pointer]:
+                  - /url: "#何谓-spi"
+              - listitem [ref=e529]:
+                - link "SPI 和 API 有什么区别？" [ref=e530] [cursor=pointer]:
+                  - /url: "#spi-和-api-有什么区别"
+              - listitem [ref=e531]:
+                - link "SPI 的优缺点？" [ref=e532] [cursor=pointer]:
+                  - /url: "#spi-的优缺点"
+          - listitem [ref=e533]:
+            - link "⭐️序列化和反序列化" [ref=e534] [cursor=pointer]:
+              - /url: "#⭐️序列化和反序列化"
+          - listitem [ref=e535]:
+            - list [ref=e536]:
+              - listitem [ref=e537]:
+                - link "什么是序列化?什么是反序列化?" [ref=e538] [cursor=pointer]:
+                  - /url: "#什么是序列化-什么是反序列化"
+              - listitem [ref=e539]:
+                - link "如果有些字段不想进行序列化怎么办？" [ref=e540] [cursor=pointer]:
+                  - /url: "#如果有些字段不想进行序列化怎么办"
+              - listitem [ref=e541]:
+                - link "常见序列化协议有哪些？" [ref=e542] [cursor=pointer]:
+                  - /url: "#常见序列化协议有哪些"
+              - listitem [ref=e543]:
+                - link "为什么不推荐使用 JDK 自带的序列化？" [ref=e544] [cursor=pointer]:
+                  - /url: "#为什么不推荐使用-jdk-自带的序列化"
+          - listitem [ref=e545]:
+            - link "I/O" [ref=e546] [cursor=pointer]:
+              - /url: "#i-o"
+          - listitem [ref=e547]:
+            - list [ref=e548]:
+              - listitem [ref=e549]:
+                - link "Java IO 流了解吗？" [ref=e550] [cursor=pointer]:
+                  - /url: "#java-io-流了解吗"
+              - listitem [ref=e551]:
+                - link "I/O 流为什么要分为字节流和字符流呢?" [ref=e552] [cursor=pointer]:
+                  - /url: "#i-o-流为什么要分为字节流和字符流呢"
+              - listitem [ref=e553]:
+                - link "Java IO 中的设计模式有哪些？" [ref=e554] [cursor=pointer]:
+                  - /url: "#java-io-中的设计模式有哪些"
+              - listitem [ref=e555]:
+                - link "⭐️BIO、NIO 和 AIO 的区别？" [ref=e556] [cursor=pointer]:
+                  - /url: "#⭐️bio、nio-和-aio-的区别"
+      - generic [ref=e558]:
+        - paragraph [ref=e559]:
+          - link [ref=e560] [cursor=pointer]:
+            - /url: https://javaguide.cn/zhuanlan/interview-guide.html
+            - img "《SpringAI 智能面试平台+RAG 知识库》" [ref=e561]
+        - heading [level=2] [ref=e562]:
+          - link "前言" [ref=e563] [cursor=pointer]:
+            - /url: "#前言"
+        - paragraph [ref=e564]:
+          - text: 这是
+          - strong [ref=e565]: JavaGuide 面试突击版本
+          - text: ，只保留最常问的面试题，并对重点内容进行了 ⭐️ 标注。提供亮色和暗色两个主题，需要打印的朋友请选择亮色版本。
+        - paragraph [ref=e566]:
+          - text: 时间充裕的朋友，推荐使用
+          - link "JavaGuide" [ref=e567] [cursor=pointer]:
+            - /url: https://javaguide.cn/
+          - text: 网站系统学习，内容更全面深入。
+        - paragraph [ref=e568]:
+          - text: 如果你想要付费支持/面试辅导（比如简历优化、一对一提问、高频考点突击资料等）的话，欢迎了解我的
+          - link "知识星球" [ref=e569] [cursor=pointer]:
+            - /url: https://javaguide.cn/about-the-author/zhishixingqiu-two-years.html
+          - text: 。已经坚持维护六年，内容持续更新，虽白菜价（0.4元/天）但质量很高，主打一个良心！
+        - paragraph [ref=e570]:
+          - text: 面试突击最新版可在公众号回复「
+          - strong [ref=e571]: PDF
+          - text: 」获取（知识星球会提前同步最新版）。
+        - paragraph [ref=e572]:
+          - img "JavaGuide 公众号" [ref=e573]
+        - generic [ref=e574]:
+          - paragraph [ref=e575]: 重要说明
+          - paragraph [ref=e576]:
+            - text: 本站所有面试题保持
+            - strong [ref=e577]: 年度系统性优化完善
+            - text: ，严格同步 Java 技术生态与招聘市场的最新动态，
+            - strong [ref=e578]: 确保内容时效性与前瞻性
+            - text: 。
+        - paragraph [ref=e579]:
+          - text: 这部分内容摘自
+          - link "JavaGuide" [ref=e580] [cursor=pointer]:
+            - /url: https://javaguide.cn/
+          - text: 下面几篇文章中的重点：
+        - list [ref=e581]:
+          - listitem [ref=e582]:
+            - link "Java 基础常见面试题总结(上)" [ref=e583] [cursor=pointer]:
+              - /url: https://javaguide.cn/java/basis/java-basic-questions-01.html
+            - text: （Java 语言的基本概念、语法、数据类型、变量、方法等）
+          - listitem [ref=e584]:
+            - link "Java 基础常见面试题总结(中)" [ref=e585] [cursor=pointer]:
+              - /url: https://javaguide.cn/java/basis/java-basic-questions-02.html
+            - text: （面向对象基础、字符串、对象的比较与拷贝等）
+          - listitem [ref=e586]:
+            - link "Java 基础常见面试题总结（下）" [ref=e587] [cursor=pointer]:
+              - /url: https://javaguide.cn/java/basis/java-basic-questions-03.html
+            - text: （异常、泛型、反射、SPI、序列化、注解等）
+        - heading [level=2] [ref=e588]:
+          - link "基础概念与常识" [ref=e589] [cursor=pointer]:
+            - /url: "#基础概念与常识"
+        - heading [level=3] [ref=e590]:
+          - link "⭐️JVM vs JDK vs JRE" [ref=e591] [cursor=pointer]:
+            - /url: "#⭐️jvm-vs-jdk-vs-jre"
+        - heading [level=4] [ref=e592]:
+          - link "JVM" [ref=e593] [cursor=pointer]:
+            - /url: "#jvm"
+        - paragraph [ref=e594]: Java 虚拟机（Java Virtual Machine, JVM）是运行 Java 字节码的虚拟机。JVM 有针对不同系统的特定实现（Windows，Linux，macOS），目的是使用相同的字节码，它们都会给出相同的结果。字节码和不同系统的 JVM 实现是 Java 语言“一次编译，随处可以运行”的关键所在。
+        - paragraph [ref=e595]:
+          - text: 如下图所示，不同编程语言（Java、Groovy、Kotlin、JRuby、Clojure ...）通过各自的编译器编译成
+          - code [ref=e596]: .class
+          - text: 文件，并最终通过 JVM 在不同平台（Windows、Mac、Linux）上运行。
+        - paragraph [ref=e597]:
+          - img "运行在 Java 虚拟机之上的编程语言" [ref=e598]
+        - paragraph [ref=e599]:
+          - strong [ref=e600]: JVM 并不是只有一种！只要满足 JVM 规范，每个公司、组织或者个人都可以开发自己的专属 JVM。
+          - text: 也就是说我们平时接触到的 HotSpot VM 仅仅是是 JVM 规范的一种实现而已。
+        - paragraph [ref=e601]:
+          - text: 除了我们平时最常用的 HotSpot VM 外，还有 J9 VM、Zing VM、JRockit VM 等 JVM 。维基百科上就有常见 JVM 的对比：
+          - link "Comparison of Java virtual machines" [ref=e602] [cursor=pointer]:
+            - /url: https://en.wikipedia.org/wiki/Comparison_of_Java_virtual_machines
+          - text: ，感兴趣的可以去看看。并且，你可以在
+          - link "Java SE Specifications" [ref=e603] [cursor=pointer]:
+            - /url: https://docs.oracle.com/javase/specs/index.html
+          - text: 上找到各个版本的 JDK 对应的 JVM 规范。
+        - paragraph [ref=e604]
+        - heading [level=4] [ref=e605]:
+          - link "JDK 和 JRE" [ref=e606] [cursor=pointer]:
+            - /url: "#jdk-和-jre"
+        - paragraph [ref=e607]: JDK（Java Development Kit）是一个功能齐全的 Java 开发工具包，供开发者使用，用于创建和编译 Java 程序。它包含了 JRE（Java Runtime Environment），以及编译器 javac 和其他工具，如 javadoc（文档生成器）、jdb（调试器）、jconsole（监控工具）、javap（反编译工具）等。
+        - paragraph [ref=e608]: JRE 是运行已编译 Java 程序所需的环境，主要包含以下两个部分：
+        - list [ref=e609]:
+          - listitem [ref=e610]:
+            - strong [ref=e611]: JVM
+            - text: ": 也就是我们上面提到的 Java 虚拟机。"
+          - listitem [ref=e612]:
+            - strong [ref=e613]: Java 基础类库（Class Library）
+            - text: ：一组标准的类库，提供常用的功能和 API（如 I/O 操作、网络通信、数据结构等）。
+        - paragraph [ref=e614]: 简单来说，JRE 只包含运行 Java 程序所需的环境和类库，而 JDK 不仅包含 JRE，还包括用于开发和调试 Java 程序的工具。
+        - paragraph [ref=e615]: 如果需要编写、编译 Java 程序或使用 Java API 文档，就需要安装 JDK。某些需要 Java 特性的应用程序（如 JSP 转换为 Servlet 或使用反射）也可能需要 JDK 来编译和运行 Java 代码。因此，即使不进行 Java 开发工作，有时也可能需要安装 JDK。
+        - paragraph [ref=e616]: 下图清晰展示了 JDK、JRE 和 JVM 的关系。
+        - paragraph [ref=e617]:
+          - img "jdk-include-jre" [ref=e618]
+        - paragraph [ref=e619]:
+          - text: 不过，从 JDK 9 开始，就不需要区分 JDK 和 JRE 的关系了，取而代之的是模块系统（JDK 被重新组织成 94 个模块）+
+          - link "jlink" [ref=e620] [cursor=pointer]:
+            - /url: http://openjdk.java.net/jeps/282
+          - text: 工具 (随 Java 9 一起发布的新命令行工具，用于生成自定义 Java 运行时映像，该映像仅包含给定应用程序所需的模块) 。并且，从 JDK 11 开始，Oracle 不再提供单独的 JRE 下载。
+        - paragraph [ref=e621]:
+          - text: 在
+          - link "Java 9 新特性概览" [ref=e622] [cursor=pointer]:
+            - /url: https://javaguide.cn/java/new-features/java9.html
+          - text: 这篇文章中，我在介绍模块化系统的时候提到：
+        - blockquote [ref=e623]:
+          - paragraph [ref=e624]: 在引入了模块系统之后，JDK 被重新组织成 94 个模块。Java 应用可以通过新增的 jlink 工具，创建出只包含所依赖的 JDK 模块的自定义运行时镜像。这样可以极大的减少 Java 运行时环境的大小。
+        - paragraph [ref=e625]: 也就是说，可以用 jlink 根据自己的需求，创建一个更小的 runtime（运行时），而不是不管什么应用，都是同样的 JRE。
+        - paragraph [ref=e626]: 定制的、模块化的 Java 运行时映像有助于简化 Java 应用的部署和节省内存并增强安全性和可维护性。这对于满足现代应用程序架构的需求，如虚拟化、容器化、微服务和云原生开发，是非常重要的。
+        - heading [level=3] [ref=e627]:
+          - link "⭐️什么是字节码?采用字节码的好处是什么?" [ref=e628] [cursor=pointer]:
+            - /url: "#⭐️什么是字节码-采用字节码的好处是什么"
+        - paragraph [ref=e629]:
+          - text: 在 Java 中，JVM 可以理解的代码就叫做字节码（即扩展名为
+          - code [ref=e630]: .class
+          - text: 的文件），它不面向任何特定的处理器，只面向虚拟机。Java 语言通过字节码的方式，在一定程度上解决了传统解释型语言执行效率低的问题，同时又保留了解释型语言可移植的特点。所以， Java 程序运行时相对来说还是高效的（不过，和 C、 C++，Rust，Go 等语言还是有一定差距的），而且，由于字节码并不针对一种特定的机器，因此，Java 程序无须重新编译便可在多种不同操作系统的计算机上运行。
+        - paragraph [ref=e631]:
+          - strong [ref=e632]: Java 程序从源代码到运行的过程如下图所示
+          - text: ：
+        - paragraph [ref=e633]:
+          - img "Java程序转变为机器代码的过程" [ref=e634]
+        - paragraph [ref=e635]:
+          - text: 我们需要格外注意的是
+          - code [ref=e636]: .class->机器码
+          - text: 这一步。在这一步 JVM 类加载器首先加载字节码文件，然后通过解释器逐行解释执行，这种方式的执行速度会相对比较慢。而且，有些方法和代码块是经常需要被调用的(也就是所谓的热点代码)，所以后面引进了
+          - strong [ref=e637]: JIT（Just in Time Compilation）
+          - text: 编译器，而 JIT 属于运行时编译。当 JIT 编译器完成第一次编译后，其会将字节码对应的机器码保存下来，下次可以直接使用。而我们知道，机器码的运行效率肯定是高于 Java 解释器的。这也解释了我们为什么经常会说
+          - strong [ref=e638]: Java 是编译与解释共存的语言
+          - text: 。
+        - blockquote [ref=e639]:
+          - paragraph [ref=e640]: 🌈 拓展阅读：
+          - list [ref=e641]:
+            - listitem [ref=e642]:
+              - link "基本功 | Java 即时编译器原理解析及实践 - 美团技术团队" [ref=e643] [cursor=pointer]:
+                - /url: https://tech.meituan.com/2020/10/22/java-jit-practice-in-meituan.html
+            - listitem [ref=e644]:
+              - link "基于静态编译构建微服务应用 - 阿里巴巴中间件" [ref=e645] [cursor=pointer]:
+                - /url: https://mp.weixin.qq.com/s/4haTyXUmh8m-dBQaEzwDJw
+        - paragraph [ref=e646]:
+          - img "Java程序转变为机器代码的过程" [ref=e647]
+        - blockquote [ref=e648]:
+          - paragraph [ref=e649]: HotSpot 采用了惰性评估(Lazy Evaluation)的做法，根据二八定律，消耗大部分系统资源的只有那一小部分的代码（热点代码），而这也就是 JIT 所需要编译的部分。JVM 会根据代码每次被执行的情况收集信息并相应地做出一些优化，因此执行的次数越多，它的速度就越快。
+        - paragraph [ref=e650]: JDK、JRE、JVM、JIT 这四者的关系如下图所示。
+        - paragraph [ref=e651]:
+          - img "JDK、JRE、JVM、JIT 这四者的关系" [ref=e652]
+        - paragraph [ref=e653]: 下面这张图是 JVM 的大致结构模型。
+        - paragraph [ref=e654]:
+          - img "JVM 的大致结构模型" [ref=e655]
+        - heading [level=3] [ref=e656]:
+          - link "⭐️为什么说 Java 语言“编译与解释并存”？" [ref=e657] [cursor=pointer]:
+            - /url: "#⭐️为什么说-java-语言-编译与解释并存"
+        - paragraph [ref=e658]: 其实这个问题我们讲字节码的时候已经提到过，因为比较重要，所以我们这里再提一下。
+        - paragraph [ref=e659]: 我们可以将高级编程语言按照程序的执行方式分为两种：
+        - list [ref=e660]:
+          - listitem [ref=e661]:
+            - strong [ref=e662]: 编译型
+            - text: ：
+            - link "编译型语言" [ref=e663] [cursor=pointer]:
+              - /url: https://zh.wikipedia.org/wiki/%E7%B7%A8%E8%AD%AF%E8%AA%9E%E8%A8%80
+            - text: 会通过
+            - link "编译器" [ref=e664] [cursor=pointer]:
+              - /url: https://zh.wikipedia.org/wiki/%E7%B7%A8%E8%AD%AF%E5%99%A8
+            - text: 将源代码一次性翻译成可被该平台执行的机器码。一般情况下，编译语言的执行速度比较快，开发效率比较低。常见的编译性语言有 C、C++、Go、Rust 等等。
+          - listitem [ref=e665]:
+            - strong [ref=e666]: 解释型
+            - text: ：
+            - link "解释型语言" [ref=e667] [cursor=pointer]:
+              - /url: https://zh.wikipedia.org/wiki/%E7%9B%B4%E8%AD%AF%E8%AA%9E%E8%A8%80
+            - text: 会通过
+            - link "解释器" [ref=e668] [cursor=pointer]:
+              - /url: https://zh.wikipedia.org/wiki/%E7%9B%B4%E8%AD%AF%E5%99%A8
+            - text: 一句一句的将代码解释（interpret）为机器代码后再执行。解释型语言开发效率比较快，执行速度比较慢。常见的解释性语言有 Python、JavaScript、PHP 等等。
+        - paragraph [ref=e669]:
+          - img "编译型语言和解释型语言" [ref=e670]
+        - paragraph [ref=e671]: 根据维基百科介绍：
+        - blockquote [ref=e672]:
+          - paragraph [ref=e673]:
+            - text: 为了改善解释语言的效率而发展出的
+            - link "即时编译" [ref=e674] [cursor=pointer]:
+              - /url: https://zh.wikipedia.org/wiki/%E5%8D%B3%E6%99%82%E7%B7%A8%E8%AD%AF
+            - text: 技术，已经缩小了这两种语言间的差距。这种技术混合了编译语言与解释型语言的优点，它像编译语言一样，先把程序源代码编译成
+            - link "字节码" [ref=e675] [cursor=pointer]:
+              - /url: https://zh.wikipedia.org/wiki/%E5%AD%97%E8%8A%82%E7%A0%81
+            - text: 。到执行期时，再将字节码直译，之后执行。
+            - link "Java" [ref=e676] [cursor=pointer]:
+              - /url: https://zh.wikipedia.org/wiki/Java
+            - text: 与
+            - link "LLVM" [ref=e677] [cursor=pointer]:
+              - /url: https://zh.wikipedia.org/wiki/LLVM
+            - text: 是这种技术的代表产物。
+          - paragraph [ref=e678]:
+            - text: 相关阅读：
+            - link "基本功 | Java 即时编译器原理解析及实践" [ref=e679] [cursor=pointer]:
+              - /url: https://tech.meituan.com/2020/10/22/java-jit-practice-in-meituan.html
+        - paragraph [ref=e680]:
+          - strong [ref=e681]: 为什么说 Java 语言“编译与解释并存”？
+        - paragraph [ref=e682]:
+          - text: 这是因为 Java 语言既具有编译型语言的特征，也具有解释型语言的特征。因为 Java 程序要经过先编译，后解释两个步骤，由 Java 编写的程序需要先经过编译步骤，生成字节码（
+          - code [ref=e683]: .class
+          - text: 文件），这种字节码必须由 Java 解释器来解释执行。
+        - heading [level=3] [ref=e684]:
+          - link "AOT 有什么优点？为什么不全部使用 AOT 呢？" [ref=e685] [cursor=pointer]:
+            - /url: "#aot-有什么优点-为什么不全部使用-aot-呢"
+        - paragraph [ref=e686]:
+          - text: JDK 9 引入了一种新的编译模式
+          - strong [ref=e687]: AOT(Ahead of Time Compilation)
+          - text: 。和 JIT 不同的是，这种编译模式会在程序被执行前就将其编译成机器码，属于静态编译（C、 C++，Rust，Go 等语言就是静态编译）。AOT 避免了 JIT 预热等各方面的开销，可以提高 Java 程序的启动速度，避免预热时间长。并且，AOT 还能减少内存占用和增强 Java 程序的安全性（AOT 编译后的代码不容易被反编译和修改），特别适合云原生场景。
+        - paragraph [ref=e688]:
+          - strong [ref=e689]: JIT 与 AOT 两者的关键指标对比
+          - text: ":"
+        - img "JIT vs AOT" [ref=e690]
+        - paragraph [ref=e691]: 可以看出，AOT 的主要优势在于启动时间、内存占用和打包体积。JIT 的主要优势在于具备更高的极限处理能力，可以降低请求的最大延迟。
+        - paragraph [ref=e692]:
+          - text: 提到 AOT 就不得不提
+          - link "GraalVM" [ref=e693] [cursor=pointer]:
+            - /url: https://www.graalvm.org/
+          - text: 了！GraalVM 是一种高性能的 JDK（完整的 JDK 发行版本），它可以运行 Java 和其他 JVM 语言，以及 JavaScript、Python 等非 JVM 语言。 GraalVM 不仅能提供 AOT 编译，还能提供 JIT 编译。感兴趣的同学，可以去看看 GraalVM 的官方文档：
+          - link "https://www.graalvm.org/latest/docs/" [ref=e694] [cursor=pointer]:
+            - /url: https://www.graalvm.org/latest/docs/
+          - text: 。如果觉得官方文档看着比较难理解的话，也可以找一些文章来看看，比如：
+        - list [ref=e695]:
+          - listitem [ref=e696]:
+            - link "基于静态编译构建微服务应用" [ref=e697] [cursor=pointer]:
+              - /url: https://mp.weixin.qq.com/s/4haTyXUmh8m-dBQaEzwDJw
+          - listitem [ref=e698]:
+            - link "走向 Native 化：Spring&Dubbo AOT 技术示例与原理讲解" [ref=e699] [cursor=pointer]:
+              - /url: https://cn.dubbo.apache.org/zh-cn/blog/2023/06/28/%e8%b5%b0%e5%90%91-native-%e5%8c%96springdubbo-aot-%e6%8a%80%e6%9c%af%e7%a4%ba%e4%be%8b%e4%b8%8e%e5%8e%9f%e7%90%86%e8%ae%b2%e8%a7%a3/
+        - paragraph [ref=e700]:
+          - strong [ref=e701]: 既然 AOT 这么多优点，那为什么不全部使用这种编译方式呢？
+        - paragraph [ref=e702]:
+          - text: 我们前面也对比过 JIT 与 AOT，两者各有优点，只能说 AOT 更适合当下的云原生场景，对微服务架构的支持也比较友好。除此之外，AOT 编译无法支持 Java 的一些动态特性，如反射、动态代理、动态加载、JNI（Java Native Interface）等。然而，很多框架和库（如 Spring、CGLIB）都用到了这些特性。如果只使用 AOT 编译，那就没办法使用这些框架和库了，或者说需要针对性地去做适配和优化。举个例子，CGLIB 动态代理使用的是 ASM 技术，而这种技术大致原理是运行时直接在内存中生成并加载修改后的字节码文件也就是
+          - code [ref=e703]: .class
+          - text: 文件，如果全部使用 AOT 提前编译，也就不能使用 ASM 技术了。为了支持类似的动态特性，所以选择使用 JIT 即时编译器。
+        - heading [level=3] [ref=e704]:
+          - link "Oracle JDK vs OpenJDK" [ref=e705] [cursor=pointer]:
+            - /url: "#oracle-jdk-vs-openjdk"
+        - paragraph [ref=e706]: 可能在看这个问题之前很多人和我一样并没有接触和使用过 OpenJDK 。那么 Oracle JDK 和 OpenJDK 之间是否存在重大差异？下面我通过收集到的一些资料，为你解答这个被很多人忽视的问题。
+        - paragraph [ref=e707]: 首先，2006 年 SUN 公司将 Java 开源，也就有了 OpenJDK。2009 年 Oracle 收购了 Sun 公司，于是自己在 OpenJDK 的基础上搞了一个 Oracle JDK。Oracle JDK 是不开源的，并且刚开始的几个版本（Java8 ~ Java11）还会相比于 OpenJDK 添加一些特有的功能和工具。
+        - paragraph [ref=e708]: 其次，对于 Java 7 而言，OpenJDK 和 Oracle JDK 是十分接近的。 Oracle JDK 是基于 OpenJDK 7 构建的，只添加了一些小功能，由 Oracle 工程师参与维护。
+        - paragraph [ref=e709]: 下面这段话摘自 Oracle 官方在 2012 年发表的一个博客：
+        - blockquote [ref=e710]:
+          - paragraph [ref=e711]: 问：OpenJDK 存储库中的源代码与用于构建 Oracle JDK 的代码之间有什么区别？
+          - paragraph [ref=e712]: 答：非常接近 - 我们的 Oracle JDK 版本构建过程基于 OpenJDK 7 构建，只添加了几个部分，例如部署代码，其中包括 Oracle 的 Java 插件和 Java WebStart 的实现，以及一些闭源的第三方组件，如图形光栅化器，一些开源的第三方组件，如 Rhino，以及一些零碎的东西，如附加文档或第三方字体。展望未来，我们的目的是开源 Oracle JDK 的所有部分，除了我们考虑商业功能的部分。
+        - paragraph [ref=e713]: 最后，简单总结一下 Oracle JDK 和 OpenJDK 的区别：
+        - list [ref=e714]:
+          - listitem [ref=e715]:
+            - strong [ref=e716]: 是否开源
+            - text: ：OpenJDK 是一个参考模型并且是完全开源的，而 Oracle JDK 是基于 OpenJDK 实现的，并不是完全开源的（个人观点：众所周知，JDK 原来是 SUN 公司开发的，后来 SUN 公司又卖给了 Oracle 公司，Oracle 公司以 Oracle 数据库而著名，而 Oracle 数据库又是闭源的，这个时候 Oracle 公司就不想完全开源了，但是原来的 SUN 公司又把 JDK 给开源了，如果这个时候 Oracle 收购回来之后就把他给闭源，必然会引起很多 Java 开发者的不满，导致大家对 Java 失去信心，那 Oracle 公司收购回来不就把 Java 烂在手里了吗！然后，Oracle 公司就想了个骚操作，这样吧，我把一部分核心代码开源出来给你们玩，并且我要和你们自己搞的 JDK 区分下，你们叫 OpenJDK，我叫 Oracle JDK，我发布我的，你们继续玩你们的，要是你们搞出来什么好玩的东西，我后续发布 Oracle JDK 也会拿来用一下，一举两得！）OpenJDK 开源项目：
+            - link "https://github.com/openjdk/jdk" [ref=e717] [cursor=pointer]:
+              - /url: https://github.com/openjdk/jdk
+            - text: 。
+          - listitem [ref=e718]:
+            - strong [ref=e719]: 是否免费
+            - text: ：Oracle JDK 会提供免费版本，但一般有时间限制。JDK17 之后的版本可以免费分发和商用，但是仅有 3 年时间，3 年后无法免费商用。不过，JDK8u221 之前只要不升级可以无限期免费。OpenJDK 是完全免费的。
+          - listitem [ref=e720]:
+            - strong [ref=e721]: 功能性
+            - text: ：Oracle JDK 在 OpenJDK 的基础上添加了一些特有的功能和工具，比如 Java Flight Recorder（JFR，一种监控工具）、Java Mission Control（JMC，一种监控工具）等工具。不过，在 Java 11 之后，OracleJDK 和 OpenJDK 的功能基本一致，之前 OracleJDK 中的私有组件大多数也已经被捐赠给开源组织。
+          - listitem [ref=e722]:
+            - strong [ref=e723]: 稳定性
+            - text: ：OpenJDK 不提供 LTS 服务，而 OracleJDK 大概每三年都会推出一个 LTS 版进行长期支持。不过，很多公司都基于 OpenJDK 提供了对应的和 OracleJDK 周期相同的 LTS 版。因此，两者稳定性其实也是差不多的。
+          - listitem [ref=e724]:
+            - strong [ref=e725]: 协议
+            - text: ：Oracle JDK 使用 BCL/OTN 协议获得许可，而 OpenJDK 根据 GPL v2 许可获得许可。
+        - blockquote [ref=e726]:
+          - paragraph [ref=e727]: 既然 Oracle JDK 这么好，那为什么还要有 OpenJDK？
+          - paragraph [ref=e728]: 答：
+          - list [ref=e729]:
+            - listitem [ref=e730]:
+              - text: OpenJDK 是开源的，开源意味着你可以对它根据你自己的需要进行修改、优化，比如 Alibaba 基于 OpenJDK 开发了 Dragonwell8：
+              - link "https://github.com/alibaba/dragonwell8" [ref=e731] [cursor=pointer]:
+                - /url: https://github.com/alibaba/dragonwell8
+            - listitem [ref=e732]: OpenJDK 是商业免费的（这也是为什么通过 yum 包管理器上默认安装的 JDK 是 OpenJDK 而不是 Oracle JDK）。虽然 Oracle JDK 也是商业免费（比如 JDK 8），但并不是所有版本都是免费的。
+            - listitem [ref=e733]: OpenJDK 更新频率更快。Oracle JDK 一般是每 6 个月发布一个新版本，而 OpenJDK 一般是每 3 个月发布一个新版本。（现在你知道为啥 Oracle JDK 更稳定了吧，先在 OpenJDK 试试水，把大部分问题都解决掉了才在 Oracle JDK 上发布）
+          - paragraph [ref=e734]: 基于以上这些原因，OpenJDK 还是有存在的必要的！
+        - paragraph [ref=e735]:
+          - img "oracle jdk release cadence" [ref=e736]
+        - paragraph [ref=e737]:
+          - strong [ref=e738]: Oracle JDK 和 OpenJDK 如何选择？
+        - paragraph [ref=e739]: 建议选择 OpenJDK 或者基于 OpenJDK 的发行版，比如 AWS 的 Amazon Corretto，阿里巴巴的 Alibaba Dragonwell。
+        - paragraph [ref=e740]: 🌈 拓展一下：
+        - list [ref=e741]:
+          - listitem [ref=e742]: BCL 协议（Oracle Binary Code License Agreement）：可以使用 JDK（支持商用），但是不能进行修改。
+          - listitem [ref=e743]: OTN 协议（Oracle Technology Network License Agreement）：11 及之后新发布的 JDK 用的都是这个协议，可以自己私下用，但是商用需要付费。
+        - heading [level=2] [ref=e744]:
+          - link "基本语法" [ref=e745] [cursor=pointer]:
+            - /url: "#基本语法"
+        - heading [level=3] [ref=e746]:
+          - link "⭐️自增自减运算符" [ref=e747] [cursor=pointer]:
+            - /url: "#⭐️自增自减运算符"
+        - paragraph [ref=e748]:
+          - text: 在写代码的过程中，常见的一种情况是需要某个整数类型变量增加 1 或减少 1。Java 提供了自增运算符 (
+          - code [ref=e749]: ++
+          - text: ) 和自减运算符 (
+          - code [ref=e750]: "--"
+          - text: ) 来简化这种操作。
+        - paragraph [ref=e751]:
+          - code [ref=e752]: ++
+          - text: 和
+          - code [ref=e753]: "--"
+          - text: 运算符可以放在变量之前，也可以放在变量之后：
+        - list [ref=e754]:
+          - listitem [ref=e755]:
+            - strong [ref=e756]: 前缀形式
+            - text: （例如
+            - code [ref=e757]: ++a
+            - text: 或
+            - code [ref=e758]: "--a"
+            - text: ）：先自增/自减变量的值，然后再使用该变量，例如，
+            - code [ref=e759]: b = ++a
+            - text: 先将
+            - code [ref=e760]: a
+            - text: 增加 1，然后把增加后的值赋给
+            - code [ref=e761]: b
+            - text: 。
+          - listitem [ref=e762]:
+            - strong [ref=e763]: 后缀形式
+            - text: （例如
+            - code [ref=e764]: a++
+            - text: 或
+            - code [ref=e765]: a--
+            - text: ）：先使用变量的当前值，然后再自增/自减变量的值。例如，
+            - code [ref=e766]: b = a++
+            - text: 先将
+            - code [ref=e767]: a
+            - text: 的当前值赋给
+            - code [ref=e768]: b
+            - text: ，然后再将
+            - code [ref=e769]: a
+            - text: 增加 1。
+        - paragraph [ref=e770]:
+          - text: 为了方便记忆，可以使用下面的口诀：
+          - strong [ref=e771]: 符号在前就先加/减，符号在后就后加/减
+          - text: 。
+        - paragraph [ref=e772]:
+          - text: 下面来看一个考察自增自减运算符的高频笔试题：执行下面的代码后，
+          - code [ref=e773]: a
+          - text: 、
+          - code [ref=e774]: b
+          - text: 、
+          - code [ref=e775]: c
+          - text: 、
+          - code [ref=e776]: d
+          - text: 和
+          - code [ref=e777]: e
+          - text: 的值是？
+        - generic [ref=e778]:
+          - text: java
+          - button "复制代码" [ref=e779] [cursor=pointer]
+          - code [ref=e781]:
+            - generic [ref=e782]: int a = 9;
+            - generic [ref=e783]: int b = a++;
+            - generic [ref=e784]: int c = ++a;
+            - generic [ref=e785]: int d = c--;
+            - generic [ref=e786]: int e = --d;
+        - paragraph [ref=e793]:
+          - text: 答案：
+          - code [ref=e794]: a = 11
+          - text: 、
+          - code [ref=e795]: b = 9
+          - text: 、
+          - code [ref=e796]: c = 10
+          - text: 、
+          - code [ref=e797]: d = 10
+          - text: 、
+          - code [ref=e798]: e = 10
+          - text: 。
+        - heading [level=3] [ref=e799]:
+          - link "⭐️移位运算符" [ref=e800] [cursor=pointer]:
+            - /url: "#⭐️移位运算符"
+        - paragraph [ref=e801]: 移位运算符是最基本的运算符之一，几乎每种编程语言都包含这一运算符。移位操作中，被操作的数据被视为二进制数，移位就是将其向左或向右移动若干位的运算。
+        - paragraph [ref=e802]:
+          - text: 移位运算符在各种框架以及 JDK 自身的源码中使用还是挺广泛的，
+          - code [ref=e803]: HashMap
+          - text: （JDK1.8） 中的
+          - code [ref=e804]: hash
+          - text: 方法的源码就用到了移位运算符：
+        - generic [ref=e805]:
+          - text: java
+          - button "复制代码" [ref=e806] [cursor=pointer]
+          - code [ref=e808]:
+            - generic [ref=e809]: "static final int hash(Object key) {"
+            - generic [ref=e810]: int h;
+            - generic [ref=e811]: // key.hashCode()：返回散列值也就是hashcode
+            - generic [ref=e812]: // ^：按位异或
+            - generic [ref=e813]: // >>>:无符号右移，忽略符号位，空位都以0补齐
+            - generic [ref=e814]: "return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);"
+            - generic [ref=e815]: "}"
+        - paragraph [ref=e824]:
+          - strong [ref=e825]: 使用移位运算符的主要原因
+          - text: ：
+        - list [ref=e826]:
+          - listitem [ref=e827]:
+            - strong [ref=e828]: 高效
+            - text: ：移位运算符直接对应于处理器的移位指令。现代处理器具有专门的硬件指令来执行这些移位操作，这些指令通常在一个时钟周期内完成。相比之下，乘法和除法等算术运算在硬件层面上需要更多的时钟周期来完成。
+          - listitem [ref=e829]:
+            - strong [ref=e830]: 节省内存
+            - text: ：通过移位操作，可以使用一个整数（如
+            - code [ref=e831]: int
+            - text: 或
+            - code [ref=e832]: long
+            - text: ）来存储多个布尔值或标志位，从而节省内存。
+        - paragraph [ref=e833]: 移位运算符最常用于快速乘以或除以 2 的幂次方。除此之外，它还在以下方面发挥着重要作用：
+        - list [ref=e834]:
+          - listitem [ref=e835]:
+            - strong [ref=e836]: 位字段管理
+            - text: ：例如存储和操作多个布尔值。
+          - listitem [ref=e837]:
+            - strong [ref=e838]: 哈希算法和加密解密
+            - text: ：通过移位和与、或等操作来混淆数据。
+          - listitem [ref=e839]:
+            - strong [ref=e840]: 数据压缩
+            - text: ：例如霍夫曼编码通过移位运算符可以快速处理和操作二进制数据，以生成紧凑的压缩格式。
+          - listitem [ref=e841]:
+            - strong [ref=e842]: 数据校验
+            - text: ：例如 CRC（循环冗余校验）通过移位和多项式除法生成和校验数据完整性。
+          - listitem [ref=e843]:
+            - strong [ref=e844]: 内存对齐
+            - text: ：通过移位操作，可以轻松计算和调整数据的对齐地址。
+        - paragraph [ref=e845]: 掌握最基本的移位运算符知识还是很有必要的，这不光可以帮助我们在代码中使用，还可以帮助我们理解源码中涉及到移位运算符的代码。
+        - paragraph [ref=e846]: Java 中有三种移位运算符：
+        - list [ref=e847]:
+          - listitem [ref=e848]:
+            - code [ref=e849]: <<
+            - text: :左移运算符，向左移若干位，高位丢弃，低位补零。
+            - code [ref=e850]: x << n
+            - text: ",相当于 x 乘以 2 的 n 次方(不溢出的情况下)。"
+          - listitem [ref=e851]:
+            - code [ref=e852]: ">>"
+            - text: :带符号右移，向右移若干位，高位补符号位，低位丢弃。正数高位补 0,负数高位补 1。
+            - code [ref=e853]: x >> n
+            - text: ",相当于 x 除以 2 的 n 次方。"
+          - listitem [ref=e854]:
+            - code [ref=e855]: ">>>"
+            - text: :无符号右移，忽略符号位，空位都以 0 补齐。
+        - paragraph [ref=e856]: 虽然移位运算本质上可以分为左移和右移，但在实际应用中，右移操作需要考虑符号位的处理方式。
+        - paragraph [ref=e857]:
+          - text: 由于
+          - code [ref=e858]: double
+          - text: ，
+          - code [ref=e859]: float
+          - text: 在二进制中的表现比较特殊，因此不能来进行移位操作。
+        - paragraph [ref=e860]:
+          - text: 移位操作符实际上支持的类型只有
+          - code [ref=e861]: int
+          - text: 和
+          - code [ref=e862]: long
+          - text: ，编译器在对
+          - code [ref=e863]: short
+          - text: 、
+          - code [ref=e864]: byte
+          - text: 、
+          - code [ref=e865]: char
+          - text: 类型进行移位前，都会将其转换为
+          - code [ref=e866]: int
+          - text: 类型再操作。
+        - paragraph [ref=e867]:
+          - strong [ref=e868]: 如果移位的位数超过数值所占有的位数会怎样？
+        - paragraph [ref=e869]: 当 int 类型左移/右移位数大于等于 32 位操作时，会先求余（%）后再进行左移/右移操作。也就是说左移/右移 32 位相当于不进行移位操作（32%32=0），左移/右移 42 位相当于左移/右移 10 位（42%32=10）。当 long 类型进行左移/右移操作时，由于 long 对应的二进制是 64 位，因此求余操作的基数也变成了 64。
+        - paragraph [ref=e870]:
+          - text: 也就是说：
+          - code [ref=e871]: x<<42
+          - text: 等同于
+          - code [ref=e872]: x<<10
+          - text: ，
+          - code [ref=e873]: x>>42
+          - text: 等同于
+          - code [ref=e874]: x>>10
+          - text: ，
+          - code [ref=e875]: x >>>42
+          - text: 等同于
+          - code [ref=e876]: x >>> 10
+          - text: 。
+        - paragraph [ref=e877]:
+          - strong [ref=e878]: 左移运算符代码示例
+          - text: ：
+        - generic [ref=e879]:
+          - text: java
+          - button "复制代码" [ref=e880] [cursor=pointer]
+          - code [ref=e882]:
+            - generic [ref=e883]: int i = -1;
+            - generic [ref=e884]: System.out.println("初始数据：" + i);
+            - generic [ref=e885]: System.out.println("初始数据对应的二进制字符串：" + Integer.toBinaryString(i));
+            - generic [ref=e886]: i <<= 10;
+            - generic [ref=e887]: System.out.println("左移 10 位后的数据 " + i);
+            - generic [ref=e888]: System.out.println("左移 10 位后的数据对应的二进制字符 " + Integer.toBinaryString(i));
+        - paragraph [ref=e896]: 输出：
+        - generic [ref=e897]:
+          - text: plain
+          - button "复制代码" [ref=e898] [cursor=pointer]
+          - code [ref=e900]:
+            - generic [ref=e901]: 初始数据：-1
+            - generic [ref=e902]: 初始数据对应的二进制字符串：11111111111111111111111111111111
+            - generic [ref=e903]: 左移 10 位后的数据 -1024
+            - generic [ref=e904]: 左移 10 位后的数据对应的二进制字符 11111111111111111111110000000000
+        - paragraph [ref=e910]: 由于左移位数大于等于 32 位操作时，会先求余（%）后再进行左移操作，所以下面的代码左移 42 位相当于左移 10 位（42%32=10），输出结果和前面的代码一样。
+        - generic [ref=e911]:
+          - text: java
+          - button "复制代码" [ref=e912] [cursor=pointer]
+          - code [ref=e914]:
+            - generic [ref=e915]: int i = -1;
+            - generic [ref=e916]: System.out.println("初始数据：" + i);
+            - generic [ref=e917]: System.out.println("初始数据对应的二进制字符串：" + Integer.toBinaryString(i));
+            - generic [ref=e918]: i <<= 42;
+            - generic [ref=e919]: System.out.println("左移 10 位后的数据 " + i);
+            - generic [ref=e920]: System.out.println("左移 10 位后的数据对应的二进制字符 " + Integer.toBinaryString(i));
+        - paragraph [ref=e928]: 右移运算符使用类似，篇幅问题，这里就不做演示了。
+        - heading [level=2] [ref=e929]:
+          - link "⭐️基本数据类型" [ref=e930] [cursor=pointer]:
+            - /url: "#⭐️基本数据类型"
+        - heading [level=3] [ref=e931]:
+          - link "Java 中的几种基本数据类型了解么？" [ref=e932] [cursor=pointer]:
+            - /url: "#java-中的几种基本数据类型了解么"
+        - paragraph [ref=e933]: Java 中有 8 种基本数据类型，分别为：
+        - list [ref=e934]:
+          - listitem [ref=e935]:
+            - text: 6 种数字类型：
+            - list [ref=e936]:
+              - listitem [ref=e937]:
+                - text: 4 种整数型：
+                - code [ref=e938]: byte
+                - text: 、
+                - code [ref=e939]: short
+                - text: 、
+                - code [ref=e940]: int
+                - text: 、
+                - code [ref=e941]: long
+              - listitem [ref=e942]:
+                - text: 2 种浮点型：
+                - code [ref=e943]: float
+                - text: 、
+                - code [ref=e944]: double
+          - listitem [ref=e945]:
+            - text: 1 种字符类型：
+            - code [ref=e946]: char
+          - listitem [ref=e947]:
+            - text: 1 种布尔型：
+            - code [ref=e948]: boolean
+            - text: 。
+        - paragraph [ref=e949]: 这 8 种基本数据类型的默认值以及所占空间的大小如下：
+        - table [ref=e950]:
+          - rowgroup [ref=e951]:
+            - row [ref=e952]:
+              - columnheader "基本类型" [ref=e953]
+              - columnheader "位数" [ref=e954]
+              - columnheader "字节" [ref=e955]
+              - columnheader "默认值" [ref=e956]
+              - columnheader "取值范围" [ref=e957]
+          - rowgroup [ref=e958]:
+            - row [ref=e959]:
+              - cell [ref=e960]:
+                - code [ref=e961]: byte
+              - cell "8" [ref=e962]
+              - cell "1" [ref=e963]
+              - cell "0" [ref=e964]
+              - cell "-128 ~ 127" [ref=e965]
+            - row [ref=e966]:
+              - cell [ref=e967]:
+                - code [ref=e968]: short
+              - cell "16" [ref=e969]
+              - cell "2" [ref=e970]
+              - cell "0" [ref=e971]
+              - cell "-32768（-2^15） ~ 32767（2^15 - 1）" [ref=e972]
+            - row [ref=e973]:
+              - cell [ref=e974]:
+                - code [ref=e975]: int
+              - cell "32" [ref=e976]
+              - cell "4" [ref=e977]
+              - cell "0" [ref=e978]
+              - cell "-2147483648 ~ 2147483647" [ref=e979]
+            - row [ref=e980]:
+              - cell [ref=e981]:
+                - code [ref=e982]: long
+              - cell "64" [ref=e983]
+              - cell "8" [ref=e984]
+              - cell "0L" [ref=e985]
+              - cell "-9223372036854775808（-2^63） ~ 9223372036854775807（2^63 -1）" [ref=e986]
+            - row [ref=e987]:
+              - cell [ref=e988]:
+                - code [ref=e989]: char
+              - cell "16" [ref=e990]
+              - cell "2" [ref=e991]
+              - cell "'u0000'" [ref=e992]
+              - cell "0 ~ 65535（2^16 - 1）" [ref=e993]
+            - row [ref=e994]:
+              - cell [ref=e995]:
+                - code [ref=e996]: float
+              - cell "32" [ref=e997]
+              - cell "4" [ref=e998]
+              - cell "0f" [ref=e999]
+              - cell "1.4E-45 ~ 3.4028235E38" [ref=e1000]
+            - row [ref=e1001]:
+              - cell [ref=e1002]:
+                - code [ref=e1003]: double
+              - cell "64" [ref=e1004]
+              - cell "8" [ref=e1005]
+              - cell "0d" [ref=e1006]
+              - cell "4.9E-324 ~ 1.7976931348623157E308" [ref=e1007]
+            - row [ref=e1008]:
+              - cell [ref=e1009]:
+                - code [ref=e1010]: boolean
+              - cell "1" [ref=e1011]
+              - cell [ref=e1012]
+              - cell "false" [ref=e1013]
+              - cell "true、false" [ref=e1014]
+        - paragraph [ref=e1015]:
+          - text: 可以看到，像
+          - code [ref=e1016]: byte
+          - text: 、
+          - code [ref=e1017]: short
+          - text: 、
+          - code [ref=e1018]: int
+          - text: 、
+          - code [ref=e1019]: long
+          - text: 能表示的最大正数都减 1 了。这是为什么呢？这是因为在二进制补码表示法中，最高位是用来表示符号的（0 表示正数，1 表示负数），其余位表示数值部分。所以，如果我们要表示最大的正数，我们需要把除了最高位之外的所有位都设为 1。如果我们再加 1，就会导致溢出，变成一个负数。
+        - paragraph [ref=e1020]:
+          - text: 对于
+          - code [ref=e1021]: boolean
+          - text: ，官方文档未明确定义，它依赖于 JVM 厂商的具体实现。逻辑上理解是占用 1 位，但是实际中会考虑计算机高效存储因素。
+        - paragraph [ref=e1022]: 另外，Java 的每种基本类型所占存储空间的大小不会像其他大多数语言那样随机器硬件架构的变化而变化。这种所占存储空间大小的不变性是 Java 程序比用其他大多数语言编写的程序更具可移植性的原因之一（《Java 编程思想》2.2 节有提到）。
+        - paragraph [ref=e1023]:
+          - strong [ref=e1024]: 注意：
+        - list [ref=e1025]:
+          - listitem [ref=e1026]:
+            - text: Java 里使用
+            - code [ref=e1027]: long
+            - text: 类型的数据一定要在数值后面加上
+            - strong [ref=e1028]: L
+            - text: ，否则将作为整型解析。
+          - listitem [ref=e1029]:
+            - text: Java 里使用
+            - code [ref=e1030]: float
+            - text: 类型的数据一定要在数值后面加上
+            - strong [ref=e1031]: f 或 F
+            - text: ，否则将无法通过编译。
+          - listitem [ref=e1032]:
+            - code [ref=e1033]: char a = 'h'
+            - text: char :单引号，
+            - code [ref=e1034]: String a = "hello"
+            - text: :双引号。
+        - paragraph [ref=e1035]:
+          - text: 这八种基本类型都有对应的包装类分别为：
+          - code [ref=e1036]: Byte
+          - text: 、
+          - code [ref=e1037]: Short
+          - text: 、
+          - code [ref=e1038]: Integer
+          - text: 、
+          - code [ref=e1039]: Long
+          - text: 、
+          - code [ref=e1040]: Float
+          - text: 、
+          - code [ref=e1041]: Double
+          - text: 、
+          - code [ref=e1042]: Character
+          - text: 、
+          - code [ref=e1043]: Boolean
+          - text: 。
+        - heading [level=3] [ref=e1044]:
+          - link "基本类型和包装类型的区别？" [ref=e1045] [cursor=pointer]:
+            - /url: "#基本类型和包装类型的区别"
+        - list [ref=e1046]:
+          - listitem [ref=e1047]:
+            - strong [ref=e1048]: 用途
+            - text: ：除了定义一些常量和局部变量之外，我们在其他地方比如方法参数、对象属性中很少会使用基本类型来定义变量。并且，包装类型可用于泛型，而基本类型不可以。
+          - listitem [ref=e1049]:
+            - strong [ref=e1050]: 存储方式
+            - text: ：基本数据类型的局部变量存放在 Java 虚拟机栈中的局部变量表中，基本数据类型的成员变量（未被
+            - code [ref=e1051]: static
+            - text: 修饰 ）存放在 Java 虚拟机的堆中。包装类型属于对象类型，我们知道几乎所有对象实例都存在于堆中。
+          - listitem [ref=e1052]:
+            - strong [ref=e1053]: 占用空间
+            - text: ：相比于包装类型（对象类型）， 基本数据类型占用的空间往往非常小。
+          - listitem [ref=e1054]:
+            - strong [ref=e1055]: 默认值
+            - text: ：成员变量包装类型不赋值就是
+            - code [ref=e1056]: "null"
+            - text: ，而基本类型有默认值且不是
+            - code [ref=e1057]: "null"
+            - text: 。
+          - listitem [ref=e1058]:
+            - strong [ref=e1059]: 比较方式
+            - text: ：对于基本数据类型来说，
+            - code [ref=e1060]: ==
+            - text: 比较的是值。对于包装数据类型来说，
+            - code [ref=e1061]: ==
+            - text: 比较的是对象的内存地址。所有整型包装类对象之间值的比较，全部使用
+            - code [ref=e1062]: equals()
+            - text: 方法。
+        - paragraph [ref=e1063]:
+          - strong [ref=e1064]: 为什么说是几乎所有对象实例都存在于堆中呢？
+          - text: 这是因为 HotSpot 虚拟机引入了 JIT 优化之后，会对对象进行逃逸分析，如果发现某一个对象并没有逃逸到方法外部，那么就可能通过标量替换来实现栈上分配，而避免堆上分配内存
+        - paragraph [ref=e1065]:
+          - text: ⚠️ 注意：
+          - strong [ref=e1066]: 基本数据类型存放在栈中是一个常见的误区！
+          - text: 基本数据类型的存储位置取决于它们的作用域和声明方式。如果它们是局部变量，那么它们会存放在栈中；如果它们是成员变量，那么它们会存放在堆/方法区/元空间中。
+        - generic [ref=e1067]:
+          - text: java
+          - button "复制代码" [ref=e1068] [cursor=pointer]
+          - code [ref=e1070]:
+            - generic [ref=e1071]: "public class Test {"
+            - generic [ref=e1072]: // 成员变量，存放在堆中
+            - generic [ref=e1073]: int a = 10;
+            - generic [ref=e1074]: // 被 static 修饰的成员变量，JDK 1.7 及之前位于方法区，1.8 后存放于元空间，均不存放于堆中。
+            - generic [ref=e1075]: // 变量属于类，不属于对象。
+            - generic [ref=e1076]: static int b = 20;
+            - generic [ref=e1077]: "public void method() {"
+            - generic [ref=e1078]: // 局部变量，存放在栈中
+            - generic [ref=e1079]: int c = 30;
+            - generic [ref=e1080]: static int d = 40; // 编译错误，不能在方法中使用 static 修饰局部变量
+            - generic [ref=e1081]: "}"
+            - generic [ref=e1082]: "}"
+        - heading [level=3] [ref=e1097]:
+          - link "包装类型的缓存机制了解么？" [ref=e1098] [cursor=pointer]:
+            - /url: "#包装类型的缓存机制了解么"
+        - paragraph [ref=e1099]: Java 基本数据类型的包装类型的大部分都用到了缓存机制来提升性能。
+        - paragraph [ref=e1100]:
+          - code [ref=e1101]: Byte
+          - text: ","
+          - code [ref=e1102]: Short
+          - text: ","
+          - code [ref=e1103]: Integer
+          - text: ","
+          - code [ref=e1104]: Long
+          - text: 这 4 种包装类默认创建了数值
+          - strong [ref=e1105]: "[-128，127]"
+          - text: 的相应类型的缓存数据，
+          - code [ref=e1106]: Character
+          - text: 创建了数值在
+          - strong [ref=e1107]: "[0,127]"
+          - text: 范围的缓存数据，
+          - code [ref=e1108]: Boolean
+          - text: 直接返回
+          - code [ref=e1109]: "TRUE"
+          - text: or
+          - code [ref=e1110]: "FALSE"
+          - text: 。
+        - paragraph [ref=e1111]:
+          - text: 对于
+          - code [ref=e1112]: Integer
+          - text: ，可以通过 JVM 参数
+          - code [ref=e1113]: "-XX:AutoBoxCacheMax=<size>"
+          - text: 修改缓存上限，但不能修改下限 -128。实际使用时，并不建议设置过大的值，避免浪费内存，甚至是 OOM。
+        - paragraph [ref=e1114]:
+          - text: 对于
+          - code [ref=e1115]: Byte
+          - text: ","
+          - code [ref=e1116]: Short
+          - text: ","
+          - code [ref=e1117]: Long
+          - text: ","
+          - code [ref=e1118]: Character
+          - text: 没有类似
+          - code [ref=e1119]: "-XX:AutoBoxCacheMax"
+          - text: 参数可以修改，因此缓存范围是固定的，无法通过 JVM 参数调整。
+          - code [ref=e1120]: Boolean
+          - text: 则直接返回预定义的
+          - code [ref=e1121]: "TRUE"
+          - text: 和
+          - code [ref=e1122]: "FALSE"
+          - text: 实例，没有缓存范围的概念。
+        - paragraph [ref=e1123]:
+          - strong [ref=e1124]: Integer 缓存源码：
+        - generic [ref=e1125]:
+          - text: java
+          - button "复制代码" [ref=e1126] [cursor=pointer]
+          - code [ref=e1128]:
+            - generic [ref=e1129]: "public static Integer valueOf(int i) {"
+            - generic [ref=e1130]: if (i >= IntegerCache.low && i <= IntegerCache.high)
+            - generic [ref=e1131]: return IntegerCache.cache[i + (-IntegerCache.low)];
+            - generic [ref=e1132]: return new Integer(i);
+            - generic [ref=e1133]: "}"
+            - generic [ref=e1134]: "private static class IntegerCache {"
+            - generic [ref=e1135]: static final int low = -128;
+            - generic [ref=e1136]: static final int high;
+            - generic [ref=e1137]: "static {"
+            - generic [ref=e1138]: // high value may be configured by property
+            - generic [ref=e1139]: int h = 127;
+            - generic [ref=e1140]: "}"
+            - generic [ref=e1141]: "}"
+        - paragraph [ref=e1156]:
+          - strong [ref=e1157]:
+            - code [ref=e1158]: Character
+            - text: "缓存源码:"
+        - generic [ref=e1159]:
+          - text: java
+          - button "复制代码" [ref=e1160] [cursor=pointer]
+          - code [ref=e1162]:
+            - generic [ref=e1163]: "public static Character valueOf(char c) {"
+            - generic [ref=e1164]: "if (c <= 127) { // must cache"
+            - generic [ref=e1165]: return CharacterCache.cache[(int)c];
+            - generic [ref=e1166]: "}"
+            - generic [ref=e1167]: return new Character(c);
+            - generic [ref=e1168]: "}"
+            - generic [ref=e1169]: "private static class CharacterCache {"
+            - generic [ref=e1170]: "private CharacterCache(){}"
+            - generic [ref=e1171]: static final Character cache[] = new Character[127 + 1];
+            - generic [ref=e1172]: "static {"
+            - generic [ref=e1173]: for (int i = 0; i < cache.length; i++)
+            - generic [ref=e1174]: cache[i] = new Character((char)i);
+            - generic [ref=e1175]: "}"
+            - generic [ref=e1176]: "}"
+        - paragraph [ref=e1194]:
+          - strong [ref=e1195]:
+            - code [ref=e1196]: Boolean
+            - text: 缓存源码：
+        - generic [ref=e1197]:
+          - text: java
+          - button "复制代码" [ref=e1198] [cursor=pointer]
+          - code [ref=e1200]:
+            - generic [ref=e1201]: "public static Boolean valueOf(boolean b) {"
+            - generic [ref=e1202]: "return (b ? TRUE : FALSE);"
+            - generic [ref=e1203]: "}"
+        - paragraph [ref=e1208]: 如果超出对应范围仍然会去创建新的对象，缓存的范围区间的大小只是在性能和资源之间的权衡。
+        - paragraph [ref=e1209]:
+          - text: 两种浮点数类型的包装类
+          - code [ref=e1210]: Float
+          - text: ","
+          - code [ref=e1211]: Double
+          - text: 并没有实现缓存机制。
+        - generic [ref=e1212]:
+          - text: java
+          - button "复制代码" [ref=e1213] [cursor=pointer]
+          - code [ref=e1215]:
+            - generic [ref=e1216]: Integer i1 = 33;
+            - generic [ref=e1217]: Integer i2 = 33;
+            - generic [ref=e1218]: System.out.println(i1 == i2);// 输出 true
+            - generic [ref=e1219]: Float i11 = 333f;
+            - generic [ref=e1220]: Float i22 = 333f;
+            - generic [ref=e1221]: System.out.println(i11 == i22);// 输出 false
+            - generic [ref=e1222]: Double i3 = 1.2;
+            - generic [ref=e1223]: Double i4 = 1.2;
+            - generic [ref=e1224]: System.out.println(i3 == i4);// 输出 false
+        - paragraph [ref=e1237]:
+          - text: 下面我们来看一个问题：下面的代码的输出结果是
+          - code [ref=e1238]: "true"
+          - text: 还是
+          - code [ref=e1239]: "false"
+          - text: 呢？
+        - generic [ref=e1240]:
+          - text: java
+          - button "复制代码" [ref=e1241] [cursor=pointer]
+          - code [ref=e1243]:
+            - generic [ref=e1244]: Integer i1 = 40;
+            - generic [ref=e1245]: Integer i2 = new Integer(40);
+            - generic [ref=e1246]: System.out.println(i1==i2);
+        - paragraph [ref=e1251]:
+          - code [ref=e1252]: Integer i1=40
+          - text: 这一行代码会发生装箱，也就是说这行代码等价于
+          - code [ref=e1253]: Integer i1=Integer.valueOf(40)
+          - text: 。因此，
+          - code [ref=e1254]: i1
+          - text: 直接使用的是缓存中的对象。而
+          - code [ref=e1255]: Integer i2 = new Integer(40)
+          - text: 会直接创建新的对象。
+        - paragraph [ref=e1256]:
+          - text: 因此，答案是
+          - code [ref=e1257]: "false"
+          - text: 。你答对了吗？
+        - paragraph [ref=e1258]:
+          - text: 记住：
+          - strong [ref=e1259]: 所有整型包装类对象之间值的比较，全部使用 equals 方法比较
+          - text: 。
+        - paragraph [ref=e1260]
+        - heading [level=3] [ref=e1261]:
+          - link "自动装箱与拆箱了解吗？原理是什么？" [ref=e1262] [cursor=pointer]:
+            - /url: "#自动装箱与拆箱了解吗-原理是什么"
+        - paragraph [ref=e1263]:
+          - strong [ref=e1264]: 什么是自动拆装箱？
+        - list [ref=e1265]:
+          - listitem [ref=e1266]:
+            - strong [ref=e1267]: 装箱
+            - text: ：将基本类型用它们对应的引用类型包装起来；
+          - listitem [ref=e1268]:
+            - strong [ref=e1269]: 拆箱
+            - text: ：将包装类型转换为基本数据类型；
+        - paragraph [ref=e1270]: 举例：
+        - generic [ref=e1271]:
+          - text: java
+          - button "复制代码" [ref=e1272] [cursor=pointer]
+          - code [ref=e1274]:
+            - generic [ref=e1275]: Integer i = 10; //装箱
+            - generic [ref=e1276]: int n = i; //拆箱
+        - paragraph [ref=e1280]: 上面这两行代码对应的字节码为：
+        - generic [ref=e1281]:
+          - text: java
+          - button "复制代码" [ref=e1282] [cursor=pointer]
+          - code [ref=e1284]:
+            - generic [ref=e1285]: L1
+            - generic [ref=e1286]: LINENUMBER 8 L1
+            - generic [ref=e1287]: ALOAD 0
+            - generic [ref=e1288]: BIPUSH 10
+            - generic [ref=e1289]: INVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;
+            - generic [ref=e1290]: "PUTFIELD AutoBoxTest.i : Ljava/lang/Integer;"
+            - generic [ref=e1291]: L2
+            - generic [ref=e1292]: LINENUMBER 9 L2
+            - generic [ref=e1293]: ALOAD 0
+            - generic [ref=e1294]: ALOAD 0
+            - generic [ref=e1295]: "GETFIELD AutoBoxTest.i : Ljava/lang/Integer;"
+            - generic [ref=e1296]: INVOKEVIRTUAL java/lang/Integer.intValue ()I
+            - generic [ref=e1297]: "PUTFIELD AutoBoxTest.n : I"
+            - generic [ref=e1298]: RETURN
+        - paragraph [ref=e1327]:
+          - text: 从字节码中，我们发现装箱其实就是调用了 包装类的
+          - code [ref=e1328]: valueOf()
+          - text: 方法，拆箱其实就是调用了
+          - code [ref=e1329]: xxxValue()
+          - text: 方法。
+        - paragraph [ref=e1330]: 因此，
+        - list [ref=e1331]:
+          - listitem [ref=e1332]:
+            - code [ref=e1333]: Integer i = 10
+            - text: 等价于
+            - code [ref=e1334]: Integer i = Integer.valueOf(10)
+          - listitem [ref=e1335]:
+            - code [ref=e1336]: int n = i
+            - text: 等价于
+            - code [ref=e1337]: int n = i.intValue()
+            - text: ;
+        - paragraph [ref=e1338]:
+          - text: 注意：
+          - strong [ref=e1339]: 如果频繁拆装箱的话，也会严重影响系统的性能。我们应该尽量避免不必要的拆装箱操作。
+        - generic [ref=e1340]:
+          - text: java
+          - button "复制代码" [ref=e1341] [cursor=pointer]
+          - code [ref=e1343]:
+            - generic [ref=e1344]: "private static long sum() {"
+            - generic [ref=e1345]: // 应该使用 long 而不是 Long
+            - generic [ref=e1346]: Long sum = 0L;
+            - generic [ref=e1347]: for (long i = 0; i <= Integer.MAX_VALUE; i++)
+            - generic [ref=e1348]: sum += i;
+            - generic [ref=e1349]: return sum;
+            - generic [ref=e1350]: "}"
+        - heading [level=3] [ref=e1359]:
+          - link "为什么浮点数运算的时候会有精度丢失的风险？" [ref=e1360] [cursor=pointer]:
+            - /url: "#为什么浮点数运算的时候会有精度丢失的风险"
+        - paragraph [ref=e1361]: 浮点数运算精度丢失代码演示：
+        - generic [ref=e1362]:
+          - text: java
+          - button "复制代码" [ref=e1363] [cursor=pointer]
+          - code [ref=e1365]:
+            - generic [ref=e1366]: float a = 2.0f - 1.9f;
+            - generic [ref=e1367]: float b = 1.8f - 1.7f;
+            - generic [ref=e1368]: System.out.printf("%.9f",a);// 0.100000024
+            - generic [ref=e1369]: System.out.println(b);// 0.099999905
+            - generic [ref=e1370]: System.out.println(a == b);// false
+        - paragraph [ref=e1377]: 为什么会出现这个问题呢？
+        - paragraph [ref=e1378]: 这个和计算机保存浮点数的机制有很大关系。我们知道计算机是二进制的，而且计算机在表示一个数字时，宽度是有限的，无限循环的小数存储在计算机时，只能被截断，所以就会导致小数精度发生损失的情况。这也就是解释了为什么浮点数没有办法用二进制精确表示。
+        - paragraph [ref=e1379]: 就比如说十进制下的 0.2 就没办法精确转换成二进制小数：
+        - generic [ref=e1380]:
+          - text: java
+          - button "复制代码" [ref=e1381] [cursor=pointer]
+          - code [ref=e1383]:
+            - generic [ref=e1384]: // 0.2 转换为二进制数的过程为，不断乘以 2，直到不存在小数为止，
+            - generic [ref=e1385]: // 在这个计算过程中，得到的整数部分从上到下排列就是二进制的结果。
+            - generic [ref=e1386]: 0.2 * 2 = 0.4 -> 0
+            - generic [ref=e1387]: 0.4 * 2 = 0.8 -> 0
+            - generic [ref=e1388]: 0.8 * 2 = 1.6 -> 1
+            - generic [ref=e1389]: 0.6 * 2 = 1.2 -> 1
+            - generic [ref=e1390]: 0.2 * 2 = 0.4 -> 0（发生循环）
+            - generic [ref=e1391]: ...
+        - paragraph [ref=e1401]:
+          - text: 关于浮点数的更多内容，建议看一下
+          - link "计算机系统基础（四）浮点数" [ref=e1402] [cursor=pointer]:
+            - /url: http://kaito-kidd.com/2018/08/08/computer-system-float-point/
+          - text: 这篇文章。
+        - heading [level=3] [ref=e1403]:
+          - link "如何解决浮点数运算的精度丢失问题？" [ref=e1404] [cursor=pointer]:
+            - /url: "#如何解决浮点数运算的精度丢失问题"
+        - paragraph [ref=e1405]:
+          - code [ref=e1406]: BigDecimal
+          - text: 可以实现对浮点数的运算，不会造成精度丢失。通常情况下，大部分需要浮点数精确运算结果的业务场景（比如涉及到钱的场景）都是通过
+          - code [ref=e1407]: BigDecimal
+          - text: 来做的。
+        - generic [ref=e1408]:
+          - text: java
+          - button "复制代码" [ref=e1409] [cursor=pointer]
+          - code [ref=e1411]:
+            - generic [ref=e1412]: BigDecimal a = new BigDecimal("1.0");
+            - generic [ref=e1413]: BigDecimal b = new BigDecimal("1.00");
+            - generic [ref=e1414]: BigDecimal c = new BigDecimal("0.8");
+            - generic [ref=e1415]: BigDecimal x = a.subtract(c);
+            - generic [ref=e1416]: BigDecimal y = b.subtract(c);
+            - generic [ref=e1417]: System.out.println(x); /* 0.2 */
+            - generic [ref=e1418]: System.out.println(y); /* 0.20 */
+            - generic [ref=e1419]: // 比较内容，不是比较值
+            - generic [ref=e1420]: System.out.println(Objects.equals(x, y)); /* false */
+            - generic [ref=e1421]: // 比较值相等用相等compareTo，相等返回0
+            - generic [ref=e1422]: System.out.println(0 == x.compareTo(y)); /* true */
+        - paragraph [ref=e1437]:
+          - text: 关于
+          - code [ref=e1438]: BigDecimal
+          - text: 的详细介绍，可以看看我写的这篇文章：
+          - link "BigDecimal 详解" [ref=e1439] [cursor=pointer]:
+            - /url: https://javaguide.cn/java/basis/bigdecimal.html
+          - text: 。
+        - heading [level=3] [ref=e1440]:
+          - link "超过 long 整型的数据应该如何表示？" [ref=e1441] [cursor=pointer]:
+            - /url: "#超过-long-整型的数据应该如何表示"
+        - paragraph [ref=e1442]: 基本数值类型都有一个表达范围，如果超过这个范围就会有数值溢出的风险。
+        - paragraph [ref=e1443]: 在 Java 中，64 位 long 整型是最大的整数类型。
+        - generic [ref=e1444]:
+          - text: java
+          - button "复制代码" [ref=e1445] [cursor=pointer]
+          - code [ref=e1447]:
+            - generic [ref=e1448]: long l = Long.MAX_VALUE;
+            - generic [ref=e1449]: System.out.println(l + 1); // -9223372036854775808
+            - generic [ref=e1450]: System.out.println(l + 1 == Long.MIN_VALUE); // true
+        - paragraph [ref=e1455]:
+          - code [ref=e1456]: BigInteger
+          - text: 内部使用
+          - code [ref=e1457]: int[]
+          - text: 数组来存储任意大小的整形数据。
+        - paragraph [ref=e1458]:
+          - text: 相对于常规整数类型的运算来说，
+          - code [ref=e1459]: BigInteger
+          - text: 运算的效率会相对较低。
+        - heading [level=2] [ref=e1460]:
+          - link "面向对象基础" [ref=e1461] [cursor=pointer]:
+            - /url: "#面向对象基础"
+        - heading [level=3] [ref=e1462]:
+          - link "⭐️成员变量与局部变量的区别？" [ref=e1463] [cursor=pointer]:
+            - /url: "#⭐️成员变量与局部变量的区别"
+        - list [ref=e1464]:
+          - listitem [ref=e1465]:
+            - strong [ref=e1466]: 语法形式
+            - text: ：从语法形式上看，成员变量是属于类的，而局部变量是在代码块或方法中定义的变量或是方法的参数；成员变量可以被
+            - code [ref=e1467]: public
+            - text: ","
+            - code [ref=e1468]: private
+            - text: ","
+            - code [ref=e1469]: static
+            - text: 等修饰符所修饰，而局部变量不能被访问控制修饰符及
+            - code [ref=e1470]: static
+            - text: 所修饰；但是，成员变量和局部变量都能被
+            - code [ref=e1471]: final
+            - text: 所修饰。
+          - listitem [ref=e1472]:
+            - strong [ref=e1473]: 存储方式
+            - text: ：从变量在内存中的存储方式来看，如果成员变量是使用
+            - code [ref=e1474]: static
+            - text: 修饰的，那么这个成员变量是属于类的，如果没有使用
+            - code [ref=e1475]: static
+            - text: 修饰，这个成员变量是属于实例的。而对象存在于堆内存，局部变量则存在于栈内存。
+          - listitem [ref=e1476]:
+            - strong [ref=e1477]: 生存时间
+            - text: ：从变量在内存中的生存时间上看，成员变量是对象的一部分，它随着对象的创建而存在，而局部变量随着方法的调用而自动生成，随着方法的调用结束而消亡。
+          - listitem [ref=e1478]:
+            - strong [ref=e1479]: 默认值
+            - text: ：从变量是否有默认值来看，成员变量如果没有被赋初始值，则会自动以类型的默认值而赋值（一种情况例外:被
+            - code [ref=e1480]: final
+            - text: 修饰的成员变量也必须显式地赋值），而局部变量则不会自动赋值。
+        - paragraph [ref=e1481]:
+          - strong [ref=e1482]: 为什么成员变量有默认值？
+        - list [ref=e1483]:
+          - listitem [ref=e1484]:
+            - paragraph [ref=e1485]: 先不考虑变量类型，如果没有默认值会怎样？变量存储的是内存地址对应的任意随机值，程序读取该值运行会出现意外。
+          - listitem [ref=e1486]:
+            - paragraph [ref=e1487]: 默认值有两种设置方式：手动和自动，根据第一点，没有手动赋值一定要自动赋值。成员变量在运行时可借助反射等方法手动赋值，而局部变量不行。
+          - listitem [ref=e1488]:
+            - paragraph [ref=e1489]: 对于编译器（javac）来说，局部变量没赋值很好判断，可以直接报错。而成员变量可能是运行时赋值，无法判断，误报“没默认值”又会影响用户体验，所以采用自动赋默认值。
+        - paragraph [ref=e1490]: 成员变量与局部变量代码示例：
+        - generic [ref=e1491]:
+          - text: java
+          - button "复制代码" [ref=e1492] [cursor=pointer]
+          - code [ref=e1494]:
+            - generic [ref=e1495]: "public class VariableExample {"
+            - generic [ref=e1496]: // 成员变量
+            - generic [ref=e1497]: private String name;
+            - generic [ref=e1498]: private int age;
+            - generic [ref=e1499]: // 方法中的局部变量
+            - generic [ref=e1500]: "public void method() {"
+            - generic [ref=e1501]: int num1 = 10; // 栈中分配的局部变量
+            - generic [ref=e1502]: String str = "Hello, world!"; // 栈中分配的局部变量
+            - generic [ref=e1503]: System.out.println(num1);
+            - generic [ref=e1504]: System.out.println(str);
+            - generic [ref=e1505]: "}"
+            - generic [ref=e1506]: // 带参数的方法中的局部变量
+            - generic [ref=e1507]: "public void method2(int num2) {"
+            - generic [ref=e1508]: int sum = num2 + 10; // 栈中分配的局部变量
+            - generic [ref=e1509]: System.out.println(sum);
+            - generic [ref=e1510]: "}"
+            - generic [ref=e1511]: // 构造方法中的局部变量
+            - generic [ref=e1512]: "public VariableExample(String name, int age) {"
+            - generic [ref=e1513]: this.name = name; // 对成员变量进行赋值
+            - generic [ref=e1514]: this.age = age; // 对成员变量进行赋值
+            - generic [ref=e1515]: int num3 = 20; // 栈中分配的局部变量
+            - generic [ref=e1516]: String str2 = "Hello, " + this.name + "!"; // 栈中分配的局部变量
+            - generic [ref=e1517]: System.out.println(num3);
+            - generic [ref=e1518]: System.out.println(str2);
+            - generic [ref=e1519]: "}"
+            - generic [ref=e1520]: "}"
+        - heading [level=3] [ref=e1552]:
+          - link "⭐️静态方法和实例方法有何不同？" [ref=e1553] [cursor=pointer]:
+            - /url: "#⭐️静态方法和实例方法有何不同"
+        - paragraph [ref=e1554]:
+          - strong [ref=e1555]: 1、调用方式
+        - paragraph [ref=e1556]:
+          - text: 在外部调用静态方法时，可以使用
+          - code [ref=e1557]: 类名.方法名
+          - text: 的方式，也可以使用
+          - code [ref=e1558]: 对象.方法名
+          - text: 的方式，而实例方法只有后面这种方式。也就是说，
+          - strong [ref=e1559]: 调用静态方法可以无需创建对象
+          - text: 。
+        - paragraph [ref=e1560]:
+          - text: 不过，需要注意的是一般不建议使用
+          - code [ref=e1561]: 对象.方法名
+          - text: 的方式来调用静态方法。这种方式非常容易造成混淆，静态方法不属于类的某个对象而是属于这个类。
+        - paragraph [ref=e1562]:
+          - text: 因此，一般建议使用
+          - code [ref=e1563]: 类名.方法名
+          - text: 的方式来调用静态方法。
+        - generic [ref=e1564]:
+          - text: java
+          - button "复制代码" [ref=e1565] [cursor=pointer]
+          - code [ref=e1567]:
+            - generic [ref=e1568]: "public class Person {"
+            - generic [ref=e1569]: "public void method() {"
+            - generic [ref=e1570]: //......
+            - generic [ref=e1571]: "}"
+            - generic [ref=e1572]: "public static void staicMethod(){"
+            - generic [ref=e1573]: //......
+            - generic [ref=e1574]: "}"
+            - generic [ref=e1575]: "public static void main(String[] args) {"
+            - generic [ref=e1576]: Person person = new Person();
+            - generic [ref=e1577]: // 调用实例方法
+            - generic [ref=e1578]: person.method();
+            - generic [ref=e1579]: // 调用静态方法
+            - generic [ref=e1580]: Person.staicMethod()
+            - generic [ref=e1581]: "}"
+            - generic [ref=e1582]: "}"
+        - paragraph [ref=e1600]:
+          - strong [ref=e1601]: 2、访问类成员是否存在限制
+        - paragraph [ref=e1602]: 静态方法在访问本类的成员时，只允许访问静态成员（即静态成员变量和静态方法），不允许访问实例成员（即实例成员变量和实例方法），而实例方法不存在这个限制。
+        - heading [level=3] [ref=e1603]:
+          - link "⭐️重载和重写有什么区别？" [ref=e1604] [cursor=pointer]:
+            - /url: "#⭐️重载和重写有什么区别"
+        - blockquote [ref=e1605]:
+          - paragraph [ref=e1606]: 重载就是同样的一个方法能够根据输入数据的不同，做出不同的处理
+          - paragraph [ref=e1607]: 重写就是当子类继承自父类的相同方法，输入数据一样，但要做出有别于父类的响应时，你就要覆盖父类方法
+        - heading [level=4] [ref=e1608]:
+          - link "重载" [ref=e1609] [cursor=pointer]:
+            - /url: "#重载"
+        - paragraph [ref=e1610]: 发生在同一个类中（或者父类和子类之间），方法名必须相同，参数类型不同、个数不同、顺序不同，方法返回值和访问修饰符可以不同。
+        - paragraph [ref=e1611]: 《Java 核心技术》这本书是这样介绍重载的：
+        - blockquote [ref=e1612]:
+          - paragraph [ref=e1613]:
+            - text: 如果多个方法(比如
+            - code [ref=e1614]: StringBuilder
+            - text: 的构造方法)有相同的名字、不同的参数， 便产生了重载。
+          - generic [ref=e1615]:
+            - text: java
+            - button "复制代码" [ref=e1616] [cursor=pointer]
+            - code [ref=e1618]:
+              - generic [ref=e1619]: StringBuilder sb = new StringBuilder();
+              - generic [ref=e1620]: StringBuilder sb2 = new StringBuilder("HelloWorld");
+          - paragraph [ref=e1624]: 编译器必须挑选出具体执行哪个方法，它通过用各个方法给出的参数类型与特定方法调用所使用的值类型进行匹配来挑选出相应的方法。 如果编译器找不到匹配的参数， 就会产生编译时错误， 因为根本不存在匹配， 或者没有一个比其他的更好(这个过程被称为重载解析(overloading resolution))。
+          - paragraph [ref=e1625]: Java 允许重载任何方法， 而不只是构造器方法。
+        - paragraph [ref=e1626]: 综上：重载就是同一个类中多个同名方法根据不同的传参来执行不同的逻辑处理。
+        - heading [level=4] [ref=e1627]:
+          - link "重写" [ref=e1628] [cursor=pointer]:
+            - /url: "#重写"
+        - paragraph [ref=e1629]: 重写发生在运行期，是子类对父类的允许访问的方法的实现过程进行重新编写。
+        - list [ref=e1630]:
+          - listitem [ref=e1631]: 方法名、参数列表必须相同，子类方法返回值类型应比父类方法返回值类型更小或相等，抛出的异常范围小于等于父类，访问修饰符范围大于等于父类。
+          - listitem [ref=e1632]:
+            - text: 如果父类方法访问修饰符为
+            - code [ref=e1633]: private/final/static
+            - text: 则子类就不能重写该方法，但是被
+            - code [ref=e1634]: static
+            - text: 修饰的方法能够被再次声明。
+          - listitem [ref=e1635]: 构造方法无法被重写
+        - heading [level=4] [ref=e1636]:
+          - link "总结" [ref=e1637] [cursor=pointer]:
+            - /url: "#总结"
+        - paragraph [ref=e1638]:
+          - text: 综上：
+          - strong [ref=e1639]: 重写就是子类对父类方法的重新改造，外部样子不能改变，内部逻辑可以改变。
+        - table [ref=e1640]:
+          - rowgroup [ref=e1641]:
+            - row [ref=e1642]:
+              - columnheader "区别点" [ref=e1643]
+              - columnheader "重载 (Overloading)" [ref=e1644]
+              - columnheader "重写 (Overriding)" [ref=e1645]
+          - rowgroup [ref=e1646]:
+            - row [ref=e1647]:
+              - cell [ref=e1648]:
+                - strong [ref=e1649]: 发生范围
+              - cell "同一个类中。" [ref=e1650]
+              - cell "父类与子类之间（存在继承关系）。" [ref=e1651]
+            - row [ref=e1652]:
+              - cell [ref=e1653]:
+                - strong [ref=e1654]: 方法签名
+              - cell [ref=e1655]:
+                - text: 方法名
+                - strong [ref=e1656]: 必须相同
+                - text: ，但
+                - strong [ref=e1657]: 参数列表必须不同
+                - text: （参数的类型、个数或顺序至少有一项不同）。
+              - cell [ref=e1658]:
+                - text: 方法名、参数列表
+                - strong [ref=e1659]: 必须完全相同
+                - text: 。
+            - row [ref=e1660]:
+              - cell [ref=e1661]:
+                - strong [ref=e1662]: 返回类型
+              - cell [ref=e1663]:
+                - text: 与返回值类型
+                - strong [ref=e1664]: 无关
+                - text: ，可以任意修改。
+              - cell [ref=e1665]:
+                - text: 子类方法的返回类型必须与父类方法的返回类型
+                - strong [ref=e1666]: 相同
+                - text: ，或者是其
+                - strong [ref=e1667]: 子类
+                - text: 。
+            - row [ref=e1668]:
+              - cell [ref=e1669]:
+                - strong [ref=e1670]: 访问修饰符
+              - cell [ref=e1671]:
+                - text: 与访问修饰符
+                - strong [ref=e1672]: 无关
+                - text: ，可以任意修改。
+              - cell [ref=e1673]:
+                - text: 子类方法的访问权限
+                - strong [ref=e1674]: 不能低于
+                - text: 父类方法的访问权限。（public > protected > default > private）
+            - row [ref=e1675]:
+              - cell [ref=e1676]:
+                - strong [ref=e1677]: 绑定时期
+              - cell "编译时绑定或称静态绑定" [ref=e1678]
+              - cell "运行时绑定 (Run-time Binding) 或称动态绑定" [ref=e1679]
+        - paragraph [ref=e1680]:
+          - strong [ref=e1681]: 方法的重写要遵循“两同两小一大”
+          - text: （以下内容摘录自《疯狂 Java 讲义》，
+          - link "issue#892" [ref=e1682] [cursor=pointer]:
+            - /url: https://github.com/Snailclimb/JavaGuide/issues/892
+          - text: ）：
+        - list [ref=e1683]:
+          - listitem [ref=e1684]: “两同”即方法名相同、形参列表相同；
+          - listitem [ref=e1685]: “两小”指的是子类方法返回值类型应比父类方法返回值类型更小或相等，子类方法声明抛出的异常类应比父类方法声明抛出的异常类更小或相等；
+          - listitem [ref=e1686]: “一大”指的是子类方法的访问权限应比父类方法的访问权限更大或相等。
+        - paragraph [ref=e1687]:
+          - text: ⭐️ 关于
+          - strong [ref=e1688]: 重写的返回值类型
+          - text: 这里需要额外多说明一下，上面的表述不太清晰准确：如果方法的返回类型是 void 和基本数据类型，则返回值重写时不可修改。但是如果方法的返回值是引用类型，重写时是可以返回该引用类型的子类的。
+        - generic [ref=e1689]:
+          - text: java
+          - button "复制代码" [ref=e1690] [cursor=pointer]
+          - code [ref=e1692]:
+            - generic [ref=e1693]: "public class Hero {"
+            - generic [ref=e1694]: "public String name() {"
+            - generic [ref=e1695]: return "超级英雄";
+            - generic [ref=e1696]: "}"
+            - generic [ref=e1697]: "}"
+            - generic [ref=e1698]: "public class SuperMan extends Hero{"
+            - generic [ref=e1699]: "@Override"
+            - generic [ref=e1700]: "public String name() {"
+            - generic [ref=e1701]: return "超人";
+            - generic [ref=e1702]: "}"
+            - generic [ref=e1703]: "public Hero hero() {"
+            - generic [ref=e1704]: return new Hero();
+            - generic [ref=e1705]: "}"
+            - generic [ref=e1706]: "}"
+            - generic [ref=e1707]: "public class SuperSuperMan extends SuperMan {"
+            - generic [ref=e1708]: "@Override"
+            - generic [ref=e1709]: "public String name() {"
+            - generic [ref=e1710]: return "超级超级英雄";
+            - generic [ref=e1711]: "}"
+            - generic [ref=e1712]: "@Override"
+            - generic [ref=e1713]: "public SuperMan hero() {"
+            - generic [ref=e1714]: return new SuperMan();
+            - generic [ref=e1715]: "}"
+            - generic [ref=e1716]: "}"
+        - heading [level=3] [ref=e1744]:
+          - link "⭐️面向对象和面向过程的区别" [ref=e1745] [cursor=pointer]:
+            - /url: "#⭐️面向对象和面向过程的区别"
+        - paragraph [ref=e1746]: 面向过程编程（Procedural-Oriented Programming，POP）和面向对象编程（Object-Oriented Programming，OOP）是两种常见的编程范式，两者的主要区别在于解决问题的方式不同：
+        - list [ref=e1747]:
+          - listitem [ref=e1748]:
+            - strong [ref=e1749]: 面向过程编程（POP）
+            - text: ：面向过程把解决问题的过程拆成一个个方法，通过一个个方法的执行解决问题。
+          - listitem [ref=e1750]:
+            - strong [ref=e1751]: 面向对象编程（OOP）
+            - text: ：面向对象会先抽象出对象，然后用对象执行方法的方式解决问题。
+        - paragraph [ref=e1752]: 相比较于 POP，OOP 开发的程序一般具有下面这些优点：
+        - list [ref=e1753]:
+          - listitem [ref=e1754]:
+            - strong [ref=e1755]: 易维护
+            - text: ：由于良好的结构和封装性，OOP 程序通常更容易维护。
+          - listitem [ref=e1756]:
+            - strong [ref=e1757]: 易复用
+            - text: ：通过继承和多态，OOP 设计使得代码更具复用性，方便扩展功能。
+          - listitem [ref=e1758]:
+            - strong [ref=e1759]: 易扩展
+            - text: ：模块化设计使得系统扩展变得更加容易和灵活。
+        - paragraph [ref=e1760]: POP 的编程方式通常更为简单和直接，适合处理一些较简单的任务。
+        - paragraph [ref=e1761]:
+          - text: "POP 和 OOP 的性能差异主要取决于它们的运行机制，而不仅仅是编程范式本身。因此，简单地比较两者的性能是一个常见的误区（相关 issue :"
+          - link "面向过程：面向过程性能比面向对象高？？" [ref=e1762] [cursor=pointer]:
+            - /url: https://github.com/Snailclimb/JavaGuide/issues/431
+          - text: ）。
+        - paragraph [ref=e1763]:
+          - img "POP 和 OOP 性能比较不合适" [ref=e1764]
+        - paragraph [ref=e1765]: 在选择编程范式时，性能并不是唯一的考虑因素。代码的可维护性、可扩展性和开发效率同样重要。
+        - paragraph [ref=e1766]: 现代编程语言基本都支持多种编程范式，既可以用来进行面向过程编程，也可以进行面向对象编程。
+        - paragraph [ref=e1767]: 下面是一个求圆的面积和周长的示例，简单分别展示了面向对象和面向过程两种不同的解决方案。
+        - paragraph [ref=e1768]:
+          - strong [ref=e1769]: 面向对象
+          - text: ：
+        - generic [ref=e1770]:
+          - text: java
+          - button "复制代码" [ref=e1771] [cursor=pointer]
+          - code [ref=e1773]:
+            - generic [ref=e1774]: "public class Circle {"
+            - generic [ref=e1775]: // 定义圆的半径
+            - generic [ref=e1776]: private double radius;
+            - generic [ref=e1777]: // 构造函数
+            - generic [ref=e1778]: "public Circle(double radius) {"
+            - generic [ref=e1779]: this.radius = radius;
+            - generic [ref=e1780]: "}"
+            - generic [ref=e1781]: // 计算圆的面积
+            - generic [ref=e1782]: "public double getArea() {"
+            - generic [ref=e1783]: return Math.PI * radius * radius;
+            - generic [ref=e1784]: "}"
+            - generic [ref=e1785]: // 计算圆的周长
+            - generic [ref=e1786]: "public double getPerimeter() {"
+            - generic [ref=e1787]: return 2 * Math.PI * radius;
+            - generic [ref=e1788]: "}"
+            - generic [ref=e1789]: "public static void main(String[] args) {"
+            - generic [ref=e1790]: // 创建一个半径为3的圆
+            - generic [ref=e1791]: Circle circle = new Circle(3.0);
+            - generic [ref=e1792]: // 输出圆的面积和周长
+            - generic [ref=e1793]: System.out.println("圆的面积为：" + circle.getArea());
+            - generic [ref=e1794]: System.out.println("圆的周长为：" + circle.getPerimeter());
+            - generic [ref=e1795]: "}"
+            - generic [ref=e1796]: "}"
+        - paragraph [ref=e1826]:
+          - text: 我们定义了一个
+          - code [ref=e1827]: Circle
+          - text: 类来表示圆，该类包含了圆的半径属性和计算面积、周长的方法。
+        - paragraph [ref=e1828]:
+          - strong [ref=e1829]: 面向过程
+          - text: ：
+        - generic [ref=e1830]:
+          - text: java
+          - button "复制代码" [ref=e1831] [cursor=pointer]
+          - code [ref=e1833]:
+            - generic [ref=e1834]: "public class Main {"
+            - generic [ref=e1835]: "public static void main(String[] args) {"
+            - generic [ref=e1836]: // 定义圆的半径
+            - generic [ref=e1837]: double radius = 3.0;
+            - generic [ref=e1838]: // 计算圆的面积和周长
+            - generic [ref=e1839]: double area = Math.PI * radius * radius;
+            - generic [ref=e1840]: double perimeter = 2 * Math.PI * radius;
+            - generic [ref=e1841]: // 输出圆的面积和周长
+            - generic [ref=e1842]: System.out.println("圆的面积为：" + area);
+            - generic [ref=e1843]: System.out.println("圆的周长为：" + perimeter);
+            - generic [ref=e1844]: "}"
+            - generic [ref=e1845]: "}"
+        - paragraph [ref=e1861]: 我们直接定义了圆的半径，并使用该半径直接计算出圆的面积和周长。
+        - heading [level=3] [ref=e1862]:
+          - link "⭐️对象的相等和引用相等的区别" [ref=e1863] [cursor=pointer]:
+            - /url: "#⭐️对象的相等和引用相等的区别"
+        - list [ref=e1864]:
+          - listitem [ref=e1865]: 对象的相等一般比较的是内存中存放的内容是否相等。
+          - listitem [ref=e1866]: 引用相等一般比较的是他们指向的内存地址是否相等。
+        - paragraph [ref=e1867]: 这里举一个例子：
+        - generic [ref=e1868]:
+          - text: java
+          - button "复制代码" [ref=e1869] [cursor=pointer]
+          - code [ref=e1871]:
+            - generic [ref=e1872]: String str1 = "hello";
+            - generic [ref=e1873]: String str2 = new String("hello");
+            - generic [ref=e1874]: String str3 = "hello";
+            - generic [ref=e1875]: // 使用 == 比较字符串的引用相等
+            - generic [ref=e1876]: System.out.println(str1 == str2);
+            - generic [ref=e1877]: System.out.println(str1 == str3);
+            - generic [ref=e1878]: // 使用 equals 方法比较字符串的相等
+            - generic [ref=e1879]: System.out.println(str1.equals(str2));
+            - generic [ref=e1880]: System.out.println(str1.equals(str3));
+        - paragraph [ref=e1891]: 输出结果：
+        - generic [ref=e1892]:
+          - text: plain
+          - button "复制代码" [ref=e1893] [cursor=pointer]
+          - code [ref=e1895]:
+            - generic [ref=e1896]: "false"
+            - generic [ref=e1897]: "true"
+            - generic [ref=e1898]: "true"
+            - generic [ref=e1899]: "true"
+        - paragraph [ref=e1905]: 从上面的代码输出结果可以看出：
+        - list [ref=e1906]:
+          - listitem [ref=e1907]:
+            - code [ref=e1908]: str1
+            - text: 和
+            - code [ref=e1909]: str2
+            - text: 不相等，而
+            - code [ref=e1910]: str1
+            - text: 和
+            - code [ref=e1911]: str3
+            - text: 相等。这是因为
+            - code [ref=e1912]: ==
+            - text: 运算符比较的是字符串的引用是否相等。
+          - listitem [ref=e1913]:
+            - code [ref=e1914]: str1
+            - text: 、
+            - code [ref=e1915]: str2
+            - text: 、
+            - code [ref=e1916]: str3
+            - text: 三者的内容都相等。这是因为
+            - code [ref=e1917]: equals
+            - text: 方法比较的是字符串的内容，即使这些字符串的对象引用不同，只要它们的内容相等，就认为它们是相等的。
+        - heading [level=3] [ref=e1918]:
+          - link "⭐️面向对象三大特征" [ref=e1919] [cursor=pointer]:
+            - /url: "#⭐️面向对象三大特征"
+        - heading [level=4] [ref=e1920]:
+          - link "封装" [ref=e1921] [cursor=pointer]:
+            - /url: "#封装"
+        - paragraph [ref=e1922]: 封装是指把一个对象的状态信息（也就是属性）隐藏在对象内部，不允许外部对象直接访问对象的内部信息。但是可以提供一些可以被外界访问的方法来操作属性。就好像我们看不到挂在墙上的空调的内部的零件信息（也就是属性），但是可以通过遥控器（方法）来控制空调。如果属性不想被外界访问，我们大可不必提供方法给外界访问。但是如果一个类没有提供给外界访问的方法，那么这个类也没有什么意义了。就好像如果没有空调遥控器，那么我们就无法操控空凋制冷，空调本身就没有意义了（当然现在还有很多其他方法 ，这里只是为了举例子）。
+        - generic [ref=e1923]:
+          - text: java
+          - button "复制代码" [ref=e1924] [cursor=pointer]
+          - code [ref=e1926]:
+            - generic [ref=e1927]: "public class Student {"
+            - generic [ref=e1928]: private int id;//id属性私有化
+            - generic [ref=e1929]: private String name;//name属性私有化
+            - generic [ref=e1930]: //获取id的方法
+            - generic [ref=e1931]: "public int getId() {"
+            - generic [ref=e1932]: return id;
+            - generic [ref=e1933]: "}"
+            - generic [ref=e1934]: //设置id的方法
+            - generic [ref=e1935]: "public void setId(int id) {"
+            - generic [ref=e1936]: this.id = id;
+            - generic [ref=e1937]: "}"
+            - generic [ref=e1938]: //获取name的方法
+            - generic [ref=e1939]: "public String getName() {"
+            - generic [ref=e1940]: return name;
+            - generic [ref=e1941]: "}"
+            - generic [ref=e1942]: //设置name的方法
+            - generic [ref=e1943]: "public void setName(String name) {"
+            - generic [ref=e1944]: this.name = name;
+            - generic [ref=e1945]: "}"
+            - generic [ref=e1946]: "}"
+        - heading [level=4] [ref=e1972]:
+          - link "继承" [ref=e1973] [cursor=pointer]:
+            - /url: "#继承"
+        - paragraph [ref=e1974]: 不同类型的对象，相互之间经常有一定数量的共同点。例如，小明同学、小红同学、小李同学，都共享学生的特性（班级、学号等）。同时，每一个对象还定义了额外的特性使得他们与众不同。例如小明的数学比较好，小红的性格惹人喜爱；小李的力气比较大。继承是使用已存在的类的定义作为基础建立新类的技术，新类的定义可以增加新的数据或新的功能，也可以用父类的功能，但不能选择性地继承父类。通过使用继承，可以快速地创建新的类，可以提高代码的重用，程序的可维护性，节省大量创建新类的时间 ，提高我们的开发效率。
+        - paragraph [ref=e1975]:
+          - strong [ref=e1976]: 关于继承如下 3 点请记住：
+        - list [ref=e1977]:
+          - listitem [ref=e1978]:
+            - text: 子类拥有父类对象所有的属性和方法（包括私有属性和私有方法），但是父类中的私有属性和方法子类是无法访问，
+            - strong [ref=e1979]: 只是拥有
+            - text: 。
+          - listitem [ref=e1980]: 子类可以拥有自己属性和方法，即子类可以对父类进行扩展。
+          - listitem [ref=e1981]: 子类可以用自己的方式实现父类的方法。（以后介绍）。
+        - heading [level=4] [ref=e1982]:
+          - link "多态" [ref=e1983] [cursor=pointer]:
+            - /url: "#多态"
+        - paragraph [ref=e1984]: 多态，顾名思义，表示一个对象具有多种的状态，具体表现为父类的引用指向子类的实例。
+        - paragraph [ref=e1985]:
+          - strong [ref=e1986]: "多态的特点:"
+        - list [ref=e1987]:
+          - listitem [ref=e1988]: 对象类型和引用类型之间具有继承（类）/实现（接口）的关系；
+          - listitem [ref=e1989]: 引用类型变量发出的方法调用的到底是哪个类中的方法，必须在程序运行期间才能确定；
+          - listitem [ref=e1990]: 多态不能调用“只在子类存在但在父类不存在”的方法；
+          - listitem [ref=e1991]: 如果子类重写了父类的方法，真正执行的是子类重写的方法，如果子类没有重写父类的方法，执行的是父类的方法。
+        - heading [level=3] [ref=e1992]:
+          - link "⭐️接口和抽象类有什么共同点和区别？" [ref=e1993] [cursor=pointer]:
+            - /url: "#⭐️接口和抽象类有什么共同点和区别"
+        - heading [level=4] [ref=e1994]:
+          - link "接口和抽象类的共同点" [ref=e1995] [cursor=pointer]:
+            - /url: "#接口和抽象类的共同点"
+        - list [ref=e1996]:
+          - listitem [ref=e1997]:
+            - strong [ref=e1998]: 实例化
+            - text: ：接口和抽象类都不能直接实例化，只能被实现（接口）或继承（抽象类）后才能创建具体的对象。
+          - listitem [ref=e1999]:
+            - strong [ref=e2000]: 抽象方法
+            - text: ：接口和抽象类都可以包含抽象方法。抽象方法没有方法体，必须在子类或实现类中实现。
+        - heading [level=4] [ref=e2001]:
+          - link "接口和抽象类的区别" [ref=e2002] [cursor=pointer]:
+            - /url: "#接口和抽象类的区别"
+        - list [ref=e2003]:
+          - listitem [ref=e2004]:
+            - strong [ref=e2005]: 设计目的
+            - text: ：接口主要用于对类的行为进行约束，你实现了某个接口就具有了对应的行为。抽象类主要用于代码复用，强调的是所属关系。
+          - listitem [ref=e2006]:
+            - strong [ref=e2007]: 继承和实现
+            - text: ：一个类只能继承一个类（包括抽象类），因为 Java 不支持多继承。但一个类可以实现多个接口，一个接口也可以继承多个其他接口。
+          - listitem [ref=e2008]:
+            - strong [ref=e2009]: 成员变量
+            - text: ：接口中的成员变量只能是
+            - code [ref=e2010]: public static final
+            - text: 类型的，不能被修改且必须有初始值。抽象类的成员变量可以有任何修饰符（
+            - code [ref=e2011]: private
+            - text: ","
+            - code [ref=e2012]: protected
+            - text: ","
+            - code [ref=e2013]: public
+            - text: ），可以在子类中被重新定义或赋值。
+          - listitem [ref=e2014]:
+            - strong [ref=e2015]: 方法
+            - text: ：
+            - list [ref=e2016]:
+              - listitem [ref=e2017]:
+                - text: Java 8 之前，接口中的方法默认是
+                - code [ref=e2018]: public abstract
+                - text: ，也就是只能有方法声明。自 Java 8 起，可以在接口中定义
+                - code [ref=e2019]: default
+                - text: （默认） 方法和
+                - code [ref=e2020]: static
+                - text: （静态）方法。 自 Java 9 起，接口可以包含
+                - code [ref=e2021]: private
+                - text: 方法。
+              - listitem [ref=e2022]: 抽象类可以包含抽象方法和非抽象方法。抽象方法没有方法体，必须在子类中实现。非抽象方法有具体实现，可以直接在抽象类中使用或在子类中重写。
+        - paragraph [ref=e2023]:
+          - text: 在 Java 8 及以上版本中，接口引入了新的方法类型：
+          - code [ref=e2024]: default
+          - text: 方法、
+          - code [ref=e2025]: static
+          - text: 方法和
+          - code [ref=e2026]: private
+          - text: 方法。这些方法让接口的使用更加灵活。
+        - paragraph [ref=e2027]:
+          - text: Java 8 引入的
+          - code [ref=e2028]: default
+          - text: 方法用于提供接口方法的默认实现，可以在实现类中被覆盖。这样就可以在不修改实现类的情况下向现有接口添加新功能，从而增强接口的扩展性和向后兼容性。
+        - generic [ref=e2029]:
+          - text: java
+          - button "复制代码" [ref=e2030] [cursor=pointer]
+          - code [ref=e2032]:
+            - generic [ref=e2033]: "public interface MyInterface {"
+            - generic [ref=e2034]: "default void defaultMethod() {"
+            - generic [ref=e2035]: System.out.println("This is a default method.");
+            - generic [ref=e2036]: "}"
+            - generic [ref=e2037]: "}"
+        - paragraph [ref=e2044]:
+          - text: Java 8 引入的
+          - code [ref=e2045]: static
+          - text: 方法无法在实现类中被覆盖，只能通过接口名直接调用（
+          - code [ref=e2046]: MyInterface.staticMethod()
+          - text: ），类似于类中的静态方法。
+          - code [ref=e2047]: static
+          - text: 方法通常用于定义一些通用的、与接口相关的工具方法，一般很少用。
+        - generic [ref=e2048]:
+          - text: java
+          - button "复制代码" [ref=e2049] [cursor=pointer]
+          - code [ref=e2051]:
+            - generic [ref=e2052]: "public interface MyInterface {"
+            - generic [ref=e2053]: "static void staticMethod() {"
+            - generic [ref=e2054]: System.out.println("This is a static method in the interface.");
+            - generic [ref=e2055]: "}"
+            - generic [ref=e2056]: "}"
+        - paragraph [ref=e2063]:
+          - text: Java 9 允许在接口中使用
+          - code [ref=e2064]: private
+          - text: 方法。
+          - code [ref=e2065]: private
+          - text: 方法可以用于在接口内部共享代码，不对外暴露。
+        - generic [ref=e2066]:
+          - text: java
+          - button "复制代码" [ref=e2067] [cursor=pointer]
+          - code [ref=e2069]:
+            - generic [ref=e2070]: "public interface MyInterface {"
+            - generic [ref=e2071]: // default 方法
+            - generic [ref=e2072]: "default void defaultMethod() {"
+            - generic [ref=e2073]: commonMethod();
+            - generic [ref=e2074]: "}"
+            - generic [ref=e2075]: // static 方法
+            - generic [ref=e2076]: "static void staticMethod() {"
+            - generic [ref=e2077]: commonMethod();
+            - generic [ref=e2078]: "}"
+            - generic [ref=e2079]: // 私有静态方法，可以被 static 和 default 方法调用
+            - generic [ref=e2080]: "private static void commonMethod() {"
+            - generic [ref=e2081]: System.out.println("This is a private method used internally.");
+            - generic [ref=e2082]: "}"
+            - generic [ref=e2083]: // 实例私有方法，只能被 default 方法调用。
+            - generic [ref=e2084]: "private void instanceCommonMethod() {"
+            - generic [ref=e2085]: System.out.println("This is a private instance method used internally.");
+            - generic [ref=e2086]: "}"
+            - generic [ref=e2087]: "}"
+        - heading [level=3] [ref=e2110]:
+          - link "深拷贝和浅拷贝区别了解吗？什么是引用拷贝？" [ref=e2111] [cursor=pointer]:
+            - /url: "#深拷贝和浅拷贝区别了解吗-什么是引用拷贝"
+        - paragraph [ref=e2112]: 关于深拷贝和浅拷贝区别，我这里先给结论：
+        - list [ref=e2113]:
+          - listitem [ref=e2114]:
+            - strong [ref=e2115]: 浅拷贝
+            - text: ：浅拷贝会在堆上创建一个新的对象（区别于引用拷贝的一点），不过，如果原对象内部的属性是引用类型的话，浅拷贝会直接复制内部对象的引用地址，也就是说拷贝对象和原对象共用同一个内部对象。
+          - listitem [ref=e2116]:
+            - strong [ref=e2117]: 深拷贝
+            - text: ：深拷贝会完全复制整个对象，包括这个对象所包含的内部对象。
+        - paragraph [ref=e2118]: 上面的结论没有完全理解的话也没关系，我们来看一个具体的案例！
+        - heading [level=4] [ref=e2119]:
+          - link "浅拷贝" [ref=e2120] [cursor=pointer]:
+            - /url: "#浅拷贝"
+        - paragraph [ref=e2121]:
+          - text: 浅拷贝的示例代码如下，我们这里实现了
+          - code [ref=e2122]: Cloneable
+          - text: 接口，并重写了
+          - code [ref=e2123]: clone()
+          - text: 方法。
+        - paragraph [ref=e2124]:
+          - code [ref=e2125]: clone()
+          - text: 方法的实现很简单，直接调用的是父类
+          - code [ref=e2126]: Object
+          - text: 的
+          - code [ref=e2127]: clone()
+          - text: 方法。
+        - generic [ref=e2128]:
+          - text: java
+          - button "复制代码" [ref=e2129] [cursor=pointer]
+          - code [ref=e2131]:
+            - generic [ref=e2132]: "public class Address implements Cloneable{"
+            - generic [ref=e2133]: private String name;
+            - generic [ref=e2134]: // 省略构造函数、Getter&Setter方法
+            - generic [ref=e2135]: "@Override"
+            - generic [ref=e2136]: "public Address clone() {"
+            - generic [ref=e2137]: "try {"
+            - generic [ref=e2138]: return (Address) super.clone();
+            - generic [ref=e2139]: "} catch (CloneNotSupportedException e) {"
+            - generic [ref=e2140]: throw new AssertionError();
+            - generic [ref=e2141]: "}"
+            - generic [ref=e2142]: "}"
+            - generic [ref=e2143]: "}"
+            - generic [ref=e2144]: "public class Person implements Cloneable {"
+            - generic [ref=e2145]: private Address address;
+            - generic [ref=e2146]: // 省略构造函数、Getter&Setter方法
+            - generic [ref=e2147]: "@Override"
+            - generic [ref=e2148]: "public Person clone() {"
+            - generic [ref=e2149]: "try {"
+            - generic [ref=e2150]: Person person = (Person) super.clone();
+            - generic [ref=e2151]: return person;
+            - generic [ref=e2152]: "} catch (CloneNotSupportedException e) {"
+            - generic [ref=e2153]: throw new AssertionError();
+            - generic [ref=e2154]: "}"
+            - generic [ref=e2155]: "}"
+            - generic [ref=e2156]: "}"
+        - paragraph [ref=e2184]: 测试：
+        - generic [ref=e2185]:
+          - text: java
+          - button "复制代码" [ref=e2186] [cursor=pointer]
+          - code [ref=e2188]:
+            - generic [ref=e2189]: Person person1 = new Person(new Address("武汉"));
+            - generic [ref=e2190]: Person person1Copy = person1.clone();
+            - generic [ref=e2191]: // true
+            - generic [ref=e2192]: System.out.println(person1.getAddress() == person1Copy.getAddress());
+        - paragraph [ref=e2198]:
+          - text: 从输出结构就可以看出，
+          - code [ref=e2199]: person1
+          - text: 的克隆对象和
+          - code [ref=e2200]: person1
+          - text: 使用的仍然是同一个
+          - code [ref=e2201]: Address
+          - text: 对象。
+        - heading [level=4] [ref=e2202]:
+          - link "深拷贝" [ref=e2203] [cursor=pointer]:
+            - /url: "#深拷贝"
+        - paragraph [ref=e2204]:
+          - text: 这里我们简单对
+          - code [ref=e2205]: Person
+          - text: 类的
+          - code [ref=e2206]: clone()
+          - text: 方法进行修改，连带着要把
+          - code [ref=e2207]: Person
+          - text: 对象内部的
+          - code [ref=e2208]: Address
+          - text: 对象一起复制。
+        - generic [ref=e2209]:
+          - text: java
+          - button "复制代码" [ref=e2210] [cursor=pointer]
+          - code [ref=e2212]:
+            - generic [ref=e2213]: "@Override"
+            - generic [ref=e2214]: "public Person clone() {"
+            - generic [ref=e2215]: "try {"
+            - generic [ref=e2216]: Person person = (Person) super.clone();
+            - generic [ref=e2217]: person.setAddress(person.getAddress().clone());
+            - generic [ref=e2218]: return person;
+            - generic [ref=e2219]: "} catch (CloneNotSupportedException e) {"
+            - generic [ref=e2220]: throw new AssertionError();
+            - generic [ref=e2221]: "}"
+            - generic [ref=e2222]: "}"
+        - paragraph [ref=e2234]: 测试：
+        - generic [ref=e2235]:
+          - text: java
+          - button "复制代码" [ref=e2236] [cursor=pointer]
+          - code [ref=e2238]:
+            - generic [ref=e2239]: Person person1 = new Person(new Address("武汉"));
+            - generic [ref=e2240]: Person person1Copy = person1.clone();
+            - generic [ref=e2241]: // false
+            - generic [ref=e2242]: System.out.println(person1.getAddress() == person1Copy.getAddress());
+        - paragraph [ref=e2248]:
+          - text: 从输出结构就可以看出，显然
+          - code [ref=e2249]: person1
+          - text: 的克隆对象和
+          - code [ref=e2250]: person1
+          - text: 包含的
+          - code [ref=e2251]: Address
+          - text: 对象已经是不同的了。
+        - paragraph [ref=e2252]:
+          - strong [ref=e2253]: 那什么是引用拷贝呢？
+          - text: 简单来说，引用拷贝就是两个不同的引用指向同一个对象。
+        - paragraph [ref=e2254]: 我专门画了一张图来描述浅拷贝、深拷贝、引用拷贝：
+        - paragraph [ref=e2255]:
+          - img "shallow&deep-copy" [ref=e2256]
+        - heading [level=2] [ref=e2257]:
+          - link "⭐️Object" [ref=e2258] [cursor=pointer]:
+            - /url: "#⭐️object"
+        - heading [level=3] [ref=e2259]:
+          - link "Object 类的常见方法有哪些？" [ref=e2260] [cursor=pointer]:
+            - /url: "#object-类的常见方法有哪些"
+        - paragraph [ref=e2261]: Object 类是一个特殊的类，是所有类的父类，主要提供了以下 11 个方法：
+        - generic [ref=e2262]:
+          - text: java
+          - button "复制代码" [ref=e2263] [cursor=pointer]
+          - code [ref=e2265]:
+            - generic [ref=e2266]: /**
+            - generic [ref=e2267]: "* native 方法，用于返回当前运行时对象的 Class 对象，使用了 final 关键字修饰，故不允许子类重写。"
+            - generic [ref=e2268]: "*/"
+            - generic [ref=e2269]: public final native Class<?> getClass()
+            - generic [ref=e2270]: /**
+            - generic [ref=e2271]: "* native 方法，用于返回对象的哈希码，主要使用在哈希表中，比如 JDK 中的HashMap。"
+            - generic [ref=e2272]: "*/"
+            - generic [ref=e2273]: public native int hashCode()
+            - generic [ref=e2274]: /**
+            - generic [ref=e2275]: "* 用于比较 2 个对象的内存地址是否相等，String 类对该方法进行了重写以用于比较字符串的值是否相等。"
+            - generic [ref=e2276]: "*/"
+            - generic [ref=e2277]: public boolean equals(Object obj)
+            - generic [ref=e2278]: /**
+            - generic [ref=e2279]: "* native 方法，用于创建并返回当前对象的一份拷贝。"
+            - generic [ref=e2280]: "*/"
+            - generic [ref=e2281]: protected native Object clone() throws CloneNotSupportedException
+            - generic [ref=e2282]: /**
+            - generic [ref=e2283]: "* 返回类的名字实例的哈希码的 16 进制的字符串。建议 Object 所有的子类都重写这个方法。"
+            - generic [ref=e2284]: "*/"
+            - generic [ref=e2285]: public String toString()
+            - generic [ref=e2286]: /**
+            - generic [ref=e2287]: "* native 方法，并且不能重写。唤醒一个在此对象监视器上等待的线程(监视器相当于就是锁的概念)。如果有多个线程在等待只会任意唤醒一个。"
+            - generic [ref=e2288]: "*/"
+            - generic [ref=e2289]: public final native void notify()
+            - generic [ref=e2290]: /**
+            - generic [ref=e2291]: "* native 方法，并且不能重写。跟 notify 一样，唯一的区别就是会唤醒在此对象监视器上等待的所有线程，而不是一个线程。"
+            - generic [ref=e2292]: "*/"
+            - generic [ref=e2293]: public final native void notifyAll()
+            - generic [ref=e2294]: /**
+            - generic [ref=e2295]: "* native方法，并且不能重写。暂停线程的执行。注意：sleep 方法没有释放锁，而 wait 方法释放了锁 ，timeout 是等待时间。"
+            - generic [ref=e2296]: "*/"
+            - generic [ref=e2297]: public final native void wait(long timeout) throws InterruptedException
+            - generic [ref=e2298]: /**
+            - generic [ref=e2299]: "* 多了 nanos 参数，这个参数表示额外时间（以纳秒为单位，范围是 0-999999）。 所以超时的时间还需要加上 nanos 纳秒。。"
+            - generic [ref=e2300]: "*/"
+            - generic [ref=e2301]: public final void wait(long timeout, int nanos) throws InterruptedException
+            - generic [ref=e2302]: /**
+            - generic [ref=e2303]: "* 跟之前的2个wait方法一样，只不过该方法一直等待，没有超时时间这个概念"
+            - generic [ref=e2304]: "*/"
+            - generic [ref=e2305]: public final void wait() throws InterruptedException
+            - generic [ref=e2306]: /**
+            - generic [ref=e2307]: "* 实例被垃圾回收器回收的时候触发的操作"
+            - generic [ref=e2308]: "*/"
+            - generic [ref=e2309]: "protected void finalize() throws Throwable { }"
+        - heading [level=3] [ref=e2355]:
+          - link "== 和 equals() 的区别" [ref=e2356] [cursor=pointer]:
+            - /url: "#和-equals-的区别"
+        - paragraph [ref=e2357]:
+          - strong [ref=e2358]:
+            - code [ref=e2359]: ==
+          - text: 对于基本类型和引用类型的作用效果是不同的：
+        - list [ref=e2360]:
+          - listitem [ref=e2361]:
+            - text: 对于基本数据类型来说，
+            - code [ref=e2362]: ==
+            - text: 比较的是值。
+          - listitem [ref=e2363]:
+            - text: 对于引用数据类型来说，
+            - code [ref=e2364]: ==
+            - text: 比较的是对象的内存地址。
+        - blockquote [ref=e2365]:
+          - paragraph [ref=e2366]: 因为 Java 只有值传递，所以，对于 == 来说，不管是比较基本数据类型，还是引用数据类型的变量，其本质比较的都是值，只是引用类型变量存的值是对象的地址。
+        - paragraph [ref=e2367]:
+          - strong [ref=e2368]:
+            - code [ref=e2369]: equals()
+          - text: 不能用于判断基本数据类型的变量，只能用来判断两个对象是否相等。
+          - code [ref=e2370]: equals()
+          - text: 方法存在于
+          - code [ref=e2371]: Object
+          - text: 类中，而
+          - code [ref=e2372]: Object
+          - text: 类是所有类的直接或间接父类，因此所有的类都有
+          - code [ref=e2373]: equals()
+          - text: 方法。
+        - paragraph [ref=e2374]:
+          - code [ref=e2375]: Object
+          - text: 类
+          - code [ref=e2376]: equals()
+          - text: 方法：
+        - generic [ref=e2377]:
+          - text: java
+          - button "复制代码" [ref=e2378] [cursor=pointer]
+          - code [ref=e2380]:
+            - generic [ref=e2381]: "public boolean equals(Object obj) {"
+            - generic [ref=e2382]: return (this == obj);
+            - generic [ref=e2383]: "}"
+        - paragraph [ref=e2388]:
+          - code [ref=e2389]: equals()
+          - text: 方法存在两种使用情况：
+        - list [ref=e2390]:
+          - listitem [ref=e2391]:
+            - strong [ref=e2392]:
+              - text: 类没有重写
+              - code [ref=e2393]: equals()
+              - text: 方法
+            - text: ：通过
+            - code [ref=e2394]: equals()
+            - text: 比较该类的两个对象时，等价于通过“==”比较这两个对象，使用的默认是
+            - code [ref=e2395]: Object
+            - text: 类
+            - code [ref=e2396]: equals()
+            - text: 方法。
+          - listitem [ref=e2397]:
+            - strong [ref=e2398]:
+              - text: 类重写了
+              - code [ref=e2399]: equals()
+              - text: 方法
+            - text: ：一般我们都重写
+            - code [ref=e2400]: equals()
+            - text: 方法来比较两个对象中的属性是否相等；若它们的属性相等，则返回 true(即，认为这两个对象相等)。
+        - paragraph [ref=e2401]:
+          - text: 举个例子（这里只是为了举例。实际上，你按照下面这种写法的话，像 IDEA 这种比较智能的 IDE 都会提示你将
+          - code [ref=e2402]: ==
+          - text: 换成
+          - code [ref=e2403]: equals()
+          - text: ）：
+        - generic [ref=e2404]:
+          - text: java
+          - button "复制代码" [ref=e2405] [cursor=pointer]
+          - code [ref=e2407]:
+            - generic [ref=e2408]: String a = new String("ab"); // a 为一个引用
+            - generic [ref=e2409]: String b = new String("ab"); // b为另一个引用,对象的内容一样
+            - generic [ref=e2410]: String aa = "ab"; // 放在常量池中
+            - generic [ref=e2411]: String bb = "ab"; // 从常量池中查找
+            - generic [ref=e2412]: System.out.println(aa == bb);// true
+            - generic [ref=e2413]: System.out.println(a == b);// false
+            - generic [ref=e2414]: System.out.println(a.equals(b));// true
+            - generic [ref=e2415]: System.out.println(42 == 42.0);// true
+        - paragraph [ref=e2425]:
+          - code [ref=e2426]: String
+          - text: 中的
+          - code [ref=e2427]: equals
+          - text: 方法是被重写过的，因为
+          - code [ref=e2428]: Object
+          - text: 的
+          - code [ref=e2429]: equals
+          - text: 方法是比较的对象的内存地址，而
+          - code [ref=e2430]: String
+          - text: 的
+          - code [ref=e2431]: equals
+          - text: 方法比较的是对象的值。
+        - paragraph [ref=e2432]:
+          - text: 当创建
+          - code [ref=e2433]: String
+          - text: 类型的对象时，虚拟机会在常量池中查找有没有已经存在的值和要创建的值相同的对象，如果有就把它赋给当前引用。如果没有就在常量池中重新创建一个
+          - code [ref=e2434]: String
+          - text: 对象。
+        - paragraph [ref=e2435]:
+          - code [ref=e2436]: String
+          - text: 类
+          - code [ref=e2437]: equals()
+          - text: 方法：
+        - generic [ref=e2438]:
+          - text: java
+          - button "复制代码" [ref=e2439] [cursor=pointer]
+          - code [ref=e2441]:
+            - generic [ref=e2442]: "public boolean equals(Object anObject) {"
+            - generic [ref=e2443]: "if (this == anObject) {"
+            - generic [ref=e2444]: return true;
+            - generic [ref=e2445]: "}"
+            - generic [ref=e2446]: "if (anObject instanceof String) {"
+            - generic [ref=e2447]: String anotherString = (String)anObject;
+            - generic [ref=e2448]: int n = value.length;
+            - generic [ref=e2449]: "if (n == anotherString.value.length) {"
+            - generic [ref=e2450]: char v1[] = value;
+            - generic [ref=e2451]: char v2[] = anotherString.value;
+            - generic [ref=e2452]: int i = 0;
+            - generic [ref=e2453]: "while (n-- != 0) {"
+            - generic [ref=e2454]: if (v1[i] != v2[i])
+            - generic [ref=e2455]: return false;
+            - generic [ref=e2456]: i++;
+            - generic [ref=e2457]: "}"
+            - generic [ref=e2458]: return true;
+            - generic [ref=e2459]: "}"
+            - generic [ref=e2460]: "}"
+            - generic [ref=e2461]: return false;
+            - generic [ref=e2462]: "}"
+        - heading [level=3] [ref=e2485]:
+          - link "hashCode() 有什么用？" [ref=e2486] [cursor=pointer]:
+            - /url: "#hashcode-有什么用"
+        - paragraph [ref=e2487]:
+          - code [ref=e2488]: hashCode()
+          - text: 的作用是获取哈希码（
+          - code [ref=e2489]: int
+          - text: 整数），也称为散列码。这个哈希码的作用是确定该对象在哈希表中的索引位置。
+        - paragraph [ref=e2490]:
+          - img "hashCode() 方法" [ref=e2491]
+        - paragraph [ref=e2492]:
+          - code [ref=e2493]: hashCode()
+          - text: 定义在 JDK 的
+          - code [ref=e2494]: Object
+          - text: 类中，这就意味着 Java 中的任何类都包含有
+          - code [ref=e2495]: hashCode()
+          - text: 函数。另外需要注意的是：
+          - code [ref=e2496]: Object
+          - text: 的
+          - code [ref=e2497]: hashCode()
+          - text: 方法是本地方法，也就是用 C 语言或 C++ 实现的。
+        - blockquote [ref=e2498]:
+          - paragraph [ref=e2499]:
+            - text: ⚠️ 注意：该方法在
+            - strong [ref=e2500]: Oracle OpenJDK8
+            - text: 中默认是 "使用线程局部状态来实现 Marsaglia's xor-shift 随机数生成", 并不是 "地址" 或者 "地址转换而来", 不同 JDK/VM 可能不同。在
+            - strong [ref=e2501]: Oracle OpenJDK8
+            - text: "中有六种生成方式 (其中第五种是返回地址), 通过添加 VM 参数: -XX:hashCode=4 启用第五种。参考源码:"
+          - list [ref=e2502]:
+            - listitem [ref=e2503]:
+              - link "https://hg.openjdk.org/jdk8u/jdk8u/hotspot/file/87ee5ee27509/src/share/vm/runtime/globals.hpp" [ref=e2504] [cursor=pointer]:
+                - /url: https://hg.openjdk.org/jdk8u/jdk8u/hotspot/file/87ee5ee27509/src/share/vm/runtime/globals.hpp
+              - text: （1127 行）
+            - listitem [ref=e2505]:
+              - link "https://hg.openjdk.org/jdk8u/jdk8u/hotspot/file/87ee5ee27509/src/share/vm/runtime/synchronizer.cpp" [ref=e2506] [cursor=pointer]:
+                - /url: https://hg.openjdk.org/jdk8u/jdk8u/hotspot/file/87ee5ee27509/src/share/vm/runtime/synchronizer.cpp
+              - text: （537 行开始）
+        - generic [ref=e2507]:
+          - text: java
+          - button "复制代码" [ref=e2508] [cursor=pointer]
+          - code [ref=e2510]:
+            - generic [ref=e2511]: public native int hashCode();
+        - paragraph [ref=e2514]:
+          - text: 散列表存储的是键值对(key-value)，它的特点是：
+          - strong [ref=e2515]: 能根据“键”快速的检索出对应的“值”。这其中就利用到了散列码！（可以快速找到所需要的对象）
+        - heading [level=3] [ref=e2516]:
+          - link "为什么要有 hashCode？" [ref=e2517] [cursor=pointer]:
+            - /url: "#为什么要有-hashcode"
+        - paragraph [ref=e2518]:
+          - text: 我们以“
+          - code [ref=e2519]: HashSet
+          - text: 如何检查重复”为例子来说明为什么要有
+          - code [ref=e2520]: hashCode
+          - text: ？
+        - paragraph [ref=e2521]: "下面这段内容摘自我的 Java 启蒙书《Head First Java》:"
+        - blockquote [ref=e2522]:
+          - paragraph [ref=e2523]:
+            - text: 当你把对象加入
+            - code [ref=e2524]: HashSet
+            - text: 时，
+            - code [ref=e2525]: HashSet
+            - text: 会先计算对象的
+            - code [ref=e2526]: hashCode
+            - text: 值来判断对象加入的位置，同时也会与其他已经加入的对象的
+            - code [ref=e2527]: hashCode
+            - text: 值作比较，如果没有相符的
+            - code [ref=e2528]: hashCode
+            - text: ，
+            - code [ref=e2529]: HashSet
+            - text: 会假设对象没有重复出现。但是如果发现有相同
+            - code [ref=e2530]: hashCode
+            - text: 值的对象，这时会调用
+            - code [ref=e2531]: equals()
+            - text: 方法来检查
+            - code [ref=e2532]: hashCode
+            - text: 相等的对象是否真的相同。如果两者相同，
+            - code [ref=e2533]: HashSet
+            - text: 就不会让其加入操作成功。如果不同的话，就会重新散列到其他位置。这样我们就大大减少了
+            - code [ref=e2534]: equals
+            - text: 的次数，相应就大大提高了执行速度。
+        - paragraph [ref=e2535]:
+          - text: 其实，
+          - code [ref=e2536]: hashCode()
+          - text: 和
+          - code [ref=e2537]: equals()
+          - text: 都是用于比较两个对象是否相等。
+        - paragraph [ref=e2538]:
+          - strong [ref=e2539]: 那为什么 JDK 还要同时提供这两个方法呢？
+        - paragraph [ref=e2540]:
+          - text: 这是因为在一些容器（比如
+          - code [ref=e2541]: HashMap
+          - text: 、
+          - code [ref=e2542]: HashSet
+          - text: ）中，有了
+          - code [ref=e2543]: hashCode()
+          - text: 之后，判断元素是否在对应容器中的效率会更高（参考添加元素进
+          - code [ref=e2544]: HashSet
+          - text: 的过程）！
+        - paragraph [ref=e2545]:
+          - text: 我们在前面也提到了添加元素进
+          - code [ref=e2546]: HashSet
+          - text: 的过程，如果
+          - code [ref=e2547]: HashSet
+          - text: 在对比的时候，同样的
+          - code [ref=e2548]: hashCode
+          - text: 有多个对象，它会继续使用
+          - code [ref=e2549]: equals()
+          - text: 来判断是否真的相同。也就是说
+          - code [ref=e2550]: hashCode
+          - text: 帮助我们大大缩小了查找成本。
+        - paragraph [ref=e2551]:
+          - strong [ref=e2552]:
+            - text: 那为什么不只提供
+            - code [ref=e2553]: hashCode()
+            - text: 方法呢？
+        - paragraph [ref=e2554]:
+          - text: 这是因为两个对象的
+          - code [ref=e2555]: hashCode
+          - text: 值相等并不代表两个对象就相等。
+        - paragraph [ref=e2556]:
+          - strong [ref=e2557]:
+            - text: 那为什么两个对象有相同的
+            - code [ref=e2558]: hashCode
+            - text: 值，它们也不一定是相等的？
+        - paragraph [ref=e2559]:
+          - text: 因为
+          - code [ref=e2560]: hashCode()
+          - text: 所使用的哈希算法也许刚好会让多个对象传回相同的哈希值。越糟糕的哈希算法越容易碰撞，但这也与数据值域分布的特性有关（所谓哈希碰撞也就是指的是不同的对象得到相同的
+          - code [ref=e2561]: hashCode
+          - text: )。
+        - paragraph [ref=e2562]: 总结下来就是：
+        - list [ref=e2563]:
+          - listitem [ref=e2564]:
+            - text: 如果两个对象的
+            - code [ref=e2565]: hashCode
+            - text: 值相等，那这两个对象不一定相等（哈希碰撞）。
+          - listitem [ref=e2566]:
+            - text: 如果两个对象的
+            - code [ref=e2567]: hashCode
+            - text: 值相等并且
+            - code [ref=e2568]: equals()
+            - text: 方法也返回
+            - code [ref=e2569]: "true"
+            - text: ，我们才认为这两个对象相等。
+          - listitem [ref=e2570]:
+            - text: 如果两个对象的
+            - code [ref=e2571]: hashCode
+            - text: 值不相等，我们就可以直接认为这两个对象不相等。
+        - paragraph [ref=e2572]:
+          - text: 相信大家看了我前面对
+          - code [ref=e2573]: hashCode()
+          - text: 和
+          - code [ref=e2574]: equals()
+          - text: 的介绍之后，下面这个问题已经难不倒你们了。
+        - heading [level=3] [ref=e2575]:
+          - link "为什么重写 equals() 时必须重写 hashCode() 方法？" [ref=e2576] [cursor=pointer]:
+            - /url: "#为什么重写-equals-时必须重写-hashcode-方法"
+        - paragraph [ref=e2577]:
+          - text: 因为两个相等的对象的
+          - code [ref=e2578]: hashCode
+          - text: 值必须是相等。也就是说如果
+          - code [ref=e2579]: equals
+          - text: 方法判断两个对象是相等的，那这两个对象的
+          - code [ref=e2580]: hashCode
+          - text: 值也要相等。
+        - paragraph [ref=e2581]:
+          - text: 如果重写
+          - code [ref=e2582]: equals()
+          - text: 时没有重写
+          - code [ref=e2583]: hashCode()
+          - text: 方法的话就可能会导致
+          - code [ref=e2584]: equals
+          - text: 方法判断是相等的两个对象，
+          - code [ref=e2585]: hashCode
+          - text: 值却不相等。
+        - paragraph [ref=e2586]:
+          - strong [ref=e2587]: 思考
+          - text: ：重写
+          - code [ref=e2588]: equals()
+          - text: 时没有重写
+          - code [ref=e2589]: hashCode()
+          - text: 方法的话，使用
+          - code [ref=e2590]: HashMap
+          - text: 可能会出现什么问题。
+        - paragraph [ref=e2591]:
+          - strong [ref=e2592]: 总结
+          - text: ：
+        - list [ref=e2593]:
+          - listitem [ref=e2594]:
+            - code [ref=e2595]: equals
+            - text: 方法判断两个对象是相等的，那这两个对象的
+            - code [ref=e2596]: hashCode
+            - text: 值也要相等。
+          - listitem [ref=e2597]:
+            - text: 两个对象有相同的
+            - code [ref=e2598]: hashCode
+            - text: 值，他们也不一定是相等的（哈希碰撞）。
+        - paragraph [ref=e2599]:
+          - text: 更多关于
+          - code [ref=e2600]: hashCode()
+          - text: 和
+          - code [ref=e2601]: equals()
+          - text: 的内容可以查看：
+          - link "Java hashCode() 和 equals()的若干问题解答" [ref=e2602] [cursor=pointer]:
+            - /url: https://www.cnblogs.com/skywang12345/p/3324958.html
+        - heading [level=2] [ref=e2603]:
+          - link "String" [ref=e2604] [cursor=pointer]:
+            - /url: "#string"
+        - heading [level=3] [ref=e2605]:
+          - link "⭐️String、StringBuffer、StringBuilder 的区别？" [ref=e2606] [cursor=pointer]:
+            - /url: "#⭐️string、stringbuffer、stringbuilder-的区别"
+        - paragraph [ref=e2607]:
+          - strong [ref=e2608]: 可变性
+        - paragraph [ref=e2609]:
+          - code [ref=e2610]: String
+          - text: 是不可变的（后面会详细分析原因）。
+        - paragraph [ref=e2611]:
+          - code [ref=e2612]: StringBuilder
+          - text: 与
+          - code [ref=e2613]: StringBuffer
+          - text: 都继承自
+          - code [ref=e2614]: AbstractStringBuilder
+          - text: 类，在
+          - code [ref=e2615]: AbstractStringBuilder
+          - text: 中也是使用字符数组保存字符串，不过没有使用
+          - code [ref=e2616]: final
+          - text: 和
+          - code [ref=e2617]: private
+          - text: 关键字修饰，最关键的是这个
+          - code [ref=e2618]: AbstractStringBuilder
+          - text: 类还提供了很多修改字符串的方法比如
+          - code [ref=e2619]: append
+          - text: 方法。
+        - generic [ref=e2620]:
+          - text: java
+          - button "复制代码" [ref=e2621] [cursor=pointer]
+          - code [ref=e2623]:
+            - generic [ref=e2624]: "abstract class AbstractStringBuilder implements Appendable, CharSequence {"
+            - generic [ref=e2625]: char[] value;
+            - generic [ref=e2626]: "public AbstractStringBuilder append(String str) {"
+            - generic [ref=e2627]: if (str == null)
+            - generic [ref=e2628]: return appendNull();
+            - generic [ref=e2629]: int len = str.length();
+            - generic [ref=e2630]: ensureCapacityInternal(count + len);
+            - generic [ref=e2631]: str.getChars(0, len, value, count);
+            - generic [ref=e2632]: count += len;
+            - generic [ref=e2633]: return this;
+            - generic [ref=e2634]: "}"
+            - generic [ref=e2635]: //...
+            - generic [ref=e2636]: "}"
+        - paragraph [ref=e2651]:
+          - strong [ref=e2652]: 线程安全性
+        - paragraph [ref=e2653]:
+          - code [ref=e2654]: String
+          - text: 中的对象是不可变的，也就可以理解为常量，线程安全。
+          - code [ref=e2655]: AbstractStringBuilder
+          - text: 是
+          - code [ref=e2656]: StringBuilder
+          - text: 与
+          - code [ref=e2657]: StringBuffer
+          - text: 的公共父类，定义了一些字符串的基本操作，如
+          - code [ref=e2658]: expandCapacity
+          - text: 、
+          - code [ref=e2659]: append
+          - text: 、
+          - code [ref=e2660]: insert
+          - text: 、
+          - code [ref=e2661]: indexOf
+          - text: 等公共方法。
+          - code [ref=e2662]: StringBuffer
+          - text: 对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的。
+          - code [ref=e2663]: StringBuilder
+          - text: 并没有对方法进行加同步锁，所以是非线程安全的。
+        - paragraph [ref=e2664]:
+          - strong [ref=e2665]: 性能
+        - paragraph [ref=e2666]:
+          - text: 每次对
+          - code [ref=e2667]: String
+          - text: 类型进行改变的时候，都会生成一个新的
+          - code [ref=e2668]: String
+          - text: 对象，然后将指针指向新的
+          - code [ref=e2669]: String
+          - text: 对象。
+          - code [ref=e2670]: StringBuffer
+          - text: 每次都会对
+          - code [ref=e2671]: StringBuffer
+          - text: 对象本身进行操作，而不是生成新的对象并改变对象引用。相同情况下使用
+          - code [ref=e2672]: StringBuilder
+          - text: 相比使用
+          - code [ref=e2673]: StringBuffer
+          - text: 仅能获得 10%~15% 左右的性能提升，但却要冒多线程不安全的风险。
+        - paragraph [ref=e2674]:
+          - strong [ref=e2675]: 对于三者使用的总结：
+        - list [ref=e2676]:
+          - listitem [ref=e2677]:
+            - text: "操作少量的数据: 适用"
+            - code [ref=e2678]: String
+          - listitem [ref=e2679]:
+            - text: "单线程操作字符串缓冲区下操作大量数据: 适用"
+            - code [ref=e2680]: StringBuilder
+          - listitem [ref=e2681]:
+            - text: "多线程操作字符串缓冲区下操作大量数据: 适用"
+            - code [ref=e2682]: StringBuffer
+        - heading [level=3] [ref=e2683]:
+          - link "⭐️String 为什么是不可变的?" [ref=e2684] [cursor=pointer]:
+            - /url: "#⭐️string-为什么是不可变的"
+        - paragraph [ref=e2685]:
+          - code [ref=e2686]: String
+          - text: 类中使用
+          - code [ref=e2687]: final
+          - text: 关键字修饰字符数组来保存字符串，
+          - generic [ref=e2688]:
+            - text: 所以
+            - code [ref=e2689]: String
+            - text: 对象是不可变的。
+        - generic [ref=e2690]:
+          - text: java
+          - button "复制代码" [ref=e2691] [cursor=pointer]
+          - code [ref=e2693]:
+            - generic [ref=e2694]: "public final class String implements java.io.Serializable, Comparable<String>, CharSequence {"
+            - generic [ref=e2695]: private final char value[];
+            - generic [ref=e2696]: //...
+            - generic [ref=e2697]: "}"
+        - blockquote [ref=e2703]:
+          - paragraph [ref=e2704]:
+            - text: 🐛 修正：我们知道被
+            - code [ref=e2705]: final
+            - text: 关键字修饰的类不能被继承，修饰的方法不能被重写，修饰的变量是基本数据类型则值不能改变，修饰的变量是引用类型则不能再指向其他对象。因此，
+            - code [ref=e2706]: final
+            - text: 关键字修饰的数组保存字符串并不是
+            - code [ref=e2707]: String
+            - text: 不可变的根本原因，因为这个数组保存的字符串是可变的（
+            - code [ref=e2708]: final
+            - text: 修饰引用类型变量的情况）。
+          - paragraph [ref=e2709]:
+            - code [ref=e2710]: String
+            - text: 真正不可变有下面几点原因：
+          - list [ref=e2711]:
+            - listitem [ref=e2712]:
+              - text: 保存字符串的数组被
+              - code [ref=e2713]: final
+              - text: 修饰且为私有的，并且
+              - code [ref=e2714]: String
+              - text: 类没有提供/暴露修改这个字符串的方法。
+            - listitem [ref=e2715]:
+              - code [ref=e2716]: String
+              - text: 类被
+              - code [ref=e2717]: final
+              - text: 修饰导致其不能被继承，进而避免了子类破坏
+              - code [ref=e2718]: String
+              - text: 不可变。
+          - paragraph [ref=e2719]:
+            - text: 相关阅读：
+            - link "如何理解 String 类型值的不可变？ - 知乎提问" [ref=e2720] [cursor=pointer]:
+              - /url: https://www.zhihu.com/question/20618891/answer/114125846
+          - paragraph [ref=e2721]:
+            - text: 补充（来自
+            - link "issue 675" [ref=e2722] [cursor=pointer]:
+              - /url: https://github.com/Snailclimb/JavaGuide/issues/675
+            - text: ）：在 Java 9 之后，
+            - code [ref=e2723]: String
+            - text: 、
+            - code [ref=e2724]: StringBuilder
+            - text: 与
+            - code [ref=e2725]: StringBuffer
+            - text: 的实现改用
+            - code [ref=e2726]: byte
+            - text: 数组存储字符串。
+          - generic [ref=e2727]:
+            - text: java
+            - button "复制代码" [ref=e2728] [cursor=pointer]
+            - code [ref=e2730]:
+              - generic [ref=e2731]: "public final class String implements java.io.Serializable,Comparable<String>, CharSequence {"
+              - generic [ref=e2732]: // @Stable 注解表示变量最多被修改一次，称为“稳定的”。
+              - generic [ref=e2733]: "@Stable"
+              - generic [ref=e2734]: private final byte[] value;
+              - generic [ref=e2735]: "}"
+              - generic [ref=e2736]: "abstract class AbstractStringBuilder implements Appendable, CharSequence {"
+              - generic [ref=e2737]: byte[] value;
+              - generic [ref=e2738]: "}"
+          - paragraph [ref=e2750]:
+            - strong [ref=e2751]:
+              - text: Java 9 为何要将
+              - code [ref=e2752]: String
+              - text: 的底层实现由
+              - code [ref=e2753]: char[]
+              - text: 改成了
+              - code [ref=e2754]: byte[]
+              - text: "?"
+          - paragraph [ref=e2755]:
+            - text: 新版的 String 其实支持两个编码方案：Latin-1 和 UTF-16。如果字符串中包含的汉字没有超过 Latin-1 可表示范围内的字符，那就会使用 Latin-1 作为编码方案。Latin-1 编码方案下，
+            - code [ref=e2756]: byte
+            - text: 占一个字节(8 位)，
+            - code [ref=e2757]: char
+            - text: 占用 2 个字节（16），
+            - code [ref=e2758]: byte
+            - text: 相较
+            - code [ref=e2759]: char
+            - text: 节省一半的内存空间。
+          - paragraph [ref=e2760]: JDK 官方就说了绝大部分字符串对象只包含 Latin-1 可表示的字符。
+          - paragraph [ref=e2761]
+          - paragraph [ref=e2762]:
+            - text: 如果字符串中包含的汉字超过 Latin-1 可表示范围内的字符，
+            - code [ref=e2763]: byte
+            - text: 和
+            - code [ref=e2764]: char
+            - text: 所占用的空间是一样的。
+          - paragraph [ref=e2765]:
+            - text: 这是官方的介绍：
+            - link "https://openjdk.java.net/jeps/254" [ref=e2766] [cursor=pointer]:
+              - /url: https://openjdk.java.net/jeps/254
+            - text: 。
+        - heading [level=3] [ref=e2767]:
+          - link "⭐️字符串拼接用“+” 还是 StringBuilder?" [ref=e2768] [cursor=pointer]:
+            - /url: "#⭐️字符串拼接用-还是-stringbuilder"
+        - paragraph [ref=e2769]: Java 语言本身并不支持运算符重载，“+”和“+=”是专门为 String 类重载过的运算符，也是 Java 中仅有的两个重载过的运算符。
+        - generic [ref=e2770]:
+          - text: java
+          - button "复制代码" [ref=e2771] [cursor=pointer]
+          - code [ref=e2773]:
+            - generic [ref=e2774]: String str1 = "he";
+            - generic [ref=e2775]: String str2 = "llo";
+            - generic [ref=e2776]: String str3 = "world";
+            - generic [ref=e2777]: String str4 = str1 + str2 + str3;
+        - paragraph [ref=e2783]: 上面的代码对应的字节码如下：
+        - paragraph [ref=e2784]
+        - paragraph [ref=e2785]:
+          - text: 可以看出，字符串对象通过“+”的字符串拼接方式，实际上是通过
+          - code [ref=e2786]: StringBuilder
+          - text: 调用
+          - code [ref=e2787]: append()
+          - text: 方法实现的，拼接完成之后调用
+          - code [ref=e2788]: toString()
+          - text: 得到一个
+          - code [ref=e2789]: String
+          - text: 对象 。
+        - paragraph [ref=e2790]:
+          - text: 不过，在循环内使用“+”进行字符串的拼接的话，存在比较明显的缺陷：
+          - strong [ref=e2791]:
+            - text: 编译器不会创建单个
+            - code [ref=e2792]: StringBuilder
+            - text: 以复用，会导致创建过多的
+            - code [ref=e2793]: StringBuilder
+            - text: 对象
+          - text: 。
+        - generic [ref=e2794]:
+          - text: java
+          - button "复制代码" [ref=e2795] [cursor=pointer]
+          - code [ref=e2797]:
+            - generic [ref=e2798]: "String[] arr = {\"he\", \"llo\", \"world\"};"
+            - generic [ref=e2799]: String s = "";
+            - generic [ref=e2800]: "for (int i = 0; i < arr.length; i++) {"
+            - generic [ref=e2801]: s += arr[i];
+            - generic [ref=e2802]: "}"
+            - generic [ref=e2803]: System.out.println(s);
+        - paragraph [ref=e2811]:
+          - code [ref=e2812]: StringBuilder
+          - text: 对象是在循环内部被创建的，这意味着每循环一次就会创建一个
+          - code [ref=e2813]: StringBuilder
+          - text: 对象。
+        - paragraph [ref=e2814]
+        - paragraph [ref=e2815]:
+          - text: 如果直接使用
+          - code [ref=e2816]: StringBuilder
+          - text: 对象进行字符串拼接的话，就不会存在这个问题了。
+        - generic [ref=e2817]:
+          - text: java
+          - button "复制代码" [ref=e2818] [cursor=pointer]
+          - code [ref=e2820]:
+            - generic [ref=e2821]: "String[] arr = {\"he\", \"llo\", \"world\"};"
+            - generic [ref=e2822]: StringBuilder s = new StringBuilder();
+            - generic [ref=e2823]: "for (String value : arr) {"
+            - generic [ref=e2824]: s.append(value);
+            - generic [ref=e2825]: "}"
+            - generic [ref=e2826]: System.out.println(s);
+        - paragraph [ref=e2834]
+        - paragraph [ref=e2835]: 如果你使用 IDEA 的话，IDEA 自带的代码检查机制也会提示你修改代码。
+        - paragraph [ref=e2836]:
+          - text: 在 JDK 9 中，字符串相加“+”改为用动态方法
+          - code [ref=e2837]: makeConcatWithConstants()
+          - text: 来实现，通过提前分配空间从而减少了部分临时对象的创建。然而这种优化主要针对简单的字符串拼接，如：
+          - code [ref=e2838]: a+b+c
+          - text: 。对于循环中的大量拼接操作，仍然会逐个动态分配内存（类似于两个两个 append 的概念），并不如手动使用 StringBuilder 来进行拼接效率高。这个改进是 JDK9 的
+          - link "JEP 280" [ref=e2839] [cursor=pointer]:
+            - /url: https://openjdk.org/jeps/280
+          - text: 提出的，关于这部分改进的详细介绍，推荐阅读这篇文章：还在无脑用
+          - link "StringBuilder？来重温一下字符串拼接吧" [ref=e2840] [cursor=pointer]:
+            - /url: https://juejin.cn/post/7182872058743750715
+          - text: 以及参考
+          - link "issue#2442" [ref=e2841] [cursor=pointer]:
+            - /url: https://github.com/Snailclimb/JavaGuide/issues/2442
+          - text: 。
+        - heading [level=3] [ref=e2842]:
+          - link "String#equals() 和 Object#equals() 有何区别？" [ref=e2843] [cursor=pointer]:
+            - /url: "#string-equals-和-object-equals-有何区别"
+        - paragraph [ref=e2844]:
+          - code [ref=e2845]: String
+          - text: 中的
+          - code [ref=e2846]: equals
+          - text: 方法是被重写过的，比较的是 String 字符串的值是否相等。
+          - code [ref=e2847]: Object
+          - text: 的
+          - code [ref=e2848]: equals
+          - text: 方法是比较的对象的内存地址。
+        - heading [level=3] [ref=e2849]:
+          - link "⭐️字符串常量池的作用了解吗？" [ref=e2850] [cursor=pointer]:
+            - /url: "#⭐️字符串常量池的作用了解吗"
+        - paragraph [ref=e2851]:
+          - strong [ref=e2852]: 字符串常量池
+          - text: 是 JVM 为了提升性能和减少内存消耗针对字符串（String 类）专门开辟的一块区域，主要目的是为了避免字符串的重复创建。
+        - generic [ref=e2853]:
+          - text: java
+          - button "复制代码" [ref=e2854] [cursor=pointer]
+          - code [ref=e2856]:
+            - generic [ref=e2857]: // 在字符串常量池中创建字符串对象 ”ab“
+            - generic [ref=e2858]: // 将字符串对象 ”ab“ 的引用赋值给 aa
+            - generic [ref=e2859]: String aa = "ab";
+            - generic [ref=e2860]: // 直接返回字符串常量池中字符串对象 ”ab“，赋值给引用 bb
+            - generic [ref=e2861]: String bb = "ab";
+            - generic [ref=e2862]: System.out.println(aa==bb); // true
+        - paragraph [ref=e2870]:
+          - text: 更多关于字符串常量池的介绍可以看一下
+          - link "Java 内存区域详解" [ref=e2871] [cursor=pointer]:
+            - /url: https://javaguide.cn/java/jvm/memory-area.html
+          - text: 这篇文章。
+        - heading [level=3] [ref=e2872]:
+          - link "⭐️String s1 = new String(\"abc\");这句话创建了几个字符串对象？" [ref=e2873] [cursor=pointer]:
+            - /url: "#⭐️string-s1-new-string-abc-这句话创建了几个字符串对象"
+        - paragraph [ref=e2874]: 先说答案：会创建 1 或 2 个字符串对象。
+        - list [ref=e2875]:
+          - listitem [ref=e2876]:
+            - text: 字符串常量池中不存在 "abc"：会创建 2 个 字符串对象。一个在字符串常量池中，由
+            - code [ref=e2877]: ldc
+            - text: 指令触发创建。一个在堆中，由
+            - code [ref=e2878]: new String()
+            - text: 创建，并使用常量池中的 "abc" 进行初始化。
+          - listitem [ref=e2879]:
+            - text: 字符串常量池中已存在 "abc"：会创建 1 个 字符串对象。该对象在堆中，由
+            - code [ref=e2880]: new String()
+            - text: 创建，并使用常量池中的 "abc" 进行初始化。
+        - paragraph [ref=e2881]: 下面开始详细分析。
+        - paragraph [ref=e2882]: 1、如果字符串常量池中不存在字符串对象 “abc”，那么它首先会在字符串常量池中创建字符串对象 "abc"，然后在堆内存中再创建其中一个字符串对象 "abc"。
+        - paragraph [ref=e2883]: 示例代码（JDK 1.8）：
+        - generic [ref=e2884]:
+          - text: java
+          - button "复制代码" [ref=e2885] [cursor=pointer]
+          - code [ref=e2887]:
+            - generic [ref=e2888]: String s1 = new String("abc");
+        - paragraph [ref=e2891]: 对应的字节码：
+        - generic [ref=e2892]:
+          - text: java
+          - button "复制代码" [ref=e2893] [cursor=pointer]
+          - code [ref=e2895]:
+            - generic [ref=e2896]: // 在堆内存中分配一个尚未初始化的 String 对象。
+            - generic [ref=e2897]: "// #2 是常量池中的一个符号引用，指向 java/lang/String 类。"
+            - generic [ref=e2898]: // 在类加载的解析阶段，这个符号引用会被解析成直接引用，即指向实际的 java/lang/String 类。
+            - generic [ref=e2899]: "0 new #2 <java/lang/String>"
+            - generic [ref=e2900]: // 复制栈顶的 String 对象引用，为后续的构造函数调用做准备。
+            - generic [ref=e2901]: // 此时操作数栈中有两个相同的对象引用：一个用于传递给构造函数，另一个用于保持对新对象的引用，后续将其存储到局部变量表。
+            - generic [ref=e2902]: 3 dup
+            - generic [ref=e2903]: // JVM 先检查字符串常量池中是否存在 "abc"。
+            - generic [ref=e2904]: // 如果常量池中已存在 "abc"，则直接返回该字符串的引用；
+            - generic [ref=e2905]: // 如果常量池中不存在 "abc"，则 JVM 会在常量池中创建该字符串字面量并返回它的引用。
+            - generic [ref=e2906]: // 这个引用被压入操作数栈，用作构造函数的参数。
+            - generic [ref=e2907]: "4 ldc #3 <abc>"
+            - generic [ref=e2908]: // 调用构造方法，使用从常量池中加载的 "abc" 初始化堆中的 String 对象
+            - generic [ref=e2909]: // 新的 String 对象将包含与常量池中的 "abc" 相同的内容，但它是一个独立的对象，存储于堆中。
+            - generic [ref=e2910]: "6 invokespecial #4 <java/lang/String.<init> : (Ljava/lang/String;)V>"
+            - generic [ref=e2911]: // 将堆中的 String 对象引用存储到局部变量表
+            - generic [ref=e2912]: 9 astore_1
+            - generic [ref=e2913]: // 返回，结束方法
+            - generic [ref=e2914]: 10 return
+        - paragraph [ref=e2935]:
+          - code [ref=e2936]: ldc (load constant)
+          - text: 指令的确是从常量池中加载各种类型的常量，包括字符串常量、整数常量、浮点数常量，甚至类引用等。对于字符串常量，
+          - code [ref=e2937]: ldc
+          - text: 指令的行为如下：
+        - list [ref=e2938]:
+          - listitem [ref=e2939]:
+            - strong [ref=e2940]: 从常量池加载字符串
+            - text: ：
+            - code [ref=e2941]: ldc
+            - text: 首先检查字符串常量池中是否已经有内容相同的字符串对象。
+          - listitem [ref=e2942]:
+            - strong [ref=e2943]: 复用已有字符串对象
+            - text: ：如果字符串常量池中已经存在内容相同的字符串对象，
+            - code [ref=e2944]: ldc
+            - text: 会将该对象的引用加载到操作数栈上。
+          - listitem [ref=e2945]:
+            - strong [ref=e2946]: 没有则创建新对象并加入常量池
+            - text: ：如果字符串常量池中没有相同内容的字符串对象，JVM 会在常量池中创建一个新的字符串对象，并将其引用加载到操作数栈中。
+        - paragraph [ref=e2947]: 2、如果字符串常量池中已存在字符串对象“abc”，则只会在堆中创建 1 个字符串对象“abc”。
+        - paragraph [ref=e2948]: 示例代码（JDK 1.8）：
+        - generic [ref=e2949]:
+          - text: java
+          - button "复制代码" [ref=e2950] [cursor=pointer]
+          - code [ref=e2952]:
+            - generic [ref=e2953]: // 字符串常量池中已存在字符串对象“abc”
+            - generic [ref=e2954]: String s1 = "abc";
+            - generic [ref=e2955]: // 下面这段代码只会在堆中创建 1 个字符串对象“abc”
+            - generic [ref=e2956]: String s2 = new String("abc");
+        - paragraph [ref=e2962]: 对应的字节码：
+        - generic [ref=e2963]:
+          - text: java
+          - button "复制代码" [ref=e2964] [cursor=pointer]
+          - code [ref=e2966]:
+            - generic [ref=e2967]: "0 ldc #2 <abc>"
+            - generic [ref=e2968]: 2 astore_1
+            - generic [ref=e2969]: "3 new #3 <java/lang/String>"
+            - generic [ref=e2970]: 6 dup
+            - generic [ref=e2971]: "7 ldc #2 <abc>"
+            - generic [ref=e2972]: "9 invokespecial #4 <java/lang/String.<init> : (Ljava/lang/String;)V>"
+            - generic [ref=e2973]: 12 astore_2
+            - generic [ref=e2974]: 13 return
+        - paragraph [ref=e2984]:
+          - text: 这里就不对上面的字节码进行详细注释了，7 这个位置的
+          - code [ref=e2985]: ldc
+          - text: 命令不会在堆中创建新的字符串对象“abc”，这是因为 0 这个位置已经执行了一次
+          - code [ref=e2986]: ldc
+          - text: 命令，已经在堆中创建过一次字符串对象“abc”了。7 这个位置执行
+          - code [ref=e2987]: ldc
+          - text: 命令会直接返回字符串常量池中字符串对象“abc”对应的引用。
+        - heading [level=3] [ref=e2988]:
+          - link "String#intern 方法有什么作用?" [ref=e2989] [cursor=pointer]:
+            - /url: "#string-intern-方法有什么作用"
+        - paragraph [ref=e2990]:
+          - code [ref=e2991]: String.intern()
+          - text: 是一个
+          - code [ref=e2992]: native
+          - text: (本地) 方法，用来处理字符串常量池中的字符串对象引用。它的工作流程可以概括为以下两种情况：
+        - list [ref=e2993]:
+          - listitem [ref=e2994]:
+            - strong [ref=e2995]: 常量池中已有相同内容的字符串对象
+            - text: ：如果字符串常量池中已经有一个与调用
+            - code [ref=e2996]: intern()
+            - text: 方法的字符串内容相同的
+            - code [ref=e2997]: String
+            - text: 对象，
+            - code [ref=e2998]: intern()
+            - text: 方法会直接返回常量池中该对象的引用。
+          - listitem [ref=e2999]:
+            - strong [ref=e3000]: 常量池中没有相同内容的字符串对象
+            - text: ：如果字符串常量池中还没有一个与调用
+            - code [ref=e3001]: intern()
+            - text: 方法的字符串内容相同的对象，
+            - code [ref=e3002]: intern()
+            - text: 方法会将当前字符串对象的引用添加到字符串常量池中，并返回该引用。
+        - paragraph [ref=e3003]: 总结：
+        - list [ref=e3004]:
+          - listitem [ref=e3005]:
+            - code [ref=e3006]: intern()
+            - text: 方法的主要作用是确保字符串引用在常量池中的唯一性。
+          - listitem [ref=e3007]:
+            - text: 当调用
+            - code [ref=e3008]: intern()
+            - text: 时，如果常量池中已经存在相同内容的字符串，则返回常量池中已有对象的引用；否则，将该字符串添加到常量池并返回其引用。
+        - paragraph [ref=e3009]: "示例代码（JDK 1.8） :"
+        - generic [ref=e3010]:
+          - text: java
+          - button "复制代码" [ref=e3011] [cursor=pointer]
+          - code [ref=e3013]:
+            - generic [ref=e3014]: // s1 指向字符串常量池中的 "Java" 对象
+            - generic [ref=e3015]: String s1 = "Java";
+            - generic [ref=e3016]: // s2 也指向字符串常量池中的 "Java" 对象，和 s1 是同一个对象
+            - generic [ref=e3017]: String s2 = s1.intern();
+            - generic [ref=e3018]: // 在堆中创建一个新的 "Java" 对象，s3 指向它
+            - generic [ref=e3019]: String s3 = new String("Java");
+            - generic [ref=e3020]: // s4 指向字符串常量池中的 "Java" 对象，和 s1 是同一个对象
+            - generic [ref=e3021]: String s4 = s3.intern();
+            - generic [ref=e3022]: // s1 和 s2 指向的是同一个常量池中的对象
+            - generic [ref=e3023]: System.out.println(s1 == s2); // true
+            - generic [ref=e3024]: // s3 指向堆中的对象，s4 指向常量池中的对象，所以不同
+            - generic [ref=e3025]: System.out.println(s3 == s4); // false
+            - generic [ref=e3026]: // s1 和 s4 都指向常量池中的同一个对象
+            - generic [ref=e3027]: System.out.println(s1 == s4); // true
+        - heading [level=3] [ref=e3043]:
+          - link "String 类型的变量和常量做“+”运算时发生了什么？" [ref=e3044] [cursor=pointer]:
+            - /url: "#string-类型的变量和常量做-运算时发生了什么"
+        - paragraph [ref=e3045]:
+          - text: 先来看字符串不加
+          - code [ref=e3046]: final
+          - text: 关键字拼接的情况（JDK1.8）：
+        - generic [ref=e3047]:
+          - text: java
+          - button "复制代码" [ref=e3048] [cursor=pointer]
+          - code [ref=e3050]:
+            - generic [ref=e3051]: String str1 = "str";
+            - generic [ref=e3052]: String str2 = "ing";
+            - generic [ref=e3053]: String str3 = "str" + "ing";
+            - generic [ref=e3054]: String str4 = str1 + str2;
+            - generic [ref=e3055]: String str5 = "string";
+            - generic [ref=e3056]: System.out.println(str3 == str4);//false
+            - generic [ref=e3057]: System.out.println(str3 == str5);//true
+            - generic [ref=e3058]: System.out.println(str4 == str5);//false
+        - blockquote [ref=e3068]:
+          - paragraph [ref=e3069]:
+            - strong [ref=e3070]: 注意
+            - text: ：比较 String 字符串的值是否相等，可以使用
+            - code [ref=e3071]: equals()
+            - text: 方法。
+            - code [ref=e3072]: String
+            - text: 中的
+            - code [ref=e3073]: equals
+            - text: 方法是被重写过的。
+            - code [ref=e3074]: Object
+            - text: 的
+            - code [ref=e3075]: equals
+            - text: 方法是比较的对象的内存地址，而
+            - code [ref=e3076]: String
+            - text: 的
+            - code [ref=e3077]: equals
+            - text: 方法比较的是字符串的值是否相等。如果你使用
+            - code [ref=e3078]: ==
+            - text: 比较两个字符串是否相等的话，IDEA 还是提示你使用
+            - code [ref=e3079]: equals()
+            - text: 方法替换。
+        - paragraph [ref=e3080]
+        - paragraph [ref=e3081]:
+          - strong [ref=e3082]: 对于编译期可以确定值的字符串，也就是常量字符串 ，jvm 会将其存入字符串常量池。并且，字符串常量拼接得到的字符串常量在编译阶段就已经被存放字符串常量池，这个得益于编译器的优化。
+        - paragraph [ref=e3083]:
+          - text: 在编译过程中，Javac 编译器（下文中统称为编译器）会进行一个叫做
+          - strong [ref=e3084]: 常量折叠(Constant Folding)
+          - text: 的代码优化。《深入理解 Java 虚拟机》中是也有介绍到：
+        - paragraph [ref=e3085]
+        - paragraph [ref=e3086]: 常量折叠会把常量表达式的值求出来作为常量嵌在最终生成的代码中，这是 Javac 编译器会对源代码做的极少量优化措施之一(代码优化几乎都在即时编译器中进行)。
+        - paragraph [ref=e3087]:
+          - text: 对于
+          - code [ref=e3088]: String str3 = "str" + "ing";
+          - text: 编译器会给你优化成
+          - code [ref=e3089]: String str3 = "string";
+          - text: 。
+        - paragraph [ref=e3090]: 并不是所有的常量都会进行折叠，只有编译器在程序编译期就可以确定值的常量才可以：
+        - list [ref=e3091]:
+          - listitem [ref=e3092]:
+            - text: 基本数据类型(
+            - code [ref=e3093]: byte
+            - text: 、
+            - code [ref=e3094]: boolean
+            - text: 、
+            - code [ref=e3095]: short
+            - text: 、
+            - code [ref=e3096]: char
+            - text: 、
+            - code [ref=e3097]: int
+            - text: 、
+            - code [ref=e3098]: float
+            - text: 、
+            - code [ref=e3099]: long
+            - text: 、
+            - code [ref=e3100]: double
+            - text: )以及字符串常量。
+          - listitem [ref=e3101]:
+            - code [ref=e3102]: final
+            - text: 修饰的基本数据类型和字符串变量
+          - listitem [ref=e3103]: 字符串通过 “+”拼接得到的字符串、基本数据类型之间算数运算（加减乘除）、基本数据类型的位运算（<<、>>、>>> ）
+        - paragraph [ref=e3104]:
+          - strong [ref=e3105]: 引用的值在程序编译期是无法确定的，编译器无法对其进行优化。
+        - paragraph [ref=e3106]:
+          - text: 对象引用和“+”的字符串拼接方式，实际上是通过
+          - code [ref=e3107]: StringBuilder
+          - text: 调用
+          - code [ref=e3108]: append()
+          - text: 方法实现的，拼接完成之后调用
+          - code [ref=e3109]: toString()
+          - text: 得到一个
+          - code [ref=e3110]: String
+          - text: 对象 。
+        - generic [ref=e3111]:
+          - text: java
+          - button "复制代码" [ref=e3112] [cursor=pointer]
+          - code [ref=e3114]:
+            - generic [ref=e3115]: String str4 = new StringBuilder().append(str1).append(str2).toString();
+        - paragraph [ref=e3118]:
+          - text: 我们在平时写代码的时候，尽量避免多个字符串对象拼接，因为这样会重新创建对象。如果需要改变字符串的话，可以使用
+          - code [ref=e3119]: StringBuilder
+          - text: 或者
+          - code [ref=e3120]: StringBuffer
+          - text: 。
+        - paragraph [ref=e3121]:
+          - text: 不过，字符串使用
+          - code [ref=e3122]: final
+          - text: 关键字声明之后，可以让编译器当做常量来处理。
+        - paragraph [ref=e3123]: 示例代码：
+        - generic [ref=e3124]:
+          - text: java
+          - button "复制代码" [ref=e3125] [cursor=pointer]
+          - code [ref=e3127]:
+            - generic [ref=e3128]: final String str1 = "str";
+            - generic [ref=e3129]: final String str2 = "ing";
+            - generic [ref=e3130]: // 下面两个表达式其实是等价的
+            - generic [ref=e3131]: String c = "str" + "ing";// 常量池中的对象
+            - generic [ref=e3132]: String d = str1 + str2; // 常量池中的对象
+            - generic [ref=e3133]: System.out.println(c == d);// true
+        - paragraph [ref=e3141]:
+          - text: 被
+          - code [ref=e3142]: final
+          - text: 关键字修饰之后的
+          - code [ref=e3143]: String
+          - text: 会被编译器当做常量来处理，编译器在程序编译期就可以确定它的值，其效果就相当于访问常量。
+        - paragraph [ref=e3144]: 如果 ，编译器在运行时才能知道其确切值的话，就无法对其优化。
+        - paragraph [ref=e3145]:
+          - text: 示例代码（
+          - code [ref=e3146]: str2
+          - text: 在运行时才能确定其值）：
+        - generic [ref=e3147]:
+          - text: java
+          - button "复制代码" [ref=e3148] [cursor=pointer]
+          - code [ref=e3150]:
+            - generic [ref=e3151]: final String str1 = "str";
+            - generic [ref=e3152]: final String str2 = getStr();
+            - generic [ref=e3153]: String c = "str" + "ing";// 常量池中的对象
+            - generic [ref=e3154]: String d = str1 + str2; // 在堆上创建的新的对象
+            - generic [ref=e3155]: System.out.println(c == d);// false
+            - generic [ref=e3156]: "public static String getStr() {"
+            - generic [ref=e3157]: return "ing";
+            - generic [ref=e3158]: "}"
+        - heading [level=2] [ref=e3168]:
+          - link "异常" [ref=e3169] [cursor=pointer]:
+            - /url: "#异常"
+        - paragraph [ref=e3170]:
+          - strong [ref=e3171]: Java 异常类层次结构图概览
+          - text: ：
+        - paragraph [ref=e3172]:
+          - img "Java 异常类层次结构图" [ref=e3173]
+        - heading [level=3] [ref=e3174]:
+          - link "Exception 和 Error 有什么区别？" [ref=e3175] [cursor=pointer]:
+            - /url: "#exception-和-error-有什么区别"
+        - paragraph [ref=e3176]:
+          - text: 在 Java 中，所有的异常都有一个共同的祖先
+          - code [ref=e3177]: java.lang
+          - text: 包中的
+          - code [ref=e3178]: Throwable
+          - text: 类。
+          - code [ref=e3179]: Throwable
+          - text: "类有两个重要的子类:"
+        - list [ref=e3180]:
+          - listitem [ref=e3181]:
+            - strong [ref=e3182]:
+              - code [ref=e3183]: Exception
+            - text: :程序本身可以处理的异常，可以通过
+            - code [ref=e3184]: catch
+            - text: 来进行捕获。
+            - code [ref=e3185]: Exception
+            - text: 又可以分为 Checked Exception (受检查异常，必须处理) 和 Unchecked Exception (不受检查异常，可以不处理)。
+          - listitem [ref=e3186]:
+            - strong [ref=e3187]:
+              - code [ref=e3188]: Error
+            - text: ：
+            - code [ref=e3189]: Error
+            - text: 属于程序无法处理的错误 ，
+            - generic [ref=e3190]:
+              - text: 我们没办法通过
+              - code [ref=e3191]: catch
+              - text: 来进行捕获
+            - text: 不建议通过
+            - code [ref=e3192]: catch
+            - text: 捕获 。例如 Java 虚拟机运行错误（
+            - code [ref=e3193]: Virtual MachineError
+            - text: ）、虚拟机内存不够错误(
+            - code [ref=e3194]: OutOfMemoryError
+            - text: )、类定义错误（
+            - code [ref=e3195]: NoClassDefFoundError
+            - text: ）等 。这些异常发生时，Java 虚拟机（JVM）一般会选择线程终止。
+        - heading [level=3] [ref=e3196]:
+          - link "⭐️Checked Exception 和 Unchecked Exception 有什么区别？" [ref=e3197] [cursor=pointer]:
+            - /url: "#⭐️checked-exception-和-unchecked-exception-有什么区别"
+        - paragraph [ref=e3198]:
+          - strong [ref=e3199]: Checked Exception
+          - text: 即 受检查异常 ，Java 代码在编译过程中，如果受检查异常没有被
+          - code [ref=e3200]: catch
+          - text: 或者
+          - code [ref=e3201]: throws
+          - text: 关键字处理的话，就没办法通过编译。
+        - paragraph [ref=e3202]: 比如下面这段 IO 操作的代码：
+        - paragraph [ref=e3203]
+        - paragraph [ref=e3204]:
+          - text: 除了
+          - code [ref=e3205]: RuntimeException
+          - text: 及其子类以外，其他的
+          - code [ref=e3206]: Exception
+          - text: 类及其子类都属于受检查异常 。常见的受检查异常有：IO 相关的异常、
+          - code [ref=e3207]: ClassNotFoundException
+          - text: 、
+          - code [ref=e3208]: SQLException
+          - text: ...。
+        - paragraph [ref=e3209]:
+          - strong [ref=e3210]: Unchecked Exception
+          - text: 即
+          - strong [ref=e3211]: 不受检查异常
+          - text: ，Java 代码在编译过程中 ，我们即使不处理不受检查异常也可以正常通过编译。
+        - paragraph [ref=e3212]:
+          - code [ref=e3213]: RuntimeException
+          - text: 及其子类都统称为非受检查异常，常见的有（建议记下来，日常开发中会经常用到）：
+        - list [ref=e3214]:
+          - listitem [ref=e3215]:
+            - code [ref=e3216]: NullPointerException
+            - text: (空指针错误)
+          - listitem [ref=e3217]:
+            - code [ref=e3218]: IllegalArgumentException
+            - text: (参数错误比如方法入参类型错误)
+          - listitem [ref=e3219]:
+            - code [ref=e3220]: NumberFormatException
+            - text: （字符串转换为数字格式错误，
+            - code [ref=e3221]: IllegalArgumentException
+            - text: 的子类）
+          - listitem [ref=e3222]:
+            - code [ref=e3223]: ArrayIndexOutOfBoundsException
+            - text: （数组越界错误）
+          - listitem [ref=e3224]:
+            - code [ref=e3225]: ClassCastException
+            - text: （类型转换错误）
+          - listitem [ref=e3226]:
+            - code [ref=e3227]: ArithmeticException
+            - text: （算术错误）
+          - listitem [ref=e3228]:
+            - code [ref=e3229]: SecurityException
+            - text: （安全错误比如权限不够）
+          - listitem [ref=e3230]:
+            - code [ref=e3231]: UnsupportedOperationException
+            - text: (不支持的操作错误比如重复创建同一用户)
+          - listitem [ref=e3232]: ……
+        - paragraph [ref=e3233]
+        - heading [level=3] [ref=e3234]:
+          - link "你更倾向于使用 Checked Exception 还是 Unchecked Exception？" [ref=e3235] [cursor=pointer]:
+            - /url: "#你更倾向于使用-checked-exception-还是-unchecked-exception"
+        - paragraph [ref=e3236]: 默认使用 Unchecked Exception，只在必要时才用 Checked Exception。
+        - paragraph [ref=e3237]:
+          - text: 我们可以把 Unchecked Exception（比如
+          - code [ref=e3238]: NullPointerException
+          - text: ）看作是代码 Bug。对待 Bug，最好的方式是让它暴露出来然后去修复代码，而不是用
+          - code [ref=e3239]: try-catch
+          - text: 去掩盖它。
+        - paragraph [ref=e3240]: 一般来说，只在一种情况下使用 Checked Exception：当这个异常是业务逻辑的一部分，并且调用方必须处理它时。比如说，一个余额不足异常。这不是 bug，而是一个正常的业务分支，我需要用 Checked Exception 来强制调用者去处理这种情况，比如提示用户去充值。这样就能在保证关键业务逻辑完整性的同时，让代码尽可能保持简洁。
+        - heading [level=3] [ref=e3241]:
+          - link "try-catch-finally 如何使用？" [ref=e3242] [cursor=pointer]:
+            - /url: "#try-catch-finally-如何使用"
+        - list [ref=e3243]:
+          - listitem [ref=e3244]:
+            - code [ref=e3245]: try
+            - text: 块：用于捕获异常。其后可接零个或多个
+            - code [ref=e3246]: catch
+            - text: 块，如果没有
+            - code [ref=e3247]: catch
+            - text: 块，则必须跟一个
+            - code [ref=e3248]: finally
+            - text: 块。
+          - listitem [ref=e3249]:
+            - code [ref=e3250]: catch
+            - text: 块：用于处理 try 捕获到的异常。
+          - listitem [ref=e3251]:
+            - code [ref=e3252]: finally
+            - text: 块：无论是否捕获或处理异常，
+            - code [ref=e3253]: finally
+            - text: 块里的语句都会被执行。当在
+            - code [ref=e3254]: try
+            - text: 块或
+            - code [ref=e3255]: catch
+            - text: 块中遇到
+            - code [ref=e3256]: return
+            - text: 语句时，
+            - code [ref=e3257]: finally
+            - text: 语句块将在方法返回之前被执行。
+        - paragraph [ref=e3258]: 代码示例：
+        - generic [ref=e3259]:
+          - text: java
+          - button "复制代码" [ref=e3260] [cursor=pointer]
+          - code [ref=e3262]:
+            - generic [ref=e3263]: "try {"
+            - generic [ref=e3264]: System.out.println("Try to do something");
+            - generic [ref=e3265]: throw new RuntimeException("RuntimeException");
+            - generic [ref=e3266]: "} catch (Exception e) {"
+            - generic [ref=e3267]: System.out.println("Catch Exception -> " + e.getMessage());
+            - generic [ref=e3268]: "} finally {"
+            - generic [ref=e3269]: System.out.println("Finally");
+            - generic [ref=e3270]: "}"
+        - paragraph [ref=e3280]: 输出：
+        - generic [ref=e3281]:
+          - text: plain
+          - button "复制代码" [ref=e3282] [cursor=pointer]
+          - code [ref=e3284]:
+            - generic [ref=e3285]: Try to do something
+            - generic [ref=e3286]: Catch Exception -> RuntimeException
+            - generic [ref=e3287]: Finally
+        - paragraph [ref=e3292]:
+          - strong [ref=e3293]: 注意：不要在 finally 语句块中使用 return!
+          - text: 当 try 语句和 finally 语句中都有 return 语句时，try 语句块中的 return 语句会被忽略。这是因为 try 语句中的 return 返回值会先被暂存在一个本地变量中，当执行到 finally 语句中的 return 之后，这个本地变量的值就变为了 finally 语句中的 return 返回值。
+        - paragraph [ref=e3294]: 代码示例：
+        - generic [ref=e3295]:
+          - text: java
+          - button "复制代码" [ref=e3296] [cursor=pointer]
+          - code [ref=e3298]:
+            - generic [ref=e3299]: "public static void main(String[] args) {"
+            - generic [ref=e3300]: System.out.println(f(2));
+            - generic [ref=e3301]: "}"
+            - generic [ref=e3302]: "public static int f(int value) {"
+            - generic [ref=e3303]: "try {"
+            - generic [ref=e3304]: return value * value;
+            - generic [ref=e3305]: "} finally {"
+            - generic [ref=e3306]: "if (value == 2) {"
+            - generic [ref=e3307]: return 0;
+            - generic [ref=e3308]: "}"
+            - generic [ref=e3309]: "}"
+            - generic [ref=e3310]: "}"
+        - paragraph [ref=e3325]: 输出：
+        - generic [ref=e3326]:
+          - text: plain
+          - button "复制代码" [ref=e3327] [cursor=pointer]
+          - code [ref=e3329]:
+            - generic [ref=e3330]: "0"
+        - heading [level=3] [ref=e3333]:
+          - link "finally 中的代码一定会执行吗？" [ref=e3334] [cursor=pointer]:
+            - /url: "#finally-中的代码一定会执行吗"
+        - paragraph [ref=e3335]: 不一定的！在某些情况下，finally 中的代码不会被执行。
+        - paragraph [ref=e3336]: 就比如说 finally 之前虚拟机被终止运行的话，finally 中的代码就不会被执行。
+        - generic [ref=e3337]:
+          - text: java
+          - button "复制代码" [ref=e3338] [cursor=pointer]
+          - code [ref=e3340]:
+            - generic [ref=e3341]: "try {"
+            - generic [ref=e3342]: System.out.println("Try to do something");
+            - generic [ref=e3343]: throw new RuntimeException("RuntimeException");
+            - generic [ref=e3344]: "} catch (Exception e) {"
+            - generic [ref=e3345]: System.out.println("Catch Exception -> " + e.getMessage());
+            - generic [ref=e3346]: // 终止当前正在运行的Java虚拟机
+            - generic [ref=e3347]: System.exit(1);
+            - generic [ref=e3348]: "} finally {"
+            - generic [ref=e3349]: System.out.println("Finally");
+            - generic [ref=e3350]: "}"
+        - paragraph [ref=e3362]: 输出：
+        - generic [ref=e3363]:
+          - text: plain
+          - button "复制代码" [ref=e3364] [cursor=pointer]
+          - code [ref=e3366]:
+            - generic [ref=e3367]: Try to do something
+            - generic [ref=e3368]: Catch Exception -> RuntimeException
+        - paragraph [ref=e3372]:
+          - text: 另外，在以下 2 种特殊情况下，
+          - code [ref=e3373]: finally
+          - text: 块的代码也不会被执行：
+        - list [ref=e3374]:
+          - listitem [ref=e3375]: 程序所在的线程死亡。
+          - listitem [ref=e3376]: 关闭 CPU。
+        - paragraph [ref=e3377]:
+          - text: 相关 issue：
+          - link "https://github.com/Snailclimb/JavaGuide/issues/190" [ref=e3378] [cursor=pointer]:
+            - /url: https://github.com/Snailclimb/JavaGuide/issues/190
+          - text: 。
+        - paragraph [ref=e3379]:
+          - text: 🧗🏻 进阶一下：从字节码角度分析
+          - code [ref=e3380]: try catch finally
+          - text: 这个语法糖背后的实现原理。
+        - heading [level=3] [ref=e3381]:
+          - link "⭐️异常使用有哪些需要注意的地方？" [ref=e3382] [cursor=pointer]:
+            - /url: "#⭐️异常使用有哪些需要注意的地方"
+        - list [ref=e3383]:
+          - listitem [ref=e3384]: 不要把异常定义为静态变量，因为这样会导致异常栈信息错乱。每次手动抛出异常，我们都需要手动 new 一个异常对象抛出。
+          - listitem [ref=e3385]: 抛出的异常信息一定要有意义。
+          - listitem [ref=e3386]:
+            - text: 建议抛出更加具体的异常，比如字符串转换为数字格式错误的时候应该抛出
+            - code [ref=e3387]: NumberFormatException
+            - text: 而不是其父类
+            - code [ref=e3388]: IllegalArgumentException
+            - text: 。
+          - listitem [ref=e3389]: 避免重复记录日志：如果在捕获异常的地方已经记录了足够的信息（包括异常类型、错误信息和堆栈跟踪等），那么在业务代码中再次抛出这个异常时，就不应该再次记录相同的错误信息。重复记录日志会使得日志文件膨胀，并且可能会掩盖问题的实际原因，使得问题更难以追踪和解决。
+          - listitem [ref=e3390]: ……
+        - heading [level=2] [ref=e3391]:
+          - link "泛型" [ref=e3392] [cursor=pointer]:
+            - /url: "#泛型"
+        - heading [level=3] [ref=e3393]:
+          - link "什么是泛型？有什么作用？" [ref=e3394] [cursor=pointer]:
+            - /url: "#什么是泛型-有什么作用"
+        - paragraph [ref=e3395]:
+          - strong [ref=e3396]: Java 泛型（Generics）
+          - text: 是 JDK 5 中引入的一个新特性。使用泛型参数，可以增强代码的可读性以及稳定性。
+        - paragraph [ref=e3397]:
+          - text: 编译器可以对泛型参数进行检测，并且通过泛型参数可以指定传入的对象类型。比如
+          - code [ref=e3398]: ArrayList<Person> persons = new ArrayList<Person>()
+          - text: 这行代码就指明了该
+          - code [ref=e3399]: ArrayList
+          - text: 对象只能传入
+          - code [ref=e3400]: Person
+          - text: 对象，如果传入其他类型的对象就会报错。
+        - generic [ref=e3401]:
+          - text: java
+          - button "复制代码" [ref=e3402] [cursor=pointer]
+          - code [ref=e3404]:
+            - generic [ref=e3405]: ArrayList<E> extends AbstractList<E>
+        - paragraph [ref=e3408]:
+          - text: 并且，原生
+          - code [ref=e3409]: List
+          - text: 返回类型是
+          - code [ref=e3410]: Object
+          - text: ，需要手动转换类型才能使用，使用泛型后编译器自动转换。
+        - heading [level=3] [ref=e3411]:
+          - link "泛型的使用方式有哪几种？" [ref=e3412] [cursor=pointer]:
+            - /url: "#泛型的使用方式有哪几种"
+        - paragraph [ref=e3413]:
+          - text: "泛型一般有三种使用方式:"
+          - strong [ref=e3414]: 泛型类
+          - text: 、
+          - strong [ref=e3415]: 泛型接口
+          - text: 、
+          - strong [ref=e3416]: 泛型方法
+          - text: 。
+        - paragraph [ref=e3417]:
+          - strong [ref=e3418]: 1.泛型类
+          - text: ：
+        - generic [ref=e3419]:
+          - text: java
+          - button "复制代码" [ref=e3420] [cursor=pointer]
+          - code [ref=e3422]:
+            - generic [ref=e3423]: //此处T可以随便写为任意标识，常见的如T、E、K、V等形式的参数常用于表示泛型
+            - generic [ref=e3424]: //在实例化泛型类时，必须指定T的具体类型
+            - generic [ref=e3425]: "public class Generic<T>{"
+            - generic [ref=e3426]: private T key;
+            - generic [ref=e3427]: "public Generic(T key) {"
+            - generic [ref=e3428]: this.key = key;
+            - generic [ref=e3429]: "}"
+            - generic [ref=e3430]: "public T getKey(){"
+            - generic [ref=e3431]: return key;
+            - generic [ref=e3432]: "}"
+            - generic [ref=e3433]: "}"
+        - paragraph [ref=e3449]: 如何实例化泛型类：
+        - generic [ref=e3450]:
+          - text: java
+          - button "复制代码" [ref=e3451] [cursor=pointer]
+          - code [ref=e3453]:
+            - generic [ref=e3454]: Generic<Integer> genericInteger = new Generic<Integer>(123456);
+        - paragraph [ref=e3457]:
+          - strong [ref=e3458]: 2.泛型接口
+          - text: ：
+        - generic [ref=e3459]:
+          - text: java
+          - button "复制代码" [ref=e3460] [cursor=pointer]
+          - code [ref=e3462]:
+            - generic [ref=e3463]: "public interface Generator<T> {"
+            - generic [ref=e3464]: public T method();
+            - generic [ref=e3465]: "}"
+        - paragraph [ref=e3470]: 实现泛型接口，不指定类型：
+        - generic [ref=e3471]:
+          - text: java
+          - button "复制代码" [ref=e3472] [cursor=pointer]
+          - code [ref=e3474]:
+            - generic [ref=e3475]: "class GeneratorImpl<T> implements Generator<T>{"
+            - generic [ref=e3476]: "@Override"
+            - generic [ref=e3477]: "public T method() {"
+            - generic [ref=e3478]: return null;
+            - generic [ref=e3479]: "}"
+            - generic [ref=e3480]: "}"
+        - paragraph [ref=e3488]: 实现泛型接口，指定类型：
+        - generic [ref=e3489]:
+          - text: java
+          - button "复制代码" [ref=e3490] [cursor=pointer]
+          - code [ref=e3492]:
+            - generic [ref=e3493]: "class GeneratorImpl implements Generator<String> {"
+            - generic [ref=e3494]: "@Override"
+            - generic [ref=e3495]: "public String method() {"
+            - generic [ref=e3496]: return "hello";
+            - generic [ref=e3497]: "}"
+            - generic [ref=e3498]: "}"
+        - paragraph [ref=e3506]:
+          - strong [ref=e3507]: 3.泛型方法
+          - text: ：
+        - generic [ref=e3508]:
+          - text: java
+          - button "复制代码" [ref=e3509] [cursor=pointer]
+          - code [ref=e3511]:
+            - generic [ref=e3512]: public static < E > void printArray( E[] inputArray )
+            - generic [ref=e3513]: "{"
+            - generic [ref=e3514]: "for ( E element : inputArray ){"
+            - generic [ref=e3515]: System.out.printf( "%s ", element );
+            - generic [ref=e3516]: "}"
+            - generic [ref=e3517]: System.out.println();
+            - generic [ref=e3518]: "}"
+        - paragraph [ref=e3527]: 使用：
+        - generic [ref=e3528]:
+          - text: java
+          - button "复制代码" [ref=e3529] [cursor=pointer]
+          - code [ref=e3531]:
+            - generic [ref=e3532]: // 创建不同类型数组：Integer, Double 和 Character
+            - generic [ref=e3533]: "Integer[] intArray = { 1, 2, 3 };"
+            - generic [ref=e3534]: "String[] stringArray = { \"Hello\", \"World\" };"
+            - generic [ref=e3535]: printArray( intArray );
+            - generic [ref=e3536]: printArray( stringArray );
+        - blockquote [ref=e3543]:
+          - paragraph [ref=e3544]:
+            - text: "注意:"
+            - code [ref=e3545]: public static < E > void printArray( E[] inputArray )
+            - text: 一般被称为静态泛型方法;在 java 中泛型只是一个占位符，必须在传递类型后才能使用。类在实例化时才能真正的传递类型参数，由于静态方法的加载先于类的实例化，也就是说类中的泛型还没有传递真正的类型参数，静态的方法的加载就已经完成了，所以静态泛型方法是没有办法使用类上声明的泛型的。只能使用自己声明的
+            - code [ref=e3546]: <E>
+        - heading [level=3] [ref=e3547]:
+          - link "项目中哪里用到了泛型？" [ref=e3548] [cursor=pointer]:
+            - /url: "#项目中哪里用到了泛型"
+        - list [ref=e3549]:
+          - listitem [ref=e3550]:
+            - text: 自定义接口通用返回结果
+            - code [ref=e3551]: CommonResult<T>
+            - text: 通过参数
+            - code [ref=e3552]: T
+            - text: 可根据具体的返回类型动态指定结果的数据类型
+          - listitem [ref=e3553]:
+            - text: 定义
+            - code [ref=e3554]: Excel
+            - text: 处理类
+            - code [ref=e3555]: ExcelUtil<T>
+            - text: 用于动态指定
+            - code [ref=e3556]: Excel
+            - text: 导出的数据类型
+          - listitem [ref=e3557]:
+            - text: 构建集合工具类（参考
+            - code [ref=e3558]: Collections
+            - text: 中的
+            - code [ref=e3559]: sort
+            - text: ","
+            - code [ref=e3560]: binarySearch
+            - text: 方法）。
+          - listitem [ref=e3561]: ……
+        - heading [level=2] [ref=e3562]:
+          - link "⭐️反射" [ref=e3563] [cursor=pointer]:
+            - /url: "#⭐️反射"
+        - paragraph [ref=e3564]:
+          - text: 关于反射的详细解读，请看这篇文章
+          - link "Java 反射机制详解" [ref=e3565] [cursor=pointer]:
+            - /url: https://javaguide.cn/java/basis/reflection.html
+          - text: 。
+        - heading [level=3] [ref=e3566]:
+          - link "什么是反射？" [ref=e3567] [cursor=pointer]:
+            - /url: "#什么是反射"
+        - paragraph [ref=e3568]:
+          - text: 简单来说，Java 反射 (Reflection) 是一种
+          - strong [ref=e3569]: 在程序运行时，动态地获取类的信息并操作类或对象（方法、属性）的能力
+          - text: 。
+        - paragraph [ref=e3570]:
+          - text: 通常情况下，我们写的代码在编译时类型就已经确定了，要调用哪个方法、访问哪个字段都是明确的。但反射允许我们在
+          - strong [ref=e3571]: 运行时
+          - text: 才去探知一个类有哪些方法、哪些属性、它的构造函数是怎样的，甚至可以动态地创建对象、调用方法或修改属性，哪怕这些方法或属性是私有的。
+        - paragraph [ref=e3572]:
+          - text: 正是这种在运行时“反观自身”并进行操作的能力，使得反射成为许多
+          - strong [ref=e3573]: 通用框架和库的基石
+          - text: 。它让代码更加灵活，能够处理在编译时未知的类型。
+        - heading [level=3] [ref=e3574]:
+          - link "反射有什么优缺点？" [ref=e3575] [cursor=pointer]:
+            - /url: "#反射有什么优缺点"
+        - paragraph [ref=e3576]:
+          - strong [ref=e3577]: 优点：
+        - list [ref=e3578]:
+          - listitem [ref=e3579]:
+            - strong [ref=e3580]: 灵活性和动态性
+            - text: ：反射允许程序在运行时动态地加载类、创建对象、调用方法和访问字段。这样可以根据实际需求（如配置文件、用户输入、注解等）动态地适应和扩展程序的行为，显著提高了系统的灵活性和适应性。
+          - listitem [ref=e3581]:
+            - strong [ref=e3582]: 框架开发的基础
+            - text: ：许多现代 Java 框架（如 Spring、Hibernate、MyBatis）都大量使用反射来实现依赖注入（DI）、面向切面编程（AOP）、对象关系映射（ORM）、注解处理等核心功能。反射是实现这些“魔法”功能不可或缺的基础工具。
+          - listitem [ref=e3583]:
+            - strong [ref=e3584]: 解耦合和通用性
+            - text: ：通过反射，可以编写更通用、可重用和高度解耦的代码，降低模块之间的依赖。例如，可以通过反射实现通用的对象拷贝、序列化、Bean 工具等。
+        - paragraph [ref=e3585]:
+          - strong [ref=e3586]: 缺点：
+        - list [ref=e3587]:
+          - listitem [ref=e3588]:
+            - strong [ref=e3589]: 性能开销
+            - text: ：反射操作通常比直接代码调用要慢。因为涉及到动态类型解析、方法查找以及 JIT 编译器的优化受限等因素。不过，对于大多数框架场景，这种性能损耗通常是可以接受的，或者框架本身会做一些缓存优化。
+          - listitem [ref=e3590]:
+            - strong [ref=e3591]: 安全性问题
+            - text: ：反射可以绕过 Java 语言的访问控制机制（如访问
+            - code [ref=e3592]: private
+            - text: 字段和方法），破坏了封装性，可能导致数据泄露或程序被恶意篡改。此外，还可以绕过泛型检查，带来类型安全隐患。
+          - listitem [ref=e3593]:
+            - strong [ref=e3594]: 代码可读性和维护性
+            - text: ：过度使用反射会使代码变得复杂、难以理解和调试。错误通常在运行时才会暴露，不像编译期错误那样容易发现。
+        - paragraph [ref=e3595]:
+          - text: 相关阅读：
+          - 'link "Java Reflection: Why is it so slow?" [ref=e3596] [cursor=pointer]':
+            - /url: https://stackoverflow.com/questions/1392351/java-reflection-why-is-it-so-slow
+          - text: 。
+        - heading [level=3] [ref=e3597]:
+          - link "反射的应用场景？" [ref=e3598] [cursor=pointer]:
+            - /url: "#反射的应用场景"
+        - paragraph [ref=e3599]:
+          - text: 我们平时写业务代码可能很少直接跟 Java 的反射（Reflection）打交道。但你可能没意识到，你天天都在享受反射带来的便利！
+          - strong [ref=e3600]: 很多流行的框架，比如 Spring/Spring Boot、MyBatis 等，底层都大量运用了反射机制
+          - text: ，这才让它们能够那么灵活和强大。
+        - paragraph [ref=e3601]: 下面简单列举几个最场景的场景帮助大家理解。
+        - paragraph [ref=e3602]:
+          - strong [ref=e3603]: 1.依赖注入与控制反转（IoC）
+        - paragraph [ref=e3604]:
+          - text: 以 Spring/Spring Boot 为代表的 IoC 框架，会在启动时扫描带有特定注解（如
+          - code [ref=e3605]: "@Component"
+          - text: ","
+          - code [ref=e3606]: "@Service"
+          - text: ","
+          - code [ref=e3607]: "@Repository"
+          - text: ","
+          - code [ref=e3608]: "@Controller"
+          - text: ）的类，利用反射实例化对象（Bean），并通过反射注入依赖（如
+          - code [ref=e3609]: "@Autowired"
+          - text: 、构造器注入等）。
+        - paragraph [ref=e3610]:
+          - strong [ref=e3611]: 2.注解处理
+        - paragraph [ref=e3612]:
+          - text: 注解本身只是个“标记”，得有人去读这个标记才知道要做什么。反射就是那个“读取器”。框架通过反射检查类、方法、字段上有没有特定的注解，然后根据注解信息执行相应的逻辑。比如，看到
+          - code [ref=e3613]: "@Value"
+          - text: ，就用反射读取注解内容，去配置文件找对应的值，再用反射把值设置给字段。
+        - paragraph [ref=e3614]:
+          - strong [ref=e3615]: 3.动态代理与 AOP
+        - paragraph [ref=e3616]:
+          - text: 想在调用某个方法前后自动加点料（比如打日志、开事务、做权限检查）？AOP（面向切面编程）就是干这个的，而动态代理是实现 AOP 的常用手段。JDK 自带的动态代理（Proxy 和 InvocationHandler）就离不开反射。代理对象在内部调用真实对象的方法时，就是通过反射的
+          - code [ref=e3617]: Method.invoke
+          - text: 来完成的。
+        - generic [ref=e3618]:
+          - text: java
+          - button "复制代码" [ref=e3619] [cursor=pointer]
+          - code [ref=e3621]:
+            - generic [ref=e3622]: "public class DebugInvocationHandler implements InvocationHandler {"
+            - generic [ref=e3623]: private final Object target; // 真实对象
+            - generic [ref=e3624]: "public DebugInvocationHandler(Object target) { this.target = target; }"
+            - generic [ref=e3625]: "// proxy: 代理对象, method: 被调用的方法, args: 方法参数"
+            - generic [ref=e3626]: "public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {"
+            - generic [ref=e3627]: System.out.println("切面逻辑：调用方法 " + method.getName() + " 之前");
+            - generic [ref=e3628]: // 通过反射调用真实对象的同名方法
+            - generic [ref=e3629]: Object result = method.invoke(target, args);
+            - generic [ref=e3630]: System.out.println("切面逻辑：调用方法 " + method.getName() + " 之后");
+            - generic [ref=e3631]: return result;
+            - generic [ref=e3632]: "}"
+            - generic [ref=e3633]: "}"
+        - paragraph [ref=e3649]:
+          - strong [ref=e3650]: 4.对象关系映射（ORM）
+        - paragraph [ref=e3651]: 像 MyBatis、Hibernate 这种框架，能帮你把数据库查出来的一行行数据，自动变成一个个 Java 对象。它是怎么知道数据库字段对应哪个 Java 属性的？还是靠反射。它通过反射获取 Java 类的属性列表，然后把查询结果按名字或配置对应起来，再用反射调用 setter 或直接修改字段值。反过来，保存对象到数据库时，也是用反射读取属性值来拼 SQL。
+        - heading [level=2] [ref=e3652]:
+          - link "代理" [ref=e3653] [cursor=pointer]:
+            - /url: "#代理"
+        - paragraph [ref=e3654]:
+          - text: 关于 Java 代理的详细介绍，可以看看笔者写的
+          - link "Java 代理模式详解" [ref=e3655] [cursor=pointer]:
+            - /url: https://javaguide.cn/java/basis/proxy.html
+          - text: 这篇文章。
+        - heading [level=3] [ref=e3656]:
+          - link "如何实现动态代理？" [ref=e3657] [cursor=pointer]:
+            - /url: "#如何实现动态代理"
+        - paragraph [ref=e3658]:
+          - text: 动态代理是一种非常强大的设计模式，它允许我们在
+          - strong [ref=e3659]: 不修改源代码
+          - text: 的情况下，对一个类或对象的方法进行
+          - strong [ref=e3660]: 功能增强（Enhancement）
+          - text: 。
+        - paragraph [ref=e3661]:
+          - text: 在 Java 中，实现动态代理最主流的方式有两种：
+          - strong [ref=e3662]: JDK 动态代理
+          - text: 和
+          - strong [ref=e3663]: CGLIB 动态代理
+          - text: 。
+        - paragraph [ref=e3664]:
+          - strong [ref=e3665]: 第一种：JDK 动态代理
+        - paragraph [ref=e3666]:
+          - text: Java 官方提供的，其核心要求是目标类必须实现一个或多个接口。JDK 动态代理在运行时，会利用
+          - code [ref=e3667]: Proxy.newProxyInstance()
+          - text: 方法，动态地创建一个实现了这些接口的代理类的实例。这个代理类在内存中生成，你看不到它的
+          - code [ref=e3668]: .java
+          - text: 或
+          - code [ref=e3669]: .class
+          - text: 文件。
+        - paragraph [ref=e3670]:
+          - text: 当你调用代理对象的任何一个方法时，这个调用都会被转发到我们提供的一个
+          - code [ref=e3671]: InvocationHandler
+          - text: 接口的
+          - code [ref=e3672]: invoke
+          - text: 方法中。在
+          - code [ref=e3673]: invoke
+          - text: 方法里，我们就可以在调用原始方法（目标方法）之前或之后，加入我们自己的增强逻辑。
+        - paragraph [ref=e3674]:
+          - strong [ref=e3675]: 第二种：CGLIB 动态代理
+        - paragraph [ref=e3676]:
+          - text: CGLIB 是一个第三方的代码生成库。它的原理与 JDK 完全不同，它不要求被代理的类实现接口。它在运行时，动态生成目标类的子类作为代理类（通过 ASM 字节码操作技术）。然后，它会重写父类（也就是被代理类）中所有非
+          - code [ref=e3677]: final
+          - text: 、
+          - code [ref=e3678]: private
+          - text: 和
+          - code [ref=e3679]: static
+          - text: 的方法。
+        - paragraph [ref=e3680]:
+          - text: 当你调用代理对象的任何一个方法时，这个调用会被 CGLIB 的
+          - code [ref=e3681]: MethodInterceptor
+          - text: 接口的
+          - code [ref=e3682]: intercept
+          - text: 方法拦截。和
+          - code [ref=e3683]: InvocationHandler
+          - text: 的
+          - code [ref=e3684]: invoke
+          - text: 方法一样，我们可以在
+          - code [ref=e3685]: intercept
+          - text: 方法里，在调用原始的父类方法之前或之后，加入我们的增强逻辑。
+        - heading [level=3] [ref=e3686]:
+          - link "静态代理和动态代理有什么区别？" [ref=e3687] [cursor=pointer]:
+            - /url: "#静态代理和动态代理有什么区别"
+        - paragraph [ref=e3688]:
+          - text: 静态代理和动态代理的核心差异在于
+          - strong [ref=e3689]: 代理关系的确定时机、实现灵活性及维护成本
+          - text: 。
+        - table [ref=e3690]:
+          - rowgroup [ref=e3691]:
+            - row [ref=e3692]:
+              - columnheader "对比维度" [ref=e3693]
+              - columnheader "静态代理 (Static Proxy)" [ref=e3694]
+              - columnheader "动态代理 (Dynamic Proxy)" [ref=e3695]
+          - rowgroup [ref=e3696]:
+            - row [ref=e3697]:
+              - cell "代理关系确定时机" [ref=e3698]
+              - cell [ref=e3699]:
+                - text: 编译期（编译后生成固定的
+                - code [ref=e3700]: .class
+                - text: 字节码文件）
+              - cell "运行时（动态生成代理类字节码并加载到 JVM）" [ref=e3701]
+            - row [ref=e3702]:
+              - cell "实现方式" [ref=e3703]
+              - cell "手动编写代理类，需与目标类实现同一接口，一对一绑定" [ref=e3704]
+              - cell [ref=e3705]:
+                - text: 无需手动编写代理类，通过
+                - code [ref=e3706]: Handler
+                - text: /
+                - code [ref=e3707]: Interceptor
+                - text: 封装增强逻辑，一对多复用
+            - row [ref=e3708]:
+              - cell "接口依赖" [ref=e3709]
+              - cell "必须实现接口（代理类与目标类遵循同一接口规范）" [ref=e3710]
+              - cell "支持代理接口或直接代理实现类" [ref=e3711]
+            - row [ref=e3712]:
+              - cell "代码量与维护性" [ref=e3713]
+              - cell "代码量大（目标类越多，代理类越多），维护成本高；接口新增方法时，目标类与代理类需同步修改" [ref=e3714]
+              - cell "代码量极少（通用增强逻辑可复用），维护性好；与接口解耦，接口变更不影响代理逻辑" [ref=e3715]
+            - row [ref=e3716]:
+              - cell "核心优势" [ref=e3717]
+              - cell "实现简单、逻辑直观，无额外框架依赖" [ref=e3718]
+              - cell "灵活性强、复用性高，降低重复编码，适配复杂场景" [ref=e3719]
+            - row [ref=e3720]:
+              - cell "典型应用场景" [ref=e3721]
+              - cell "简单的装饰器模式、少量固定类的增强需求" [ref=e3722]
+              - cell "Spring AOP、RPC 框架（如 Dubbo）、ORM 框架" [ref=e3723]
+        - heading [level=3] [ref=e3724]:
+          - link "⭐️JDK 动态代理和 CGLIB 动态代理有什么区别？" [ref=e3725] [cursor=pointer]:
+            - /url: "#⭐️jdk-动态代理和-cglib-动态代理有什么区别"
+        - list [ref=e3726]:
+          - listitem [ref=e3727]:
+            - text: JDK 动态代理是官方的，它要求被代理的类必须实现接口。它的原理是动态生成一个接口的实现类来作为代理。CGLIB 是第三方的，它不需要接口。它的原理是动态生成一个被代理类的子类来作为代理。但也正因为是继承，所以它不能代理
+            - code [ref=e3728]: final
+            - text: 的类，被代理的方法也不能是
+            - code [ref=e3729]: final
+            - text: 或
+            - code [ref=e3730]: private
+            - text: 。
+          - listitem [ref=e3731]: 就二者的效率来说，大部分情况都是 JDK 动态代理更优秀，随着 JDK 版本的升级，这个优势更加明显。
+        - heading [level=3] [ref=e3732]:
+          - link "⭐️介绍一下动态代理在框架中的实际应用场景" [ref=e3733] [cursor=pointer]:
+            - /url: "#⭐️介绍一下动态代理在框架中的实际应用场景"
+        - paragraph [ref=e3734]:
+          - text: 动态代理最典型的应用场景就是
+          - strong [ref=e3735]: Spring AOP
+          - text: 。
+        - paragraph [ref=e3736]: AOP(Aspect-Oriented Programming:面向切面编程)能够将那些与业务无关，却为业务模块所共同调用的逻辑或责任（例如事务处理、日志管理、权限控制等）封装起来，便于减少系统的重复代码，降低模块间的耦合度，并有利于未来的可拓展性和可维护性。
+        - paragraph [ref=e3737]:
+          - text: Spring AOP 就是基于动态代理的，如果要代理的对象，实现了某个接口，那么 Spring AOP 会使用
+          - strong [ref=e3738]: JDK Proxy
+          - text: ，去创建代理对象，而对于没有实现接口的对象，就无法使用 JDK Proxy 去进行代理了，这时候 Spring AOP 会使用
+          - strong [ref=e3739]: Cglib
+          - text: 生成一个被代理对象的子类来作为代理，如下图所示：
+        - paragraph [ref=e3740]:
+          - img "SpringAOPProcess" [ref=e3741]
+        - heading [level=2] [ref=e3742]:
+          - link "注解" [ref=e3743] [cursor=pointer]:
+            - /url: "#注解"
+        - heading [level=3] [ref=e3744]:
+          - link "何谓注解？" [ref=e3745] [cursor=pointer]:
+            - /url: "#何谓注解"
+        - paragraph [ref=e3746]:
+          - code [ref=e3747]: Annotation
+          - text: （注解） 是 Java5 开始引入的新特性，可以看作是一种特殊的注释，主要用于修饰类、方法或者变量，提供某些信息供程序在编译或者运行时使用。
+        - paragraph [ref=e3748]:
+          - text: 注解本质是一个继承了
+          - code [ref=e3749]: Annotation
+          - text: 的特殊接口：
+        - generic [ref=e3750]:
+          - text: java
+          - button "复制代码" [ref=e3751] [cursor=pointer]
+          - code [ref=e3753]:
+            - generic [ref=e3754]: "@Target(ElementType.METHOD)"
+            - generic [ref=e3755]: "@Retention(RetentionPolicy.SOURCE)"
+            - generic [ref=e3756]: "public @interface Override {"
+            - generic [ref=e3757]: "}"
+            - generic [ref=e3758]: "public interface Override extends Annotation{"
+            - generic [ref=e3759]: "}"
+        - paragraph [ref=e3770]:
+          - text: JDK 提供了很多内置的注解（比如
+          - code [ref=e3771]: "@Override"
+          - text: 、
+          - code [ref=e3772]: "@Deprecated"
+          - text: ），同时，我们还可以自定义注解。
+        - heading [level=3] [ref=e3773]:
+          - link "注解的解析方法有哪几种？" [ref=e3774] [cursor=pointer]:
+            - /url: "#注解的解析方法有哪几种"
+        - paragraph [ref=e3775]: 注解只有被解析之后才会生效，常见的解析方法有两种：
+        - list [ref=e3776]:
+          - listitem [ref=e3777]:
+            - strong [ref=e3778]: 编译期直接扫描
+            - text: ：编译器在编译 Java 代码的时候扫描对应的注解并处理，比如某个方法使用
+            - code [ref=e3779]: "@Override"
+            - text: 注解，编译器在编译的时候就会检测当前的方法是否重写了父类对应的方法。
+          - listitem [ref=e3780]:
+            - strong [ref=e3781]: 运行期通过反射处理
+            - text: ：像框架中自带的注解(比如 Spring 框架的
+            - code [ref=e3782]: "@Value"
+            - text: 、
+            - code [ref=e3783]: "@Component"
+            - text: )都是通过反射来进行处理的。
+        - heading [level=2] [ref=e3784]:
+          - link "⭐️SPI" [ref=e3785] [cursor=pointer]:
+            - /url: "#⭐️spi"
+        - paragraph [ref=e3786]:
+          - text: 关于 SPI 的详细解读，请看这篇文章
+          - link "Java SPI 机制详解" [ref=e3787] [cursor=pointer]:
+            - /url: https://javaguide.cn/java/basis/spi.html
+          - text: 。
+        - heading [level=3] [ref=e3788]:
+          - link "何谓 SPI?" [ref=e3789] [cursor=pointer]:
+            - /url: "#何谓-spi"
+        - paragraph [ref=e3790]: SPI 即 Service Provider Interface ，字面意思就是：“服务提供者的接口”，我的理解是：专门提供给服务提供者或者扩展框架功能的开发者去使用的一个接口。
+        - paragraph [ref=e3791]: SPI 将服务接口和具体的服务实现分离开来，将服务调用方和服务实现者解耦，能够提升程序的扩展性、可维护性。修改或者替换服务实现并不需要修改调用方。
+        - paragraph [ref=e3792]: 很多框架都使用了 Java 的 SPI 机制，比如：Spring 框架、数据库加载驱动、日志接口、以及 Dubbo 的扩展实现等等。
+        - heading [level=3] [ref=e3794]:
+          - link "SPI 和 API 有什么区别？" [ref=e3795] [cursor=pointer]:
+            - /url: "#spi-和-api-有什么区别"
+        - paragraph [ref=e3796]:
+          - strong [ref=e3797]: 那 SPI 和 API 有啥区别？
+        - paragraph [ref=e3798]: 说到 SPI 就不得不说一下 API（Application Programming Interface） 了，从广义上来说它们都属于接口，而且很容易混淆。下面先用一张图说明一下：
+        - paragraph [ref=e3799]:
+          - img "SPI VS API" [ref=e3800]
+        - paragraph [ref=e3801]: 一般模块之间都是通过接口进行通讯，因此我们在服务调用方和服务实现方（也称服务提供者）之间引入一个“接口”。
+        - list [ref=e3802]:
+          - listitem [ref=e3803]:
+            - text: 当实现方提供了接口和实现，我们可以通过调用实现方的接口从而拥有实现方给我们提供的能力，这就是
+            - strong [ref=e3804]: API
+            - text: 。这种情况下，接口和实现都是放在实现方的包中。调用方通过接口调用实现方的功能，而不需要关心具体的实现细节。
+          - listitem [ref=e3805]:
+            - text: 当接口存在于调用方这边时，这就是
+            - strong [ref=e3806]: SPI
+            - text: 。由接口调用方确定接口规则，然后由不同的厂商根据这个规则对这个接口进行实现，从而提供服务。
+        - paragraph [ref=e3807]: 举个通俗易懂的例子：公司 H 是一家科技公司，新设计了一款芯片，然后现在需要量产了，而市面上有好几家芯片制造业公司，这个时候，只要 H 公司指定好了这芯片生产的标准（定义好了接口标准），那么这些合作的芯片公司（服务提供者）就按照标准交付自家特色的芯片（提供不同方案的实现，但是给出来的结果是一样的）。
+        - heading [level=3] [ref=e3808]:
+          - link "SPI 的优缺点？" [ref=e3809] [cursor=pointer]:
+            - /url: "#spi-的优缺点"
+        - paragraph [ref=e3810]: 通过 SPI 机制能够大大地提高接口设计的灵活性，但是 SPI 机制也存在一些缺点，比如：
+        - list [ref=e3811]:
+          - listitem [ref=e3812]: 需要遍历加载所有的实现类，不能做到按需加载，这样效率还是相对较低的。
+          - listitem [ref=e3813]:
+            - text: 当多个
+            - code [ref=e3814]: ServiceLoader
+            - text: 同时
+            - code [ref=e3815]: load
+            - text: 时，会有并发问题。
+        - heading [level=2] [ref=e3816]:
+          - link "⭐️序列化和反序列化" [ref=e3817] [cursor=pointer]:
+            - /url: "#⭐️序列化和反序列化"
+        - paragraph [ref=e3818]:
+          - text: 关于序列化和反序列化的详细解读，请看这篇文章
+          - link "Java 序列化详解" [ref=e3819] [cursor=pointer]:
+            - /url: https://javaguide.cn/java/basis/serialization.html
+          - text: ，里面涉及到的知识点和面试题更全面。
+        - heading [level=3] [ref=e3820]:
+          - link "什么是序列化?什么是反序列化?" [ref=e3821] [cursor=pointer]:
+            - /url: "#什么是序列化-什么是反序列化"
+        - paragraph [ref=e3822]: 如果我们需要持久化 Java 对象比如将 Java 对象保存在文件中，或者在网络传输 Java 对象，这些场景都需要用到序列化。
+        - paragraph [ref=e3823]: 简单来说：
+        - list [ref=e3824]:
+          - listitem [ref=e3825]:
+            - strong [ref=e3826]: 序列化
+            - text: ：将数据结构或对象转换成可以存储或传输的形式，通常是二进制字节流，也可以是 JSON, XML 等文本格式
+          - listitem [ref=e3827]:
+            - strong [ref=e3828]: 反序列化
+            - text: ：将在序列化过程中所生成的数据转换为原始数据结构或者对象的过程
+        - paragraph [ref=e3829]: 对于 Java 这种面向对象编程语言来说，我们序列化的都是对象（Object）也就是实例化后的类(Class)，但是在 C++这种半面向对象的语言中，struct(结构体)定义的是数据结构类型，而 class 对应的是对象类型。
+        - paragraph [ref=e3830]: 下面是序列化和反序列化常见应用场景：
+        - list [ref=e3831]:
+          - listitem [ref=e3832]: 对象在进行网络传输（比如远程方法调用 RPC 的时候）之前需要先被序列化，接收到序列化的对象之后需要再进行反序列化；
+          - listitem [ref=e3833]: 将对象存储到文件之前需要进行序列化，将对象从文件中读取出来需要进行反序列化；
+          - listitem [ref=e3834]: 将对象存储到数据库（如 Redis）之前需要用到序列化，将对象从缓存数据库中读取出来需要反序列化；
+          - listitem [ref=e3835]: 将对象存储到内存之前需要进行序列化，从内存中读取出来之后需要进行反序列化。
+        - paragraph [ref=e3836]: 维基百科是如是介绍序列化的：
+        - blockquote [ref=e3837]:
+          - paragraph [ref=e3838]:
+            - strong [ref=e3839]: 序列化
+            - text: （serialization）在计算机科学的数据处理中，是指将数据结构或对象状态转换成可取用格式（例如存成文件，存于缓冲，或经由网络中发送），以留待后续在相同或另一台计算机环境中，能恢复原先状态的过程。依照序列化格式重新获取字节的结果时，可以利用它来产生与原始对象相同语义的副本。对于许多对象，像是使用大量引用的复杂对象，这种序列化重建的过程并不容易。面向对象中的对象序列化，并不概括之前原始对象所关系的函数。这种过程也称为对象编组（marshalling）。从一系列字节提取数据结构的反向操作，是反序列化（也称为解编组、deserialization、unmarshalling）。
+        - paragraph [ref=e3840]:
+          - text: 综上：
+          - strong [ref=e3841]: 序列化的主要目的是通过网络传输对象或者说是将对象存储到文件系统、数据库、内存中。
+        - paragraph [ref=e3842]
+        - paragraph [ref=e3843]: https://www.corejavaguru.com/java/serialization/interview-questions-1
+        - paragraph [ref=e3844]:
+          - strong [ref=e3845]: 序列化协议对应于 TCP/IP 4 层模型的哪一层？
+        - paragraph [ref=e3846]: 我们知道网络通信的双方必须要采用和遵守相同的协议。TCP/IP 四层模型是下面这样的，序列化协议属于哪一层呢？
+        - list [ref=e3847]:
+          - listitem [ref=e3848]: 应用层
+          - listitem [ref=e3849]: 传输层
+          - listitem [ref=e3850]: 网络层
+          - listitem [ref=e3851]: 网络接口层
+        - paragraph [ref=e3852]:
+          - img "TCP/IP 四层模型" [ref=e3853]
+        - paragraph [ref=e3854]: 如上图所示，OSI 七层协议模型中，表示层做的事情主要就是对应用层的用户数据进行处理转换为二进制流。反过来的话，就是将二进制流转换成应用层的用户数据。这不就对应的是序列化和反序列化么？
+        - paragraph [ref=e3855]: 因为，OSI 七层协议模型中的应用层、表示层和会话层对应的都是 TCP/IP 四层模型中的应用层，所以序列化协议属于 TCP/IP 协议应用层的一部分。
+        - heading [level=3] [ref=e3856]:
+          - link "如果有些字段不想进行序列化怎么办？" [ref=e3857] [cursor=pointer]:
+            - /url: "#如果有些字段不想进行序列化怎么办"
+        - paragraph [ref=e3858]:
+          - text: 对于不想进行序列化的变量，使用
+          - code [ref=e3859]: transient
+          - text: 关键字修饰。
+        - paragraph [ref=e3860]:
+          - code [ref=e3861]: transient
+          - text: 关键字的作用是：阻止实例中那些用此关键字修饰的的变量序列化；当对象被反序列化时，被
+          - code [ref=e3862]: transient
+          - text: 修饰的变量值不会被持久化和恢复。
+        - paragraph [ref=e3863]:
+          - text: 关于
+          - code [ref=e3864]: transient
+          - text: 还有几点注意：
+        - list [ref=e3865]:
+          - listitem [ref=e3866]:
+            - code [ref=e3867]: transient
+            - text: 只能修饰变量，不能修饰类和方法。
+          - listitem [ref=e3868]:
+            - code [ref=e3869]: transient
+            - text: 修饰的变量，在反序列化后变量值将会被置成类型的默认值。例如，如果是修饰
+            - code [ref=e3870]: int
+            - text: 类型，那么反序列后结果就是
+            - code [ref=e3871]: "0"
+            - text: 。
+          - listitem [ref=e3872]:
+            - code [ref=e3873]: static
+            - text: 变量因为不属于任何对象(Object)，所以无论有没有
+            - code [ref=e3874]: transient
+            - text: 关键字修饰，均不会被序列化。
+        - heading [level=3] [ref=e3875]:
+          - link "常见序列化协议有哪些？" [ref=e3876] [cursor=pointer]:
+            - /url: "#常见序列化协议有哪些"
+        - paragraph [ref=e3877]: JDK 自带的序列化方式一般不会用 ，因为序列化效率低并且存在安全问题。比较常用的序列化协议有 Hessian、Kryo、Protobuf、ProtoStuff，这些都是基于二进制的序列化协议。
+        - paragraph [ref=e3878]: 像 JSON 和 XML 这种属于文本类序列化方式。虽然可读性比较好，但是性能较差，一般不会选择。
+        - heading [level=3] [ref=e3879]:
+          - link "为什么不推荐使用 JDK 自带的序列化？" [ref=e3880] [cursor=pointer]:
+            - /url: "#为什么不推荐使用-jdk-自带的序列化"
+        - paragraph [ref=e3881]: 我们很少或者说几乎不会直接使用 JDK 自带的序列化方式，主要原因有下面这些原因：
+        - list [ref=e3882]:
+          - listitem [ref=e3883]:
+            - strong [ref=e3884]: 不支持跨语言调用
+            - text: ": 如果调用的是其他语言开发的服务的时候就不支持了。"
+          - listitem [ref=e3885]:
+            - strong [ref=e3886]: 性能差
+            - text: ：相比于其他序列化框架性能更低，主要原因是序列化之后的字节数组体积较大，导致传输成本加大。
+          - listitem [ref=e3887]:
+            - strong [ref=e3888]: 存在安全问题
+            - text: ：序列化和反序列化本身并不存在问题。但当输入的反序列化的数据可被用户控制，那么攻击者即可通过构造恶意输入，让反序列化产生非预期的对象，在此过程中执行构造的任意代码。相关阅读：
+            - link "应用安全：JAVA 反序列化漏洞之殇" [ref=e3889] [cursor=pointer]:
+              - /url: https://cryin.github.io/blog/secure-development-java-deserialization-vulnerability/
+            - text: 。
+        - heading [level=2] [ref=e3890]:
+          - link "I/O" [ref=e3891] [cursor=pointer]:
+            - /url: "#i-o"
+        - heading [level=3] [ref=e3892]:
+          - link "Java IO 流了解吗？" [ref=e3893] [cursor=pointer]:
+            - /url: "#java-io-流了解吗"
+        - paragraph [ref=e3894]:
+          - text: IO 即
+          - code [ref=e3895]: Input/Output
+          - text: ，输入和输出。数据输入到计算机内存的过程即输入，反之输出到外部存储（比如数据库，文件，远程主机）的过程即输出。数据传输过程类似于水流，因此称为 IO 流。IO 流在 Java 中分为输入流和输出流，而根据数据的处理方式又分为字节流和字符流。
+        - paragraph [ref=e3896]: Java IO 流的 40 多个类都是从如下 4 个抽象类基类中派生出来的。
+        - list [ref=e3897]:
+          - listitem [ref=e3898]:
+            - code [ref=e3899]: InputStream
+            - text: /
+            - code [ref=e3900]: Reader
+            - text: ": 所有的输入流的基类，前者是字节输入流，后者是字符输入流。"
+          - listitem [ref=e3901]:
+            - code [ref=e3902]: OutputStream
+            - text: /
+            - code [ref=e3903]: Writer
+            - text: ": 所有输出流的基类，前者是字节输出流，后者是字符输出流。"
+        - heading [level=3] [ref=e3904]:
+          - link "I/O 流为什么要分为字节流和字符流呢?" [ref=e3905] [cursor=pointer]:
+            - /url: "#i-o-流为什么要分为字节流和字符流呢"
+        - paragraph [ref=e3906]:
+          - text: 问题本质想问：
+          - strong [ref=e3907]: 不管是文件读写还是网络发送接收，信息的最小存储单元都是字节，那为什么 I/O 流操作要分为字节流操作和字符流操作呢？
+        - paragraph [ref=e3908]: 个人认为主要有两点原因：
+        - list [ref=e3909]:
+          - listitem [ref=e3910]: 字符流是由 Java 虚拟机将字节转换得到的，这个过程还算是比较耗时；
+          - listitem [ref=e3911]: 如果我们不知道编码类型的话，使用字节流的过程中很容易出现乱码问题。
+        - heading [level=3] [ref=e3912]:
+          - link "Java IO 中的设计模式有哪些？" [ref=e3913] [cursor=pointer]:
+            - /url: "#java-io-中的设计模式有哪些"
+        - paragraph [ref=e3914]:
+          - text: 参考答案：
+          - link "Java IO 设计模式总结" [ref=e3915] [cursor=pointer]:
+            - /url: https://javaguide.cn/java/io/io-design-patterns.html
+        - heading [level=3] [ref=e3916]:
+          - link "⭐️BIO、NIO 和 AIO 的区别？" [ref=e3917] [cursor=pointer]:
+            - /url: "#⭐️bio、nio-和-aio-的区别"
+        - paragraph [ref=e3918]:
+          - text: 参考答案：
+          - link "Java IO 模型详解" [ref=e3919] [cursor=pointer]:
+            - /url: https://javaguide.cn/java/io/io-model.html
+      - generic [ref=e3922]:
+        - link "编辑此页" [ref=e3924] [cursor=pointer]:
+          - /url: https://github.com/Snailclimb/JavaGuide-Interview/edit/main/docs/java/java-basis.md
+          - img "edit icon" [ref=e3925]
+          - text: 编辑此页
+        - generic [ref=e3928]:
+          - generic [ref=e3929]:
+            - text: "最近更新:"
+            - time [ref=e3930]: 2026/3/12 17:23
+          - generic [ref=e3931]: "贡献者: guide,Guide"
+      - navigation [ref=e3932]:
+        - link "Java集合常见面试题总结" [ref=e3933] [cursor=pointer]:
+          - /url: /java/java-collection.html
+          - generic [ref=e3934]: 下一页
+    - contentinfo [ref=e92]:
+      - link "鄂ICP备2020015769号-1" [ref=e303] [cursor=pointer]:
+        - /url: https://beian.miit.gov.cn/
+      - generic [ref=e96]: Copyright © 2026 Guide
+  - button "沉浸阅读" [ref=e97] [cursor=pointer]

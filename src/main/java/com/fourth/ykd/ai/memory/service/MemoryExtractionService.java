@@ -235,6 +235,17 @@ public class MemoryExtractionService {
         6. 不得返回 Markdown 代码块、解释文字或额外内容。
         """;
 
+    private static final String FALLBACK_EXTRACTION_INSTRUCTIONS = """
+        你负责从用户本轮明确提出的长期记忆管理命令中提取结构化候选记忆。
+
+        仅处理用户明确要求保存、更新、删除、关闭、取消、替换或长期记住的信息。
+        如果用户没有明确长期记忆意图，返回空 candidates。
+        recentConversationContext 仅用于确认“那个项目”“之前的任务”等指代对象，
+        不得把上下文中未被用户本轮明确提及的信息自行保存或删除。
+
+        必须严格按照系统提供的 MemoryExtractionResult JSON Schema 返回结果，
+        不要输出解释、Markdown 或任何 Schema 之外的文字。
+        """;
     private final ChatClient memoryExtractionChatClient;
 
     /**
@@ -312,11 +323,10 @@ public class MemoryExtractionService {
 
         //第二次重试
         try {
-            return limitCandidates(extractOnce(completedTurn,
-                      EXTRACTION_INSTRUCTIONS
+            return limitCandidates(extractOnce(
+                    buildFallbackTurn(userMessage, recentConversationContext),
+                    FALLBACK_EXTRACTION_INSTRUCTIONS
                                     //换行：把两端提示词分开
-                                    + System.lineSeparator()
-                                    + STRUCTURED_OUTPUT_RETRY_INSTRUCTIONS
                     )
             );
         } catch (RuntimeException retryException) {
@@ -324,7 +334,10 @@ public class MemoryExtractionService {
                     "[AI][MEMORY_EXTRACTION][FAILED] failureType={}",
                     retryException.getClass().getSimpleName()
             );
-            return List.of();
+            throw new IllegalStateException(
+                    "长期记忆提取两次均未返回有效结构化结果",
+                    retryException
+            );
         }
     }
 
@@ -412,6 +425,21 @@ public class MemoryExtractionService {
         );
     }
 
+    private String buildFallbackTurn(
+            String userMessage,
+            String recentConversationContext
+    ) {
+        return """
+                [RECENT_CONVERSATION_CONTEXT]
+                %s
+
+                [USER_MESSAGE]
+                %s
+                """.formatted(
+                normalizeRecentContext(recentConversationContext),
+                userMessage.trim()
+        );
+    }
     /**
      * 清理并限制近期会话上下文长度。
      * 空上下文使用“无”明确告诉模型；过长内容截断到固定字符数，避免提示词失控。

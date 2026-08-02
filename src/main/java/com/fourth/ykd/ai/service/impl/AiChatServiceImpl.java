@@ -215,57 +215,7 @@ public class AiChatServiceImpl implements AiChatService {
                 );
 
         //把真实写库计数交给主模型，防止数据库没有成功却回复“已经记住”。
-        String memoryExecutionContext = """
-                这是一次明确的长期记忆管理请求。
-                后台已经执行完毕，真实结果如下：
-                completed=%s
-                failedStage=%s
-                candidateCount=%d
-                createdCount=%d
-                confirmedCount=%d
-                replacedCount=%d
-                deletedCount=%d
-                ignoredCount=%d
-                failedCount=%d
-
-                必须严格依据上述真实结果回复用户：
-                只有 createdCount、confirmedCount、replacedCount 或 deletedCount 大于 0 时，
-                才能明确声称已经记住、确认、更新或删除。
-                如果 completed=false 或 failedCount 大于 0，必须如实说明部分或全部操作没有成功。
-                如果所有操作数量都是 0，不得声称已经完成，应请用户更明确地说明要记住或忘记什么。
-                不要向用户展示字段名、内部计数、数据库、模型路由或系统实现细节。
-                """.formatted(
-                formationResult.completed(),
-                formationResult.failedStage(),
-                formationResult.candidateCount(),
-                formationResult.createdCount(),
-                formationResult.confirmedCount(),
-                formationResult.replacedCount(),
-                formationResult.deletedCount(),
-                formationResult.ignoredCount(),
-                formationResult.failedCount()
-        );
-
-        String answer = springAiChatClient.prompt()
-                .system(TOOL_USAGE_INSTRUCTIONS + memoryExecutionContext)
-                .user(normalizedMessage)
-                .advisors(advisorSpec -> advisorSpec.param(
-                        ChatMemory.CONVERSATION_ID,
-                        normalizedConversationId
-                ))
-                .tools(
-                        mathCalculatorTools,
-                        timeTool,
-                        baiduSearchTool,
-                        weatherTool,
-                        translationTool
-                )
-                .call()
-                .content();
-
-        String normalizedAnswer = StringUtils.hasText(answer)
-                ? answer.trim()
-                : "这次记忆操作没有得到可确认的结果，请再明确说明要记住或忘记什么。";
+        String normalizedAnswer = buildMemoryManagementReply(formationResult);
 
         sqliteChatMessageRepository.save(
                 normalizedConversationId,
@@ -279,6 +229,48 @@ public class AiChatServiceImpl implements AiChatService {
         );
 
         return new AiChatResponse(normalizedAnswer);
+    }
+    static String buildMemoryManagementReply(
+            MemoryFormationService.FormationResult formationResult
+    ) {
+        if (!formationResult.completed()) {
+            return "本次长期记忆处理未完成，请稍后重试或换一种更明确的说法。";
+        }
+
+        int successfulCount = formationResult.createdCount()
+                + formationResult.confirmedCount()
+                + formationResult.replacedCount()
+                + formationResult.deletedCount();
+
+        if (formationResult.failedCount() > 0) {
+            return successfulCount > 0
+                    ? "本次长期记忆已部分处理完成，部分内容未能保存，请稍后重试。"
+                    : "本次长期记忆处理未完成，请稍后重试或换一种更明确的说法。";
+        }
+
+        StringBuilder reply = new StringBuilder();
+
+        if (formationResult.createdCount() > 0) {
+            reply.append("已保存本次长期记忆。");
+        }
+
+        if (formationResult.confirmedCount() > 0) {
+            reply.append("已确认本次长期记忆。");
+        }
+
+        if (formationResult.replacedCount() > 0) {
+            reply.append("已更新本次长期记忆。");
+        }
+
+        if (formationResult.deletedCount() > 0) {
+            reply.append("已删除相关长期记忆。");
+        }
+
+        if (reply.isEmpty()) {
+            return "本次没有识别到需要保存或变更的长期记忆，请说得更明确一些。";
+        }
+
+        return reply.toString();
     }
     /**
      * 构造明确记忆管理请求使用的近期会话上下文。

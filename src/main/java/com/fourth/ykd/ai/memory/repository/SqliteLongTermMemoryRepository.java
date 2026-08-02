@@ -117,6 +117,42 @@ public class SqliteLongTermMemoryRepository {
             """;
 
     /**
+     * 根据用户和记忆 ID 查询当前仍然有效的长期记忆。
+     * Redis 语义检索只返回 memoryId，
+     * 最终必须通过 SQLite 再次确认用户归属、状态和过期时间。
+     */
+    private static final String FIND_ACTIVE_BY_ID_AND_USER_ID_SQL = """
+            SELECT
+                id,
+                user_id,
+                memory_type,
+                memory_key,
+                content,
+                summary,
+                importance,
+                confidence,
+                status,
+                source_conversation_id,
+                content_hash,
+                supersedes_id,
+                expires_at,
+                created_at,
+                updated_at,
+                last_accessed_at,
+                access_count
+            FROM agent_memory
+            WHERE id = ?
+              AND user_id = ?
+              AND status = 'ACTIVE'
+              AND (
+                  expires_at IS NULL
+                  OR expires_at > CURRENT_TIMESTAMP
+              )
+            LIMIT 1
+            """;
+
+
+    /**
      * 用于内容去重:根据用户、记忆类型和内容哈希查询重复记忆。
      * 已经过期的记录不会被当成当前有效重复项。
      */
@@ -296,6 +332,27 @@ public class SqliteLongTermMemoryRepository {
         return results.stream().findFirst();
     }
 
+    /**
+     * 根据 Redis 返回的 memoryId 查询当前用户仍有效的长期记忆。
+     * 查询条件由 SQLite 统一判断，
+     * 避免 Redis 索引延迟时读到已经删除、替代或过期的数据。
+     * @param userId 当前微信用户 ID
+     * @param memoryId Redis 语义索引返回的记忆 ID
+     * @return 当前仍有效且属于该用户的记忆；不满足条件时为空
+     */
+    public Optional<MemoryItem> findActiveByIdAndUserId(
+            String userId,
+            String memoryId
+    ) {
+        List<MemoryItem> results = jdbcTemplate.query(
+                FIND_ACTIVE_BY_ID_AND_USER_ID_SQL,
+                MEMORY_ITEM_ROW_MAPPER,
+                requireText(memoryId, "memoryId"),
+                requireText(userId, "userId")
+        );
+
+        return results.stream().findFirst();
+    }
     /**
      * 根据稳定业务键查询当前有效版本。
      * 适用于 PROFILE、PREFERENCE、PROJECT 和 TASK 等可替换事实。

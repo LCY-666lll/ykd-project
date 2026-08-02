@@ -106,7 +106,7 @@ public class IlinkReplyProcessor {
         }
         //明确记忆命令走同步管理入口，必须根据真实写库结果生成回复。
         if (intent == UserIntent.MEMORY_MANAGE) {
-            return ReplyResult.text(intent, aiChatService.manageMemory(userId, userText).reply(), null);
+            return ReplyResult.text(intent, "收到，正在处理你的长期记忆请求，完成后通知你。", null);
         }
         if (intent == UserIntent.VOICE_REPLY) {
             return ReplyResult.audio(intent, aiChatService.chatForVoiceReply(userId, userText).reply(), null);

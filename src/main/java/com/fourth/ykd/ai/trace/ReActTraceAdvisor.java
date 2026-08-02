@@ -98,8 +98,8 @@ public class ReActTraceAdvisor extends ToolCallAdvisor {
         if (output instanceof DeepSeekAssistantMessage deepSeekMessage
                 && StringUtils.hasText(deepSeekMessage.getReasoningContent())) {
             trace.reasoningPresent = true;
-            log.info("[AI][REACT][THOUGHT] traceId={}, step={}, reasoning={}", trace.traceId, trace.step,
-                    sanitize(deepSeekMessage.getReasoningContent()));
+            log.debug("[AI][REACT][THOUGHT] traceId={}, step={}, reasoningLength={}", trace.traceId, trace.step,
+                    deepSeekMessage.getReasoningContent().length());
         }
         List<AssistantMessage.ToolCall> toolCalls =
                 output == null ? List.of() : output.getToolCalls();
@@ -112,8 +112,8 @@ public class ReActTraceAdvisor extends ToolCallAdvisor {
             trace.toolRounds++;
         }
         for (AssistantMessage.ToolCall toolCall : toolCalls) {
-            log.info("[AI][REACT][ACTION] traceId={}, step={}, tool={}, arguments={}", trace.traceId, trace.step,
-                    toolCall.name(), sanitize(toolCall.arguments()));
+            log.debug("[AI][REACT][ACTION] traceId={}, step={}, tool={}, argumentLength={}", trace.traceId, trace.step,
+                    toolCall.name(), StringUtils.hasText(toolCall.arguments()) ? toolCall.arguments().length() : 0);
         }        return response;
     }
 

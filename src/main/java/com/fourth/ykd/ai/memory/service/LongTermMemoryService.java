@@ -2,11 +2,13 @@ package com.fourth.ykd.ai.memory.service;
 
 import com.fourth.ykd.ai.memory.model.MemoryCandidate;
 import com.fourth.ykd.ai.memory.model.MemoryConsolidationResult;
+import com.fourth.ykd.ai.memory.model.MemoryIndexOutboxTask;
 import com.fourth.ykd.ai.memory.model.MemoryItem;
 import com.fourth.ykd.ai.memory.model.MemoryOperation;
 import com.fourth.ykd.ai.memory.model.MemoryStatus;
 import com.fourth.ykd.ai.memory.model.MemoryWriteResult;
 import com.fourth.ykd.ai.memory.policy.MemoryCandidatePolicy;
+import com.fourth.ykd.ai.memory.repository.MemoryIndexOutboxRepository;
 import com.fourth.ykd.ai.memory.repository.SqliteLongTermMemoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -47,6 +49,7 @@ public class LongTermMemoryService {
     private final MemoryCandidatePolicy candidatePolicy;
     //负责 agent_memory 表的实际查询和状态更新
     private final SqliteLongTermMemoryRepository memoryRepository;
+    private final MemoryIndexOutboxRepository memoryIndexOutboxRepository;
 
     /**
      * 执行一条经过语义合并的长期记忆决定。
@@ -173,9 +176,7 @@ public class LongTermMemoryService {
 
         for (MemoryItem target : targets) {
             if (!target.id().equals(retained.id())) {
-                requireOneRow(
-                        memoryRepository.markSuperseded(target.id())
-                );
+                markSupersededAndQueueDelete(target.id());
             }
         }
 
@@ -201,9 +202,7 @@ public class LongTermMemoryService {
         MemoryItem latest = findLatestMemory(targets);
 
         for (MemoryItem target : targets) {
-            requireOneRow(
-                    memoryRepository.markSuperseded(target.id())
-            );
+            markSupersededAndQueueDelete(target.id());
         }
 
         return create(
@@ -233,9 +232,7 @@ public class LongTermMemoryService {
         MemoryItem latest = findLatestMemory(targets);
 
         for (MemoryItem target : targets) {
-            requireOneRow(
-                    memoryRepository.markDeleted(target.id())
-            );
+            markDeletedAndQueueDelete(target.id());
         }
 
         MemoryItem deleted = memoryRepository
@@ -423,6 +420,11 @@ public class LongTermMemoryService {
         3. requireOneRow 检查是不是 1*/
         requireOneRow(memoryRepository.insert(memory));
 
+        memoryIndexOutboxRepository.enqueue(
+                memory.id(),
+                MemoryIndexOutboxTask.Operation.UPSERT
+        );
+
         /*action 是外部传进来的。
         普通新增传：CREATED
         替换旧版本传：REPLACED
@@ -433,6 +435,22 @@ public class LongTermMemoryService {
     /**
      * 生成稳定内容哈希，用于判断内容是否完全相同。
      */
+    private void markSupersededAndQueueDelete(String memoryId) {
+        requireOneRow(memoryRepository.markSuperseded(memoryId));
+        memoryIndexOutboxRepository.enqueue(
+                memoryId,
+                MemoryIndexOutboxTask.Operation.DELETE
+        );
+    }
+
+    private void markDeletedAndQueueDelete(String memoryId) {
+        requireOneRow(memoryRepository.markDeleted(memoryId));
+        memoryIndexOutboxRepository.enqueue(
+                memoryId,
+                MemoryIndexOutboxTask.Operation.DELETE
+        );
+    }
+
     private String calculateContentHash(String content) {
         try {
             //MessageDigest 是 Java 提供的摘要算法工具类

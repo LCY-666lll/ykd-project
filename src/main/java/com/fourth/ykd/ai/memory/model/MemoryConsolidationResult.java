@@ -10,7 +10,7 @@ import java.util.Objects;
  * 应该创建、确认、替换、删除，还是忽略
  * @param decisions 本轮所有候选记忆对应的语义处理决定
  */
-public record MemoryConsolidationResult(
+public record  MemoryConsolidationResult(
         //一轮模型比较可能产生多个决定
         List<Decision> decisions
 ) {

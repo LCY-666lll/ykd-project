@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
@@ -68,22 +69,24 @@ class MemoryExtractionServiceTest {
         );
 
         assertThat(result).containsExactly(candidate);
+        verify(requestSpec).system(argThat((String instructions) ->
+                instructions.contains("MemoryExtractionResult JSON Schema")
+        ));
     }
 
     @Test
-    void shouldReturnEmptyListWhenBothAttemptsFail() {
+    void shouldThrowWhenBothAttemptsFail() {
         whenStructuredResult()
-                .thenThrow(new IllegalArgumentException("???????"))
-                .thenThrow(new IllegalArgumentException("?????????"));
+                .thenThrow(new IllegalArgumentException("第一次失败"))
+                .thenThrow(new IllegalArgumentException("第二次失败"));
 
-        List<MemoryCandidate> result = memoryExtractionService.extract(
-                "????????",
-                "???"
-        );
-
-        assertThat(result).isEmpty();
+        assertThatThrownBy(() -> memoryExtractionService.extract(
+                "关闭当前项目",
+                "好的"
+        ))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("长期记忆提取两次均未返回有效结构化结果");
     }
-
     @Test
     void shouldIgnoreNullElementsAndKeepAtMostFiveCandidates() {
         List<MemoryCandidate> candidates = new ArrayList<>();

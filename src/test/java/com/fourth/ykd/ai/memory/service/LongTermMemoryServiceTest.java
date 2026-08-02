@@ -7,6 +7,7 @@ import com.fourth.ykd.ai.memory.model.MemoryStatus;
 import com.fourth.ykd.ai.memory.model.MemoryType;
 import com.fourth.ykd.ai.memory.model.MemoryWriteResult;
 import com.fourth.ykd.ai.memory.policy.MemoryCandidatePolicy;
+import com.fourth.ykd.ai.memory.repository.MemoryIndexOutboxRepository;
 import com.fourth.ykd.ai.memory.repository.SqliteLongTermMemoryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,6 +49,7 @@ class LongTermMemoryServiceTest {
      */
     @BeforeEach
     void createMemoryTable() {
+        jdbcTemplate.execute("DROP TABLE IF EXISTS memory_index_outbox");
         jdbcTemplate.execute("DROP TABLE IF EXISTS agent_memory");
 
         jdbcTemplate.execute("""
@@ -69,6 +71,20 @@ class LongTermMemoryServiceTest {
                     updated_at DATETIME NOT NULL,
                     last_accessed_at DATETIME,
                     access_count INTEGER NOT NULL DEFAULT 0
+                )
+                """);
+        jdbcTemplate.execute("""
+                CREATE TABLE memory_index_outbox (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    memory_id TEXT NOT NULL,
+                    operation TEXT NOT NULL,
+                    status TEXT NOT NULL DEFAULT 'PENDING',
+                    retry_count INTEGER NOT NULL DEFAULT 0,
+                    next_attempt_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    last_error TEXT,
+                    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    completed_at DATETIME
                 )
                 """);
     }
@@ -140,6 +156,14 @@ class LongTermMemoryServiceTest {
         assertThat(memoryRepository.findActiveByUserId("user-2", 10))
                 .extracting(memory -> memory.id())
                 .containsExactly(otherUser.memory().id());
+        assertThat(jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM memory_index_outbox WHERE operation = 'UPSERT'",
+                Integer.class
+        )).isEqualTo(3);
+        assertThat(jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM memory_index_outbox WHERE operation = 'DELETE'",
+                Integer.class
+        )).isEqualTo(2);
     }
     /**
      * 验证新版本插入失败时，旧版本仍保持有效。
@@ -403,11 +427,23 @@ class LongTermMemoryServiceTest {
         }
 
         @Bean
+        MemoryIndexOutboxRepository memoryIndexOutboxRepository(
+                JdbcTemplate jdbcTemplate
+        ) {
+            return new MemoryIndexOutboxRepository(jdbcTemplate);
+        }
+
+        @Bean
         LongTermMemoryService memoryService(
                 MemoryCandidatePolicy candidatePolicy,
-                SqliteLongTermMemoryRepository memoryRepository
+                SqliteLongTermMemoryRepository memoryRepository,
+                MemoryIndexOutboxRepository memoryIndexOutboxRepository
         ) {
-            return new LongTermMemoryService(candidatePolicy, memoryRepository);
+            return new LongTermMemoryService(
+                    candidatePolicy,
+                    memoryRepository,
+                    memoryIndexOutboxRepository
+            );
         }
     }
 }
