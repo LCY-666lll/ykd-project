@@ -1,6 +1,7 @@
 package com.fourth.ykd.ilink.service.impl;
 import com.fourth.ykd.ai.dto.*;
 import com.fourth.ykd.ai.infrastructure.memory.SqliteChatMessageRepository;
+import com.fourth.ykd.ai.infrastructure.memory.SoftDeleteChatMessage;
 import com.fourth.ykd.ai.routing.*;
 import com.fourth.ykd.ai.service.*;
 import com.fourth.ykd.ai.utils.FileGenerationTool;
@@ -36,6 +37,7 @@ public class IlinkReplyProcessor {
     // 文件识别结束
     private final ChatMemory chatMemory;
     private final SqliteChatMessageRepository sqliteChatMessageRepository;
+    private final SoftDeleteChatMessage softDeleteChatMessage;
 
     /** 注入现有的回复处理依赖。 */
     public IlinkReplyProcessor(AiChatService aiChatService, DeepSeekIntentRouter intentRouter,
@@ -48,7 +50,8 @@ public class IlinkReplyProcessor {
             PeriodicTaskTool periodicTaskTool,
             ScheduledTaskTool scheduledTaskTool,
             ChatMemory chatMemory,
-            SqliteChatMessageRepository sqliteChatMessageRepository) {
+            SqliteChatMessageRepository sqliteChatMessageRepository,
+            SoftDeleteChatMessage softDeleteChatMessage) {
         this.aiChatService = aiChatService; this.intentRouter = intentRouter;
         this.imageGenerationService = imageGenerationService;
         this.imageReferenceGenerationService = imageReferenceGenerationService;
@@ -61,10 +64,15 @@ public class IlinkReplyProcessor {
         this.scheduledTaskTool = scheduledTaskTool;
         this.chatMemory = chatMemory;
         this.sqliteChatMessageRepository = sqliteChatMessageRepository;
+        this.softDeleteChatMessage = softDeleteChatMessage;
     }
 
     /** 按现有意图执行业务，并产出待发送结果。 */
     public ReplyResult process(String userId, String userText, boolean voiceMode) {
+        if ("软删除记忆".equals(userText != null ? userText.trim() : "")) {
+            String result = softDeleteChatMessage.execute(userId);
+            return ReplyResult.text(UserIntent.TEXT, result, null);
+        }
         Optional<PendingUserImage> pendingImage = imageContextService.findActive(userId);
         UserIntent intent = intentRouter.route(userId, userText, pendingImage.isPresent());
         if (pendingImage.isEmpty() && (intent == UserIntent.IMAGE_EDIT || intent == UserIntent.IMAGE_UNDERSTAND)) {
@@ -95,9 +103,9 @@ public class IlinkReplyProcessor {
             return ReplyResult.image(intent, image, null);
         }
 
-        // 定时任务 → 直接调用 ScheduledTaskTool（绕过 DeepSeek 工具调用，由内部 AI 解析）
+        // 定时任务 → 分发到 ScheduledTaskTool 的具体方法（查询/取消/创建）
         if (intent == UserIntent.TASK_SCHEDULED) {
-            String reply = scheduledTaskTool.parseAndSchedule(userId, userText);
+            String reply = dispatchScheduledTask(userId, userText);
             return ReplyResult.text(intent, reply, pendingImage.orElse(null));
         }
         // 周期任务 → 直接调用 PeriodicTaskTool（绕过 DeepSeek 工具调用，由内部 parseTask() 解析）
@@ -129,10 +137,44 @@ public class IlinkReplyProcessor {
     }
 
 
+    private static final java.util.regex.Pattern ST_QUERY =
+            java.util.regex.Pattern.compile("查看|查询|列表|有哪些|显示|列出|待执行");
+    private static final java.util.regex.Pattern ST_CANCEL =
+            java.util.regex.Pattern.compile("取消|删除|停止|不要");
+    private static final java.util.regex.Pattern ST_EXECUTE =
+            java.util.regex.Pattern.compile("立即执行|马上执行|现在执行|立刻执行|提前执行|手动执行");
+
     private static final java.util.regex.Pattern PT_CREATE = java.util.regex.Pattern.compile("创建|设置|安排|帮我|给我|加一个|来一个");
     private static final java.util.regex.Pattern PT_LIST = java.util.regex.Pattern.compile("查看|列表|有哪些|显示|列出|任务.*列表|当前.*任务");
     private static final java.util.regex.Pattern PT_DELETE = java.util.regex.Pattern.compile("取消|删除|停止|不要|移除|删掉|去掉");
     private static final java.util.regex.Pattern PT_EXECUTE = java.util.regex.Pattern.compile("立即执行|马上执行|现在执行|提前执行|手动执行");
+
+    /** 将定时任务请求分发到 ScheduledTaskTool 的具体方法。 */
+    private String dispatchScheduledTask(String userId, String text) {
+        if (text == null || text.isBlank()) {
+            return "无法处理空的定时任务请求。";
+        }
+        // 立即/手动执行 → executeNow
+        if (ST_EXECUTE.matcher(text).find()) {
+            String taskId = extractTaskId(text);
+            if (!taskId.matches("\\d+")) {
+                return "请指定要立即执行的任务ID，例如: 立即执行任务6";
+            }
+            return scheduledTaskTool.executeNow(taskId);
+        }
+        // 查询/查看/列出 → listScheduledTasks
+        if (ST_QUERY.matcher(text).find()) {
+            return scheduledTaskTool.executeWithUserContext(userId,
+                    () -> scheduledTaskTool.listScheduledTasks());
+        }
+        // 取消/删除 → cancelScheduledTask
+        if (ST_CANCEL.matcher(text).find()) {
+            return scheduledTaskTool.executeWithUserContext(userId,
+                    () -> scheduledTaskTool.cancelScheduledTask(extractTaskId(text)));
+        }
+        // 默认：创建定时任务（AI 解析延迟时间）
+        return scheduledTaskTool.parseAndSchedule(userId, text);
+    }
 
     /** 将周期任务请求分发到 PeriodicTaskTool 的具体方法。 */
     private String dispatchPeriodicTask(String text) {

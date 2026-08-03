@@ -18,6 +18,17 @@ public class TaskMemoryRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
+    /**
+     * <p>id——SQLite数据库中的序号</p>
+     * <p>task_type——任务类型，PERIODIC（周期），SCHEDULED（定时）</p>
+     * <p>task_name——任务名称，</p>
+     * <p>user_id——用户微信ID</p>
+     * <p>cron_expression——Cron 表达式（定时任务为 NULL）</p>
+     * <p>task_description——用户的原始完整需求文本</p>
+     * <p>status——任务状态，PENDING（等待执行），EXECUTED（已成功执行），CANCELLED（已取消），FAILED（执行过程中出错），EXPIRED（已过期）</p>
+     * <p>execute_at——时间戳，任务应执行的时刻</p>
+     * <p>last_executed_at——最近一次实际执行的时刻</p>
+     */
     private static final String CREATE_TABLE_SQL = """
             CREATE TABLE IF NOT EXISTS task_memory (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,

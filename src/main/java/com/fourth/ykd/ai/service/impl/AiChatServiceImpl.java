@@ -7,6 +7,9 @@ import com.fourth.ykd.ai.service.AiChatService;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.messages.Message;
 import com.fourth.ykd.ai.utils.*;
+import com.fourth.ykd.ai.rag.RagHook;
+import com.fourth.ykd.ai.rag.RagInterceptor;
+import com.fourth.ykd.ai.rag.DocumentSearchTool;
 import com.fourth.ykd.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -66,6 +69,14 @@ public class AiChatServiceImpl implements AiChatService {
                 用户要求重复执行应调用 create_periodic_task，而非 schedule_task。
             14. 硬性约束：涉及周期任务或定时任务的任何操作，必须先调用对应工具，再基于工具返回值回复用户。
                 在未收到工具返回值之前，严禁声称任务已创建、已删除或返回任何任务列表。
+            15. 当用户询问某人/某项目的具体属性（技术栈、职责、感受、目标、经历、
+                爱好、背景等细节信息）时，必须调用 search_knowledge_base 使用用户问题
+                中的关键词精确检索。自动检索结果（═══ 标记中的内容）只是辅助参考，
+                可能不完整，你必须以 search_knowledge_base 的返回结果为准。
+                严禁在看到不完整的自动检索结果后就声称"知识库中没有相关信息"。
+                search_knowledge_base 检索无结果时，才可说明"知识库中暂无相关信息"。
+                search_knowledge_base 用于私有知识库文档，
+                search_realtime_information 用于互联网公开信息，两者不可混用。
             """;
 
     private static final int PERSISTED_MEMORY_LIMIT = 20;
@@ -91,6 +102,12 @@ public class AiChatServiceImpl implements AiChatService {
     private final ChatMemory chatMemory;
 
     private final SqliteChatMessageRepository sqliteChatMessageRepository;
+
+    private final RagHook ragHook;
+
+    private final RagInterceptor ragInterceptor;
+
+    private final DocumentSearchTool documentSearchTool;
 
     @Override
     public AiChatResponse chat(String message) {
@@ -120,24 +137,69 @@ public class AiChatServiceImpl implements AiChatService {
 
         log.info("[AI][MEMORY_CHAT] conversationId={}", normalizedConversationId);
 
-        ScheduledTaskTool.setCurrentUserId(normalizedConversationId);
-        String answer;
-        try {
-            answer = springAiChatClient.prompt()
-                    .system(TOOL_USAGE_INSTRUCTIONS + """
-                            系统已支持 PDF、DOCX、XLSX 文件生成，以及文生图、参考图编辑、图片识别和语音合成。
-                            不得声称这些能力不存在或无法使用；用户追问先前生成结果时，应基于聊天记忆如实说明。
-                            当用户明确要求语音回复时，外层系统会把回答正文合成为语音；你只需正常回答用户的问题，
-                            输出适合朗读的正文，不得声称自己只能文本交互、不能语音回复，也不要解释语音合成过程。
-                            """)
-                    .user(normalizedMessage)
-                    .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
-                    .tools(mathCalculatorTools, timeTool, baiduSearchTool, weatherTool, translationTool, periodicTaskTool, scheduledTaskTool)
-                    .call()
-                    .content();
-        } finally {
-            ScheduledTaskTool.clearCurrentUserId();
-        }
+        String answer = scheduledTaskTool.executeWithUserContext(normalizedConversationId, () ->
+                springAiChatClient.prompt()
+                        .system(TOOL_USAGE_INSTRUCTIONS + """
+                                回答风格要求：保持简洁，用要点列表替代长篇段落，
+                                避免不必要的emoji和装饰性格式，直接给出关键信息。
+                                系统已支持 PDF、DOCX、XLSX 文件生成，以及文生图、参考图编辑、图片识别、
+                                语音合成和知识库检索（RAG）。
+                                不得声称这些能力不存在或无法使用；用户追问先前生成结果时，应基于聊天记忆如实说明。
+                                当用户明确要求语音回复时，外层系统会把回答正文合成为语音；你只需正常回答用户的问题，
+                                输出适合朗读的正文，不得声称自己只能文本交互、不能语音回复，也不要解释语音合成过程。
+
+                                【RAG 知识库强制规则】
+                                系统知识库中包含以下类型的文档：系统功能介绍、API接口文档、
+                                常见问题解答、部署说明、用户个人信息和资料等。当用户询问任何
+                                可能存在于这些文档中的信息（包括人名、地点、教育背景、工作经历
+                                等个人信息），必须先调用 search_knowledge_base 检索知识库，
+                                而不是直接回答"没有相关信息"或凭训练数据猜测。
+                                当系统提示中出现「═══ 知识库检索结果 ═══」标记时，说明以下内容是
+                                从本系统官方文档中检索到的确定事实。你必须遵守以下规则：
+                                1. 将检索结果视为关于本系统的权威信息，优先于你的训练数据中的任何知识。
+                                2. 直接引用检索结果中的具体内容，包括数字、路径、名称、配置值，
+                                   以及感受、观点、经历等描述性文字。不得模糊化或使用"大概"
+                                   "可能""常见做法""推测""一般"等不确定措辞。
+                                3. 即使问题涉及"系统配置""后台参数""部署信息"等看似只有管理员才能
+                                   知道的信息，只要检索结果中有明确答案，你就直接回答，不得声称
+                                   "无法查看""无法确认""属于后台配置""需要问管理员"。
+                                4. 如果你的训练知识与检索结果冲突，以检索结果为准，因为它是本系统的
+                                   真实文档。
+                                5. 检索结果无匹配或不足以回答时，才可以使用你的通用知识，并说明
+                                   "知识库中暂无相关信息"。
+                                5.1. 严禁编造具体的文件路径、文件名、端口号、配置值、API地址等
+                                     精确信息。这些信息如果检索结果中没有明确包含，就必须说
+                                     "知识库中暂无相关记录"，不得凭"常见做法""通常是什么"
+                                     来推测。例如：检索结果只说"摄入清单"但未给出文件路径，
+                                     就不要说data/rag-manifest.json；只说"日志文件"但未给出
+                                     文件名，就不要说logs/rag.log。只有检索结果中明确写出
+                                     的路径/名称/数字，你才能引用。
+                                5.2. 对于感受、观点、经历、评价等描述性内容，必须严格基于检索结果
+                                     原文，不得扩写、润色或添加检索结果中未提及的内容。检索结果只说
+                                     "热爱技术落地带来的成就感"，你就只能引用这一点，不得补充"高压"
+                                     "倦怠""自嘲""加班"等检索结果中不存在的描述。检索结果中的
+                                     描述性内容是用户提供的确定信息，不是你可以自由发挥的素材。
+                                6. 当系统提示中出现「自动检索未找到」标记时，说明自动检索未匹配到
+                                   结果，但这不代表知识库中没有相关信息。你必须调用
+                                   search_knowledge_base 尝试使用不同关键词检索，
+                                   而不是直接回答"没有相关信息"或凭训练数据猜测。
+                                   只有 search_knowledge_base 也返回无结果时，
+                                   才能如实告知用户。
+                                7. 知识库内容与聊天记忆冲突时，以知识库为准。聊天记忆中可能有
+                                   过时的、推测的或之前编造的错误信息，不得将其当作事实重复。
+                                8. 当检索到的知识库片段不包含用户所需的具体信息（如用户问"技术栈"
+                                   但检索片段只有"基本信息"），必须调用 search_knowledge_base
+                                   用更精确的关键词重新检索，而不是直接说"知识库没有相关信息"。
+                                   知识库文档可能包含多个段落，某次检索的 top-2 片段未必覆盖
+                                   所需内容，多尝试不同关键词。
+                                """)
+                        .user(normalizedMessage)
+                        .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
+                        .advisors(ragHook, ragInterceptor)
+                        .tools(mathCalculatorTools, timeTool, baiduSearchTool, documentSearchTool, weatherTool, translationTool, periodicTaskTool, scheduledTaskTool)
+                        .call()
+                        .content()
+        );
 
         // 模型回答成功后，把 bot 回复写入 SQLite。
         sqliteChatMessageRepository.save(
