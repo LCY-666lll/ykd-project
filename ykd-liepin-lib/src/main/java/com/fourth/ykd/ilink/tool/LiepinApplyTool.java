@@ -155,15 +155,26 @@ public class LiepinApplyTool {
 
                 sb.append("📋 投递结果：\n");
                 for (ApplyResult result : results) {
+                    // 区分"已投递"和"投递成功"
+                    String status;
+                    if (result.success()) {
+                        if (result.message().contains("[已投递]")) {
+                            status = "♻️";
+                        } else {
+                            status = "✅";
+                        }
+                    } else {
+                        status = "❌";
+                    }
                     sb.append(String.format("  %s %s - %s\n",
-                            result.success() ? "✅" : "❌",
+                            status,
                             result.jobTitle(),
                             result.message()));
                 }
                 sb.append(String.format("  总计: %d 成功, %d 失败\n", successCount, failCount));
             }
 
-            // 仅聊一聊的岗位 → 返回链接
+            // 仅聊一聊的岗位 → 直接返回HR聊天链接
             if (!chatOnlyJobs.isEmpty()) {
                 if (!applyUrls.isEmpty()) sb.append("\n");
                 sb.append("💬 以下岗位仅支持\"聊一聊\"，点击链接可直接与HR沟通：\n\n");

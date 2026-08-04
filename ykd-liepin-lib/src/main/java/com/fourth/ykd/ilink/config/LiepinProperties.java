@@ -24,7 +24,7 @@ LiepinProperties {
      * 是否使用无头模式（不显示浏览器窗口）。
      * 开发调试时建议 false，生产环境建议 true。
      */
-    private boolean headless = false;
+    private boolean headless = true;
 
     /**
      * 页面操作超时时间（毫秒）。

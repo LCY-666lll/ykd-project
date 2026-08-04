@@ -10,14 +10,42 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-
+//用户请求
+//      │
+//      ▼
+//  searchJobs() ──────────────────────┐
+//      │                              │
+//      ├── login()                    │
+//      │   ├── injectCookies()        │
+//      │   └── checkLoginStatus()     │
+//      │                              │
+//      ├── buildSearchUrl()           │
+//      │   ├── getCityCode()          │
+//      │   ├── getSalaryCode()        │
+//      │   ├── getExperienceCode()    │
+//      │   └── encodeParam()          │
+//      │                              │
+//      ├── parseJobList()             │
+//      │   ├── extractTextLocator()   │
+//      │   └── extractHref()          │
+//      │                              │
+//      └── checkJobCanApply()         │
+//          └── randomDelay()          │
+//                                     │
+//  applyJob() ◀───────────────────────┘
+//      │
+//      ├── extractText()
+//      ├── handleApplyDialog()
+//      ├── handleChatApply()
+//      ├── checkApplyResult()
+//      └── randomDelay()
 /**
  * 猎聘网浏览器自动化客户端。
  * 使用 Playwright 实现 Cookie 登录、岗位搜索、简历投递。
  */
 @Slf4j
 @Component
-public class LiepinClient {
+public class   LiepinClient {
 
     private final LiepinProperties properties;
 
@@ -37,11 +65,13 @@ public class LiepinClient {
      * 使用 Cookie 登录猎聘。如果已登录则跳过。
      * @return true 登录成功，false Cookie 无效或为空
      */
+    // synchronized 保证线程安全
     public synchronized boolean login() {
+        //检查是否已登录且页面未关闭 → 是则跳过
         if (loggedIn && page != null && !page.isClosed()) {
             return true;
         }
-
+//获取配置的Cookie → 为空则返回false
         String cookie = properties.getCookie();
         if (cookie == null || cookie.isBlank()) {
             log.warn("[Liepin] cookie 为空，无法登录。请在 application-local.properties 配置 liepin.cookie");
@@ -49,8 +79,9 @@ public class LiepinClient {
         }
 
         try {
+            //关闭旧资源（close()）
             close();
-
+//启动Playwright浏览器
             playwright = Playwright.create();
             browser = playwright.chromium().launch(
                     new BrowserType.LaunchOptions().setHeadless(properties.isHeadless())
@@ -97,9 +128,12 @@ public class LiepinClient {
      */
     private void injectCookies(String cookieStr) {
         List<Cookie> cookies = new ArrayList<>();
+        //按 ";" 分割Cookie字符串。遍历每个Cookie键值对
         for (String pair : cookieStr.split(";")) {
             String trimmed = pair.trim();
+            // 按 "=" 分割键和值
             int eq = trimmed.indexOf('=');
+            //创建Cookie对象，设置domain为".liepin.com"
             if (eq > 0) {
                 String name = trimmed.substring(0, eq).trim();
                 String value = trimmed.substring(eq + 1).trim();
@@ -110,6 +144,7 @@ public class LiepinClient {
                 }
             }
         }
+        //添加到浏览器上下文
         context.addCookies(cookies);
         log.debug("[Liepin] 注入 {} 个 Cookie", cookies.size());
     }
@@ -120,9 +155,9 @@ public class LiepinClient {
     private boolean checkLoginStatus() {
         try {
             // 猎聘登录后页面会有用户相关元素
-            page.waitForSelector("div.ant-dropdown-trigger.user-nav-icon, " +
-                            "a[data-mark='login_user_name'], " +
-                            "div.user-nav",
+            page.waitForSelector("div.ant-dropdown-trigger.user-nav-icon, " +//用户头像
+                            "a[data-mark='login_user_name'], " +//用户名
+                            "div.user-nav",//用户导航
                     new Page.WaitForSelectorOptions().setTimeout(properties.getTimeoutMs()));
             return true;
         } catch (Exception e) {
@@ -150,7 +185,7 @@ public class LiepinClient {
             // 构建搜索 URL
             String searchUrl = buildSearchUrl(keyword, city, salary, experience);
             log.info("[Liepin] 搜索岗位: keyword={}, city={}, salary={}, experience={}, url={}", keyword, city, salary, experience, searchUrl);
-
+//page.navigate() - 访问搜索页
             page.navigate(searchUrl);
             page.waitForLoadState(LoadState.NETWORKIDLE, new Page.WaitForLoadStateOptions().setTimeout(20000));
             randomDelay();
@@ -221,6 +256,7 @@ public class LiepinClient {
     /**
      * 构建猎聘搜索 URL。同时兼容新版和旧版 URL 参数格式。
      */
+    //search调用
     private String buildSearchUrl(String keyword, String city, String salary, String experience) {
         StringBuilder url = new StringBuilder("https://www.liepin.com/zhaopin/?");
 
@@ -263,6 +299,7 @@ public class LiepinClient {
     /**
      * 解析岗位列表页面。猎聘使用混淆 CSS 类名，通过 data-nick 属性和语义化类名定位。
      */
+    //search调用
     private List<JobInfo> parseJobList() {
         List<JobInfo> jobs = new ArrayList<>();
 
@@ -455,11 +492,13 @@ public class LiepinClient {
         try {
             Page detailPage = context.newPage();
             try {
+                // 打开新页面，访问jobUrl
                 detailPage.navigate(jobUrl);
                 detailPage.waitForLoadState(LoadState.DOMCONTENTLOADED, new Page.WaitForLoadStateOptions().setTimeout(10000));
                 randomDelay();
 
                 // 精确查找岗位详情区域的按钮（排除导航栏）
+                // 查找"投简历"类按钮 → 找到返回true
                 String[] applySelectors = {
                         "div[class*='job-info'] button:has-text('投简历')",
                         "div[class*='job-detail'] button:has-text('投简历')",
@@ -470,19 +509,22 @@ public class LiepinClient {
                         "button:has-text('立即申请')",
                         "button:has-text('投递简历')",
                         "button:has-text('马上投递')",
-                        "button:has-text('一键投递')"
+                        "button:has-text('一键投递')",
+                        // 兜底：全局查找
+                        "button:has-text('投简历')"
                 };
 
                 for (String sel : applySelectors) {
                     try {
                         var btn = detailPage.locator(sel);
                         if (btn.count() > 0 && btn.first().isVisible()) {
+                            log.info("[Liepin] 岗位可投递，找到按钮: {}, url: {}", sel, jobUrl);
                             return true;
                         }
                     } catch (Exception ignored) {}
                 }
 
-                // 检查是否只有"聊一聊"按钮
+                // 没找到"投简历"按钮，检查是否有"聊一聊"按钮
                 String[] chatSelectors = {
                         "button:has-text('聊一聊')",
                         "button:has-text('继续聊')",
@@ -494,19 +536,21 @@ public class LiepinClient {
                     try {
                         var btn = detailPage.locator(sel);
                         if (btn.count() > 0 && btn.first().isVisible()) {
+                            log.info("[Liepin] 岗位仅支持聊一聊，找到按钮: {}, url: {}", sel, jobUrl);
                             return false;
                         }
                     } catch (Exception ignored) {}
                 }
 
-                // 默认认为可投递
-                return true;
+                // 都没找到，默认不可投递（安全策略）
+                log.info("[Liepin] 未找到投递/聊一聊按钮，默认不可投递: {}", jobUrl);
+                return false;
             } finally {
                 detailPage.close();
             }
         } catch (Exception e) {
-            log.warn("[Liepin] 检查岗位类型失败: {}, 默认可投递", e.getMessage());
-            return true;
+            log.warn("[Liepin] 检查岗位类型失败: {}, 默认不可投递", e.getMessage());
+            return false;
         }
     }
 
@@ -524,6 +568,7 @@ public class LiepinClient {
         }
 
         try {
+            // page.navigate(jobUrl) - 访问岗位页
             page.navigate(jobUrl);
             page.waitForLoadState(LoadState.NETWORKIDLE, new Page.WaitForLoadStateOptions().setTimeout(20000));
             randomDelay();
@@ -539,12 +584,13 @@ public class LiepinClient {
                 title = pageTitle.contains("-") ? pageTitle.split("-")[0].trim() : pageTitle;
             }
 
-            // 检查是否已投递或已沟通
+            // 检查是否已投递或已沟通（页面按钮状态）
             Locator alreadyApplied = page.locator(
                     "button:has-text('已申请'), button:has-text('已投递'), button:has-text('已沟通'), " +
                     "span:has-text('已申请'), div:has-text('已投递简历')");
             if (alreadyApplied.count() > 0) {
-                return new ApplyResult(title, true, "已投递过该岗位");
+                log.info("[Liepin] {} - 检测到已投递状态（页面按钮）", title);
+                return new ApplyResult(title, true, "已投递过该岗位 [已投递]");
             }
 
             // 查找正式投递按钮（"投简历"类）
@@ -602,8 +648,14 @@ public class LiepinClient {
             applyBtn.first().click();
             randomDelay();
 
-            // 处理可能弹出的确认对话框
-            handleApplyDialog();
+            // 处理可能弹出的确认对话框，返回值表示是否检测到已投递弹窗
+            boolean alreadyAppliedInDialog = handleApplyDialog();
+
+            // 如果弹窗显示已投递，返回成功并标注
+            if (alreadyAppliedInDialog) {
+                log.info("[Liepin] {} - 弹窗提示已投递过该岗位", title);
+                return new ApplyResult(title, true, "已投递过该岗位 [已投递]");
+            }
 
             // 检查投递结果
             boolean success = checkApplyResult();
@@ -634,8 +686,10 @@ public class LiepinClient {
 
     /**
      * 处理投递后可能弹出的对话框（如打招呼语、选择简历等）。
+     *
+     * @return true 如果弹窗提示"已投递过该岗位"，false 其他情况
      */
-    private void handleApplyDialog() {
+    private boolean handleApplyDialog() {
         try {
             // 等待弹窗出现
             try {
@@ -647,15 +701,32 @@ public class LiepinClient {
             Locator modal = page.locator("div.ant-modal, div[class*='modal'], div[class*='dialog']");
             if (modal.count() > 0) {
                 // 等待弹窗内容加载完成（最多等3秒）
+                String modalText = "";
                 for (int i = 0; i < 6; i++) {
                     randomDelay();
                     try {
-                        String text = modal.first().innerText();
-                        if (!text.isBlank()) {
-                            log.info("[Liepin] 弹窗内容: {}", text.substring(0, Math.min(200, text.length())));
+                        modalText = modal.first().innerText();
+                        if (!modalText.isBlank()) {
+                            log.info("[Liepin] 弹窗内容: {}", modalText.substring(0, Math.min(200, modalText.length())));
                             break;
                         }
                     } catch (Exception ignored) {}
+                }
+
+                // 检查弹窗是否提示"已投递过该岗位"
+                if (modalText.contains("已投递过该岗位") || modalText.contains("您已投递") ||
+                    modalText.contains("已经投递") || modalText.contains("重复投递") ||
+                    modalText.contains("已申请过") || modalText.contains("您已经申请")) {
+                    log.info("[Liepin] 弹窗提示已投递过该岗位");
+                    // 尝试关闭弹窗
+                    try {
+                        Locator closeBtn = modal.locator("button:has-text('我知道了'), button:has-text('确定'), button:has-text('关闭'), button.ant-modal-close, span.ant-modal-close-icon");
+                        if (closeBtn.count() > 0) {
+                            closeBtn.first().click();
+                            randomDelay();
+                        }
+                    } catch (Exception ignored) {}
+                    return true;  // 返回 true 表示已投递
                 }
 
                 // 检查弹窗是否有"投简历"按钮（有些弹窗是二次确认）
@@ -664,7 +735,7 @@ public class LiepinClient {
                     log.info("[Liepin] 弹窗中有投递按钮: {}", applyInModal.first().innerText());
                     applyInModal.first().click();
                     randomDelay();
-                    return;
+                    return false;
                 }
 
                 // 查找确认/发送按钮
@@ -689,36 +760,8 @@ public class LiepinClient {
         } catch (Exception e) {
             log.debug("[Liepin] 处理弹窗异常: {}", e.getMessage());
         }
+        return false;  // 返回 false 表示不是已投递弹窗
     }
-
-    /**
-     * 处理聊天投递：点击"继续聊"或"聊一聊"后，发送跟进消息。
-     */
-    private void handleChatApply() {
-        try {
-            randomDelay();
-            // 等待聊天窗口加载
-            Locator chatPanel = page.locator("div[class*='chat'], div[class*='im-panel'], div[class*='dialog']");
-            if (chatPanel.count() > 0) {
-                // 找到输入框
-                Locator chatInput = chatPanel.locator("textarea, input[type='text'], div[contenteditable='true']");
-                if (chatInput.count() > 0) {
-                    chatInput.first().fill("您好，我看到贵司的招聘信息，我对这个岗位很感兴趣，希望有机会进一步沟通。");
-                    randomDelay();
-                    // 发送消息
-                    Locator sendBtn = chatPanel.locator("button:has-text('发送'), button.ant-btn-primary");
-                    if (sendBtn.count() > 0) {
-                        sendBtn.first().click();
-                        randomDelay();
-                        log.info("[Liepin] 已发送跟进消息");
-                    }
-                }
-            }
-        } catch (Exception e) {
-            log.debug("[Liepin] 发送跟进消息异常: {}", e.getMessage());
-        }
-    }
-
     /**
      * 检查投递是否成功。
      */
@@ -735,7 +778,6 @@ public class LiepinClient {
             Locator successIndicator = page.locator(
                     "button:has-text('已申请'), " +
                             "button:has-text('已投递'), " +
-                            "button:has-text('已沟通'), " +
                             "div.ant-message-success, " +
                             "span:has-text('投递成功'), " +
                             "span:has-text('申请成功'), " +

@@ -28,6 +28,7 @@ public class McpToolService {
     /**
      * 获取所有可用工具信息（名称、描述、参数），用于构建系统提示。
      */
+    //查找工具
     public List<ToolInfo> getAvailableTools() {
         List<ToolInfo> tools = new ArrayList<>();
         for (ToolCallbackProvider provider : mcpToolCallbackProviders) {
@@ -49,6 +50,7 @@ public class McpToolService {
      * @param argsJson 参数 JSON 字符串
      * @return 工具执行结果
      */
+    //根据查找到的工具名进行调用
     public String callTool(String toolName, String argsJson) {
         log.info("[MCP][TOOL_CALL] tool={}, args={}", toolName, argsJson);
         for (ToolCallbackProvider provider : mcpToolCallbackProviders) {
@@ -74,6 +76,7 @@ public class McpToolService {
      * 构建猎聘工具描述文本，注入系统提示让 AI 知道如何调用猎聘工具。
      * 猎聘工具走 MCP，不走 Spring AI toolCallbacks，所以需要在系统提示中描述格式。
      */
+    //告诉AI如何调用猎聘工具
     public String buildLiepinToolDescriptions() {
         List<ToolInfo> tools = getAvailableTools().stream()
                 .filter(t -> t.name().startsWith("search_liepin") || t.name().startsWith("apply_liepin"))

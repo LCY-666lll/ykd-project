@@ -15,6 +15,7 @@ import java.util.List;
  * 自定义工具调用管理器。
  * 猎聘工具走 MCP 协议调用，其他工具走 Spring AI 默认执行。
  */
+//日志记录
 @Slf4j
 public class McpToolCallingManager implements ToolCallingManager {
 
@@ -49,5 +50,9 @@ public class McpToolCallingManager implements ToolCallingManager {
                 .forEach(tc -> log.info("[MCP][LIEPIN_CALL] tool={}, args={}", tc.name(), tc.arguments()));
 
         return delegate.executeToolCalls(prompt, chatResponse);
+    }
+
+    public McpToolService getMcpToolService() {
+        return mcpToolService;
     }
 }
