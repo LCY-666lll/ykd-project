@@ -3,6 +3,7 @@ package com.fourth.ykd.ai.rag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
+import org.springframework.ai.vectorstore.filter.Filter;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -55,7 +56,11 @@ public class RagService {
         try {
             SearchRequest request = SearchRequest.builder()
                     .query(query)
-                    .filterExpression("userId == '" + userId + "'")
+                    .filterExpression(new Filter.Expression(
+                            Filter.ExpressionType.EQ,
+                            new Filter.Key("userId"),
+                            new Filter.Value(userId)
+                    ))
                     .topK(TOP_K)
                     .build();
             List<Document> results = vectorStore.similaritySearch(request);

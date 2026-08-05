@@ -651,6 +651,12 @@ public class   LiepinClient {
             // 处理可能弹出的确认对话框，返回值表示是否检测到已投递弹窗
             boolean alreadyAppliedInDialog = handleApplyDialog();
 
+            // 检测到登录弹窗，Cookie 已过期
+            if (!loggedIn) {
+                log.warn("[Liepin] {} - Cookie 已过期，需要更新", title);
+                return new ApplyResult(title, false, "Cookie 已过期，请更新 liepin.cookie 配置");
+            }
+
             // 如果弹窗显示已投递，返回成功并标注
             if (alreadyAppliedInDialog) {
                 log.info("[Liepin] {} - 弹窗提示已投递过该岗位", title);
@@ -711,6 +717,22 @@ public class   LiepinClient {
                             break;
                         }
                     } catch (Exception ignored) {}
+                }
+
+                // 检测到登录/注册弹窗，说明 Cookie 已过期
+                if (modalText.contains("登录") && modalText.contains("注册") &&
+                    (modalText.contains("密码登录") || modalText.contains("验证码") || modalText.contains("手机号"))) {
+                    log.warn("[Liepin] 检测到登录弹窗，Cookie 已过期，请更新 liepin.cookie 配置");
+                    loggedIn = false;
+                    // 尝试关闭弹窗
+                    try {
+                        Locator closeBtn = modal.locator("button.ant-modal-close, span.ant-modal-close-icon");
+                        if (closeBtn.count() > 0) {
+                            closeBtn.first().click();
+                            randomDelay();
+                        }
+                    } catch (Exception ignored) {}
+                    return false;
                 }
 
                 // 检查弹窗是否提示"已投递过该岗位"
@@ -774,6 +796,19 @@ public class   LiepinClient {
         randomDelay();
 
         try {
+            // 获取页面文本用于分析
+            String bodyText = page.locator("body").innerText();
+            log.info("[Liepin] 投递结果检查，页面文本片段: {}", bodyText.substring(0, Math.min(800, bodyText.length())));
+
+            // 检查是否有"继续聊"按钮 - 表示已投递过或已沟通过
+            Locator chatBtn = page.locator(
+                    "button:has-text('继续聊'), a:has-text('继续聊'), " +
+                    "button:has-text('已沟通'), a:has-text('已沟通')");
+            if (chatBtn.count() > 0) {
+                log.info("[Liepin] 检测到'继续聊'按钮，说明已投递过或已沟通过");
+                return true;
+            }
+
             // 检查是否有成功提示
             Locator successIndicator = page.locator(
                     "button:has-text('已申请'), " +
@@ -789,13 +824,11 @@ public class   LiepinClient {
                 return true;
             }
 
-            // 打印页面文本用于调试
-            String bodyText = page.locator("body").innerText();
-            log.info("[Liepin] 投递结果检查，页面文本片段: {}", bodyText.substring(0, Math.min(800, bodyText.length())));
-
             // 检查页面文本中是否包含成功标志
-            if (bodyText.contains("投递成功") || bodyText.contains("申请成功") || bodyText.contains("已投递") || bodyText.contains("已申请")) {
-                log.info("[Liepin] 页面文本中检测到投递成功标志");
+            if (bodyText.contains("投递成功") || bodyText.contains("申请成功") ||
+                bodyText.contains("已投递") || bodyText.contains("已申请") ||
+                bodyText.contains("您已投递过") || bodyText.contains("已投递过该职位")) {
+                log.info("[Liepin] 页面文本中检测到投递成功/已投递标志");
                 return true;
             }
 
@@ -813,18 +846,29 @@ public class   LiepinClient {
                     Locator btn = page.locator(sel);
                     if (btn.count() > 0 && btn.first().isVisible()) {
                         String btnText = btn.first().innerText().trim();
+                        // 检查按钮文字是否包含"已申请"或"已投递"
                         if (btnText.contains("已申请") || btnText.contains("已投递")) {
                             log.info("[Liepin] 按钮文字为 '{}'，投递成功", btnText);
                             return true;
                         }
-                        log.info("[Liepin] 岗位详情区域投简历按钮仍存在: '{}'，投递可能未成功", btnText);
-                        return false;
+                        // 如果按钮旁边有"继续聊"，说明已投递过
+                        log.info("[Liepin] 岗位详情区域投简历按钮仍存在: '{}'，但需要结合其他标志判断", btnText);
+                        // 不直接返回 false，继续检查其他标志
                     }
                 } catch (Exception ignored) {}
             }
 
-            log.info("[Liepin] 未找到岗位详情区域的投简历按钮，默认投递成功");
-            return true;
+            // 检查是否有"您已投递过该职位"的弹窗提示
+            Locator alreadyAppliedModal = page.locator(
+                    "div:has-text('您已投递过'), div:has-text('已投递过该职位'), " +
+                    "div:has-text('重复投递'), div:has-text('已经投递')");
+            if (alreadyAppliedModal.count() > 0) {
+                log.info("[Liepin] 检测到已投递提示弹窗");
+                return true;
+            }
+
+            log.info("[Liepin] 未检测到明确的投递成功标志，默认投递失败");
+            return false;
         } catch (Exception e) {
             log.debug("[Liepin] 检查投递结果异常: {}", e.getMessage());
             return false;

@@ -44,11 +44,6 @@ public class McpToolCallingManager implements ToolCallingManager {
             return delegate.executeToolCalls(prompt, chatResponse);
         }
 
-        // 有猎聘工具调用，记录日志（实际执行仍走默认路径）
-        output.getToolCalls().stream()
-                .filter(tc -> tc.name().startsWith("search_liepin") || tc.name().startsWith("apply_liepin"))
-                .forEach(tc -> log.info("[MCP][LIEPIN_CALL] tool={}, args={}", tc.name(), tc.arguments()));
-
         return delegate.executeToolCalls(prompt, chatResponse);
     }
 

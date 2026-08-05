@@ -93,9 +93,6 @@ public class SqliteChatMessageRepository {
         if (!StringUtils.hasText(content)) {
              throw new IllegalArgumentException("content 不能为空");
         }
-        if (!StringUtils.hasText(content)) {
-            throw new IllegalArgumentException("content 不能为空");
-        }
         return jdbcTemplate.update(
                 INSERT_SQL,
                 normalizedConversationId,
