@@ -15,7 +15,7 @@ class SqliteChatMessageRepositoryTest {
     @Test
     void shouldSaveQueryAndSoftDeleteChatMessages() {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(
-                new DriverManagerDataSource("jdbc:sqlite:data/ykd-memory.db")
+                new DriverManagerDataSource("jdbc:sqlite:data/ykd-reply-memory.db")
         );
 
         SqliteChatMessageRepository repository =
@@ -50,7 +50,7 @@ class SqliteChatMessageRepositoryTest {
     @Test
     void shouldKeepOnlyLatestHundredActiveMessages() {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(
-                new DriverManagerDataSource("jdbc:sqlite:data/ykd-memory.db")
+                new DriverManagerDataSource("jdbc:sqlite:data/ykd-reply-memory.db")
         );
         SqliteChatMessageRepository repository =
                 new SqliteChatMessageRepository(jdbcTemplate);
