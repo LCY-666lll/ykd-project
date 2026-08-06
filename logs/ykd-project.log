@@ -1,0 +1,742 @@
+2026-08-06T10:23:46.993+08:00  INFO 33308 --- [ykd-project] [main] com.fourth.ykd.YkdProjectApplication     : Starting YkdProjectApplication using Java 21.0.7 with PID 33308 (D:\ykd\report-reply\ykd-project-app\target\classes started by xin in D:\ykd\report-reply)
+2026-08-06T10:23:47.000+08:00  INFO 33308 --- [ykd-project] [main] com.fourth.ykd.YkdProjectApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-08-06T10:23:49.205+08:00  WARN 33308 --- [ykd-project] [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerAutoConfiguration' of type [org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-08-06T10:23:49.311+08:00  WARN 33308 --- [ykd-project] [main] trationDelegate$BeanPostProcessorChecker : Bean 'serverAnnotatedBeanRegistry' of type [org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerAutoConfiguration$ServerMcpAnnotatedBeans] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-08-06T10:23:49.325+08:00  WARN 33308 --- [ykd-project] [main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.ai.mcp.server.annotation-scanner-org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerProperties' of type [org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-08-06T10:23:49.526+08:00  INFO 33308 --- [ykd-project] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-08-06T10:23:49.539+08:00  INFO 33308 --- [ykd-project] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-08-06T10:23:49.539+08:00  INFO 33308 --- [ykd-project] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.55]
+2026-08-06T10:23:49.589+08:00  INFO 33308 --- [ykd-project] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-08-06T10:23:49.590+08:00  INFO 33308 --- [ykd-project] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2523 ms
+2026-08-06T10:23:50.172+08:00  INFO 33308 --- [ykd-project] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-08-06T10:23:50.249+08:00  INFO 33308 --- [ykd-project] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@62b786dc
+2026-08-06T10:23:50.250+08:00  INFO 33308 --- [ykd-project] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-08-06T10:23:50.663+08:00  INFO 33308 --- [ykd-project] [main] c.fourth.ykd.ai.rag.SQLiteVectorStore    : [RAG][SQLiteVectorStore] document_chunk 表初始化完成
+2026-08-06T10:23:50.839+08:00  INFO 33308 --- [ykd-project] [main] c.f.ykd.ilink.client.IlinkClientManager  : [iLink] session restored from .ilink/session.token
+2026-08-06T10:23:50.839+08:00  INFO 33308 --- [ykd-project] [main] c.f.y.i.s.impl.IlinkLoginServiceImpl     : [iLink] 获取成功
+2026-08-06T10:23:51.226+08:00  WARN 33308 --- [ykd-project] [main] o.s.m.provider.tool.SyncMcpToolProvider  : No tool methods found in the provided tool objects: []
+2026-08-06T10:23:51.231+08:00  INFO 33308 --- [ykd-project] [main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable tools capabilities, notification: true
+2026-08-06T10:23:51.232+08:00  INFO 33308 --- [ykd-project] [main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Registered tools: 13
+2026-08-06T10:23:51.232+08:00  INFO 33308 --- [ykd-project] [main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable resources capabilities, notification: true
+2026-08-06T10:23:51.233+08:00  INFO 33308 --- [ykd-project] [main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable resources templates capabilities, notification: true
+2026-08-06T10:23:51.233+08:00  INFO 33308 --- [ykd-project] [main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable prompts capabilities, notification: true
+2026-08-06T10:23:51.233+08:00  INFO 33308 --- [ykd-project] [main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable completions capabilities
+2026-08-06T10:23:51.305+08:00  WARN 33308 --- [ykd-project] [main] o.s.m.p.s.SyncMcpSamplingProvider        : No sampling methods found
+2026-08-06T10:23:51.307+08:00  WARN 33308 --- [ykd-project] [main] o.s.m.p.e.SyncMcpElicitationProvider     : No elicitation methods found
+2026-08-06T10:23:51.342+08:00  INFO 33308 --- [ykd-project] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-08-06T10:23:51.351+08:00  INFO 33308 --- [ykd-project] [main] com.fourth.ykd.YkdProjectApplication     : Started YkdProjectApplication in 4.758 seconds (process running for 19.952)
+2026-08-06T10:23:51.354+08:00  INFO 33308 --- [ykd-project] [main] com.fourth.ykd.YkdProjectApplication     : ==========
+2026-08-06T10:23:51.354+08:00  INFO 33308 --- [ykd-project] [main] com.fourth.ykd.YkdProjectApplication     : Spring Boot 启动成功！
+2026-08-06T10:23:51.355+08:00  INFO 33308 --- [ykd-project] [main] com.fourth.ykd.YkdProjectApplication     : ==========
+2026-08-06T10:24:17.009+08:00  INFO 33308 --- [ykd-project] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-06T10:24:17.009+08:00  INFO 33308 --- [ykd-project] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-08-06T10:24:17.011+08:00  INFO 33308 --- [ykd-project] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-08-06T10:24:17.041+08:00  INFO 33308 --- [ykd-project] [http-nio-8080-exec-1] c.github.wechat.ilink.sdk.ILinkClient    : closing ILinkClient
+2026-08-06T10:24:17.041+08:00  INFO 33308 --- [ykd-project] [http-nio-8080-exec-1] c.f.ykd.ilink.client.IlinkClientManager  : [iLink] client closed
+2026-08-06T10:24:17.042+08:00  INFO 33308 --- [ykd-project] [http-nio-8080-exec-1] c.f.ykd.ilink.client.IlinkClientManager  : [iLink] new client created
+2026-08-06T10:24:17.680+08:00 ERROR 33308 --- [ykd-project] [http-nio-8080-exec-2] c.f.ykd.exception.ApiExceptionHandler    : Unexpected system exception
+
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.55.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.19.jar:6.2.19]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.55.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.55.jar:10.1.55]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.19.jar:6.2.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1272) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1797) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.55.jar:10.1.55]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-08-06T10:24:47.609+08:00  INFO 33308 --- [ykd-project] [ilink-io] c.f.y.i.s.impl.IlinkLoginServiceImpl     : [iLink] login succeeded, loginContext=com.github.wechat.ilink.sdk.core.login.LoginContext@748748a3
+2026-08-06T10:24:47.609+08:00  INFO 33308 --- [ykd-project] [ilink-io] c.f.ykd.ilink.client.IlinkClientManager  : [iLink] saving loginContext: botId=cd0f742b1719@im.bot, userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, baseUrl=https://ilinkai.weixin.qq.com
+2026-08-06T10:24:47.612+08:00  INFO 33308 --- [ykd-project] [ilink-io] c.f.ykd.ilink.client.IlinkClientManager  : [iLink] session saved to .ilink/session.token
+2026-08-06T10:25:07.012+08:00  INFO 33308 --- [ykd-project] [scheduling-1] c.f.y.i.s.IlinkMessagePollingService     : [iLink][USER_MESSAGE] fromUserId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, text=帮我查一下杭州今天天气怎么样，再告诉我未来3天杭州天气怎么样，最后搜一下最近杭州的新闻，以pdf的形式返回给我。
+2026-08-06T10:25:09.529+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.ykd.ai.routing.DeepSeekIntentRouter  : [AI][INTENT_ROUTE] source=MODEL, intent=FILE_GENERATE
+2026-08-06T10:25:09.529+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [iLink][ROUTED] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, intent=FILE_GENERATE, hasPendingImage=false
+2026-08-06T10:25:09.541+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.ykd.ai.utils.FileGenerationTool      : [AI][FILE_GENERATE][START] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, userText=帮我查一下杭州今天天气怎么样，再告诉我未来3天杭州天气怎么样，最后搜一下最近杭州的新闻，以pdf的形式返回给我。
+2026-08-06T10:25:09.569+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][START] traceId=409c5a36, conversationId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:25:11.556+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][ACTION] traceId=409c5a36, step=1, tool=query_current_weather, arguments={"city": "杭州"}
+2026-08-06T10:25:11.556+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][ACTION] traceId=409c5a36, step=1, tool=query_weather_forecast, arguments={"city": "杭州"}
+2026-08-06T10:25:11.556+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][ACTION] traceId=409c5a36, step=1, tool=search_realtime_information, arguments={"query": "杭州最新新闻", "num": 8}
+2026-08-06T10:25:11.560+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.utils.WeatherTool      : [AI][TOOL][WEATHER][START] 开始调用天气工具，city=杭州
+2026-08-06T10:25:13.103+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.w.service.impl.WeatherServiceImpl  : Weather query succeeded: city=杭州, locationId=101210101, temp=33, text=多云, elapsedMs=1543
+2026-08-06T10:25:13.104+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.utils.WeatherTool      : [AI][TOOL][WEATHER][SUCCESS] 天气工具调用成功，city=杭州, temp=33, text=多云, humidity=57
+2026-08-06T10:25:13.104+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.utils.WeatherTool      : [AI][TOOL][WEATHER_FORECAST][START] city=杭州
+2026-08-06T10:25:13.635+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.w.service.impl.WeatherServiceImpl  : Weather forecast query succeeded: city=杭州, locationId=101210101, days=3, elapsedMs=530
+2026-08-06T10:25:13.635+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.utils.WeatherTool      : [AI][TOOL][WEATHER_FORECAST][SUCCESS] city=杭州, days=3
+2026-08-06T10:25:13.638+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.utils.TimeTool         : [AI][TOOL][TIME][START] operateType=now, targetDate=null
+2026-08-06T10:25:13.638+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.utils.TimeTool         : [AI][TOOL][TIME][SUCCESS] operateType=now, result=当前上海时区时间：2026-08-06 10:25:13，星期4
+2026-08-06T10:25:13.639+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.utils.BaiduSearchTool    : [AI][TOOL][BAIDU_SEARCH][START] query=杭州最新新闻, currentTime=当前上海时区时间：2026-08-06 10:25:13，星期4, num=8
+2026-08-06T10:25:17.467+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.a.c.a.t.b.BaiduSearchService           : baidu search: 杭州最新新闻 2026-08-06,result number:10
+2026-08-06T10:25:17.467+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.a.c.a.t.b.BaiduSearchService           : 问题分析中 听
+问题分析中 听
+http://nourl.ubs.baidu.com/279
+2026-08-06T10:25:17.467+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.a.c.a.t.b.BaiduSearchService           : 大家还在搜 杭州今日头条新闻杭州高科技新闻搜索一下杭州的新闻杭州刚刚发生的大事杭州最美城市新闻杭州又来一波什么今天杭州18时新闻60分杭州最新确认延长
+大家还在搜 杭州今日头条新闻杭州高科技新闻搜索一下杭州的新闻杭州刚刚发生的大事杭州最美城市新闻杭州又来一波什么今天杭州18时新闻60分杭州最新确认延长
+http://28608.recommend_list.baidu.com
+2026-08-06T10:25:17.467+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.a.c.a.t.b.BaiduSearchService           : 城市新闻 -杭州新闻中心-杭州网
+城市新闻 -杭州新闻中心-杭州网 2026年7月23日2026-07-23 ·大杭州玩水寻清凉的"天花板"这么玩 2026-07-23 ·浙江经济"期中考成绩单"出炉大家的菜篮子,钱包和购物车有啥新变化? 2026-07-23 ·中国射击一天两度包揽金银牌 2026-07-23 ·这个水上集市卖得最火的是荷花和莲蓬 2026-07-23 ·今日大暑杭州迎来持续晴热高温天气 2026-07-23 ·曾回应"市民 杭州网
+null
+2026-08-06T10:25:17.467+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.a.c.a.t.b.BaiduSearchService           : 综合-浙江新闻_浙江在线
+综合-浙江新闻_浙江在线 2026年08月01日09时 9人3班倒,在海底70米给"甬舟号"换刀 2026年08月01日09时 洗街,泼水,纳凉,一起来浙江"浇"个朋友吧 2026年08月01日09时 雨果奖得主郝景芳回应质疑:用ai写作,没啥见不得人的 2026年08月01日09时 ai到底长啥样?杭州人在文三街旁伸手就摸到了 2026年08月01日09时 法国留学生宁海... 浙江在线·新闻
+https://zjnews.zjol.com.cn/zjnews/zjxw/index_1.shtml
+2026-08-06T10:25:17.467+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.a.c.a.t.b.BaiduSearchService           : [中国新闻]杭州亚运会赛时运行近一月 整体平稳有序
+[中国新闻]杭州亚运会赛时运行近一月 整体平稳有序 [中国新闻]环太平洋2026多国联合演习正在进行 [中国新闻]伊朗警告:英国如继续支持美军将成“打击目标” [中国新闻]以色列总理访美在即 伊朗发出警告 [中国新闻]伊朗称与阿曼就海峡管理磋商取得进展 [中国新闻]美方暂停空袭伊朗 美伊谈判有何空间 [中国新闻]伊朗称已停止针对美国的报复性打击 ... 央视网
+http://m.app.cctv.com/vsetv/detail/C10336/02cae5829613468aaa5820ba84c2af73/index.shtml
+2026-08-06T10:25:17.467+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.a.c.a.t.b.BaiduSearchService           : 综合动态
+综合动态 2026年7月3日2026-07-08 市人大常委会审议七项历史文化街区保护规划 2026-07-07 王浩在临安调研“兴村”工作 2026-07-06 王浩检查指导防汛和电力迎峰度夏工作 2026-07-03 王浩“七一”前夕走访慰问老党员 2026-06-30 市十四届人大七次会议代表25日报到 2026-06-26 王浩在杭州调研项目建设 2026-06-24 加载更多 国家部委... 杭州市人民政府
+https://www.hangzhou.gov.cn/col/col812255/index.html?uid=4037001&pageNum=323
+2026-08-06T10:25:17.467+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.a.c.a.t.b.BaiduSearchService           : 杭州新闻联播(2026年08月01日)
+杭州新闻联播(2026年08月01日) 6天前播放出错啦,请尝试退出重试或刷新 刷新 重试 诊断 code: 4400 uuid: 420312c9-6af5-4f29-970b-9fc3ba455888 requestid: 5c9d8e2a-58ca-429a-a6ac-1e70ac86dfb7 播放时间: 2026-08-01 20:13:11 发布时间:2026-08-01 20:10 来自:8月 标签:杭州,新闻联播,2026,杭州新闻联播 简介: ... 葫芦网
+https://tv.hoolo.tv/hzzh/folder1655/folder28120/folder28128/2026-08-01/3005610.html
+2026-08-06T10:25:17.468+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.a.c.a.t.b.BaiduSearchService           : 政府工作动态
+政府工作动态 2026-08-05 上塘:特色课程让孩子们成长蜕变 2026-08-05 aihangzhou城市客厅亮相文三街区 2026-08-05 三墩"星计划"用艺术疗愈"星星的孩子" 2026-08-05 杭州这个社区打通养老"最后一百米" 2026-08-05 工业遗存华丽蜕变 2026-08-05 100个精品"流动剧场"将亮相杭州 2026-08-04 杭州人工智能企业研发的"实在... 杭州市人民政府
+https://www.hangzhou.gov.cn/col/col812253/index.html
+2026-08-06T10:25:17.468+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.a.c.a.t.b.BaiduSearchService           : 杭州市富阳区气象台2026年8月1日22时21分解除雷电黄色预警信号
+杭州市富阳区气象台2026年8月1日22时21分解除雷电黄色预警信号 5天前杭州市富阳区气象台2026年8月1日22时21分解除雷电黄色预警信号 杭州市富阳区气象台2026年8月1日22时21分解除雷电黄色预警信号。 杭州市富阳区人民政府  播报  暂停
+https://www.fuyang.gov.cn/col/col1229415195/art/2026/art_7f23ded34b244e45b70eb2c71f9211cb.html
+2026-08-06T10:25:17.468+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.a.c.a.t.b.BaiduSearchService           : [新闻直播间]浙江 杭州亚运会将于今年9月23日至10月8日进行 亚运...
+[新闻直播间]浙江 杭州亚运会将于今年9月23日至10月8日进行 亚运... [新闻直播间]浙江 杭州亚运会将于今年9月23日至10月8日进行 亚运场馆钱塘轮滑中心将产生16枚金牌 选集 更多 《新闻直播间》 20260806 01:00 《新闻直播间》 20260805 17:00 《新闻直播间》 20260805 16:00 《新闻直播间》 20260805 15:00 《新闻直播间》 20260805 14:00 ... 央视网
+http://m.app.cctv.com/vsetv/detail/C10616/c230e1a43fcf415187b82270a259115c/index.shtml
+2026-08-06T10:25:17.468+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.utils.BaiduSearchTool    : [AI][TOOL][BAIDU_SEARCH][SUCCESS] query=杭州最新新闻 2026-08-06, resultCount=8
+2026-08-06T10:25:17.474+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][OBSERVATION] traceId=409c5a36, step=1, tool=query_current_weather, result={"city":"杭州","updateTime":"2026-08-06T10:21+08:00","obsTime":"2026-08-06T10:10+08:00","temp":"33","feelsLike":"33","text":"多云","windDir":"北风","windSpeed":"23","humidity":"57"}
+2026-08-06T10:25:17.474+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][OBSERVATION] traceId=409c5a36, step=1, tool=query_weather_forecast, result={"city":"杭州","updateTime":"2026-08-06T10:21+08:00","daily":[{"date":"2026-08-06","tempMax":"37","tempMin":"28","textDay":"多云","textNight":"小雨","windDirDay":"东北风","windScaleDay":"1-3","windDirNight":"北风","windScaleNight":"1-3","humidity":"88","precip":"3.2"},{"date":"2026-08-07","tempMax":"35","tempMin":"28","textDay":"小雨","textNight":"多云","windDirDay":"北风","windScaleDay":"1-3","windDirNight":"北风","windScaleNight":"1-3","humidity":"88","precip":"5.6"},{"date":"2026-08-08","tempMax":"33","tempMin":"24","textDay":"大雨","textNight":"中雨","windDirDay":"北风","windScaleDay":"1-3","windDirNight":"东北风","windScaleNight":"1-3","humidity":"88","precip":"25.6"}]}
+2026-08-06T10:25:17.475+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][OBSERVATION] traceId=409c5a36, step=1, tool=search_realtime_information, result="以下是从百度搜索获取的关于“杭州最新新闻”的结果，检索时间：当前上海时区时间：2026-08-06 10:25:13，星期4。搜索结果非空即表示查询成功，即使少于请求数量也应据实回答：\n\n1. **问题分析中 听**\n   问题分析中 听\n   http://nourl.ubs.baidu.com/279\n\n2. **大家还在搜 杭州今日头条新闻杭州高科技新闻搜索一下杭州的新闻杭州刚刚发生的大事杭州最美城市新闻杭州又来一波什么今天杭州18时新闻60分杭州最新确认延长**\n   大家还在搜 杭州今日头条新闻杭州高科技新闻搜索一下杭州的新闻杭州刚刚发生的大事杭州最美城市新闻杭州又来一波什么今天杭州18时新闻60分杭州最新确认延长\n   http://28608.recommend_list.baidu.com\n\n3. **城市新闻 -杭州新闻中心-杭州网**\n   城市新闻 -杭州新闻中心-杭州网 2026年7月23日2026-07-23 ·大杭州玩水寻清凉的\"天花板\"这么玩 2026-07-23 ·浙江经济\"期中考成绩单\"出炉大家的菜篮子,钱包和购物车有啥新变化? 2026-07-23 ·中国射击一天两度包揽金银牌 2026-07-23 ·这个水上集市卖得最火的是荷花和莲蓬 2026-07-23 ·今日大暑杭州迎来持续晴热高温天气 2026-07-23 ·曾回应\"市民 杭州网\n   null\n\n4. **综合-浙江新闻_浙江在线**\n   综合-浙江新闻_浙江在线 2026年08月01日09时 9人3班倒,在海底70米给\"甬舟号\"换刀 2026年08月01日09时 洗街,泼水,纳凉,一起来浙江\"浇\"个朋友吧 2026年08月01日09时 雨果奖得主郝景芳回应质疑:用ai写作,没啥见不得人的 2026年08月01日09时 ai到底长啥样?杭州人在文三街旁伸手就摸到了 2026年08月01日09时 法国留学生宁海... 浙江在线·新闻\n   https://zjnews.zjol.com.cn/zjnews/zjxw/index_1.shtml\n\n5. **[中国新闻]杭州亚运会赛时运行近一月 整体平稳有序**\n   [中国新闻]杭州亚运会赛时运行近一月 整体平稳有序 [中国新闻]环太平洋2026多国联合演习正在进行 [中国新闻]伊朗警告:英国如继续支持美军将成“打击目标” [中国新闻]以色列总理访美在即 伊朗发出警告 [中国新闻]伊朗称与阿曼就海峡管理磋商取得进展 [中国新闻]美方暂停空袭伊朗 美伊谈判有何空间 [中国新闻]伊朗称已停止针对美国的报复性打击 ... 央视网\n   http://m.app.cctv.com/vsetv/detail/C10336/02cae5829613468aaa5820ba84c2af73/index.shtml\n\n6. **综合动态**\n   综合动态 2026年7月3日2026-07-08 市人大常委会审议七项历史文化街区保护规划 2026-07-07 王浩在临安调研“兴村”工作 2026-07-06 王浩检查指导防汛和电力迎峰度夏工作 2026-07-03 王浩“七一”前夕走访慰问老党员 2026-06-30 市十四届人大七次会议代表25日报到 2026-06-26 王浩在杭州调研项目建设 2026-06-24 加载更多 国家部委... 杭州市人民政府\n   https://www.hangzhou.gov.cn/col/col812255/...
+2026-08-06T10:25:22.390+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][FINAL] traceId=409c5a36, steps=2, toolRounds=1, reasoningPresent=false, promptTokens=5661, completionTokens=662, totalTokens=6323, elapsedMs=12822
+2026-08-06T10:25:24.305+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.service.impl.IlinkReplySender    : [iLink][REPLY_SENT] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, type=FILE, fileName=杭州今日天气、未来3天预报与近期新闻.pdf, fileBytes=70008, elapsedMs=17292
+2026-08-06T10:29:55.188+08:00  INFO 33308 --- [ykd-project] [scheduling-1] c.f.y.i.s.IlinkMessagePollingService     : [iLink][IMAGE_CONTEXT_SAVED] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, imageBytes=187236
+2026-08-06T10:29:55.190+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [AI][IMAGE_MEMORY_UNDERSTAND][START] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:30:04.510+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.rag.SQLiteVectorStore    : [RAG][SQLiteVectorStore] 存入 1 个文档块
+2026-08-06T10:30:04.510+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.rag.RagService         : [RAG][INGEST] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, fileName=图片识别_用户此前发送了一张图片, chunks=1
+2026-08-06T10:30:04.510+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [AI][IMAGE_MEMORY_UNDERSTAND][SUCCESS] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, summaryLength=180
+2026-08-06T10:30:52.613+08:00  INFO 33308 --- [ykd-project] [scheduling-1] c.f.y.i.s.IlinkMessagePollingService     : [iLink][USER_MESSAGE] fromUserId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, text=将图片背景换成夜晚星空
+2026-08-06T10:30:52.751+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.ykd.ai.routing.DeepSeekIntentRouter  : [AI][INTENT_ROUTE] source=LOCAL_RULE, intent=IMAGE_EDIT
+2026-08-06T10:30:52.752+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [iLink][ROUTED] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, intent=IMAGE_EDIT, hasPendingImage=true
+2026-08-06T10:30:52.759+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [AI][IMAGE_EDIT][START] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:31:15.568+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [AI][IMAGE_MEMORY_UNDERSTAND][START] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:31:56.657+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.rag.SQLiteVectorStore    : [RAG][SQLiteVectorStore] 存入 2 个文档块
+2026-08-06T10:31:56.658+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.rag.RagService         : [RAG][INGEST] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, fileName=图片识别_机器人此前根据用户要求编辑并生成了一张图片, chunks=2
+2026-08-06T10:31:56.658+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [AI][IMAGE_MEMORY_UNDERSTAND][SUCCESS] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, summaryLength=523
+2026-08-06T10:31:56.658+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [AI][IMAGE_EDIT][SUCCESS] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, imageBytes=1574602
+2026-08-06T10:32:04.374+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.service.impl.IlinkReplySender    : [iLink][REPLY_SENT] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, type=IMAGE, imageBytes=1574602, elapsedMs=71760
+2026-08-06T10:33:06.775+08:00  INFO 33308 --- [ykd-project] [scheduling-1] c.f.y.i.s.IlinkMessagePollingService     : [iLink][VOICE_RECOGNIZED] fromUserId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, text=帮我生成一张粉色小猪的图片
+2026-08-06T10:33:06.878+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.ykd.ai.routing.DeepSeekIntentRouter  : [AI][INTENT_ROUTE] source=LOCAL_RULE, intent=IMAGE_GENERATE
+2026-08-06T10:33:06.879+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [iLink][VOICE_ROUTED] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, intent=IMAGE_GENERATE, hasPendingImage=false
+2026-08-06T10:33:06.896+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [AI][IMAGE_GENERATE][START] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:33:06.901+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][START] traceId=c285a0bf, conversationId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:33:11.298+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][FINAL] traceId=c285a0bf, steps=1, toolRounds=0, reasoningPresent=false, promptTokens=3706, completionTokens=72, totalTokens=3778, elapsedMs=4396
+2026-08-06T10:33:26.833+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [AI][IMAGE_MEMORY_UNDERSTAND][START] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:33:50.534+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.rag.SQLiteVectorStore    : [RAG][SQLiteVectorStore] 存入 1 个文档块
+2026-08-06T10:33:50.534+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.rag.RagService         : [RAG][INGEST] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, fileName=图片识别_机器人此前根据用户请求生成了一张图片, chunks=1
+2026-08-06T10:33:50.534+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [AI][IMAGE_MEMORY_UNDERSTAND][SUCCESS] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, summaryLength=181
+2026-08-06T10:33:50.534+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [AI][IMAGE_GENERATE][SUCCESS] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, imageBytes=1198996
+2026-08-06T10:34:03.514+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.service.impl.IlinkReplySender    : [iLink][REPLY_SENT] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, type=IMAGE, imageBytes=1198996, elapsedMs=56738
+2026-08-06T10:34:23.926+08:00  INFO 33308 --- [ykd-project] [scheduling-1] c.f.y.i.s.IlinkMessagePollingService     : [iLink][VOICE_RECOGNIZED] fromUserId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, text=上海今天的天气怎么样
+2026-08-06T10:34:25.643+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.ykd.ai.routing.DeepSeekIntentRouter  : [AI][INTENT_ROUTE] source=MODEL, intent=TEXT
+2026-08-06T10:34:25.644+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [iLink][VOICE_ROUTED] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, intent=TEXT, hasPendingImage=false
+2026-08-06T10:34:25.653+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.ai.service.impl.AiChatServiceImpl  : [AI][MEMORY_CHAT] conversationId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:34:26.804+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.rag.RagService         : [RAG][RETRIEVE] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, results=3, afterFilter=2, cacheSize=1
+2026-08-06T10:34:26.813+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][START] traceId=4a0ca990, conversationId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:34:28.276+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][ACTION] traceId=4a0ca990, step=1, tool=query_current_weather, arguments={"city": "上海"}
+2026-08-06T10:34:28.276+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.utils.WeatherTool      : [AI][TOOL][WEATHER][START] 开始调用天气工具，city=上海
+2026-08-06T10:34:30.572+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.w.service.impl.WeatherServiceImpl  : Weather query succeeded: city=上海, locationId=101020100, temp=32, text=多云, elapsedMs=2296
+2026-08-06T10:34:30.573+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.utils.WeatherTool      : [AI][TOOL][WEATHER][SUCCESS] 天气工具调用成功，city=上海, temp=32, text=多云, humidity=67
+2026-08-06T10:34:30.574+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][OBSERVATION] traceId=4a0ca990, step=1, tool=query_current_weather, result={"city":"上海","updateTime":"2026-08-06T10:32+08:00","obsTime":"2026-08-06T10:28+08:00","temp":"32","feelsLike":"36","text":"多云","windDir":"西北风","windSpeed":"7","humidity":"67"}
+2026-08-06T10:34:32.131+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][FINAL] traceId=4a0ca990, steps=2, toolRounds=1, reasoningPresent=false, promptTokens=12537, completionTokens=157, totalTokens=12694, elapsedMs=5318
+2026-08-06T10:34:32.455+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.service.impl.IlinkReplySender    : [iLink][REPLIED] toUserId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, answer=上海今天（8月6日）当前实时天气如下： - **温度**：32℃，体感温度 36℃（较闷热） - **天气**：多云 - **风向风力**：西北风，风速 7 km/h - **湿度**：67% 温馨提示：尽管实际温度不算太高，但由于湿度较大，体感会更热一些，外出请注意防暑补水。 如果需要未来几天的天气预报或有其他问题，随时告诉我哦！, elapsedMs=8528
+2026-08-06T10:35:02.649+08:00  INFO 33308 --- [ykd-project] [scheduling-1] c.f.y.i.s.IlinkMessagePollingService     : [iLink][USER_MESSAGE] fromUserId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, text=回复我语音
+2026-08-06T10:35:03.344+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.ykd.ai.routing.DeepSeekIntentRouter  : [AI][INTENT_ROUTE] source=MODEL, intent=VOICE_REPLY
+2026-08-06T10:35:03.344+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [iLink][ROUTED] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, intent=VOICE_REPLY, hasPendingImage=false
+2026-08-06T10:35:03.351+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.ai.service.impl.AiChatServiceImpl  : [AI][MEMORY_CHAT] conversationId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:35:03.604+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.rag.RagService         : [RAG][RETRIEVE] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, results=3, afterFilter=1, cacheSize=2
+2026-08-06T10:35:03.611+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][START] traceId=4fc20321, conversationId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:35:04.634+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][FINAL] traceId=4fc20321, steps=1, toolRounds=0, reasoningPresent=false, promptTokens=6166, completionTokens=55, totalTokens=6221, elapsedMs=1021
+2026-08-06T10:35:24.015+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.service.impl.IlinkReplySender    : [iLink][REPLY_SENT] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, type=AUDIO, fileName=qwen-audio-reply.mp3, fileBytes=742701, elapsedMs=21365
+2026-08-06T10:37:37.450+08:00  INFO 33308 --- [ykd-project] [scheduling-1] c.f.y.i.s.IlinkMessagePollingService     : [iLink][USER_MESSAGE] fromUserId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, text=帮我在猎聘上搜一下杭州的销售岗位，薪资20-30k。
+2026-08-06T10:37:40.265+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.ykd.ai.routing.DeepSeekIntentRouter  : [AI][INTENT_ROUTE] source=MODEL, intent=TEXT
+2026-08-06T10:37:40.265+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [iLink][ROUTED] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, intent=TEXT, hasPendingImage=false
+2026-08-06T10:37:40.283+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.ai.service.impl.AiChatServiceImpl  : [AI][MEMORY_CHAT] conversationId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:37:41.359+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.rag.RagService         : [RAG][RETRIEVE] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, results=3, afterFilter=2, cacheSize=3
+2026-08-06T10:37:41.366+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][START] traceId=d4a8c827, conversationId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:37:43.489+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][ACTION] traceId=d4a8c827, step=1, tool=search_liepin_jobs, arguments={"keyword": "销售", "city": "杭州", "salary": "20-30k"}
+2026-08-06T10:37:43.490+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.tool.LiepinApplyTool  : [AI][TOOL][LIEPIN][SEARCH] keyword=销售, city=杭州, salary=20-30k, experience=null
+2026-08-06T10:38:21.249+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] Cookie 已注入，等待搜索验证
+2026-08-06T10:38:21.250+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 搜索岗位: keyword=销售, city=杭州, salary=20-30k, experience=, url=https://www.liepin.com/zhaopin/?key=%E9%94%80%E5%94%AE&keyword=%E9%94%80%E5%94%AE&dq=070020&city=070020&salary=20&
+2026-08-06T10:38:46.563+08:00 ERROR 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 搜索失败: Timeout 20000ms exceeded
+
+com.microsoft.playwright.TimeoutError: Timeout 20000ms exceeded
+	at com.microsoft.playwright.impl.WaitableTimeout.get(WaitableTimeout.java:41) ~[playwright-1.44.0.jar:1.44.0]
+	at com.microsoft.playwright.impl.WaitableRace.get(WaitableRace.java:44) ~[playwright-1.44.0.jar:1.44.0]
+	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:120) ~[playwright-1.44.0.jar:1.44.0]
+	at com.microsoft.playwright.impl.FrameImpl.waitForLoadStateImpl(FrameImpl.java:906) ~[playwright-1.44.0.jar:1.44.0]
+	at com.microsoft.playwright.impl.FrameImpl.waitForLoadStateImpl(FrameImpl.java:891) ~[playwright-1.44.0.jar:1.44.0]
+	at com.microsoft.playwright.impl.PageImpl.lambda$waitForLoadState$86(PageImpl.java:1400) ~[playwright-1.44.0.jar:1.44.0]
+	at com.microsoft.playwright.impl.WaitForEventLogger.lambda$get$0(WaitForEventLogger.java:50) ~[playwright-1.44.0.jar:1.44.0]
+	at com.microsoft.playwright.impl.LoggingSupport.withLogging(LoggingSupport.java:47) ~[playwright-1.44.0.jar:1.44.0]
+	at com.microsoft.playwright.impl.ChannelOwner.withLogging(ChannelOwner.java:89) ~[playwright-1.44.0.jar:1.44.0]
+	at com.microsoft.playwright.impl.WaitForEventLogger.get(WaitForEventLogger.java:41) ~[playwright-1.44.0.jar:1.44.0]
+	at com.microsoft.playwright.impl.ChannelOwner.withWaitLogging(ChannelOwner.java:82) ~[playwright-1.44.0.jar:1.44.0]
+	at com.microsoft.playwright.impl.PageImpl.waitForLoadState(PageImpl.java:1399) ~[playwright-1.44.0.jar:1.44.0]
+	at com.fourth.ykd.ilink.client.LiepinClient.searchJobs(LiepinClient.java:190) ~[classes/:na]
+	at com.fourth.ykd.ilink.tool.LiepinApplyTool.searchJobs(LiepinApplyTool.java:48) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.ai.tool.method.MethodToolCallback.callMethod(MethodToolCallback.java:185) ~[spring-ai-model-1.1.2.jar:1.1.2]
+	at org.springframework.ai.tool.method.MethodToolCallback.call(MethodToolCallback.java:112) ~[spring-ai-model-1.1.2.jar:1.1.2]
+	at org.springframework.ai.model.tool.DefaultToolCallingManager.lambda$executeToolCall$5(DefaultToolCallingManager.java:241) ~[spring-ai-model-1.1.2.jar:1.1.2]
+	at io.micrometer.observation.Observation.observe(Observation.java:564) ~[micrometer-observation-1.15.12.jar:1.15.12]
+	at org.springframework.ai.model.tool.DefaultToolCallingManager.executeToolCall(DefaultToolCallingManager.java:238) ~[spring-ai-model-1.1.2.jar:1.1.2]
+	at org.springframework.ai.model.tool.DefaultToolCallingManager.executeToolCalls(DefaultToolCallingManager.java:143) ~[spring-ai-model-1.1.2.jar:1.1.2]
+	at com.fourth.ykd.ai.service.McpToolCallingManager.executeToolCalls(McpToolCallingManager.java:47) ~[classes/:na]
+	at org.springframework.ai.chat.client.advisor.ToolCallAdvisor.adviseCall(ToolCallAdvisor.java:129) ~[spring-ai-client-chat-1.1.2.jar:1.1.2]
+	at com.fourth.ykd.ai.trace.ReActTraceAdvisor.adviseCall(ReActTraceAdvisor.java:46) ~[classes/:na]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:114) ~[spring-ai-client-chat-1.1.2.jar:1.1.2]
+	at io.micrometer.observation.Observation.observe(Observation.java:564) ~[micrometer-observation-1.15.12.jar:1.15.12]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:113) ~[spring-ai-client-chat-1.1.2.jar:1.1.2]
+	at org.springframework.ai.chat.client.advisor.api.BaseAdvisor.adviseCall(BaseAdvisor.java:52) ~[spring-ai-client-chat-1.1.2.jar:1.1.2]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.lambda$nextCall$1(DefaultAroundAdvisorChain.java:114) ~[spring-ai-client-chat-1.1.2.jar:1.1.2]
+	at io.micrometer.observation.Observation.observe(Observation.java:564) ~[micrometer-observation-1.15.12.jar:1.15.12]
+	at org.springframework.ai.chat.client.advisor.DefaultAroundAdvisorChain.nextCall(DefaultAroundAdvisorChain.java:113) ~[spring-ai-client-chat-1.1.2.jar:1.1.2]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.lambda$doGetObservableChatClientResponse$1(DefaultChatClient.java:539) ~[spring-ai-client-chat-1.1.2.jar:1.1.2]
+	at io.micrometer.observation.Observation.observe(Observation.java:564) ~[micrometer-observation-1.15.12.jar:1.15.12]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.doGetObservableChatClientResponse(DefaultChatClient.java:537) ~[spring-ai-client-chat-1.1.2.jar:1.1.2]
+	at org.springframework.ai.chat.client.DefaultChatClient$DefaultCallResponseSpec.content(DefaultChatClient.java:517) ~[spring-ai-client-chat-1.1.2.jar:1.1.2]
+	at com.fourth.ykd.ai.service.impl.AiChatServiceImpl.chat(AiChatServiceImpl.java:173) ~[classes/:na]
+	at com.fourth.ykd.ilink.service.impl.IlinkReplyProcessor.process(IlinkReplyProcessor.java:99) ~[classes/:na]
+	at com.fourth.ykd.ilink.service.impl.IlinkMessageReplyServiceImpl.reply(IlinkMessageReplyServiceImpl.java:86) ~[classes/:na]
+	at com.fourth.ykd.ilink.service.impl.IlinkMessageReplyServiceImpl.lambda$submit$0(IlinkMessageReplyServiceImpl.java:28) ~[classes/:na]
+	at java.base/java.util.concurrent.CompletableFuture$UniRun.tryFire(CompletableFuture.java:787) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-08-06T10:38:46.564+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][OBSERVATION] traceId=d4a8c827, step=1, tool=search_liepin_jobs, result="未找到匹配的岗位，建议：\n1. 换个关键词试试\n2. 扩大搜索范围（去掉城市或薪资限制）\n3. 检查猎聘 Cookie 是否有效"
+2026-08-06T10:38:49.396+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][FINAL] traceId=d4a8c827, steps=2, toolRounds=1, reasoningPresent=false, promptTokens=12914, completionTokens=249, totalTokens=13163, elapsedMs=68029
+2026-08-06T10:38:50.372+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.service.impl.IlinkReplySender    : [iLink][REPLIED] toUserId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, answer=很抱歉，按照您提供的条件（杭州、销售、20-30k）暂时没有搜索到匹配的岗位。 可能是搜索条件较为具体导致结果较少，建议您可以尝试以下几种方式： 1. **更换关键词**——比如将"销售"换成"销售经理""客户经理""大客户销售""区域销售"等更细化的岗位名称 2. **放宽薪资范围**——比如调整为"15-25k"或"面议" 3. **去掉城市或薪资限制**——扩大搜索范围后再筛选 请问您希望我按哪种方式重新搜索呢？比如换个关键词、放宽条件，还是调整城市？您告诉我具体偏好，我马上帮您再找找！, elapsedMs=72922
+2026-08-06T10:39:50.275+08:00  INFO 33308 --- [ykd-project] [scheduling-1] c.f.y.i.s.IlinkMessagePollingService     : [iLink][USER_MESSAGE] fromUserId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, text=帮我在猎聘上搜一下杭州的销售经理岗位，薪资8-30k。
+2026-08-06T10:39:51.593+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.ykd.ai.routing.DeepSeekIntentRouter  : [AI][INTENT_ROUTE] source=MODEL, intent=TEXT
+2026-08-06T10:39:51.593+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [iLink][ROUTED] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, intent=TEXT, hasPendingImage=false
+2026-08-06T10:39:51.601+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.ai.service.impl.AiChatServiceImpl  : [AI][MEMORY_CHAT] conversationId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:39:51.990+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.rag.RagService         : [RAG][RETRIEVE] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, results=3, afterFilter=1, cacheSize=4
+2026-08-06T10:39:52.002+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][START] traceId=047a90ff, conversationId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:39:54.304+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][ACTION] traceId=047a90ff, step=1, tool=search_liepin_jobs, arguments={"keyword": "销售经理", "city": "杭州", "salary": "8-30k"}
+2026-08-06T10:39:54.305+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.tool.LiepinApplyTool  : [AI][TOOL][LIEPIN][SEARCH] keyword=销售经理, city=杭州, salary=8-30k, experience=null
+2026-08-06T10:39:54.305+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 搜索岗位: keyword=销售经理, city=杭州, salary=8-30k, experience=, url=https://www.liepin.com/zhaopin/?key=%E9%94%80%E5%94%AE%E7%BB%8F%E7%90%86&keyword=%E9%94%80%E5%94%AE%E7%BB%8F%E7%90%86&dq=070020&city=070020&salary=5&
+2026-08-06T10:39:58.062+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 页面标题: 【杭州招聘信息_杭州人才网招聘信息】-猎聘, URL: https://www.liepin.com/zhaopin/?key=%E9%94%80%E5%94%AE%E7%BB%8F%E7%90%86&keyword=%E9%94%80%E5%94%AE%E7%BB%8F%E7%90%86&dq=070020&city=070020&salary=5&
+2026-08-06T10:39:58.116+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 匹配到选择器: a[data-nick='job-detail-job-info'], 数量: 42
+2026-08-06T10:39:58.122+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 通过 data-nick 找到 42 个岗位链接
+2026-08-06T10:39:58.132+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 第一个卡片解析: title='销售经理
+【
+杭州-上城区
+】
+150-300元/天
+实习
+3个月
+提供转正
+大专', cardText='销售经理
+【
+杭州-上城区
+】
+150-300元/天
+实习
+3个月
+提供转正
+大专
+杭州菲雅贸易有限公司
+广告/公关/会展1-49人'
+2026-08-06T10:39:58.250+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 找到 15 个岗位，开始检测投递类型...
+2026-08-06T10:40:02.233+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/84572531?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_84572531%3A1%3A14eddc91-5462-4d94-9720-f212b9c472d4&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=0&skId=pulq5lis4ek0ertnauytitor2rdaay0b&fkId=pulq5lis4ek0ertnauytitor2rdaay0b&ckId=pulq5lis4ek0ertnauytitor2rdaay0b&sfrom=search_job_pc&curPage=0&pageSize=40&index=0
+2026-08-06T10:40:02.237+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [1/15] 销售经理
+【
+杭州-上城区
+】
+150-300元/天
+实习
+3个月
+提供转正
+大专 → 仅聊一聊
+2026-08-06T10:40:04.313+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/78784197?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_78784197%3A1%3A14eddc91-5462-4d94-9720-f212b9c472d4&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=1&skId=pulq5lis4ek0ertnauytitor2rdaay0b&fkId=pulq5lis4ek0ertnauytitor2rdaay0b&ckId=pulq5lis4ek0ertnauytitor2rdaay0b&sfrom=search_job_pc&curPage=0&pageSize=40&index=1
+2026-08-06T10:40:04.315+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [2/15] 销售经理
+【
+杭州
+】
+5-7k
+应届
+本科 → 仅聊一聊
+2026-08-06T10:40:06.950+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/45035969?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_45035969%3A1%3A14eddc91-5462-4d94-9720-f212b9c472d4&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=2&skId=pulq5lis4ek0ertnauytitor2rdaay0b&fkId=pulq5lis4ek0ertnauytitor2rdaay0b&ckId=pulq5lis4ek0ertnauytitor2rdaay0b&sfrom=search_job_pc&curPage=0&pageSize=40&index=2
+2026-08-06T10:40:06.951+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [3/15] 销售经理（储备岗位）
+【
+杭州-萧山区
+】
+5-8k
+应届
+大专 → 仅聊一聊
+2026-08-06T10:40:09.070+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/66324773?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_66324773%3A1%3A14eddc91-5462-4d94-9720-f212b9c472d4&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=3&skId=pulq5lis4ek0ertnauytitor2rdaay0b&fkId=pulq5lis4ek0ertnauytitor2rdaay0b&ckId=pulq5lis4ek0ertnauytitor2rdaay0b&sfrom=search_job_pc&curPage=0&pageSize=40&index=3
+2026-08-06T10:40:09.072+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [4/15] 区域销售经理
+【
+杭州-西湖区
+】
+5-10k
+应届
+大专 → 仅聊一聊
+2026-08-06T10:40:11.599+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/46764303?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_46764303%3A1%3A14eddc91-5462-4d94-9720-f212b9c472d4&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=4&skId=pulq5lis4ek0ertnauytitor2rdaay0b&fkId=pulq5lis4ek0ertnauytitor2rdaay0b&ckId=pulq5lis4ek0ertnauytitor2rdaay0b&sfrom=search_job_pc&curPage=0&pageSize=40&index=4
+2026-08-06T10:40:11.601+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [5/15] 销售经理
+【
+杭州
+】
+5-8k
+应届
+学历不限 → 仅聊一聊
+2026-08-06T10:40:15.237+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/45256461?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_45256461%3A1%3A14eddc91-5462-4d94-9720-f212b9c472d4&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=5&skId=pulq5lis4ek0ertnauytitor2rdaay0b&fkId=pulq5lis4ek0ertnauytitor2rdaay0b&ckId=pulq5lis4ek0ertnauytitor2rdaay0b&sfrom=search_job_pc&curPage=0&pageSize=40&index=5
+2026-08-06T10:40:15.238+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [6/15] 销售经理
+【
+杭州
+】
+5-10k
+应届
+大专 → 仅聊一聊
+2026-08-06T10:40:18.354+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/80621007?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_80621007%3A1%3A14eddc91-5462-4d94-9720-f212b9c472d4&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=6&skId=pulq5lis4ek0ertnauytitor2rdaay0b&fkId=pulq5lis4ek0ertnauytitor2rdaay0b&ckId=pulq5lis4ek0ertnauytitor2rdaay0b&sfrom=search_job_pc&curPage=0&pageSize=40&index=6
+2026-08-06T10:40:18.357+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [7/15] 区域销售经理
+【
+杭州-富阳区
+】
+7-12k
+应届
+本科 → 仅聊一聊
+2026-08-06T10:40:20.341+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/77910153?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_77910153%3A1%3A14eddc91-5462-4d94-9720-f212b9c472d4&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=7&skId=pulq5lis4ek0ertnauytitor2rdaay0b&fkId=pulq5lis4ek0ertnauytitor2rdaay0b&ckId=pulq5lis4ek0ertnauytitor2rdaay0b&sfrom=search_job_pc&curPage=0&pageSize=40&index=7
+2026-08-06T10:40:20.343+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [8/15] 销售经理管培生
+【
+杭州-萧山区
+】
+8-16k
+应届
+本科 → 仅聊一聊
+2026-08-06T10:40:22.853+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/75575671?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_75575671%3A1%3A14eddc91-5462-4d94-9720-f212b9c472d4&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=8&skId=pulq5lis4ek0ertnauytitor2rdaay0b&fkId=pulq5lis4ek0ertnauytitor2rdaay0b&ckId=pulq5lis4ek0ertnauytitor2rdaay0b&sfrom=search_job_pc&curPage=0&pageSize=40&index=8
+2026-08-06T10:40:22.856+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [9/15] 销售经理
+【
+杭州-西湖区
+】
+50-100元/天
+实习
+3个月
+提供转正
+学历不限 → 仅聊一聊
+2026-08-06T10:40:24.683+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/47990745?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_47990745%3A1%3A14eddc91-5462-4d94-9720-f212b9c472d4&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=9&skId=pulq5lis4ek0ertnauytitor2rdaay0b&fkId=pulq5lis4ek0ertnauytitor2rdaay0b&ckId=pulq5lis4ek0ertnauytitor2rdaay0b&sfrom=search_job_pc&curPage=0&pageSize=40&index=9
+2026-08-06T10:40:24.686+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [10/15] 电话销售经理
+【
+杭州-临平区
+】
+100-200元/天
+实习
+3个月
+提供转正
+学历不限 → 仅聊一聊
+2026-08-06T10:40:26.987+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位可投递，找到按钮: a:has-text('投简历'), url: https://www.liepin.com/lptjob/83805861?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_83805861%3A1%3A14eddc91-5462-4d94-9720-f212b9c472d4&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=10&skId=pulq5lis4ek0ertnauytitor2rdaay0b&fkId=pulq5lis4ek0ertnauytitor2rdaay0b&ckId=pulq5lis4ek0ertnauytitor2rdaay0b&sfrom=search_job_pc&curPage=0&pageSize=40&index=10
+2026-08-06T10:40:26.989+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [11/15] 国际销售经理（北美/杭州）
+【
+杭州-滨江区
+】
+9-10k·14薪
+应届
+本科 → 可投递
+2026-08-06T10:40:30.621+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位可投递，找到按钮: a:has-text('投简历'), url: https://www.liepin.com/lptjob/83799445?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_83799445%3A1%3A14eddc91-5462-4d94-9720-f212b9c472d4&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=11&skId=pulq5lis4ek0ertnauytitor2rdaay0b&fkId=pulq5lis4ek0ertnauytitor2rdaay0b&ckId=pulq5lis4ek0ertnauytitor2rdaay0b&sfrom=search_job_pc&curPage=0&pageSize=40&index=11
+2026-08-06T10:40:30.623+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [12/15] 国际销售经理（阿拉伯语）
+【
+杭州-滨江区
+】
+9-10k·14薪
+应届
+本科 → 可投递
+2026-08-06T10:40:35.127+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位可投递，找到按钮: a:has-text('投简历'), url: https://www.liepin.com/lptjob/84377933?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_84377933%3A1%3A14eddc91-5462-4d94-9720-f212b9c472d4&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=12&skId=pulq5lis4ek0ertnauytitor2rdaay0b&fkId=pulq5lis4ek0ertnauytitor2rdaay0b&ckId=pulq5lis4ek0ertnauytitor2rdaay0b&sfrom=search_job_pc&curPage=0&pageSize=40&index=12
+2026-08-06T10:40:35.129+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [13/15] 海外销售经理（校招）
+【
+杭州-滨江区
+】
+8-12k
+应届
+本科 → 可投递
+2026-08-06T10:40:38.192+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位可投递，找到按钮: a:has-text('投简历'), url: https://www.liepin.com/lptjob/77975485?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_77975485%3A1%3A14eddc91-5462-4d94-9720-f212b9c472d4&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=13&skId=pulq5lis4ek0ertnauytitor2rdaay0b&fkId=pulq5lis4ek0ertnauytitor2rdaay0b&ckId=pulq5lis4ek0ertnauytitor2rdaay0b&sfrom=search_job_pc&curPage=0&pageSize=40&index=13
+2026-08-06T10:40:38.194+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [14/15] 欧洲销售经理（仅限欧洲留学生）
+【
+杭州-西湖区
+】
+12-20k·15薪
+应届
+本科 → 可投递
+2026-08-06T10:40:42.437+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位可投递，找到按钮: a:has-text('投简历'), url: https://www.liepin.com/lptjob/80218943?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_80218943%3A1%3A14eddc91-5462-4d94-9720-f212b9c472d4&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=14&skId=pulq5lis4ek0ertnauytitor2rdaay0b&fkId=pulq5lis4ek0ertnauytitor2rdaay0b&ckId=pulq5lis4ek0ertnauytitor2rdaay0b&sfrom=search_job_pc&curPage=0&pageSize=40&index=14
+2026-08-06T10:40:42.439+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [15/15] 沪浙西-销售区域经理-J14290
+【
+杭州-上城区
+】
+30-50k·13薪
+应届
+本科 → 可投递
+2026-08-06T10:40:42.440+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.tool.LiepinApplyTool  : [AI][TOOL][LIEPIN][SEARCH][SUCCESS] found 15 jobs
+2026-08-06T10:40:42.440+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][OBSERVATION] traceId=047a90ff, step=1, tool=search_liepin_jobs, result="找到 15 个岗位（5个可投递，10个仅支持聊一聊）：\n\n📌 【可直接投递】回复序号自动投递：\n  11. 国际销售经理（北美/杭州）\n【\n杭州-滨江区\n】\n9-10k·14薪\n应届\n本科 | 9-10k·14薪 | 杭州-滨江区\n  12. 国际销售经理（阿拉伯语）\n【\n杭州-滨江区\n】\n9-10k·14薪\n应届\n本科 | 9-10k·14薪 | 杭州-滨江区\n  13. 海外销售经理（校招）\n【\n杭州-滨江区\n】\n8-12k\n应届\n本科 | 8-12k | 杭州-滨江区\n  14. 欧洲销售经理（仅限欧洲留学生）\n【\n杭州-西湖区\n】\n12-20k·15薪\n应届\n本科 | 12-20k·15薪 | 青岛乾程科技股份有限公司\n  15. 沪浙西-销售区域经理-J14290\n【\n杭州-上城区\n】\n30-50k·13薪\n应届\n本科 | 30-50k·13薪 | 杭州-上城区\n\n💬 【仅支持聊一聊】回复序号获取HR对话链接：\n  1. 销售经理\n【\n杭州-上城区\n】\n150-300元/天\n实习\n3个月\n提供转正\n大专 | 150-300元/天 | 杭州菲雅贸易有限公司\n  2. 销售经理\n【\n杭州\n】\n5-7k\n应届\n本科 | 5-7k | 北京优特捷信息技术有限公司\n  3. 销售经理（储备岗位）\n【\n杭州-萧山区\n】\n5-8k\n应届\n大专 | 5-8k | 杭州科雷机电工业有限公司\n  4. 区域销售经理\n【\n杭州-西湖区\n】\n5-10k\n应届\n大专 | 5-10k | 杭州-西湖区\n  5. 销售经理\n【\n杭州\n】\n5-8k\n应届\n学历不限 | 5-8k | 杭州玉苍科技有限公司\n  6. 销售经理\n【\n杭州\n】\n5-10k\n应届\n大专 | 5-10k | 杭州\n  7. 区域销售经理\n【\n杭州-富阳区\n】\n7-12k\n应届\n本科 | 7-12k | 杭州-富阳区\n  8. 销售经理管培生\n【\n杭州-萧山区\n】\n8-16k\n应届\n本科 | 8-16k | 杭州润居实业有限责任公司\n  9. 销售经理\n【\n杭州-西湖区\n】\n50-100元/天\n实习\n3个月\n提供转正\n学历不限 | 50-100元/天 | 溯启信息科技(杭州)有限公司\n  10. 电话销售经理\n【\n杭州-临平区\n】\n100-200元/天\n实习\n3个月\n提供转正\n学历不限 | 100-200元/天 | 杭州长河信用管理有限公司\n\n回复序号即可，如\"投递1、3\"或\"全部投递\"。"
+2026-08-06T10:40:46.317+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][FINAL] traceId=047a90ff, steps=2, toolRounds=1, reasoningPresent=false, promptTokens=13708, completionTokens=467, totalTokens=14175, elapsedMs=54315
+2026-08-06T10:40:47.057+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.service.impl.IlinkReplySender    : [iLink][REPLIED] toUserId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, answer=我在猎聘上为您找到了 **15个销售经理岗位**（其中5个可直接投递，10个仅支持"聊一聊"），以下是在您薪资范围 **8-30k** 内的岗位： ### 📌 可直接投递的岗位 | 序号 | 岗位 | 城市 | 薪资 | |------|------|------|------| | 11 | 国际销售经理（北美） | 滨江区 | 9-10k·14薪 | | 12 | 国际销售经理（阿拉伯语） | 滨江区 | 9-10k·14薪 | | 13 | 海外销售经理（校招） | 滨江区 | 8-12k | | 14 | 欧洲销售经理 | 西湖区 | 12-20k·15薪 | > 注：序号15（沪浙西区域经理）薪资为30-50k，超出范围；序号1-10多为实习、日薪或低于8k起步的岗位。 ### 💬 仅支持"聊一聊"的部分岗位 - **销售经理管培生**（萧山区，8-16k） - **区域销售经理**（富阳区，7-12k） - **区域销售经理**（西湖区，5-10k） --- 请问您想投递哪些岗位？可以直接回复序号，例如： - **「投递11、12、13、14」** —— 投递这4个可直投岗位 - **「全部」** —— 投递全部可直投岗位 - 或者告诉我具体序号 您也可以把"仅聊一聊"的岗位告诉我序号，我为您生成HR对话链接。请确认您的选择！😊, elapsedMs=56782
+2026-08-06T10:43:17.609+08:00  INFO 33308 --- [ykd-project] [scheduling-1] c.f.y.i.s.IlinkMessagePollingService     : [iLink][USER_MESSAGE] fromUserId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, text=帮我在猎聘上搜一下杭州的产品经理岗位，薪资6-30k。
+2026-08-06T10:43:18.614+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.ykd.ai.routing.DeepSeekIntentRouter  : [AI][INTENT_ROUTE] source=MODEL, intent=TEXT
+2026-08-06T10:43:18.614+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [iLink][ROUTED] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, intent=TEXT, hasPendingImage=false
+2026-08-06T10:43:18.632+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.ai.service.impl.AiChatServiceImpl  : [AI][MEMORY_CHAT] conversationId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:43:19.172+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.rag.RagService         : [RAG][RETRIEVE] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, results=3, afterFilter=1, cacheSize=5
+2026-08-06T10:43:19.182+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][START] traceId=84b7747c, conversationId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:43:20.519+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][FINAL] traceId=84b7747c, steps=1, toolRounds=0, reasoningPresent=false, promptTokens=6802, completionTokens=90, totalTokens=6892, elapsedMs=1337
+2026-08-06T10:43:21.031+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.service.impl.IlinkReplySender    : [iLink][REPLIED] toUserId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, answer=好的，我来帮您在猎聘上搜索杭州的产品经理岗位，薪资范围6-30k。 请问您还有其他条件吗？比如经验要求（应届、1-3年、3-5年等），或者更具体的岗位方向（如AI产品经理、B端产品经理、数据产品经理等）？如果没有特殊要求，我就直接按"产品经理 + 杭州 + 6-30k"来搜索了。, elapsedMs=3422
+2026-08-06T10:43:55.548+08:00  INFO 33308 --- [ykd-project] [scheduling-1] c.f.y.i.s.IlinkMessagePollingService     : [iLink][USER_MESSAGE] fromUserId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, text=帮我在猎聘上搜一下杭州的产品经理岗位，薪资6-30k。
+2026-08-06T10:43:56.357+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.ykd.ai.routing.DeepSeekIntentRouter  : [AI][INTENT_ROUTE] source=MODEL, intent=TEXT
+2026-08-06T10:43:56.367+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [iLink][ROUTED] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, intent=TEXT, hasPendingImage=false
+2026-08-06T10:43:56.375+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.ai.service.impl.AiChatServiceImpl  : [AI][MEMORY_CHAT] conversationId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:43:56.375+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.rag.RagService         : [RAG][CACHE][HIT] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, query=帮我在猎聘上搜一下杭州的产品经理岗位，薪资6-30k。, docsCount=1
+2026-08-06T10:43:56.386+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][START] traceId=25e0eab8, conversationId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:43:57.450+08:00  WARN 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.rag.RagInterceptor     : [RAG][INTERCEPTOR][AFTER][EMPTY_ANSWER] 模型返回了空回答，可能原因：检索失败 / 模型拒绝 / 系统异常
+2026-08-06T10:43:57.450+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][ACTION] traceId=25e0eab8, step=1, tool=search_liepin_jobs, arguments={"keyword": "产品经理", "city": "杭州", "salary": "6-30k"}
+2026-08-06T10:43:57.450+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.tool.LiepinApplyTool  : [AI][TOOL][LIEPIN][SEARCH] keyword=产品经理, city=杭州, salary=6-30k, experience=null
+2026-08-06T10:43:57.450+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 搜索岗位: keyword=产品经理, city=杭州, salary=6-30k, experience=, url=https://www.liepin.com/zhaopin/?key=%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86&keyword=%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86&dq=070020&city=070020&salary=5&
+2026-08-06T10:44:02.988+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 页面标题: 【杭州招聘信息_杭州人才网招聘信息】-猎聘, URL: https://www.liepin.com/zhaopin/?key=%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86&keyword=%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86&dq=070020&city=070020&salary=5&
+2026-08-06T10:44:03.009+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 匹配到选择器: a[data-nick='job-detail-job-info'], 数量: 42
+2026-08-06T10:44:03.011+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 通过 data-nick 找到 42 个岗位链接
+2026-08-06T10:44:03.027+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 第一个卡片解析: title='学术产品经理
+【
+杭州-上城区
+】
+180-300元/天
+实习
+3个月
+提供转正
+硕士', cardText='学术产品经理
+【
+杭州-上城区
+】
+180-300元/天
+实习
+3个月
+提供转正
+硕士
+浙江康网医药有限公司
+制药1-49人'
+2026-08-06T10:44:03.165+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 找到 15 个岗位，开始检测投递类型...
+2026-08-06T10:44:06.786+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/53055335?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_53055335%3A1%3Ab4375e89-ce4c-4dd2-898d-155a90e2517e&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=0&skId=qltfwtv0byyovynn3i2e3wxr91opqxxb&fkId=qltfwtv0byyovynn3i2e3wxr91opqxxb&ckId=qltfwtv0byyovynn3i2e3wxr91opqxxb&sfrom=search_job_pc&curPage=0&pageSize=40&index=0
+2026-08-06T10:44:06.790+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [1/15] 学术产品经理
+【
+杭州-上城区
+】
+180-300元/天
+实习
+3个月
+提供转正
+硕士 → 仅聊一聊
+2026-08-06T10:44:09.792+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/84382859?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_84382859%3A1%3Ab4375e89-ce4c-4dd2-898d-155a90e2517e&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=1&skId=qltfwtv0byyovynn3i2e3wxr91opqxxb&fkId=qltfwtv0byyovynn3i2e3wxr91opqxxb&ckId=qltfwtv0byyovynn3i2e3wxr91opqxxb&sfrom=search_job_pc&curPage=0&pageSize=40&index=1
+2026-08-06T10:44:09.795+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [2/15] 智能驾驶产品经理实习生（海外业务方向）
+【
+杭州-滨江区
+】
+150-300元/天
+实习
+3个月
+本科 → 仅聊一聊
+2026-08-06T10:44:12.407+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/84217581?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_84217581%3A1%3Ab4375e89-ce4c-4dd2-898d-155a90e2517e&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=2&skId=qltfwtv0byyovynn3i2e3wxr91opqxxb&fkId=qltfwtv0byyovynn3i2e3wxr91opqxxb&ckId=qltfwtv0byyovynn3i2e3wxr91opqxxb&sfrom=search_job_pc&curPage=0&pageSize=40&index=2
+2026-08-06T10:44:12.409+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [3/15] 智能驾驶产品经理实习生
+【
+杭州-滨江区
+】
+150-300元/天
+实习
+3个月
+提供转正
+本科 → 仅聊一聊
+2026-08-06T10:44:14.337+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/82479125?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_82479125%3A1%3Ab4375e89-ce4c-4dd2-898d-155a90e2517e&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=3&skId=qltfwtv0byyovynn3i2e3wxr91opqxxb&fkId=qltfwtv0byyovynn3i2e3wxr91opqxxb&ckId=qltfwtv0byyovynn3i2e3wxr91opqxxb&sfrom=search_job_pc&curPage=0&pageSize=40&index=3
+2026-08-06T10:44:14.339+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [4/15] AI产品经理
+【
+杭州-余杭区
+】
+25-50k
+应届
+硕士 → 仅聊一聊
+2026-08-06T10:44:17.574+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位可投递，找到按钮: a:has-text('投简历'), url: https://www.liepin.com/lptjob/83663077?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_83663077%3A1%3Ab4375e89-ce4c-4dd2-898d-155a90e2517e&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=4&skId=qltfwtv0byyovynn3i2e3wxr91opqxxb&fkId=qltfwtv0byyovynn3i2e3wxr91opqxxb&ckId=qltfwtv0byyovynn3i2e3wxr91opqxxb&sfrom=search_job_pc&curPage=0&pageSize=40&index=4
+2026-08-06T10:44:17.577+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [5/15] IT产品经理(J10180)
+【
+杭州-西湖区
+】
+8-12k
+应届
+本科 → 可投递
+2026-08-06T10:44:20.445+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/76182111?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_76182111%3A1%3Ab4375e89-ce4c-4dd2-898d-155a90e2517e&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=5&skId=qltfwtv0byyovynn3i2e3wxr91opqxxb&fkId=qltfwtv0byyovynn3i2e3wxr91opqxxb&ckId=qltfwtv0byyovynn3i2e3wxr91opqxxb&sfrom=search_job_pc&curPage=0&pageSize=40&index=5
+2026-08-06T10:44:20.446+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [6/15] AI产品经理（实习）
+【
+杭州-滨江区
+】
+150-200元/天
+实习
+3个月
+提供转正
+本科 → 仅聊一聊
+2026-08-06T10:44:23.558+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位可投递，找到按钮: a:has-text('投简历'), url: https://www.liepin.com/lptjob/84217221?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_84217221%3A1%3Ab4375e89-ce4c-4dd2-898d-155a90e2517e&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=6&skId=qltfwtv0byyovynn3i2e3wxr91opqxxb&fkId=qltfwtv0byyovynn3i2e3wxr91opqxxb&ckId=qltfwtv0byyovynn3i2e3wxr91opqxxb&sfrom=search_job_pc&curPage=0&pageSize=40&index=6
+2026-08-06T10:44:23.560+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [7/15] 智能驾驶产品经理实习生
+【
+杭州-滨江区
+】
+120-200元/天
+实习
+3个月
+本科 → 可投递
+2026-08-06T10:44:26.094+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/76497655?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_76497655%3A1%3Ab4375e89-ce4c-4dd2-898d-155a90e2517e&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=7&skId=qltfwtv0byyovynn3i2e3wxr91opqxxb&fkId=qltfwtv0byyovynn3i2e3wxr91opqxxb&ckId=qltfwtv0byyovynn3i2e3wxr91opqxxb&sfrom=search_job_pc&curPage=0&pageSize=40&index=7
+2026-08-06T10:44:26.097+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [8/15] 产品经理
+【
+杭州-西湖区
+】
+180-250元/天
+实习
+6个月
+提供转正
+硕士 → 仅聊一聊
+2026-08-06T10:44:29.108+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/79068189?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_79068189%3A1%3Ab4375e89-ce4c-4dd2-898d-155a90e2517e&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=8&skId=qltfwtv0byyovynn3i2e3wxr91opqxxb&fkId=qltfwtv0byyovynn3i2e3wxr91opqxxb&ckId=qltfwtv0byyovynn3i2e3wxr91opqxxb&sfrom=search_job_pc&curPage=0&pageSize=40&index=8
+2026-08-06T10:44:29.110+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [9/15] 【同花顺-AI产品经理实习生招聘】
+【
+杭州
+】
+150-250元/天
+实习
+3个月
+提供转正
+本科 → 仅聊一聊
+2026-08-06T10:44:31.517+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/83675443?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_83675443%3A1%3Ab4375e89-ce4c-4dd2-898d-155a90e2517e&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=9&skId=qltfwtv0byyovynn3i2e3wxr91opqxxb&fkId=qltfwtv0byyovynn3i2e3wxr91opqxxb&ckId=qltfwtv0byyovynn3i2e3wxr91opqxxb&sfrom=search_job_pc&curPage=0&pageSize=40&index=9
+2026-08-06T10:44:31.519+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [10/15] 产品经理（校招）
+【
+杭州-滨江区
+】
+12-16k
+应届
+本科 → 仅聊一聊
+2026-08-06T10:44:33.994+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/79441171?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_79441171%3A1%3Ab4375e89-ce4c-4dd2-898d-155a90e2517e&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=10&skId=qltfwtv0byyovynn3i2e3wxr91opqxxb&fkId=qltfwtv0byyovynn3i2e3wxr91opqxxb&ckId=qltfwtv0byyovynn3i2e3wxr91opqxxb&sfrom=search_job_pc&curPage=0&pageSize=40&index=10
+2026-08-06T10:44:33.996+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [11/15] AI产品经理
+【
+杭州-滨江区
+】
+150-180元/天
+实习
+3个月
+提供转正
+硕士 → 仅聊一聊
+2026-08-06T10:44:36.570+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/76706461?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_76706461%3A1%3Ab4375e89-ce4c-4dd2-898d-155a90e2517e&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=11&skId=qltfwtv0byyovynn3i2e3wxr91opqxxb&fkId=qltfwtv0byyovynn3i2e3wxr91opqxxb&ckId=qltfwtv0byyovynn3i2e3wxr91opqxxb&sfrom=search_job_pc&curPage=0&pageSize=40&index=11
+2026-08-06T10:44:36.571+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [12/15] 产品经理
+【
+杭州
+】
+150-300元/天
+实习
+3个月
+提供转正
+本科 → 仅聊一聊
+2026-08-06T10:44:40.086+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/83286197?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_83286197%3A1%3Ab4375e89-ce4c-4dd2-898d-155a90e2517e&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=12&skId=qltfwtv0byyovynn3i2e3wxr91opqxxb&fkId=qltfwtv0byyovynn3i2e3wxr91opqxxb&ckId=qltfwtv0byyovynn3i2e3wxr91opqxxb&sfrom=search_job_pc&curPage=0&pageSize=40&index=12
+2026-08-06T10:44:40.088+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [13/15] 项目管理实习生（PM Intern）
+【
+杭州-萧山区
+】
+150-180元/天
+实习
+7个月
+提供转正
+本科 → 仅聊一聊
+2026-08-06T10:44:43.421+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/78405433?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_78405433%3A1%3Ab4375e89-ce4c-4dd2-898d-155a90e2517e&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=13&skId=qltfwtv0byyovynn3i2e3wxr91opqxxb&fkId=qltfwtv0byyovynn3i2e3wxr91opqxxb&ckId=qltfwtv0byyovynn3i2e3wxr91opqxxb&sfrom=search_job_pc&curPage=0&pageSize=40&index=13
+2026-08-06T10:44:43.425+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [14/15] 大模型产品经理实习生
+【
+杭州-滨江区
+】
+100-200元/天
+实习
+3个月
+本科 → 仅聊一聊
+2026-08-06T10:44:46.020+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 岗位仅支持聊一聊，找到按钮: a:has-text('聊一聊'), url: https://www.liepin.com/lptjob/46886943?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_46886943%3A1%3Ab4375e89-ce4c-4dd2-898d-155a90e2517e&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=14&skId=qltfwtv0byyovynn3i2e3wxr91opqxxb&fkId=qltfwtv0byyovynn3i2e3wxr91opqxxb&ckId=qltfwtv0byyovynn3i2e3wxr91opqxxb&sfrom=search_job_pc&curPage=0&pageSize=40&index=14
+2026-08-06T10:44:46.021+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] [15/15] 产品经理
+【
+杭州-滨江区
+】
+5-9k
+应届
+大专 → 仅聊一聊
+2026-08-06T10:44:46.022+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.tool.LiepinApplyTool  : [AI][TOOL][LIEPIN][SEARCH][SUCCESS] found 15 jobs
+2026-08-06T10:44:46.022+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][OBSERVATION] traceId=25e0eab8, step=1, tool=search_liepin_jobs, result="找到 15 个岗位（2个可投递，13个仅支持聊一聊）：\n\n📌 【可直接投递】回复序号自动投递：\n  5. IT产品经理(J10180)\n【\n杭州-西湖区\n】\n8-12k\n应届\n本科 | 8-12k | 杭州瑞江化工有限公司\n  7. 智能驾驶产品经理实习生\n【\n杭州-滨江区\n】\n120-200元/天\n实习\n3个月\n本科 | 120-200元/天 | 杭州-滨江区\n\n💬 【仅支持聊一聊】回复序号获取HR对话链接：\n  1. 学术产品经理\n【\n杭州-上城区\n】\n180-300元/天\n实习\n3个月\n提供转正\n硕士 | 180-300元/天 | 杭州-上城区\n  2. 智能驾驶产品经理实习生（海外业务方向）\n【\n杭州-滨江区\n】\n150-300元/天\n实习\n3个月\n本科 | 150-300元/天 | 杭州-滨江区\n  3. 智能驾驶产品经理实习生\n【\n杭州-滨江区\n】\n150-300元/天\n实习\n3个月\n提供转正\n本科 | 150-300元/天 | 杭州-滨江区\n  4. AI产品经理\n【\n杭州-余杭区\n】\n25-50k\n应届\n硕士 | 25-50k | 智云星峰(杭州)技术有限公司\n  6. AI产品经理（实习）\n【\n杭州-滨江区\n】\n150-200元/天\n实习\n3个月\n提供转正\n本科 | 150-200元/天 | 杭州科芯未来工程技术研究有限责任公司\n  8. 产品经理\n【\n杭州-西湖区\n】\n180-250元/天\n实习\n6个月\n提供转正\n硕士 | 180-250元/天 | 杭州科杉科技有限公司\n  9. 【同花顺-AI产品经理实习生招聘】\n【\n杭州\n】\n150-250元/天\n实习\n3个月\n提供转正\n本科 | 150-250元/天 | 杭州\n  10. 产品经理（校招）\n【\n杭州-滨江区\n】\n12-16k\n应届\n本科 | 12-16k | 杭州-滨江区\n  11. AI产品经理\n【\n杭州-滨江区\n】\n150-180元/天\n实习\n3个月\n提供转正\n硕士 | 150-180元/天 | 杭州-滨江区\n  12. 产品经理\n【\n杭州\n】\n150-300元/天\n实习\n3个月\n提供转正\n本科 | 150-300元/天 | 杭州数腾芯达科技有限公司\n  13. 项目管理实习生（PM Intern）\n【\n杭州-萧山区\n】\n150-180元/天\n实习\n7个月\n提供转正\n本科 | 150-180元/天 | 杭州-萧山区\n  14. 大模型产品经理实习生\n【\n杭州-滨江区\n】\n100-200元/天\n实习\n3个月\n本科 | 100-200元/天 | 宁波图灵奇点智能科技有限公司\n  15. 产品经理\n【\n杭州-滨江区\n】\n5-9k\n应届\n大专 | 5-9k | 杭州星一科技有限公司\n\n回复序号即可，如\"投递1、3\"或\"全部投递\"。"
+2026-08-06T10:44:49.262+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][FINAL] traceId=25e0eab8, steps=2, toolRounds=1, reasoningPresent=false, promptTokens=14747, completionTokens=558, totalTokens=15305, elapsedMs=52875
+2026-08-06T10:44:50.957+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.service.impl.IlinkReplySender    : [iLink][REPLIED] toUserId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, answer=我在猎聘上为您找到了 **15个产品经理相关岗位**（其中2个可投递，13个仅支持"聊一聊"），按您薪资范围6-30k整理如下： ### 📌 可直接投递的岗位 | 序号 | 岗位 | 城市/区 | 薪资 | 经验 | |------|------|---------|------|------| | 5 | IT产品经理(J10180) · 杭州瑞江化工 | 西湖区 | 8-12k | 应届 | | 7 | 智能驾驶产品经理实习生 | 滨江区 | 120-200元/天 | 实习 | ### 💬 仅支持"聊一聊"的部分岗位 | 序号 | 岗位 | 城市/区 | 薪资 | 备注 | |------|------|---------|------|------| | 4 | AI产品经理 · 智云星峰 | 余杭区 | 25-50k | 应届/硕士（部分超30k） | | 10 | 产品经理（校招） | 滨江区 | 12-16k | 应届 | | 15 | 产品经理 · 杭州星一科技 | 滨江区 | 5-9k | 应届/大专 | | 8 | 产品经理（实习）· 杭州科杉科技 | 西湖区 | 180-250元/天 | 实习可转正 | | 9 | 同花顺-AI产品经理实习生 | 杭州 | 150-250元/天 | 实习可转正 | | 1/2/3/6/11/12/13/14 | 各类产品经理/AI产品经理实习岗 | — | 100-300元/天 | 实习为主 | --- 请问您想投递哪些岗位？可以直接回复序号，例如： - **「投递5、7」** —— 投递这2个可直投岗位 - **「全部」** —— 投递全部可直投岗位 - **「投递4、10、15」** 等 —— 帮我生成"聊一聊"HR对话链接的岗位 请告诉我您的选择，我马上为您处理！😊, elapsedMs=55408
+2026-08-06T10:46:10.459+08:00  INFO 33308 --- [ykd-project] [scheduling-1] c.f.y.i.s.IlinkMessagePollingService     : [iLink][USER_MESSAGE] fromUserId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, text=4、7
+2026-08-06T10:46:11.708+08:00  WARN 33308 --- [ykd-project] [ilink-reply-1] c.f.ykd.ai.routing.DeepSeekIntentRouter  : [AI][INTENT_ROUTE] source=MODEL_FALLBACK, intent=TEXT, result={“intent”:”TEXT”}
+2026-08-06T10:46:11.708+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.s.impl.IlinkReplyProcessor       : [iLink][ROUTED] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, intent=TEXT, hasPendingImage=false
+2026-08-06T10:46:11.725+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.ai.service.impl.AiChatServiceImpl  : [AI][MEMORY_CHAT] conversationId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:46:12.144+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] com.fourth.ykd.ai.rag.RagService         : [RAG][RETRIEVE] userId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, results=3, afterFilter=2, cacheSize=6
+2026-08-06T10:46:12.149+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][START] traceId=942f4ec4, conversationId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat
+2026-08-06T10:46:14.269+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][ACTION] traceId=942f4ec4, step=1, tool=apply_liepin_jobs, arguments={"jobUrlsOrIndices": "4,7"}
+2026-08-06T10:46:14.269+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.tool.LiepinApplyTool  : [AI][TOOL][LIEPIN][APPLY] input=4,7
+2026-08-06T10:46:18.563+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 点击投递按钮: 投简历 (选择器: a:has-text('投简历'))
+2026-08-06T10:46:30.719+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 弹窗中未找到确认按钮
+2026-08-06T10:46:32.942+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 投递结果检查，页面文本片段: 首页
+职位
+校园
+海归
+简历优化
+猎聘APP
+我要招人
+你好，
+林先生
+投递成功
+以下职位与您投递的职位非常相似，是否一起发送简历？
+AI专利实习生（机械方向）
+【
+杭州-西兴
+】
+150-200元/天
+实习
+3个月
+本科
+零跑科技
+互联网10000人以上
+范先生
+招聘专员
+机械设计实习生（VMR）(J10154)
+【
+杭州-余杭区
+】
+180-250元/天
+实习
+6个月
+提供转正
+本科
+杭州蓝芯机器人技术股份有限公司
+人工智能C轮100-499人
+尧先生
+HRM
+整车项目管理实习生
+【
+杭州-钱塘区
+】
+150-200元/天
+实习
+5个月
+提供转正
+本科
+上海犀重新能源汽车有限公司
+新能源汽车C轮500-999人
+唐先生
+招聘负责人
+智能驾驶产品经理实习生
+【
+杭州-西兴
+】
+150-300元/天
+实习
+3个月
+提供转正
+本科
+零跑科技
+互联网10000人以上
+李先生
+机械工程师实习生（提供转正）
+【
+杭州-高桥
+】
+200-250元/天
+实习
+6个月
+提供转正
+硕士
+深圳市朝上科技有限责任公司
+新材料1-49人
+潘女士
+工程师助理
+【
+杭州-钱塘区
+】
+100-150元/天
+实习
+3个月
+本科
+牛仁智能科技(杭州)有限公司
+医疗器械A轮50-99人
+梅女士
+HR
+工程项目管理实习生（自动化）
+【
+杭州-浦沿
+】
+150-180元/天
+实习
+3个月
+提供转正
+本科
+普康生物
+制药100-499人
+陈女士
+实习生-车辆工程/机械专业
+【
+杭州-余杭区
+】
+150-200元/天
+实习
+12个月
+提供转正
+本科
+飞沃达(上海)科技有限公司
+汽车零部件及配件50-99人
+胡女士
+行政专员/助理
+
+邀请应聘
+
+我的投递
+
+我的收藏
+
+猎聘APP
+
+投诉建议
+
+10
+有新消息
+
+简历投递成功
+
+扫一扫，下载猎聘APP
+
+想第一时间收到应聘反馈？
+下载猎聘APP，实时查询应聘进展，让求
+2026-08-06T10:46:32.947+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 检测到投递成功标志
+2026-08-06T10:46:32.947+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ilink.client.LiepinClient   : [Liepin] 智能驾驶产品经理实习生 - 投递成功
+2026-08-06T10:46:34.100+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][OBSERVATION] traceId=942f4ec4, step=1, tool=apply_liepin_jobs, result="📋 投递结果：\n  ✅ 智能驾驶产品经理实习生 - 投递成功\n  总计: 1 成功, 0 失败\n\n💬 以下岗位仅支持\"聊一聊\"，点击链接可直接与HR沟通：\n\n  🔗 AI产品经理\n【\n杭州-余杭区\n】\n25-50k\n应届\n硕士 | 25-50k | 智云星峰(杭州)技术有限公司\n     https://www.liepin.com/lptjob/82479125?pgRef=c_pc_search_page%3Ac_pc_search_job_listcard%406_82479125%3A1%3Ab4375e89-ce4c-4dd2-898d-155a90e2517e&d_sfrom=search_prime&d_ckId=null&d_curPage=0&d_pageSize=40&d_headId=null&d_posi=3&skId=qltfwtv0byyovynn3i2e3wxr91opqxxb&fkId=qltfwtv0byyovynn3i2e3wxr91opqxxb&ckId=qltfwtv0byyovynn3i2e3wxr91opqxxb&sfrom=search_job_pc&curPage=0&pageSize=40&index=3\n\n"
+2026-08-06T10:46:36.315+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.fourth.ykd.ai.trace.ReActTraceAdvisor  : [AI][REACT][FINAL] traceId=942f4ec4, steps=2, toolRounds=1, reasoningPresent=false, promptTokens=15102, completionTokens=339, totalTokens=15441, elapsedMs=24165
+2026-08-06T10:46:36.975+08:00  INFO 33308 --- [ykd-project] [ilink-reply-1] c.f.y.i.service.impl.IlinkReplySender    : [iLink][REPLIED] toUserId=o9cq807-PfbODqYbSCiOvSfNw31k@im.wechat, answer=您的投递结果如下： ### ✅ 投递成功 - **智能驾驶产品经理实习生**（滨江区，120-200元/天）—— 简历已成功投递！ ### 💬 需与HR"聊一聊"的岗位 **AI产品经理**（杭州·余杭区，25-50k，应届/硕士）—— 该岗位仅支持在线沟通，我已为您生成HR对话链接，您可以直接打开与对方沟通： **AI产品经理 · 智云星峰(杭州)技术有限公司** 🔗 https://www.liepin.com/lptjob/82479125 --- 本次共投递 **1份简历成功**，另有 **1个岗位** 需要您通过"聊一聊"与HR直接沟通。 希望您求职顺利，早日收到好消息！如果还需要帮您投递其他岗位，随时告诉我哦！😊, elapsedMs=26516
+2026-08-06T10:50:09.403+08:00  INFO 33308 --- [ykd-project] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-08-06T10:50:09.406+08:00  INFO 33308 --- [ykd-project] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
