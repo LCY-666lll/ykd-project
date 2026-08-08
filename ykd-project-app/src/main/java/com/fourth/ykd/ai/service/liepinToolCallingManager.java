@@ -17,12 +17,12 @@ import java.util.List;
  */
 //日志记录
 @Slf4j
-public class McpToolCallingManager implements ToolCallingManager {
+public class liepinToolCallingManager implements ToolCallingManager {
 
     private final DefaultToolCallingManager delegate;
     private final McpToolService mcpToolService;
 
-    public McpToolCallingManager(DefaultToolCallingManager delegate, McpToolService mcpToolService) {
+    public liepinToolCallingManager(DefaultToolCallingManager delegate, McpToolService mcpToolService) {
         this.delegate = delegate;
         this.mcpToolService = mcpToolService;
     }

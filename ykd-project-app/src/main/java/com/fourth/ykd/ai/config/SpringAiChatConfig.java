@@ -1,7 +1,7 @@
 package com.fourth.ykd.ai.config;
 
 import com.fourth.ykd.ai.rag.SQLiteVectorStore;
-import com.fourth.ykd.ai.service.McpToolCallingManager;
+import com.fourth.ykd.ai.service.liepinToolCallingManager;
 import com.fourth.ykd.ai.service.McpToolService;
 import com.fourth.ykd.ai.trace.ReActTraceAdvisor;
 import org.springframework.ai.model.tool.DefaultToolCallingManager;
@@ -43,7 +43,7 @@ public class SpringAiChatConfig {
         DefaultToolCallingManager defaultManager = DefaultToolCallingManager.builder()
                 .toolCallbackResolver(toolCallbackResolver)
                 .build();
-        return new McpToolCallingManager(defaultManager, mcpToolService);
+        return new liepinToolCallingManager(defaultManager, mcpToolService);
     }
 
     @Bean
