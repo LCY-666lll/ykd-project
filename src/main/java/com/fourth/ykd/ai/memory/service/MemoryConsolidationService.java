@@ -51,6 +51,11 @@ public class MemoryConsolidationService {
      */
     private static final int MAX_ACTIVE_MEMORIES = 200;
 
+    /**
+     * 限制近期会话上下文长度，避免指代消解数据无限扩大合并模型输入。
+     */
+    private static final int MAX_RECENT_CONTEXT_LENGTH = 4_000;
+
     //调用负责“记忆语义合并”的 AI 模型
     private final ChatClient memoryConsolidationChatClient;
     //查询当前用户已有的 ACTIVE 长期记忆，供模型进行语义比较
@@ -76,11 +81,13 @@ public class MemoryConsolidationService {
      * 对本轮候选记忆进行语义合并判断。
      * @param userId 当前微信用户 ID
      * @param candidates 记忆提取模型返回的候选记忆
+     * @param recentConversationContext 只用于解析“这个任务”等指代的近期会话
      * @return 经过安全校验的语义合并结果
      */
     public MemoryConsolidationResult consolidate(
             String userId,
-            List<MemoryCandidate> candidates
+            List<MemoryCandidate> candidates,
+            String recentConversationContext
     ) {
         String normalizedUserId = requireText(userId, "userId");
         List<MemoryCandidate> safeCandidates = normalizeCandidates(candidates);
@@ -100,7 +107,8 @@ public class MemoryConsolidationService {
         //构建模型输入对象
         ConsolidationInput input = buildInput(
                 safeCandidates,
-                existingMemories
+                existingMemories,
+                recentConversationContext
         );
 
         String inputJson = writeInputJson(input);
@@ -211,7 +219,8 @@ public class MemoryConsolidationService {
      */
     private ConsolidationInput buildInput(
             List<MemoryCandidate> candidates,
-            List<MemoryItem> existingMemories
+            List<MemoryItem> existingMemories,
+            String recentConversationContext
     ) {
         List<IndexedCandidate> indexedCandidates =
                 //生成整数序列: range(0, 3):包含 0，不包含 3。
@@ -237,7 +246,29 @@ public class MemoryConsolidationService {
 
         return new ConsolidationInput(
                 indexedCandidates,
-                memories
+                memories,
+                normalizeRecentConversationContext(
+                        recentConversationContext
+                )
+        );
+    }
+
+    /**
+     * 清理并限制近期会话上下文。
+     * 该文本只帮助模型消解指代，最终仍只能操作 existingMemories 中的真实 ID。
+     */
+    private String normalizeRecentConversationContext(String context) {
+        if (!StringUtils.hasText(context)) {
+            return "无";
+        }
+
+        String normalized = context.trim();
+        if (normalized.length() <= MAX_RECENT_CONTEXT_LENGTH) {
+            return normalized;
+        }
+
+        return normalized.substring(
+                normalized.length() - MAX_RECENT_CONTEXT_LENGTH
         );
     }
 
@@ -450,10 +481,13 @@ public class MemoryConsolidationService {
      * 本轮新提取出的候选记忆
      * existingMemories：
      * 当前用户数据库里已有的相关记忆
+     * recentConversationContext：
+     * 只用于消解本轮候选中的省略和指代
      */
     private record ConsolidationInput(
             List<IndexedCandidate> candidates,
-            List<ExistingMemory> existingMemories
+            List<ExistingMemory> existingMemories,
+            String recentConversationContext
     ) {
     }
 

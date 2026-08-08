@@ -59,7 +59,7 @@ public class SpringAiChatConfig {
                         .order(Ordered.HIGHEST_PRECEDENCE + 200)
                         .build();
 
-// 注册到 Builder 内部
+   // 注册到 Builder 内部：给以后这个 ChatClient 的每一次模型调用，默认都挂上这三个 Advisor。
         chatClientBuilder.defaultAdvisors(
                 /*LongTermMemoryAdvisor → 检索并注入长期记忆
                 MessageChatMemoryAdvisor → 注入短期聊天窗口
@@ -69,7 +69,7 @@ public class SpringAiChatConfig {
                 new ReActTraceAdvisor(toolCallingManager, Ordered.HIGHEST_PRECEDENCE + 300,
                         chatMemory, sqliteChatMessageRepository));
 
-// 构建 ChatClient
+   // 构建 ChatClient
         return chatClientBuilder.build();
     }
 }

@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class BaiduSearchTool {
+public class   BaiduSearchTool {
 
     private final BaiduSearchService baiduSearchService;
 

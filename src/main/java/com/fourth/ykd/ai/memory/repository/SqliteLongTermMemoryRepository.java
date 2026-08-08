@@ -270,7 +270,7 @@ public class SqliteLongTermMemoryRepository {
         SET importance = MAX(importance, ?),
             confidence = MAX(confidence, ?),
             updated_at = CURRENT_TIMESTAMP
-        WHERE id = ?
+        WHERE id = ?  
           AND status = 'ACTIVE'
         """;
 
@@ -585,6 +585,7 @@ public class SqliteLongTermMemoryRepository {
             throw new IllegalArgumentException("记忆类型不能为空");
         }
 
+        //requireMemoryType(memoryType).name()
         return memoryType;
     }
 

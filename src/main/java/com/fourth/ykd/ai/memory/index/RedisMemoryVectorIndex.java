@@ -120,6 +120,7 @@ public class  RedisMemoryVectorIndex {
 
     /**
      * 在当前用户的 ACTIVE 长期记忆中执行语义相似度搜索。
+     * 对于当前用户的这个问题，Redis 里哪些 ACTIVE 长期记忆语义最相关
      * 执行流程：
      * 1. 校验 userId、query 和 limit；
      * 2. 将原始 userId 转换为 Redis 查询使用的 userScope；
@@ -157,7 +158,7 @@ public class  RedisMemoryVectorIndex {
         //配置搜索请求
         SearchRequest searchRequest = SearchRequest.builder()
                         .query(query.trim())
-                        //指定最多返回多少条最相似结果
+                         //指定最多返回多少条最相似结果
                         .topK(limit)
                         // 使用配置的最低相似度阈值，过滤弱相关记忆
                         .similarityThreshold(similarityThreshold)
@@ -172,7 +173,8 @@ public class  RedisMemoryVectorIndex {
                         )
                         .build();
 
-       /* 执行相似度搜索
+
+        /* 执行相似度搜索
         query 文本
            ↓
         EmbeddingModel 转换查询向量
@@ -194,6 +196,7 @@ public class  RedisMemoryVectorIndex {
 
     /**
      * 将 SQLite MemoryItem 转换成 Spring AI Redis 向量文档。
+     * Redis VectorStore 操作的不是：MemoryItem,而是：Document
      * Document 组成：
      * 1. ID：直接使用 memoryId；
      * 2. 文本：优先使用 summary，content 作为兜底；

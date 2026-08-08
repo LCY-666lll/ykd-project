@@ -65,6 +65,7 @@ public class MemoryVectorStoreConfiguration {
     }
 
 
+    //负责创建：JedisPooled:一个能够真正连接 Redis，而且内部维护连接池的 Jedis 客户端
     @Bean(destroyMethod = "close")
     public JedisPooled memoryJedisPooled(JedisConnectionFactory connectionFactory){
         return createJedisPooled(connectionFactory);
@@ -72,6 +73,7 @@ public class MemoryVectorStoreConfiguration {
 
 
     /**
+     * 真正创建 Jedis:
      * 根据 Spring Boot 已经解析完成的 Redis 配置 创建 Jedis 客户端。
      * 复用 Spring Boot 已解析的 Redis 地址、端口、密码和基础连接参数。
      * @param connectionFactory Spring Boot Redis 连接工厂

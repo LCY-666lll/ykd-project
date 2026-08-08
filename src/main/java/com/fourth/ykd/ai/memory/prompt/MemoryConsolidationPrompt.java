@@ -68,6 +68,17 @@ public final class MemoryConsolidationPrompt {
             应删除或结束对应的未完成 TASK，
             不能因为表达中没有出现原来的 memoryKey 就忽略。
 
+            recentConversationContext 只用于解析候选中的省略和指代。
+            例如近期对话刚刚列出唯一一个未完成任务，
+            用户随后说“关闭这个任务”，应把“这个任务”解析为该唯一任务。
+            近期对话刚刚确认用户当前称呼，
+            用户随后说“以后别这样叫我”，应把该表达解析为删除当前称呼。
+
+            只有近期上下文和 existingMemories 能共同唯一确定目标时，
+            才能据此返回 CONFIRM、REPLACE 或 DELETE。
+            最终只能操作 existingMemories 中真实存在的记忆 ID，
+            不得根据近期上下文创建目标 ID，也不得操作上下文中出现但数据库中不存在的事实。
+
             操作必须遵守候选的原始 operation：
 
             UPSERT 候选：

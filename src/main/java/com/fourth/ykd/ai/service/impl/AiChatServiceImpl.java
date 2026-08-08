@@ -19,7 +19,15 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
-/* 普通文本聊天：DeepSeek 仍然是文本对话模型，只是通过 Spring AI ChatClient 调用。 */
+/*
+普通文本聊天：DeepSeek 仍然是文本对话模型，只是通过 Spring AI ChatClient 调用。
+ AiChatServiceImpl
+ ├→ springAiChatClient（SpringAiChatConfig 组装：3 Advisor）
+ ├→ 5 个工具 Bean（WeatherTool/BaiduSearchTool/TimeTool/TranslationTool/MathCalculatorTool）
+ ├→ ChatMemory（短期记忆）
+ ├→ SqliteChatMessageRepository（会话落库）
+ └→ MemoryFormationService（异步长期记忆）
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -27,8 +35,8 @@ public class AiChatServiceImpl implements AiChatService {
 
     private static final String DEFAULT_CONVERSATION_ID = "api-chat";
 
+    //模型什么时候必须调用哪个工具，什么时候不能使用旧记忆代替实时查询。
     private static final String TOOL_USAGE_INSTRUCTIONS = """
-
     你是微信机器人智能助手，所有回答使用中文。
     工具选择规则：
             1. 用户明确询问某地当前天气、温度、降雨或风力时才调用 query_current_weather；新闻、时事、政策、经济、科技动态问题不得调用该工具。
@@ -98,6 +106,7 @@ public class AiChatServiceImpl implements AiChatService {
 
     private final SqliteChatMessageRepository sqliteChatMessageRepository;
 
+    //从本轮用户消息和助手回复中提取长期记忆候选
     private final MemoryFormationService memoryFormationService;
 
     @Override
@@ -115,49 +124,123 @@ public class AiChatServiceImpl implements AiChatService {
         return chat(conversationId, message, VOICE_REPLY_INSTRUCTIONS);
     }
 
-    private AiChatResponse chat(String conversationId, String message, String additionalSystemInstructions) {
+    /**
+     * 执行普通聊天或语音回答文本生成。
+     *
+     * @param conversationId 当前用户或会话 ID
+     * @param message 用户本轮消息
+     * @param additionalSystemInstructions 额外系统规则，
+     *                                     普通聊天为空，
+     *                                     语音回答时传语音专用规则
+     * @return 包含最终文字回答的 AiChatResponse
+     *
+     * 核心流程：
+     * 1. 校验并规范参数；
+     * 2. ChatMemory 为空时，从 SQLite 恢复最近消息；
+     * 3. 将本轮用户消息持久化；
+     * 4. 通过 Advisor 参数指定当前会话；
+     * 5. 挂载实时工具并调用模型；
+     * 6. 保存助手回答；
+     * 7. 清理过旧聊天记录；
+     * 8. 异步提交长期记忆形成；
+     * 9. 返回 AiChatResponse。
+     */
+    private AiChatResponse chat(
+            String conversationId,
+            String message,
+            String additionalSystemInstructions
+    ) {
+        // 空消息不能交给模型。
         if (!StringUtils.hasText(message)) {
-            throw new BusinessException(40001, "消息内容不能为空");
+            throw new BusinessException(
+                    40001,
+                    "消息内容不能为空"
+            );
         }
 
-        String normalizedMessage = message.trim();
-        String normalizedConversationId = StringUtils.hasText(conversationId)
-                ? conversationId.trim()
-                : DEFAULT_CONVERSATION_ID;
+        // 清理用户输入和会话 ID。
+        String normalizedMessage =
+                message.trim();
 
-        // 如果项目刚重启，内存没有历史消息，就从 SQLite 恢复最近 20 条
-        restorePersistedMemory(normalizedConversationId);
+        String normalizedConversationId =
+                StringUtils.hasText(conversationId)
+                        ? conversationId.trim()
+                        : DEFAULT_CONVERSATION_ID;
 
-        // 本次用户问题先写入 SQLite。
+        /*
+         * 如果应用刚刚重启，ChatMemory 中没有历史，
+         * 就从 SQLite 恢复最近 20 条聊天记录。
+         */
+        restorePersistedMemory(
+                normalizedConversationId
+        );
+
+        // 模型调用前，先持久化本轮用户消息。
         sqliteChatMessageRepository.save(
                 normalizedConversationId,
                 PersistedChatMessage.Role.USER,
                 normalizedMessage
         );
 
-        log.info("[AI][MEMORY_CHAT] conversationId={}", normalizedConversationId);
+        log.info(
+                "[AI][MEMORY_CHAT] conversationId={}",
+                normalizedConversationId
+        );
 
-        String answer = springAiChatClient.prompt()
-                .system(buildChatSystemInstructions() + additionalSystemInstructions)
-                .user(normalizedMessage)
-                .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, normalizedConversationId))
-                .tools(mathCalculatorTools,timeTool,baiduSearchTool,weatherTool,translationTool)
-                .call()
-                .content();
-        String normalizedAnswer = StringUtils.hasText(answer) ? answer.trim() : "我在的，有什么需要我帮忙？";
-        // 模型回答成功后，把 bot 回复写入 SQLite。
+        /*
+         * 构造本轮模型请求。
+         * advisors 中传入 conversationId，
+         * 让短期记忆 Advisor 和其他自定义 Advisor
+         * 知道本轮应该读取哪个用户的数据。
+         */
+        String answer =
+                springAiChatClient.prompt()
+                        .system(
+                                buildChatSystemInstructions()
+                                        + additionalSystemInstructions
+                        )
+                        .user(normalizedMessage)
+                        .advisors(
+                                advisorSpec ->
+                                        advisorSpec.param(
+                                                ChatMemory.CONVERSATION_ID,
+                                                normalizedConversationId
+                                        )
+                        )
+                        .tools(
+                                mathCalculatorTools,
+                                timeTool,
+                                baiduSearchTool,
+                                weatherTool,
+                                translationTool
+                        )
+                        .call()
+                        .content();
+
+        // 模型空回答时提供默认内容。
+        String normalizedAnswer =
+                StringUtils.hasText(answer)
+                        ? answer.trim()
+                        : "我在的，有什么需要我帮忙？";
+
+        // 模型成功回答后，持久化助手消息。
         sqliteChatMessageRepository.save(
                 normalizedConversationId,
                 PersistedChatMessage.Role.ASSISTANT,
                 normalizedAnswer
         );
 
-        sqliteChatMessageRepository.softDeleteOldMessages(
-                normalizedConversationId,
-                MAX_PERSISTED_MEMORY_MESSAGES
-        );
+        // 每个会话只保留最近 100 条活跃持久化消息。
+        sqliteChatMessageRepository
+                .softDeleteOldMessages(
+                        normalizedConversationId,
+                        MAX_PERSISTED_MEMORY_MESSAGES
+                );
 
-        //普通聊天先返回用户，再把本轮对话提交到专用线程池异步形成长期记忆。
+        /*
+         * 主回复已经生成，
+         * 后台异步分析本轮对话是否值得形成长期记忆。
+         */
         memoryFormationService.submit(
                 normalizedConversationId,
                 normalizedConversationId,
@@ -165,48 +248,74 @@ public class AiChatServiceImpl implements AiChatService {
                 normalizedAnswer
         );
 
-        return new AiChatResponse(normalizedAnswer);
+        // 将最终文字包装后返回给 Processor。
+        return new AiChatResponse(
+                normalizedAnswer
+        );
     }
 
     static String buildChatSystemInstructions() {
         return TOOL_USAGE_INSTRUCTIONS + CURRENT_CAPABILITY_INSTRUCTIONS;
     }
 
-    /*明确记忆管理请求的同步处理流程：
-     → 校验用户消息并恢复最近短期聊天记忆
-     → 提取最近六条会话，用于解析“刚才那个”等指代
-     → 保存用户消息到 chat_message
-     → 同步调用 formSynchronously()
-     → 等待 SQLite 实际写入完成
-     → 把执行结果交给主模型
-     → 主模型生成中文回复
-     → 保存助手回复*/
+    /**
+     * 同步处理用户明确提出的长期记忆管理请求。
+     *
+     * @param conversationId 用户或会话 ID
+     * @param message 记住、修改、纠正、删除等明确指令
+     * @return 根据真实数据库执行结果生成的回复
+     *
+     * 与普通聊天不同：
+     * 普通聊天异步形成记忆；
+     * 明确记忆管理必须等待真实写库结果。
+     */
     @Override
     public AiChatResponse manageMemory(
             String conversationId,
             String message
     ) {
         if (!StringUtils.hasText(message)) {
-            throw new BusinessException(40001, "消息内容不能为空");
+            throw new BusinessException(
+                    40001,
+                    "消息内容不能为空"
+            );
         }
 
-        String normalizedMessage = message.trim();
-        String normalizedConversationId = StringUtils.hasText(conversationId)
-                ? conversationId.trim()
-                : DEFAULT_CONVERSATION_ID;
+        String normalizedMessage =
+                message.trim();
 
-        restorePersistedMemory(normalizedConversationId);
-        //在保存本轮用户消息前读取历史，避免把当前命令重复放进“近期上下文”。
+        String normalizedConversationId =
+                StringUtils.hasText(conversationId)
+                        ? conversationId.trim()
+                        : DEFAULT_CONVERSATION_ID;
+
+        // 先恢复近期短期聊天，便于解析“刚才那个”等指代。
+        restorePersistedMemory(
+                normalizedConversationId
+        );
+
+        /*
+         * 必须在保存当前记忆命令前提取历史，
+         * 避免当前命令既出现在历史中，又作为本轮消息重复传入。
+         */
         String recentConversationContext =
-                buildRecentConversationContext(normalizedConversationId);
+                buildRecentConversationContext(
+                        normalizedConversationId
+                );
 
+        // 保存用户本轮明确记忆命令。
         sqliteChatMessageRepository.save(
                 normalizedConversationId,
                 PersistedChatMessage.Role.USER,
                 normalizedMessage
         );
 
-        MemoryFormationService.FormationResult formationResult =
+        /*
+         * 同步执行长期记忆形成和真实数据库写入，
+         * 返回创建、确认、替换、删除、失败等真实计数。
+         */
+        MemoryFormationService.FormationResult
+                formationResult =
                 memoryFormationService.formSynchronously(
                         normalizedConversationId,
                         normalizedConversationId,
@@ -214,8 +323,11 @@ public class AiChatServiceImpl implements AiChatService {
                         recentConversationContext
                 );
 
-        //把真实写库计数交给主模型，防止数据库没有成功却回复“已经记住”。
-        String normalizedAnswer = buildMemoryManagementReply(formationResult);
+        // 根据真实写库结果生成确定性回复，不虚假承诺。
+        String normalizedAnswer =
+                buildMemoryManagementReply(
+                        formationResult
+                );
 
         sqliteChatMessageRepository.save(
                 normalizedConversationId,
@@ -223,13 +335,17 @@ public class AiChatServiceImpl implements AiChatService {
                 normalizedAnswer
         );
 
-        sqliteChatMessageRepository.softDeleteOldMessages(
-                normalizedConversationId,
-                MAX_PERSISTED_MEMORY_MESSAGES
-        );
+        sqliteChatMessageRepository
+                .softDeleteOldMessages(
+                        normalizedConversationId,
+                        MAX_PERSISTED_MEMORY_MESSAGES
+                );
 
-        return new AiChatResponse(normalizedAnswer);
+        return new AiChatResponse(
+                normalizedAnswer
+        );
     }
+
     static String buildMemoryManagementReply(
             MemoryFormationService.FormationResult formationResult
     ) {

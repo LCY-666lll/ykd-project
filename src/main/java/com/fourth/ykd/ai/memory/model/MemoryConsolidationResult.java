@@ -5,6 +5,7 @@ import java.util.Objects;
 
 /**
  * AI 对候选记忆和已有长期记忆进行语义比较后的结果。
+ * 这些候选和数据库旧记忆是什么关系
  * MemoryCandidate 负责描述“从本轮对话中提取出了什么”，
  * MemoryConsolidationResult 负责描述 这条候选记忆和数据库里的旧记忆是什么关系？
  * 应该创建、确认、替换、删除，还是忽略
@@ -16,9 +17,15 @@ public record  MemoryConsolidationResult(
 ) {
 
     /**
+     * 紧凑构造器
      * 对模型返回结果进行基础清理。
      * 这里只处理空集合和空元素，不在数据模型中执行数据库校验。
      * 候选下标、记忆编号、用户归属和记忆状态将在业务服务中校验。
+     * public MemoryConsolidationResult {
+         decisions = 清理后的decisions;
+         // Java 编译器最后自动做
+         this.decisions = decisions;
+     }
      */
     public MemoryConsolidationResult {
         decisions = decisions == null

@@ -15,12 +15,6 @@ public class MathCalculatorTool {
 
     /**
      * 数学表达式运算，当AI需要精确数学计算时自动调用。
-     * 适用场景：
-     * <ul>
-     *     <li>四则运算、小数计算、复杂算式求解</li>
-     *     <li>防止大模型口算出错，交由本地代码精确运算</li>
-     * </ul>
-     *
      * @param expression 数学表达式，例如 (100+25)*3/2
      * @return 计算结果文本，供AI二次加工展示
      */

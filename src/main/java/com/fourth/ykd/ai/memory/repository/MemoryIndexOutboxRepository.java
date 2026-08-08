@@ -145,6 +145,7 @@ public class MemoryIndexOutboxRepository {
         return value == null ? null : value.toLocalDateTime();
     }
 
+    //防止整段巨大异常堆栈直接塞进 SQLite last_error。
     private static String normalizeError(String value) {
         if (!StringUtils.hasText(value)) {
             return "未知 Redis 同步异常";

@@ -18,20 +18,23 @@ import org.springframework.util.StringUtils;
 @Service
 @RequiredArgsConstructor
 public class IlinkMessagePollingService {
-
     private final IlinkClientManager clientManager;
     private final IlinkMessageReplyService ilinkMessageReplyService;
     private final ImageContextService imageContextService;
 
+    /** 每 500ms 轮询一次：fixedDelay = 上次执行结束到下次开始，任务慢也不会重叠 */
     @Scheduled(fixedDelayString = "${ilink.poll-delay-ms:500}")
     public void pollMessages() {
+        // 链式 Optional 一行处理三种状态：
+        // 没客户端 → 空；有但未登录 → filter 过滤掉；已登录 → 拉消息
+        // 这一行就是"iLink 未登录时系统静默跳过"的实现
         clientManager.findClient()
                 .filter(ILinkClient::isLoggedIn)
                 .ifPresent(this::pullMessages);
     }
-
     private void pullMessages(ILinkClient client) {
         try {
+            // getUpdates() 是长轮询：会挂住等待，直到有新消息或 35s 超时
             List<WeixinMessage> messages = client.getUpdates();
             for (WeixinMessage message : messages) {
                 handleMessage(client, message);
@@ -45,6 +48,8 @@ public class IlinkMessagePollingService {
 
     private void handleMessage(ILinkClient client, WeixinMessage message) {
         String fromUserId = message.getFrom_user_id();
+        // 第一道过滤：没有用户 ID，或消息来自机器人自己 → 丢弃
+        // 防止机器人回复自己的消息再次进入业务，形成"自己回复自己"的死循环
         if (!StringUtils.hasText(fromUserId) || isFromBot(client, fromUserId)) {
             return;
         }
@@ -78,6 +83,7 @@ public class IlinkMessagePollingService {
                 && fromUserId.equals(client.getLoginContext().getBotId());
     }
 
+    /** 图片处理：下载字节 → 存图片上下文 → 进回复队列发确认语 */
     private void saveImageContext(ILinkClient client, String userId, MessageItem imageItem) {
         try {
             byte[] imageBytes = client.downloadImageFromMessageItem(imageItem);
@@ -89,6 +95,7 @@ public class IlinkMessagePollingService {
         }
     }
 
+    /** 提取文本：遍历 item_list 找第一个有内容的 text_item */
     private String extractText(WeixinMessage message) {
         if (message.getItem_list() == null) {
             return null;
@@ -100,7 +107,7 @@ public class IlinkMessagePollingService {
         }
         return null;
     }
-
+    /** 提取语音识别文本：找第一个 voice_item 的 text 字段 */
     private String extractVoiceText(WeixinMessage message) {
         if (message.getItem_list() == null) {
             return null;
@@ -113,6 +120,7 @@ public class IlinkMessagePollingService {
         return null;
     }
 
+    //hasVoiceItem(message) 为 true 只代表“有语音”，不代表“有识别文字”。
     private boolean hasVoiceItem(WeixinMessage message) {
         if (message.getItem_list() == null) {
             return false;

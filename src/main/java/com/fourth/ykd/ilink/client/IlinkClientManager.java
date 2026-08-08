@@ -44,6 +44,7 @@ public class IlinkClientManager {
      * volatile 只保证单次读取、写入的可见性，不能保证多个操作组合起来是线程安全的,
      * 所以创建和关闭方法还需要加 synchronized。
      * createNewClient(),加了 synchronized，而：
+     * 创建和关闭要串行，防止两个线程同时操作 client。
      * closeCurrentClient(),也加了 synchronized。
      * 但是不会产生死锁： Java 的 synchronized 是 可重入锁。
      * 当前线程已经拿到了 this 对象的锁，还可以再次进入同一个对象上的其他 synchronized 方法。

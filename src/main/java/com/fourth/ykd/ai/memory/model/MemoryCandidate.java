@@ -3,7 +3,8 @@ package com.fourth.ykd.ai.memory.model;
 import java.time.LocalDateTime;
 
 /**
- * 从一轮对话中提取出来的 长期记忆候选项。
+ * 从一轮对话中提取出来的 长期记忆 候选 项。
+ *
  * 该对象只表示 模型的提取结果，
  * 未经过业务校验，也未写入数据库。
  * 模型以后负责输出类似：
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
  *         "project.ykd.active_branch",
  *         "ykd-project 后续开发使用 lcy-project 分支",
  *         "ykd-project 使用 lcy-project 分支",
- *         0.9,
+ *         0.9,m
  *         0.98,
  *         MemoryOperation.UPSERT,
  *         null

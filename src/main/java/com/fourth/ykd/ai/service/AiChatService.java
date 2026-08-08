@@ -7,6 +7,7 @@ public interface AiChatService {
     AiChatResponse chat(String message);
 
     AiChatResponse chat(String conversationId, String message);
+
     AiChatResponse chatForVoiceReply(String conversationId, String message);
 
 

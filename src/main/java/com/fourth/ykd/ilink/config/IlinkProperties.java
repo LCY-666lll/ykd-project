@@ -66,7 +66,7 @@ public class IlinkProperties {
 
     /**
      * 是否开启 SDK 内置心跳。
-     * 先关闭；第 4 步我们会自己实现更及时的消息接收循环。
+     * 500ms 轮询替代 SDK 心跳，避免两套机制抢消息
      */
     private boolean heartbeatEnabled = false;
 

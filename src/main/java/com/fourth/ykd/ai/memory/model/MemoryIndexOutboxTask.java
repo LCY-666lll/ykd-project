@@ -3,6 +3,7 @@ package com.fourth.ykd.ai.memory.model;
 import java.time.LocalDateTime;
 
 /**
+ * 这条 SQLite 记忆以后如何同步 Redis的任务。
  * SQLite 中一条 Redis 长期记忆索引同步任务。
  * Redis 是可重建索引，任务失败不会修改 agent_memory 中的事实数据。
  */

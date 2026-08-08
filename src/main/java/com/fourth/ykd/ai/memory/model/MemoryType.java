@@ -27,7 +27,6 @@ public enum MemoryType {
     /**
      * 判断两个记忆类型能否进入同一次语义合并。
      * PROFILE 与 PREFERENCE 允许互相纠正错误分类，其他类型仍严格隔离。
-     *
      * @param other 已有长期记忆的类型
      * @return 类型相同，或双方属于 PROFILE/PREFERENCE 时返回 true
      */

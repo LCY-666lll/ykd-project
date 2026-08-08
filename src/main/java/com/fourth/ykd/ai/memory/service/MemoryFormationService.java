@@ -216,7 +216,8 @@ public class MemoryFormationService {
             long consolidationStartedAt = System.nanoTime();
             consolidationResult = consolidationService.consolidate(
                     userId,
-                    candidates
+                    candidates,
+                    recentConversationContext
             );
             consolidationElapsedMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - consolidationStartedAt);
         } catch (RuntimeException exception) {

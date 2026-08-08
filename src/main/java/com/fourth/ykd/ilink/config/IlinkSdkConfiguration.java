@@ -19,6 +19,7 @@ ILinkClient.builder().config(...)*/
 → 读取 ilink.*
 → 完成字段绑定
 → 放入 Spring 容器*/
+//把 IlinkProperties 注册成 Bean——它没有@Component，靠这里激活。
 @EnableConfigurationProperties(IlinkProperties.class)
 public class IlinkSdkConfiguration {
 
